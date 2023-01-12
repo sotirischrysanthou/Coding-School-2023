@@ -13,7 +13,7 @@ namespace Session_04
             int age = 25;
             string gender = "male";
             
-            string message = "You are " + gender + " and llok younger than" + age;
+            string message = "You are " + gender + " and lοok younger than " + age;
             
             return message;
         }
