@@ -46,10 +46,10 @@ internal class MainProgram
         ProgramFive progFive = new ProgramFive();
         Console.WriteLine("PROGRAM #5\n----------");
         Console.WriteLine("1000000000 secs to:");
-        Console.WriteLine(progFive.SecondsToMinutes() + "minutes");
-        Console.WriteLine(progFive.SecondsToHours() + "hours");
-        Console.WriteLine(progFive.SecondsToDays() + "days");
-        Console.WriteLine(progFive.SecondsToYears() + "years");
+        Console.WriteLine(progFive.SecondsToMinutes() + " minutes");
+        Console.WriteLine(progFive.SecondsToHours() + " hours");
+        Console.WriteLine(progFive.SecondsToDays() + " days");
+        Console.WriteLine(progFive.SecondsToYears() + " years");
         Console.WriteLine("\n");
 
 
@@ -58,10 +58,10 @@ internal class MainProgram
         ProgramSix progSix = new ProgramSix();
         Console.WriteLine("PROGRAM #6\n----------");
         Console.WriteLine("1000000000 secs to:");
-        Console.WriteLine(progSix.SecondsToMinutes() + "minutes");
-        Console.WriteLine(progSix.SecondsToHours() + "hours");
-        Console.WriteLine(progSix.SecondsToDays() + "days");
-        Console.WriteLine(progSix.SecondsToYears() + "years");
+        Console.WriteLine(progSix.SecondsToMinutes() + " minutes");
+        Console.WriteLine(progSix.SecondsToHours() + " hours");
+        Console.WriteLine(progSix.SecondsToDays() + " days");
+        Console.WriteLine(progSix.SecondsToYears() + " years");
         Console.WriteLine("\n");
 
 
