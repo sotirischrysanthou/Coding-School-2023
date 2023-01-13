@@ -33,7 +33,7 @@ internal class MainProgram
         } 
         n = Convert.ToInt32(input);
         Console.WriteLine("Sum from 1 to n is : " + progTwo.SumFromOneToN(n));
-        Console.WriteLine("Product from 1 to n is : " + progTwo.SumFromOneToN(n));
+        Console.WriteLine("Product from 1 to n is : " + progTwo.ProductFromOneToN(n));
         
         Console.WriteLine("\n");
 
