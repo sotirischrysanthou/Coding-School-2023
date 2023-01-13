@@ -9,9 +9,9 @@ namespace Session_05
     class ProgramOne
     {
         //reverses string ""Sotiris Chrysanthou""
-        public StringBuilder ReverseStringBulder()
+        public string ReverseString(string s)
         {
-            StringBuilder sb = new StringBuilder("Sotiris Chrysanthou");
+            StringBuilder sb = new StringBuilder(s);
             char c;
             int end = sb.Length - 1;
             int start = 0;
@@ -24,7 +24,7 @@ namespace Session_05
                 start++;
                 end--;
             }
-            return sb;
+            return sb.ToString();
         }
     }
 }

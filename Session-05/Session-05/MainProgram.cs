@@ -10,7 +10,10 @@ internal class MainProgram
          * Write a C# program to print Hello and your name in the same line.*/
         ProgramOne progOne = new ProgramOne();
         Console.WriteLine("PROGRAM #1\n----------");
-        Console.WriteLine(progOne.ReverseStringBulder());
+        string input;
+        Console.WriteLine("Give a Number:");
+        input = Console.ReadLine();
+        Console.WriteLine(progOne.ReverseString(input));
         Console.WriteLine("\n");
 
 
