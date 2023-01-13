@@ -6,15 +6,11 @@ internal class MainProgram
 {
     private static void Main(string[] args)
     {
-        string input;
-
         /* PROGRAM #1 
          * Write a C# program that reverses a given string (your name)*/
         ProgramOne progOne = new ProgramOne();
         Console.WriteLine("PROGRAM #1\n----------");
-        Console.WriteLine("Write your name:");
-        input = Console.ReadLine();
-        Console.WriteLine(progOne.ReverseStringBulder(input));
+        Console.WriteLine(progOne.ReverseStringBulder());
         Console.WriteLine("\n");
 
         /* PROGRAM #2 
@@ -23,6 +19,7 @@ internal class MainProgram
          * the product of 1,...,n*/
         ProgramTwo progTwo = new ProgramTwo();
         Console.WriteLine("PROGRAM #2\n----------");
+        string input;
         int n;
         Console.WriteLine("Give a Number:");
         input = Console.ReadLine();
