@@ -4,8 +4,10 @@ using Session_05;
 
 internal class MainProgram
 {
+
     private static void Main(string[] args)
     {
+        MyFunctions funcs = new MyFunctions();
         /* PROGRAM #1 
          * Write a C# program that reverses a given string (your name)*/
         ProgramOne progOne = new ProgramOne();
@@ -22,21 +24,30 @@ internal class MainProgram
          * the product of 1,...,n*/
         ProgramTwo progTwo = new ProgramTwo();
         Console.WriteLine("PROGRAM #2\n----------");
-        int n;
-        Console.WriteLine("Give a Number:");
-        input = Console.ReadLine();
-        while (! input.All(char.IsDigit))
-        {
-            Console.WriteLine("You gave wrong Input");
-            Console.WriteLine("Give a Number:");
-            input = Console.ReadLine();
-        } 
-        n = Convert.ToInt32(input);
+        int n = funcs.ReadNumberFromConsole();
         Console.WriteLine("Sum from 1 to n is : " + progTwo.SumFromOneToN(n));
         Console.WriteLine("Product from 1 to n is : " + progTwo.ProductFromOneToN(n));
-        
         Console.WriteLine("\n");
+
+
+        /* PROGRAM #3 
+        * Write a C# program that asks the user for an integer (n) and finds all 
+        * the prime numbers from 1 to n*/
+        ProgramThree progThree = new ProgramThree();
+        Console.WriteLine("PROGRAM #3\n----------");
+        n = funcs.ReadNumberFromConsole();
+        Console.WriteLine("Prime Numbers from 1 to {0} are:",n);
+        if (n > 3)
+            for (int i = 5; i < n; i += 6)
+                if (progThree.IsPrime(i))
+                    Console.WriteLine(i);
+        else if (n > 1)
+            Console.WriteLine("2\n3");
+        else
+            Console.WriteLine("Τhere are no prime numbers in this interval ");
 
         Console.ReadLine();
     }
+
+    
 }
