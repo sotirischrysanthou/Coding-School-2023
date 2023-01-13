@@ -11,7 +11,7 @@ internal class MainProgram
         ProgramOne progOne = new ProgramOne();
         Console.WriteLine("PROGRAM #1\n----------");
         string input;
-        Console.WriteLine("Give a Number:");
+        Console.WriteLine("Write your name:");
         input = Console.ReadLine();
         Console.WriteLine(progOne.ReverseString(input));
         Console.WriteLine("\n");
