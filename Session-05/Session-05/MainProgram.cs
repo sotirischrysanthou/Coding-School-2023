@@ -37,6 +37,19 @@ internal class MainProgram
         
         Console.WriteLine("\n");
 
+        Programfour progFour = new Programfour();
+        int[] arrayA = new int[] {2, 4, 9, 12};
+        int[] arrayB = new int[] {1, 3, 7, 10};
+        int[] res = progFour.MultiplyArrays(arrayA, arrayB);
+        for (int i = 0; i < arrayA.Length; i++)
+        {
+            for (int j = 0; j < arrayA.Length; j++)
+            {
+                Console.Write(res[i * arrayB.Length + j] + "  ");
+            }
+            Console.WriteLine();
+        }
+
         Console.ReadLine();
     }
 }
