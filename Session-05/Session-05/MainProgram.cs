@@ -22,7 +22,6 @@ internal class MainProgram
          * the product of 1,...,n*/
         ProgramTwo progTwo = new ProgramTwo();
         Console.WriteLine("PROGRAM #2\n----------");
-        string input;
         int n;
         Console.WriteLine("Give a Number:");
         input = Console.ReadLine();
