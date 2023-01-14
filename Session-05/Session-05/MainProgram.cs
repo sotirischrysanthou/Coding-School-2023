@@ -59,5 +59,18 @@ internal class MainProgram
         }
 
         Console.ReadLine();
+
+        /* PROGRAM #5
+        * Write a C# program to sort the given array of integers from the lowest 
+        * to the highest number*/
+        ProgramFive progFive = new ProgramFive();
+        Console.WriteLine("PROGRAM #5\n----------");
+        int[] array = new int[] { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
+        array = progFive.InsertionSort(array);
+        for (int i = 0; i < array.Length; i++)
+        {
+                Console.Write(array[i] + "  ");
+        }
+        Console.WriteLine();
     }
 }
