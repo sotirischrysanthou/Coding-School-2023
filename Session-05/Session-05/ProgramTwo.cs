@@ -20,7 +20,7 @@ namespace Session_05
 
         public int ProductFromOneToN(int n)
         {
-            int sum = 0;
+            int sum = 1;
             for (int i = 1; i <= n; i++)
             {
                 sum *= i;

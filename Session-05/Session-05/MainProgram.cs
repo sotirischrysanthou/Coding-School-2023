@@ -24,8 +24,8 @@ internal class MainProgram
         ProgramTwo progTwo = new ProgramTwo();
         Console.WriteLine("PROGRAM #2\n----------");
         int n = funcs.ReadNumberFromConsole();
-        Console.WriteLine("Sum from 1 to n is : " + progTwo.SumFromOneToN(n));
-        Console.WriteLine("Product from 1 to n is : " + progTwo.ProductFromOneToN(n));
+        Console.WriteLine("Sum from 1 to {0} is : {1}",n , progTwo.SumFromOneToN(n));
+        Console.WriteLine("Product from 1 to {0} is : {1}",n , progTwo.ProductFromOneToN(n));
         Console.WriteLine("\n");
 
 
