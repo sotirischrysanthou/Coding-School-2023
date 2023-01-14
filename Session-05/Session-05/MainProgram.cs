@@ -44,8 +44,14 @@ internal class MainProgram
             Console.WriteLine("2\n3");
         else
             Console.WriteLine("Τhere are no prime numbers in this interval ");
+        Console.WriteLine("\n");
 
+
+        /* PROGRAM #4 
+         * Write a C# program to multiply all values from Array1 with all values 
+         * from Array2 and display the results in a new Array*/
         Programfour progFour = new Programfour();
+        Console.WriteLine("PROGRAM #4\n----------");
         int[] arrayA = new int[] {2, 4, 9, 12};
         int[] arrayB = new int[] {1, 3, 7, 10};
         int[] res = progFour.MultiplyArrays(arrayA, arrayB);
