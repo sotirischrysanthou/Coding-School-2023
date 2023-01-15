@@ -36,14 +36,28 @@ internal class MainProgram
         Console.WriteLine("PROGRAM #3\n----------");
         n = funcs.ReadNumberFromConsole();
         Console.WriteLine("Prime Numbers from 1 to {0} are:",n);
-        if (n > 3)
-            for (int i = 5; i < n; i += 6)
-                if (progThree.IsPrime(i))
-                    Console.WriteLine(i);
-        else if (n > 1)
+        if (n > 1)
+        {
             Console.WriteLine("2\n3");
+        }
+        if (n > 3)
+        {
+            for (int i = 5; i < n; i += 6)
+            {
+                if (progThree.IsPrime(i))
+                {
+                    Console.WriteLine(i);
+                }
+                if (progThree.IsPrime(i+2))
+                {
+                    Console.WriteLine(i+2);
+                }
+            }
+        }
         else
+        {
             Console.WriteLine("Τhere are no prime numbers in this interval ");
+        }
         Console.WriteLine("\n");
 
 
@@ -63,6 +77,7 @@ internal class MainProgram
             }
             Console.WriteLine();
         }
+        Console.WriteLine("\n");
 
 
         /* PROGRAM #5
@@ -76,7 +91,7 @@ internal class MainProgram
         {
                 Console.Write(array[i] + "  ");
         }
-        Console.WriteLine();
+        Console.WriteLine("\n");
         
         Console.ReadLine();
     }
