@@ -9,7 +9,7 @@ namespace Session_05
     class ProgramOne
     {
         //reverses string ""Sotiris Chrysanthou""
-        public string ReverseString(string s)
+        public string ReverseString(string? s)
         {
             StringBuilder sb = new StringBuilder(s);
             char c;

@@ -10,11 +10,11 @@ namespace Session_05
     {
         public int ReadNumberFromConsole()
         {
-            string input;
+            string? input;
             int n;
             Console.WriteLine("Give a Number:");
             input = Console.ReadLine();
-            while (!input.All(char.IsDigit))
+            while (input!=null && (!input.All(char.IsDigit)))
             {
                 Console.WriteLine("You gave wrong Input");
                 Console.WriteLine("Give a Number:");

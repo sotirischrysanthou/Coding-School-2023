@@ -11,7 +11,7 @@ internal class MainProgram
          * Write a C# program that reverses a given string (your name)*/
         ProgramOne progOne = new ProgramOne();
         Console.WriteLine("PROGRAM #1\n----------");
-        string input;
+        string? input;
         Console.WriteLine("Write your name:");
         input = Console.ReadLine();
         Console.WriteLine(progOne.ReverseString(input));
