@@ -64,7 +64,6 @@ internal class MainProgram
             Console.WriteLine();
         }
 
-        Console.ReadLine();
 
         /* PROGRAM #5
         * Write a C# program to sort the given array of integers from the lowest 
@@ -78,5 +77,7 @@ internal class MainProgram
                 Console.Write(array[i] + "  ");
         }
         Console.WriteLine();
+        
+        Console.ReadLine();
     }
 }
