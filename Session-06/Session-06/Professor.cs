@@ -43,7 +43,7 @@ namespace Session_06 {
 
         }
 
-        public void SetGrate(int studentID,int courseID,int grade) {
+        public void SetGrate(Guid studentID,Guid courseID,int grade) {
 
         }
 
