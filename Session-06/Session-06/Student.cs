@@ -36,7 +36,7 @@ namespace Session_06 {
 
         }
 
-        public void WriteExam(Guid courseID, DateTime datetime) {
+        public void WriteExam(Guid course, DateTime datetime) {
 
         }
     }
