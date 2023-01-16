@@ -27,9 +27,10 @@ namespace Session_06 {
         public Schedule(Guid id, Guid courseID, Guid professorID) : this(id, courseID) {
             ProfessorID = professorID;
         }
+
+        public Schedule(Guid id, Guid courseID, Guid professorID, DateTime calendar) : this(id, courseID, professorID) {
+            Calendar = calendar;
+        }
     }
 
-    public Schedule(Guid id, Guid courseID, Guid professorID, DateTime calendar) : this(id, courseID, professorID) {
-            
-    }
 }
