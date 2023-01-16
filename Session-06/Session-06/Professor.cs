@@ -9,7 +9,7 @@ namespace Session_06 {
     internal class Professor : Person {
         // Properties
         public string? Rank { get; set; }
-        //TODO: public Course[] Courses { get; set; }
+        public Course[] Courses { get; set; }
 
         // Constractors
         public Professor() : base() {
@@ -33,10 +33,19 @@ namespace Session_06 {
             Rank = rank;
         }
 
+        public Professor(Guid id, String name, int age, string rank, Course[] courses) : this(id, name, age, rank) {
+            Console.WriteLine("Professor Constractors called with parameters (Guid id = {0}, String name = {1}, int age = {2}, string rank ={3})", id, name, age, rank);
+            Courses = courses;
+        }
 
-        // TODO: Teach(course, datetime)
 
-        // TODO: SetGrate(studentID, courseID, grade)
+        public void Teach(Course course, DateTime datetime) {
+
+        }
+
+        public void SetGrate(int studentID,int courseID,int grade) {
+
+        }
 
         public String GetName() {
             return String.Format("Dr {0} ", base.GetName());
