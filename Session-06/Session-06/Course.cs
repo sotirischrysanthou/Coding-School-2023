@@ -10,5 +10,22 @@ namespace Session_06 {
         public Guid ID { get; set; }
         public String? Code { get; set; }
         public String? Subject { get; set; }
+
+        // Constructors
+        public Course() {
+
+        }
+
+        public Course(Guid id) : this() {
+            ID = id;
+        }
+
+        public Course(Guid id,String code) : this(id) {
+            Code = code;
+        }
+
+        public Course(Guid id, String code, String subject) : this(id, code) {
+            Subject = subject;
+        }
     }
 }
