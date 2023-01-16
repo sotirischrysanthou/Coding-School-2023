@@ -8,7 +8,7 @@ namespace Session_06 {
     internal class Student : Person {
         // Properties
         public int RegistrationNumber { get; set; }
-        //TODO: public Course[] Courses { get; set; }
+        public Course[] Courses { get; set; }
 
         // Constractors
         public Student() : base() {
@@ -32,9 +32,12 @@ namespace Session_06 {
             RegistrationNumber = registrationNumber;
         }
 
+        public void Attent(Course course, DateTime datetime) {
 
-        // TODO: Attent(course, datetime)
+        }
 
-        // TODO: WriteExam(courseID, datetime)
+        public void WriteExam(Guid courseID, DateTime datetime) {
+
+        }
     }
 }
