@@ -8,7 +8,7 @@ namespace Session_06 {
     internal class Student : Person {
         // Properties
         public int RegistrationNumber { get; set; }
-        public Course[] Courses { get; set; }
+        public Course[]? Courses { get; set; }
 
         // Constractors
         public Student() : base() {

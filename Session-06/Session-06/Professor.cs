@@ -9,7 +9,7 @@ namespace Session_06 {
     internal class Professor : Person {
         // Properties
         public string? Rank { get; set; }
-        public Course[] Courses { get; set; }
+        public Course[]? Courses { get; set; }
 
         // Constractors
         public Professor() : base() {
