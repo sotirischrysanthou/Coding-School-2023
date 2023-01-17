@@ -13,9 +13,9 @@ internal class Program {
 
         Console.WriteLine("ReadAll\n-----");
         msglog.ReadAll();
-        Console.WriteLine("Clear\n-----");
+        Console.WriteLine("-----\nClear\n-----");
         msglog.Clear();
-        Console.WriteLine("ReadAll\n-----");
+        Console.WriteLine("ReadAll\n-------");
         msglog.ReadAll();
     }
 }
