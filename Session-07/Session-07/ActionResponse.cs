@@ -6,5 +6,15 @@ using System.Threading.Tasks;
 
 namespace Session_07 {
     internal class ActionResponse {
+        // Properties
+        public Guid RequestID { get; set; }
+        public Guid ResponseID { get; set; }
+        public String Output { get; set; } 
+
+        public ActionResponse(Guid requestID, Guid responseID, String output) {
+            RequestID = requestID;
+            ResponseID = responseID;
+            Output = output;
+        }
     }
 }
