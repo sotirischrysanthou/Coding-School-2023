@@ -15,20 +15,30 @@ namespace Session_07 {
                 return true;
             }
         }
-        public string ReverseString(string? s) {
-            StringBuilder sb = new StringBuilder(s);
-            char c;
-            int end = sb.Length - 1;
-            int start = 0;
 
-            while (end - start > 0) {
-                c = sb[end];
-                sb[end] = sb[start];
-                sb[start] = c;
-                start++;
-                end--;
-            }
-            return sb.ToString();
+        // Non recursive method
+        //public string ReverseString(String? s) {
+        //    StringBuilder sb = new StringBuilder(s);
+        //    char c;
+        //    int end = sb.Length - 1;
+        //    int start = 0;
+
+        //    while (end - start > 0) {
+        //        c = sb[end];
+        //        sb[end] = sb[start];
+        //        sb[start] = c;
+        //        start++;
+        //        end--;
+        //    }
+        //    return sb.ToString();
+        //}
+
+        // Recursive Method
+        public String ReverseString(String str) {
+            if (str.Length > 0)
+                return str[str.Length - 1] + ReverseString(str.Substring(0, str.Length - 1));
+            else
+                return str;
         }
     }
 }
