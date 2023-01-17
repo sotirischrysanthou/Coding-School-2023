@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Session_07 {
     internal class Message {
         // Properties
-        public Guid ID { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public Guid? ID { get; set; }
+        public DateTime? TimeStamp { get; set; }
         public String Content { get; set; }
 
         // Constractors
