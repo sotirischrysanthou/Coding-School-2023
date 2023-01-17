@@ -47,7 +47,8 @@ namespace Session_07 {
                 output = String.Format("ERROR : {0}", output);
                 response = new ActionResponse(actionRequest.ID, responseID, output);
             }
-            message = new Message(messageID, DateTime.Now, output);
+            String messageContent = String.Format("Try to do {0} \"{1}\" and result is : {2}", actionRequest.Action, actionRequest.Input, output);
+            message = new Message(messageID, DateTime.Now, messageContent);
             Logger.Write(message);
             return response;
         }
