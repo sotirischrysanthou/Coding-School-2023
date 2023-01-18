@@ -23,21 +23,28 @@ namespace Session_07 {
         public ActionResponse Execute(ActionRequest actionRequest) {
             ActionResponse response = new ActionResponse(actionRequest.ID);
             String? output;
-            Session_07.Action action = NewAction(actionRequest.Action);
-            
-            if (action.Run(actionRequest.Input, out output)) {
-                response.SetOutput(output);
-            } else {
-                output = String.Format("ERROR : {0}", output);
-                response.SetOutput(output);
+            Log("EXECUTION START");
+            try {
+                Session_07.Action action = NewAction(actionRequest.Action);
+                if (action.Run(actionRequest.Input, out output)) {
+                    response.SetOutput(output);
+                } else {
+                    output = String.Format("ERROR : {0}", output);
+                    response.SetOutput(output);
+                }
+                Log(String.Format("Try to do {0} \"{1}\" and result is : {2}", actionRequest.Action, actionRequest.Input, response.Output));
+            } catch (Exception ex) {
+                Log(ex.Message);
+            } finally {
+                Log("EXECUTION END");
             }
-            Log(String.Format("Try to do {0} \"{1}\" and result is : {2}", actionRequest.Action, actionRequest.Input, output));
-            
             return response;
         }
 
         private void Log(string text) {
-            Message message = new Message(text);
+            Message message = new Message("---------------");
+            Logger.Write(message);
+            message = new Message(text);
             Logger.Write(message);
         }
 
