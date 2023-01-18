@@ -9,11 +9,14 @@ namespace Session_07 {
         // Properties
         public Guid RequestID { get; set; }
         public Guid ResponseID { get; set; }
-        public String Output { get; set; } 
+        public String? Output { get; set; } 
 
-        public ActionResponse(Guid requestID, Guid responseID, String output) {
+        public ActionResponse(Guid requestID) {
             RequestID = requestID;
-            ResponseID = responseID;
+            ResponseID = Guid.NewGuid();
+        }
+        
+        public void SetOutput(String output) {
             Output = output;
         }
     }

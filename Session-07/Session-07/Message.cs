@@ -12,9 +12,9 @@ namespace Session_07 {
         public String Content { get; set; }
 
         // Constractors
-        public Message(Guid id, DateTime timeStamp, String content) { 
-            ID = id;
-            TimeStamp = timeStamp;
+        public Message(String content) { 
+            ID = Guid.NewGuid();
+            TimeStamp = DateTime.Now;
             Content = content;
         }
 

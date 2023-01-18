@@ -21,13 +21,29 @@ namespace Session_07 {
 
         // Methods
         public ActionResponse Execute(ActionRequest actionRequest) {
-            Message message;
-            ActionResponse response;
-            Guid responseID = Guid.NewGuid();
-            Guid messageID = Guid.NewGuid();
-            Session_07.Action action;
+            ActionResponse response = new ActionResponse(actionRequest.ID);
             String? output;
-            switch (actionRequest.Action) {
+            Session_07.Action action = NewAction(actionRequest.Action);
+            
+            if (action.Run(actionRequest.Input, out output)) {
+                response.SetOutput(output);
+            } else {
+                output = String.Format("ERROR : {0}", output);
+                response.SetOutput(output);
+            }
+            Log(String.Format("Try to do {0} \"{1}\" and result is : {2}", actionRequest.Action, actionRequest.Input, output));
+            
+            return response;
+        }
+
+        private void Log(string text) {
+            Message message = new Message(text);
+            Logger.Write(message);
+        }
+
+        private Session_07.Action NewAction(ActionEnum actionEnum) {
+            Session_07.Action action;
+            switch (actionEnum) {
                 case ActionEnum.Convert:
                     action = new ActionConvert();
                     break;
@@ -41,16 +57,7 @@ namespace Session_07 {
                     action = new Session_07.Action();
                     break;
             }
-            if (action.Run(actionRequest.Input, out output)) {
-                response = new ActionResponse(actionRequest.ID, responseID, output);
-            } else {
-                output = String.Format("ERROR : {0}", output);
-                response = new ActionResponse(actionRequest.ID, responseID, output);
-            }
-            String messageContent = String.Format("Try to do {0} \"{1}\" and result is : {2}", actionRequest.Action, actionRequest.Input, output);
-            message = new Message(messageID, DateTime.Now, messageContent);
-            Logger.Write(message);
-            return response;
+            return action;
         }
     }
 }
