@@ -10,10 +10,8 @@ namespace Session_09 {
         private bool _isOperatorPressed;
         private bool _isEqualPressed;
         private Resolver _resolver;
-        private Addition _addition;
 
-
-        //Methods
+        // Constractors
         public Form1() {
             InitializeComponent();
             _isLastBtnNumber = false;
@@ -23,6 +21,7 @@ namespace Session_09 {
 
 
 
+        //Methods
         private void btnOne_Click(object sender, EventArgs e) {
             NumberProc("1");
         }
