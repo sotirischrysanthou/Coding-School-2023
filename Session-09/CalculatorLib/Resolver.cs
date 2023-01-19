@@ -17,7 +17,11 @@ namespace CalculatorLib {
 
         public string Resolve(String expresion) {
             _expresion = expresion;
-            int[] numbers = new int[100];
+
+            // writen like this for future Update. For more complex equations
+            // with more than one operator and more than two numbers
+            //--------------------------------------------------------------------
+            int[] numbers = new int[100]; 
             StringBuilder operators = new StringBuilder();
             int numOfNums = 0;
             String ops = "+-x/^=";
@@ -33,6 +37,7 @@ namespace CalculatorLib {
                     operators.Append(_expresion[i]);
                 }
             }
+            //----------------------------------------------------------------------
             double res = 0;
             switch (operators[0]) {
                 case '+':
