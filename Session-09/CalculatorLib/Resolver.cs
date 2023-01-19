@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,11 @@ using System.Threading.Tasks;
 namespace CalculatorLib {
     public class Resolver {
         //Properties
-        private String _expresion;
+        private String? _expresion;
 
-        public Resolver() { }
+        public Resolver() {
+            _expresion = null;
+        }
 
         public string Resolve(String expresion) {
             _expresion = expresion;
@@ -58,12 +61,16 @@ namespace CalculatorLib {
         }
 
         /* Isolate int from _expresion*/
-        private int? IntIsolation(int start, int length) {
-            String isolatedString = _expresion.Substring(start, length);
+        private int IntIsolation(int start, int length) {
             int i;
-            if (Int32.TryParse(isolatedString, out i))
-                return i;
-            return null;
+            try {
+                String isolatedString = _expresion.Substring(start, length);
+                i = Int32.Parse(isolatedString);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex.Message);
+                throw;
+            }
+            return i;
         }
 
     }
