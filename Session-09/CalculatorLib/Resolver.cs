@@ -17,7 +17,7 @@ namespace CalculatorLib {
 
         public string Resolve(String expresion) {
             _expresion = expresion;
-            int[] numbers = new int[2];
+            int[] numbers = new int[100];
             StringBuilder operators = new StringBuilder();
             int numOfNums = 0;
             String ops = "+-x/^=";

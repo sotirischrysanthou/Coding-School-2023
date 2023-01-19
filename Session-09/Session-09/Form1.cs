@@ -21,56 +21,74 @@ namespace Session_09 {
             _resolver = new Resolver();
         }
 
+        private void keyOneDown(object sender, KeyEventArgs e) {
+            // Determine whether the keystroke is a number from the top of the keyboard.
+            switch (e.KeyCode) {
+                case Keys.Enter:
+                    break;
+                case Keys.D0:
+                    btnZero_Click()
+                    break;
+                case Keys.D1:
+                    break;
+                case Keys.D2:
+                    break;
+                case Keys.D3:
+                    break;
+                case Keys.D4:
+                    break;
+                case Keys.D5:
+                    break;
+                case Keys.D6:
+                    break;
+                case Keys.D7:
+                    break;
+                case Keys.D8:
+                    break;
+                case Keys.D9:
+                    break;
+                case Keys.Multiply:
+                    break;
+                case Keys.Add:
+                    break;
+                case Keys.Subtract:
+                    break;
+                case Keys.Divide:
+                    break;
+            }
+        }
+
         private void btnOne_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "1";
-            NumberPressed();
+            NumberProc("1");
         }
 
         private void btnTwo_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "2";
-            NumberPressed();
+            NumberProc("2");
         }
         private void btnThree_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "3";
-            NumberPressed();
+            NumberProc("3");
         }
         private void btnFour_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "4";
-            NumberPressed();
+            NumberProc("4");
         }
         private void btnFive_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "5";
-            NumberPressed();
+            NumberProc("5");
         }
         private void btnSix_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "6";
-            NumberPressed();
+            NumberProc("6");
         }
         private void btnSeven_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "7";
-            NumberPressed();
+            NumberProc("7");
         }
         private void btnEight_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "8";
-            NumberPressed();
+            NumberProc("8");
         }
         private void btnNine_Click(object sender, EventArgs e) {
-            ClealIfIsANewEquation();
-            ctrlDisplay.Text += "9";
-            NumberPressed();
+            NumberProc("9");
         }
 
         private void btnZero_Click(object sender, EventArgs e) {
-            ctrlDisplay.Text += "0";
-            NumberPressed();
+            NumberProc("0");
         }
 
         private void btnRoot_Click(object sender, EventArgs e) {
@@ -142,6 +160,12 @@ namespace Session_09 {
                 _isEqualPressed = false;
                 ctrlDisplay.Text = string.Empty;
             }
+        }
+
+        private void NumberProc(string n) {
+            ClealIfIsANewEquation();
+            ctrlDisplay.Text += n;
+            NumberPressed();
         }
 
 
