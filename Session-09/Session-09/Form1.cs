@@ -56,7 +56,7 @@ namespace Session_09 {
         }
 
         private void btnRoot_Click(object sender, EventArgs e) {
-            if (!_isLastBtnNumber && !_isOperatorPressed) {
+            if (!_isLastBtnNumber) {
                 ClealIfIsANewEquation();
                 ctrlDisplay.Text += "√";
                 OperatorPressed();
@@ -93,11 +93,9 @@ namespace Session_09 {
         }
 
         private void OperatorPressed() {
-            _isOperatorPressed = true;
             _isLastBtnNumber = false;
         }
         private void EqualPressed() {
-            _isOperatorPressed = false;
             _isEqualPressed = true;
         }
 
@@ -119,7 +117,7 @@ namespace Session_09 {
         }
 
         private void OperationProc(string o) {
-            if (_isLastBtnNumber && !_isOperatorPressed) {
+            if (_isLastBtnNumber) {
                 ctrlDisplay.Text += o;
                 OperatorPressed();
             }
