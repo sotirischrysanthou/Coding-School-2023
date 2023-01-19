@@ -6,7 +6,7 @@ namespace Session_09 {
         //Properties
         
         // It would be true when the last button pressed is an operator
-        private bool _lastBtnIsNumber;
+        private bool _isLastBtnNumber;
         private bool _isOperatorPressed;
         private bool _isEqualPressed;
         private Resolver _resolver;
@@ -16,7 +16,7 @@ namespace Session_09 {
         //Methods
         public Form1() {
             InitializeComponent();
-            _lastBtnIsNumber = false;
+            _isLastBtnNumber = false;
             _isOperatorPressed = false;
             _resolver = new Resolver();
         }
@@ -57,23 +57,26 @@ namespace Session_09 {
         }
 
         private void btnRoot_Click(object sender, EventArgs e) {
-            OperationProc("√");
+            if (!_isLastBtnNumber && !_isOperatorPressed) {
+                ctrlDisplay.Text += "√";
+                OperatorPressed();
+            }
         }
 
         private void btnAddition_Click(object sender, EventArgs e) {
-            OperationProc("+");
+            OperationProc(" + ");
         }
 
         private void btnSubtraction_Click(object sender, EventArgs e) {
-            OperationProc("-");
+            OperationProc(" - ");
         }
 
         private void btnΜultiplication_Click(object sender, EventArgs e) {
-            OperationProc("x");
+            OperationProc(" x ");
         }
 
         private void btnDivision_Click(object sender, EventArgs e) {
-            OperationProc("/");
+            OperationProc(" / ");
         }
 
         private void btnExposition_Click(object sender, EventArgs e) {
@@ -81,7 +84,7 @@ namespace Session_09 {
         }
 
         private void btnEqual_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (_isLastBtnNumber) {
                 ctrlDisplay.Text += " = ";
                 OperatorPressed();
                 EqualPressed();
@@ -91,7 +94,7 @@ namespace Session_09 {
 
         private void OperatorPressed() {
             _isOperatorPressed = true;
-            _lastBtnIsNumber = false;
+            _isLastBtnNumber = false;
         }
         private void EqualPressed() {
             _isOperatorPressed = false;
@@ -99,7 +102,7 @@ namespace Session_09 {
         }
 
         private void NumberPressed() {
-            _lastBtnIsNumber = true;
+            _isLastBtnNumber = true;
         }
 
         private void ClealIfIsANewEquation() {
@@ -116,7 +119,7 @@ namespace Session_09 {
         }
 
         private void OperationProc(string o) {
-            if (_lastBtnIsNumber && !_isOperatorPressed) {
+            if (_isLastBtnNumber && !_isOperatorPressed) {
                 ctrlDisplay.Text += o;
                 OperatorPressed();
             }
