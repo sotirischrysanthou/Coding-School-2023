@@ -1,4 +1,6 @@
-﻿namespace Session_09 {
+﻿using System.Text;
+
+namespace Session_09 {
     public partial class Form1 : Form {
         // It would be true when the last button pressed is an operator
         private bool _lastBtnIsNumber;
@@ -98,14 +100,28 @@
                 ctrlDisplay.Text += " = ";
                 OperatorPressed();
                 int[] numbers = new int[30];
+                StringBuilder operators = new StringBuilder();
                 int numOfNums = 0;
-                String operators = "+-x/^√";
+                String ops = "+-x/^√=";
                 String expresion = ctrlDisplay.Text;
-                foreach (var c in expresion) {
-                    numbers[numOfNums] = Convert.ToInt32(c);
-                    //operators.Contains(c);
-                    ctrlDisplay.Text = numbers[numOfNums].ToString();
+                int start=0;
+                for (int i = 0; i < expresion.Length; i++) {
+                    if (ops.Contains(expresion[i])) {
+                        numbers[numOfNums] = Convert.ToInt32(expresion.Substring(start, i - start));
+                        numOfNums++;
+                        start = i + 1;
+                        operators.Append(expresion[i]);
+                    }
                 }
+                int res = 0;
+                switch (operators[0]) {
+                    case '+':
+                        res = numbers[0] + numbers[1];
+                        break;
+                    default:
+                        break;
+                }
+                ctrlDisplay.Text += res.ToString();
             }
         }
 
