@@ -58,6 +58,7 @@ namespace Session_09 {
 
         private void btnRoot_Click(object sender, EventArgs e) {
             if (!_isLastBtnNumber && !_isOperatorPressed) {
+                ClealIfIsANewEquation();
                 ctrlDisplay.Text += "√";
                 OperatorPressed();
             }
