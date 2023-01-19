@@ -1,13 +1,19 @@
 ﻿using System.Text;
+using CalculatorLib;
 
 namespace Session_09 {
     public partial class Form1 : Form {
         // It would be true when the last button pressed is an operator
         private bool _lastBtnIsNumber;
+        private bool _isOeratorPressed;
+        private Addition _addition;
+
 
         public Form1() {
             InitializeComponent();
             _lastBtnIsNumber = false;
+            _isOeratorPressed = false;
+            _addition= new Addition();
         }
 
         private void btnOne_Click(object sender, EventArgs e) {
@@ -54,42 +60,42 @@ namespace Session_09 {
         }
 
         private void btnRoot_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (!_lastBtnIsNumber && !_isOeratorPressed) {
                 ctrlDisplay.Text += "√";
                 OperatorPressed();
             }
         }
 
         private void btnAddition_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (_lastBtnIsNumber && !_isOeratorPressed) {
                 ctrlDisplay.Text += " + ";
                 OperatorPressed();
             }
         }
 
         private void btnSubtraction_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (_lastBtnIsNumber && !_isOeratorPressed) {
                 ctrlDisplay.Text += " - ";
                 OperatorPressed();
             }
         }
 
         private void btnΜultiplication_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (_lastBtnIsNumber && !_isOeratorPressed) {
                 ctrlDisplay.Text += " x ";
                 OperatorPressed();
             }
         }
 
         private void btnDivision_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (_lastBtnIsNumber && !_isOeratorPressed) {
                 ctrlDisplay.Text += " / ";
                 OperatorPressed();
             }
         }
 
         private void btnExposition_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber) {
+            if (_lastBtnIsNumber && !_isOeratorPressed) {
                 ctrlDisplay.Text += "^";
                 OperatorPressed();
             }
@@ -99,10 +105,10 @@ namespace Session_09 {
             if (_lastBtnIsNumber) {
                 ctrlDisplay.Text += " = ";
                 OperatorPressed();
-                int[] numbers = new int[30];
+                int[] numbers = new int[2];
                 StringBuilder operators = new StringBuilder();
                 int numOfNums = 0;
-                String ops = "+-x/^√=";
+                String ops = "+-x/^=";
                 String expresion = ctrlDisplay.Text;
                 int start=0;
                 for (int i = 0; i < expresion.Length; i++) {
@@ -112,13 +118,33 @@ namespace Session_09 {
                         start = i + 1;
                         operators.Append(expresion[i]);
                     }
+                    else if (expresion[i] == '√') {
+                        start = i + 1;
+                        operators.Append(expresion[i]);
+                    }
                 }
-                int res = 0;
+                double res = 0;
                 switch (operators[0]) {
                     case '+':
                         res = numbers[0] + numbers[1];
                         break;
+                    case '-':
+                        res = numbers[0] - numbers[1];
+                        break;
+                    case '/':
+                        res = numbers[0] / numbers[1];
+                        break;
+                    case 'x':
+                        res = numbers[0] * numbers[1];
+                        break;
+                    case '^':
+                        res = Math.Pow(numbers[0], numbers[1]);
+                        break;
+                    case '√':
+                        res = Math.Sqrt(numbers[0]);
+                        break;
                     default:
+                        res = numbers[0];
                         break;
                 }
                 ctrlDisplay.Text += res.ToString();
@@ -126,6 +152,7 @@ namespace Session_09 {
         }
 
         private void OperatorPressed() {
+            _isOeratorPressed = true;
             _lastBtnIsNumber = false;
         }
 
