@@ -187,7 +187,7 @@
             this.btnRoot.Name = "btnRoot";
             this.btnRoot.Size = new System.Drawing.Size(56, 33);
             this.btnRoot.TabIndex = 16;
-            this.btnRoot.Text = "x√y";
+            this.btnRoot.Text = "√x";
             this.btnRoot.UseVisualStyleBackColor = true;
             this.btnRoot.Click += new System.EventHandler(this.btnRoot_Click);
             // 

@@ -92,45 +92,27 @@ namespace Session_09 {
         }
 
         private void btnRoot_Click(object sender, EventArgs e) {
-            if (!_lastBtnIsNumber && !_isOperatorPressed) {
-                ctrlDisplay.Text += "√";
-                OperatorPressed();
-            }
+            OperationProc("√");
         }
 
         private void btnAddition_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber && !_isOperatorPressed) {
-                ctrlDisplay.Text += " + ";
-                OperatorPressed();
-            }
+            OperationProc("+");
         }
 
         private void btnSubtraction_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber && !_isOperatorPressed) {
-                ctrlDisplay.Text += " - ";
-                OperatorPressed();
-            }
+            OperationProc("-");
         }
 
         private void btnΜultiplication_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber && !_isOperatorPressed) {
-                ctrlDisplay.Text += " x ";
-                OperatorPressed();
-            }
+            OperationProc("x");
         }
 
         private void btnDivision_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber && !_isOperatorPressed) {
-                ctrlDisplay.Text += " / ";
-                OperatorPressed();
-            }
+            OperationProc("/");
         }
 
         private void btnExposition_Click(object sender, EventArgs e) {
-            if (_lastBtnIsNumber && !_isOperatorPressed) {
-                ctrlDisplay.Text += "^";
-                OperatorPressed();
-            }
+            OperationProc("^");
         }
 
         private void btnEqual_Click(object sender, EventArgs e) {
@@ -166,6 +148,13 @@ namespace Session_09 {
             ClealIfIsANewEquation();
             ctrlDisplay.Text += n;
             NumberPressed();
+        }
+
+        private void OperationProc(string o) {
+            if (_lastBtnIsNumber && !_isOperatorPressed) {
+                ctrlDisplay.Text += o;
+                OperatorPressed();
+            }
         }
 
 
