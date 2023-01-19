@@ -21,42 +21,7 @@ namespace Session_09 {
             _resolver = new Resolver();
         }
 
-        private void keyOneDown(object sender, KeyEventArgs e) {
-            // Determine whether the keystroke is a number from the top of the keyboard.
-            switch (e.KeyCode) {
-                case Keys.Enter:
-                    break;
-                case Keys.D0:
-                    btnZero_Click()
-                    break;
-                case Keys.D1:
-                    break;
-                case Keys.D2:
-                    break;
-                case Keys.D3:
-                    break;
-                case Keys.D4:
-                    break;
-                case Keys.D5:
-                    break;
-                case Keys.D6:
-                    break;
-                case Keys.D7:
-                    break;
-                case Keys.D8:
-                    break;
-                case Keys.D9:
-                    break;
-                case Keys.Multiply:
-                    break;
-                case Keys.Add:
-                    break;
-                case Keys.Subtract:
-                    break;
-                case Keys.Divide:
-                    break;
-            }
-        }
+
 
         private void btnOne_Click(object sender, EventArgs e) {
             NumberProc("1");
