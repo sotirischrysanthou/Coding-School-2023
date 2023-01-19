@@ -3,19 +3,22 @@ using CalculatorLib;
 
 namespace Session_09 {
     public partial class Form1 : Form {
+        //Properties
+        
         // It would be true when the last button pressed is an operator
         private bool _lastBtnIsNumber;
         private bool _isOperatorPressed;
         private bool _isEqualPressed;
+        private Resolver _resolver;
         private Addition _addition;
 
 
-
+        //Methods
         public Form1() {
             InitializeComponent();
             _lastBtnIsNumber = false;
             _isOperatorPressed = false;
-            _addition = new Addition();
+            _resolver = new Resolver();
         }
 
         private void btnOne_Click(object sender, EventArgs e) {
@@ -117,48 +120,7 @@ namespace Session_09 {
                 ctrlDisplay.Text += " = ";
                 OperatorPressed();
                 EqualPressed();
-                int[] numbers = new int[2];
-                StringBuilder operators = new StringBuilder();
-                int numOfNums = 0;
-                String ops = "+-x/^=";
-                String expresion = ctrlDisplay.Text;
-                int start = 0;
-                for (int i = 0; i < expresion.Length; i++) {
-                    if (ops.Contains(expresion[i])) {
-                        numbers[numOfNums] = Convert.ToInt32(expresion.Substring(start, i - start));
-                        numOfNums++;
-                        start = i + 1;
-                        operators.Append(expresion[i]);
-                    } else if (expresion[i] == '√') {
-                        start = i + 1;
-                        operators.Append(expresion[i]);
-                    }
-                }
-                double res = 0;
-                switch (operators[0]) {
-                    case '+':
-                        res = numbers[0] + numbers[1];
-                        break;
-                    case '-':
-                        res = numbers[0] - numbers[1];
-                        break;
-                    case '/':
-                        res = numbers[0] / numbers[1];
-                        break;
-                    case 'x':
-                        res = numbers[0] * numbers[1];
-                        break;
-                    case '^':
-                        res = Math.Pow(numbers[0], numbers[1]);
-                        break;
-                    case '√':
-                        res = Math.Sqrt(numbers[0]);
-                        break;
-                    default:
-                        res = numbers[0];
-                        break;
-                }
-                ctrlDisplay.Text += res.ToString();
+                ctrlDisplay.Text += _resolver.Resolve(ctrlDisplay.Text);
             }
         }
 
