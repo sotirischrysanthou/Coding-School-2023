@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_06 {
-    internal class Schedule {
+    public class Schedule {
         // Properties
         public Guid ID { get; set; }
         public Guid CourseID { get; set; }

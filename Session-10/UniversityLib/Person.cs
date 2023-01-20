@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_06 {
-    internal class Person {
+    public class Person {
         // Properties
         public Guid ID { get; set; }
         public String? Name { get; set; }

@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_06 {
-    internal class Student : Person {
+    public class Student : Person {
         // Properties
         public int RegistrationNumber { get; set; }
-        public Course[]? Courses { get; set; }
+        public List<Course> Courses { get; set; }
 
         // Constractors
         public Student() : base() {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Session_06 {
-    internal class Professor : Person {
+    public class Professor : Person {
         // Properties
         public string? Rank { get; set; }
         public Course[]? Courses { get; set; }

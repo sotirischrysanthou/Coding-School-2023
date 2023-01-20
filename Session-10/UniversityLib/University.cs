@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_06 {
-    internal class University : Institute {
+    public class University : Institute {
         // Properties
         public Student[]? Students { get; set; }
         public Course[]? Courses { get; set; }
@@ -15,8 +15,6 @@ namespace Session_06 {
         public University() : base() {
 
         }
-
-        public University() : base() { }
 
         public University(String name) : base(name) { }
 
@@ -43,6 +41,6 @@ namespace Session_06 {
         public Student[] GetStudents() { return Students; }
         public Course[] GetCourses() { return Courses; }
         public Grade[] GetGrades() { return Grades; }
-        public void SetScheduledCourse(Guid courseGuid professorDateTime datetime) { }
+        public void SetScheduledCourse(Guid courseID,Guid professorID,DateTime datetime) { }
     }
 }

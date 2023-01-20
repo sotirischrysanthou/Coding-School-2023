@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_06 {
-    internal class Course {
+    public class Course {
         // Properties
         public Guid ID { get; set; }
         public String? Code { get; set; }
@@ -13,7 +13,7 @@ namespace Session_06 {
 
         // Constructors
         public Course() {
-
+            ID = Guid.NewGuid();
         }
 
         public Course(String code) : this() {

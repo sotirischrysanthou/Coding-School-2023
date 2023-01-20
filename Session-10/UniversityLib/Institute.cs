@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_06 {
-    internal class Institute {
+    public class Institute {
         // Properties
         public Guid ID { get; set; }
         public String? Name { get; set; }
@@ -17,11 +17,11 @@ namespace Session_06 {
             ID = Guid.NewGuid();
         }
 
-        public Institute(Guid id, String name) : this() {
+        public Institute(String name) : this() {
             Name = name;
         }
 
-        public Institute(Guid id, String name, int yearsInService) : this(name) {
+        public Institute(String name, int yearsInService) : this(name) {
             YearsInService = yearsInService;
         }
         // Methods
