@@ -43,10 +43,6 @@
             this.SchdlProfessorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SchdlCalendar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvGrades = new System.Windows.Forms.DataGridView();
-            this.GradeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CourseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GradesCourse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bsGrades = new System.Windows.Forms.BindingSource(this.components);
             this.bsScheduledCourse = new System.Windows.Forms.BindingSource(this.components);
             this.btnLoad = new System.Windows.Forms.Button();
@@ -56,6 +52,10 @@
             this.labelGrades = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.GradeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CourseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GradesCourse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourses)).BeginInit();
@@ -209,30 +209,6 @@
             this.dgvGrades.Size = new System.Drawing.Size(614, 234);
             this.dgvGrades.TabIndex = 3;
             // 
-            // GradeID
-            // 
-            this.GradeID.DataPropertyName = "ID";
-            this.GradeID.HeaderText = "ID";
-            this.GradeID.Name = "GradeID";
-            // 
-            // StudentID
-            // 
-            this.StudentID.DataPropertyName = "StudentID";
-            this.StudentID.HeaderText = "Student ID";
-            this.StudentID.Name = "StudentID";
-            // 
-            // CourseID
-            // 
-            this.CourseID.DataPropertyName = "CourseID";
-            this.CourseID.HeaderText = "Course ID";
-            this.CourseID.Name = "CourseID";
-            // 
-            // GradesCourse
-            // 
-            this.GradesCourse.DataPropertyName = "GradesCourse";
-            this.GradesCourse.HeaderText = "Grade";
-            this.GradesCourse.Name = "GradesCourse";
-            // 
             // btnLoad
             // 
             this.btnLoad.Location = new System.Drawing.Point(551, 534);
@@ -307,6 +283,30 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // GradeID
+            // 
+            this.GradeID.DataPropertyName = "ID";
+            this.GradeID.HeaderText = "ID";
+            this.GradeID.Name = "GradeID";
+            // 
+            // StudentID
+            // 
+            this.StudentID.DataPropertyName = "StudentID";
+            this.StudentID.HeaderText = "Student ID";
+            this.StudentID.Name = "StudentID";
+            // 
+            // CourseID
+            // 
+            this.CourseID.DataPropertyName = "CourseID";
+            this.CourseID.HeaderText = "Course ID";
+            this.CourseID.Name = "CourseID";
+            // 
+            // GradesCourse
+            // 
+            this.GradesCourse.DataPropertyName = "GradeCourse";
+            this.GradesCourse.HeaderText = "Grade";
+            this.GradesCourse.Name = "GradesCourse";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -363,10 +363,6 @@
         private DataGridViewTextBoxColumn SchdlID;
         private DataGridViewTextBoxColumn SchdlProfessorID;
         private DataGridViewTextBoxColumn SchdlCalendar;
-        private DataGridViewTextBoxColumn GradeID;
-        private DataGridViewTextBoxColumn StudentID;
-        private DataGridViewTextBoxColumn CourseID;
-        private DataGridViewTextBoxColumn GradesCourse;
         private Button btnLoad;
         private Label labelStudents;
         private Label LabelCourses;
@@ -374,5 +370,9 @@
         private Label labelGrades;
         private Button btnNew;
         private Button btnRefresh;
+        private DataGridViewTextBoxColumn GradeID;
+        private DataGridViewTextBoxColumn StudentID;
+        private DataGridViewTextBoxColumn CourseID;
+        private DataGridViewTextBoxColumn GradesCourse;
     }
 }
