@@ -11,23 +11,35 @@ namespace Session_10 {
 
         private void Form1_Load(object sender, EventArgs e) {
             SetControlProperties();
-            Init();
+            
 
 
 
         }
 
-        private void Init() {
-            _uni = new University("University of Athents",185);
+        private void NewUni() {
+            _uni = new University("University of Athents", 185);
+            int RegistrationNumber = 1;
+            _uni.Students.Add(new Student("Sotiris Chrysanthou", 25, RegistrationNumber++));
+            _uni.Students.Add(new Student("Fotis Chrysoulas", 44, RegistrationNumber++));
+            _uni.Students.Add(new Student("Demetris Raptodimos", 25, RegistrationNumber++));
+            Refresh();
 
-            bsStudents.DataSource = _uni.Students;
-            bsCourses.DataSource = _uni.Courses;
-            bsGrades.DataSource = _uni.Grades;
-            bsScheduledCourse.DataSource = _uni.ScheduledCourse;
+
+        }
+
+        private void Refresh() {
+            if (_uni != null) {
+                bsStudents.DataSource = _uni.Students;
+                bsCourses.DataSource = _uni.Courses;
+                bsGrades.DataSource = _uni.Grades;
+                bsScheduledCourse.DataSource = _uni.ScheduledCourse;
+            }
         }
 
         private void SetControlProperties() {
 
+            serializer = new Serializer();
             dgvStudents.AutoGenerateColumns = false;
             dgvCourses.AutoGenerateColumns = false;
             dgvGrades.AutoGenerateColumns = false;
@@ -55,7 +67,21 @@ namespace Session_10 {
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
+            serializer.SerializeToFile(_uni, "University.json");
+            MessageBox.Show("Save Done!!!");
+        }
 
+        private void btnLoad_Click(object sender, EventArgs e) {
+            _uni = serializer.Deserialize<University>("University.json");
+            Refresh();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e) {
+            NewUni();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e) {
+            Refresh();
         }
     }
 }
