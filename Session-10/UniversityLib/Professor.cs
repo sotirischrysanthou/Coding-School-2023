@@ -13,28 +13,25 @@ namespace Session_06 {
 
         // Constractors
         public Professor() : base() {
+            ID = Guid.NewGuid();
             Console.WriteLine("Professor Constractors called without parameters");
         }
-        public Professor(Guid id) : base(id) {
-            Console.WriteLine("Professor Constractors called with parameters (Guid id = {0})", id);
 
+        public Professor(String name) : base(name) {
+            Console.WriteLine("Professor Constractors called with parameters (String name = {0})",name);
         }
 
-        public Professor(Guid id, String name) : base(id, name) {
-            Console.WriteLine("Professor Constractors called with parameters (Guid id = {0}, String name = {1})",id,name);
+        public Professor(String name, int age) : base( name, age) {
+            Console.WriteLine("Professor Constractors called with parameters (String name = {0}, int age = {1})", name, age);
         }
 
-        public Professor(Guid id, String name, int age) : base(id, name, age) {
-            Console.WriteLine("Professor Constractors called with parameters (Guid id = {0}, String name = {1}, int age = {2})", id, name, age);
-        }
-
-        public Professor(Guid id, String name, int age,string rank) : base(id, name, age) {
-            Console.WriteLine("Professor Constractors called with parameters (Guid id = {0}, String name = {1}, int age = {2}, string rank ={3})", id, name, age, rank);
+        public Professor(String name, int age,string rank) : base(name, age) {
+            Console.WriteLine("Professor Constractors called with parameters (String name = {0}, int age = {1}, string rank ={2})",name, age, rank);
             Rank = rank;
         }
 
-        public Professor(Guid id, String name, int age, string rank, Course[] courses) : this(id, name, age, rank) {
-            Console.WriteLine("Professor Constractors called with parameters (Guid id = {0}, String name = {1}, int age = {2}, string rank ={3})", id, name, age, rank);
+        public Professor(String name, int age, string rank, Course[] courses) : this(name, age, rank) {
+            Console.WriteLine("Professor Constractors called with parameters (String name = {0}, int age = {1}, string rank ={2})", name, age, rank);
             Courses = courses;
         }
 

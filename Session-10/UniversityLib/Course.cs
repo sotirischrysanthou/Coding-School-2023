@@ -16,15 +16,11 @@ namespace Session_06 {
 
         }
 
-        public Course(Guid id) : this() {
-            ID = id;
-        }
-
-        public Course(Guid id,String code) : this(id) {
+        public Course(String code) : this() {
             Code = code;
         }
 
-        public Course(Guid id, String code, String subject) : this(id, code) {
+        public Course(String code, String subject) : this(code) {
             Subject = subject;
         }
     }

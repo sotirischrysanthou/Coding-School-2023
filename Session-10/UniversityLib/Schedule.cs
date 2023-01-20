@@ -13,22 +13,18 @@ namespace Session_06 {
         public DateTime Calendar { get; set; }
 
         public Schedule() {
-
+            ID= Guid.NewGuid();
         }
 
-        public Schedule(Guid id) : this() {
-            ID = id;
-        }
-
-        public Schedule(Guid id, Guid courseID) : this(id) {
+        public Schedule(Guid courseID) : this() {
             CourseID = courseID;
         }
 
-        public Schedule(Guid id, Guid courseID, Guid professorID) : this(id, courseID) {
+        public Schedule(Guid courseID, Guid professorID) : this(courseID) {
             ProfessorID = professorID;
         }
 
-        public Schedule(Guid id, Guid courseID, Guid professorID, DateTime calendar) : this(id, courseID, professorID) {
+        public Schedule(Guid courseID, Guid professorID, DateTime calendar) : this(courseID, professorID) {
             Calendar = calendar;
         }
     }

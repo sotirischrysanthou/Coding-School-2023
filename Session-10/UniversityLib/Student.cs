@@ -12,23 +12,20 @@ namespace Session_06 {
 
         // Constractors
         public Student() : base() {
+            ID = Guid.NewGuid();
             Console.WriteLine("Student Constractors called without parameters");
         }
-        public Student(Guid id) : base(id) {
-            Console.WriteLine("Student Constractors called with parameters (Guid id = {0})", id);
 
+        public Student(String name) : base(name) {
+            Console.WriteLine("Student Constractors called with parameters (String name = {0})", name);
         }
 
-        public Student(Guid id, String name) : base(id, name) {
-            Console.WriteLine("Student Constractors called with parameters (Guid id = {0}, String name = {1})", id, name);
+        public Student(String name, int age) : base(name, age) {
+            Console.WriteLine("Person Constractor called with parameters (String name = {0}, int age = {1})", name, age);
         }
 
-        public Student(Guid id, String name, int age) : base(id, name, age) {
-            Console.WriteLine("Student Constractors called with parameters (Guid id = {0}, String name = {1}, int age = {2})", id, name, age);
-        }
-
-        public Student(Guid id, String name, int age, int registrationNumber) : base(id, name, age) {
-            Console.WriteLine("Student Constractors called with parameters (Guid id = {0}, String name = {1}, int age = {2}, string rank ={3})", id, name, age, registrationNumber);
+        public Student(String name, int age, int registrationNumber) : base(name, age) {
+            Console.WriteLine("Student Constractors called with parameters (String name = {0}, int age = {1}, string rank ={2})",name, age, registrationNumber);
             RegistrationNumber = registrationNumber;
         }
 

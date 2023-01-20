@@ -13,22 +13,18 @@ namespace Session_06 {
 
         // Constractors
         public Person() {
+            ID = Guid.NewGuid();
             Console.WriteLine("Person Constractor called without parameters");
         }
 
-        public Person(Guid id) : this() {
-            ID = id;
-            Console.WriteLine("Person Constractor called with parameter  (Guid id = {0})", id);
-        }
-
-        public Person(Guid id, String name) : this(id) {
+        public Person(String name) : this() {
             Name = name;
-            Console.WriteLine("Person Constractor called with parameters (Guid id = {0}, String name = {1})", id, name);
+            Console.WriteLine("Person Constractor called with parameters (String name = {0})",name);
         }
 
-        public Person(Guid id, String name, int age) : this(id, name) {
+        public Person(String name, int age) : this(name) {
             Age = age;
-            Console.WriteLine("Person Constractor called with parameters (Guid id = {0}, String name = {1}, int age = {2})", id, name, age);
+            Console.WriteLine("Person Constractor called with parameters (String name = {0}, int age = {1})", name, age);
         }
 
         public String GetName() {

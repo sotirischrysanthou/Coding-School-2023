@@ -14,18 +14,14 @@ namespace Session_06 {
         // Constructors
 
         public Institute() {
-
+            ID = Guid.NewGuid();
         }
 
-        public Institute(Guid id) : this() {
-            ID = id;
-        }
-
-        public Institute(Guid id, String name) : this(id) {
+        public Institute(Guid id, String name) : this() {
             Name = name;
         }
 
-        public Institute(Guid id, String name, int yearsInService) : this(id, name) {
+        public Institute(Guid id, String name, int yearsInService) : this(name) {
             YearsInService = yearsInService;
         }
         // Methods

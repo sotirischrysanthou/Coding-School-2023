@@ -12,22 +12,18 @@ namespace Session_06 {
         public int GradeCourse { get; set; }
 
         public Grade() {
-
+            ID= Guid.NewGuid();
         }
 
-        public Grade(Guid id) : this() {
-            ID = id;
-        }
-
-        public Grade(Guid id, Guid studentID) : this(id) {
+        public Grade(Guid studentID) : this() {
             StudentID = studentID;
         }
 
-        public Grade(Guid id, Guid studentID, Guid courseID) : this(id,studentID) {
+        public Grade(Guid studentID, Guid courseID) : this(studentID) {
             CourseID = courseID;
         }
 
-        public Grade(Guid id, Guid studentID, Guid courseID, int grade) : this(id, studentID,courseID) {
+        public Grade(Guid studentID, Guid courseID, int grade) : this(studentID, courseID) {
             GradeCourse = grade; ;
         }
     }
