@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Session_06 {
+namespace UniversityLib {
     public class Professor : Person {
         // Properties
         public string? Rank { get; set; }

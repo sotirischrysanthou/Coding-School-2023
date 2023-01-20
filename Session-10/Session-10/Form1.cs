@@ -1,9 +1,10 @@
-using Session_06;
+using UniversityLib;
+using SerializerLib;
 
 namespace Session_10 {
     public partial class Form1 : Form {
-        List<Student> students;
-        List<Course> courses;
+        private University _uni;
+        Serializer serializer;
         public Form1() {
             InitializeComponent();
         }
@@ -11,30 +12,32 @@ namespace Session_10 {
         private void Form1_Load(object sender, EventArgs e) {
             SetControlProperties();
             Init();
-            
-            
-            
+
+
+
         }
 
         private void Init() {
-            students = new List<Student>();
-            students.Add(new Student("Sotiris Chrysanthou", 25, 1));
-            bsStudents.DataSource = students;
+            _uni = new University("University of Athents",185);
 
-            courses = new List<Course>();
-            courses.Add(new Course("A05","IP"));
-            courses.Add(new Course("A06","OOP"));
-            bsCourses.DataSource = courses;
+            bsStudents.DataSource = _uni.Students;
+            bsCourses.DataSource = _uni.Courses;
+            bsGrades.DataSource = _uni.Grades;
+            bsScheduledCourse.DataSource = _uni.ScheduledCourse;
         }
 
         private void SetControlProperties() {
 
             dgvStudents.AutoGenerateColumns = false;
             dgvCourses.AutoGenerateColumns = false;
+            dgvGrades.AutoGenerateColumns = false;
+            dgvScheduledCourse.AutoGenerateColumns = false;
             dgvStudents.DataSource = bsStudents;
             dgvCourses.DataSource = bsCourses;
+            dgvGrades.DataSource = bsGrades;
+            dgvScheduledCourse.DataSource = bsScheduledCourse;
 
-            
+
 
             dgvStudents.CellContentClick += dgvStudents_CellContentClick;
 

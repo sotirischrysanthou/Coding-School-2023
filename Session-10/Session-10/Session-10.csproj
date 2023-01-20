@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SerializerLib\SerializerLib.csproj" />
     <ProjectReference Include="..\UniversityLib\UniversityLib.csproj" />
   </ItemGroup>
 

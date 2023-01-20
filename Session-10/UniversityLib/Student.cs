@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_06 {
+namespace UniversityLib {
     public class Student : Person {
         // Properties
         public int RegistrationNumber { get; set; }
