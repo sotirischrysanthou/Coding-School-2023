@@ -16,25 +16,25 @@ namespace Session_06 {
 
         }
 
-        public University(Guid id) : base(id) { }
+        public University() : base() { }
 
-        public University(Guid id, String name) : base(id, name) { }
+        public University(String name) : base( name) { }
 
-        public University(Guid id, String name, int yearsInService) : base(id, name, yearsInService) { }
+        public University(String name, int yearsInService) : base(id, name, yearsInService) { }
 
-        public University(Guid id, String name, int yearsInService, Student[]? students) : this(id, name, yearsInService) {
+        public University(String name, int yearsInService, Student[]? students) : this(name, yearsInService) {
             Students = students;
         }
 
-        public University(Guid id, String name, int yearsInService, Student[]? students, Course[]? courses) : this(id, name, yearsInService, students) {
+        public University(String name, int yearsInService, Student[]? students, Course[]? courses) : this(name, yearsInService, students) {
             Courses = courses;
         }
 
-        public University(Guid id, String name, int yearsInService, Student[]? students, Course[]? courses, Grade[]? grades) : this(id, name, yearsInService, students, courses) {
+        public University(String name, int yearsInService, Student[]? students, Course[]? courses, Grade[]? grades) : this(name, yearsInService, students, courses) {
             Grades = grades;
         }
 
-        public University(Guid id, String name, int yearsInService, Student[]? students, Course[]? courses, Grade[]? grades, Schedule[]? scheduledCourse) : this(id, name, yearsInService, students, courses, grades) {
+        public University(String name, int yearsInService, Student[]? students, Course[]? courses, Grade[]? grades, Schedule[]? scheduledCourse) : this(name, yearsInService, students, courses, grades) {
             ScheduledCourse = scheduledCourse;
         }
 
