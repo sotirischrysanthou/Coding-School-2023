@@ -31,24 +31,25 @@ namespace Session_10 {
             _uni.Courses.Add(new Course(String.Format("{0}{1}", coursesPreFix, (coursesNum++)), "Object-Oriented Programming"));
             
             int i = 0;
-            int j = 0;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 6));
-            i++;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 7));
-            i++;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 8));
-            j++;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 6));
-            i--;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 10));
-            i--;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 7));
-            j++;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 6));
-            i++;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 10));
-            i++;
-            _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 7));
+            for (int j = 0; j < 3; j++) {
+                i = 0; 
+                _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 6));
+                i++;
+                _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 7));
+                i++;
+                _uni.Grades.Add(new Grade(_uni.Students[i].ID, _uni.Courses[j].ID, 8));
+            }
+
+            for (int j = 0; j < 3; j++) {
+                i = 0;
+                _uni.ScheduledCourse.Add(new Schedule(_uni.Courses[i].ID,Guid.NewGuid(),DateTime.Now));
+                i++;
+                _uni.ScheduledCourse.Add(new Schedule(_uni.Courses[i].ID, Guid.NewGuid(), DateTime.Now));
+                i++;
+                _uni.ScheduledCourse.Add(new Schedule(_uni.Courses[i].ID, Guid.NewGuid(), DateTime.Now));
+
+            }
+
             Refresh();
 
 
