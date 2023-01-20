@@ -17,15 +17,15 @@ namespace Session_06 {
 
         }
 
-        public Institute() : this() {
-            ID = Guid.NewGuid();
+        public Institute(Guid id) : this() {
+            ID = id;
         }
 
-        public Institute(String name) : this() {
+        public Institute(Guid id, String name) : this(id) {
             Name = name;
         }
 
-        public Institute(String name, int yearsInService) : this(name) {
+        public Institute(Guid id, String name, int yearsInService) : this(id, name) {
             YearsInService = yearsInService;
         }
         // Methods
