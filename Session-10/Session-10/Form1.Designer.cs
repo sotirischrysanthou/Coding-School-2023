@@ -52,8 +52,8 @@
             this.labelGrades = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.SchdlCourseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SchdlID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SchdlCourseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SchdlProfessorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SchdlCalendar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
@@ -159,8 +159,8 @@
             this.dgvScheduledCourse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvScheduledCourse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvScheduledCourse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SchdlCourseID,
             this.SchdlID,
+            this.SchdlCourseID,
             this.SchdlProfessorID,
             this.SchdlCalendar});
             this.dgvScheduledCourse.Location = new System.Drawing.Point(643, 294);
@@ -282,17 +282,17 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // SchdlCourseID
-            // 
-            this.SchdlCourseID.DataPropertyName = "CourseID";
-            this.SchdlCourseID.HeaderText = "Course ID";
-            this.SchdlCourseID.Name = "SchdlCourseID";
-            // 
             // SchdlID
             // 
             this.SchdlID.DataPropertyName = "ID";
             this.SchdlID.HeaderText = "ID";
             this.SchdlID.Name = "SchdlID";
+            // 
+            // SchdlCourseID
+            // 
+            this.SchdlCourseID.DataPropertyName = "CourseID";
+            this.SchdlCourseID.HeaderText = "Course ID";
+            this.SchdlCourseID.Name = "SchdlCourseID";
             // 
             // SchdlProfessorID
             // 
@@ -369,8 +369,8 @@
         private DataGridViewTextBoxColumn StudentID;
         private DataGridViewTextBoxColumn CourseID;
         private DataGridViewTextBoxColumn GradesCourse;
-        private DataGridViewTextBoxColumn SchdlCourseID;
         private DataGridViewTextBoxColumn SchdlID;
+        private DataGridViewTextBoxColumn SchdlCourseID;
         private DataGridViewTextBoxColumn SchdlProfessorID;
         private DataGridViewTextBoxColumn SchdlCalendar;
     }
