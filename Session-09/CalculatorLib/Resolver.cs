@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib {
     public class Resolver {
-        //Properties
+        // Properties
         private String? _expresion;
         double[] _numbers;
         private _CalcOperation[] _operators;
@@ -25,15 +25,21 @@ namespace CalculatorLib {
             Root = 6
         };
 
+        // Constructors
         public Resolver() {
-            _expresion = null;
+            Init();
+        }
+
+        // Methods
+
+        public void Init() {
             _numbers = new double[100];
             _numOfNums = 0;
             _operators = new _CalcOperation[100];
             _numOfOps = 0;
         }
-
         public string Resolve(String expresion) {
+            Init();
             _expresion = expresion;
 
             // writen like this for future Update. For more complex equations
@@ -55,7 +61,7 @@ namespace CalculatorLib {
             }
             //----------------------------------------------------------------------
             double res = 0;
-            while (_numOfNums > 0) {
+            while (_operators[0] != _CalcOperation.Equal) {
                 res = SimpleEquation();
             }
             return res.ToString();
@@ -110,13 +116,11 @@ namespace CalculatorLib {
         private int FindOperatorWithHighestPiority() {
             _CalcOperation op = _operators[0];
             int highestPriority = 0;
-            int i = 0;
-            while (_operators[i] != _CalcOperation.Equal) {
+            for (int i = 0; i < _numOfOps; i++) {
                 if (_operators[i] > op) {
                     highestPriority = i;
                     op = _operators[i];
                 }
-                i++;
             }
             return highestPriority;
         }
@@ -124,6 +128,7 @@ namespace CalculatorLib {
         private double SimpleEquation() {
             int pos = FindOperatorWithHighestPiority();
             double res = _numbers[pos];
+
             switch (_operators[pos]) {
                 case _CalcOperation.Add:
                     res = _numbers[pos] + _numbers[pos + 1];
@@ -158,26 +163,22 @@ namespace CalculatorLib {
             int newOperatorsPos = 0;
             int oldNumbersPos = 0;
             int newNumbersPos = 0;
-            if (_numOfNums > 1) {
-                for (oldNumbersPos = 0; oldNumbersPos < _numOfNums; oldNumbersPos++) {
-                    if (oldNumbersPos == pos) {
-                        newNumbers[newNumbersPos] = res;
-                        if (_operators[pos] != _CalcOperation.Root) {
-                            oldNumbersPos++;
-                        }
-                    } else {
-                        newNumbers[newNumbersPos] = _numbers[oldNumbersPos];
+            for (oldNumbersPos = 0; oldNumbersPos < _numOfNums; oldNumbersPos++) {
+                if (oldNumbersPos == pos) {
+                    newNumbers[newNumbersPos] = res;
+                    if (_operators[pos] != _CalcOperation.Root) {
+                        oldNumbersPos++;
                     }
-                    newNumbersPos++;
+                } else {
+                    newNumbers[newNumbersPos] = _numbers[oldNumbersPos];
                 }
-                _numbers = newNumbers;
-                if (_operators[pos] != _CalcOperation.Root) {
-                    _numOfNums--;
-                }
-            } else {
-                _numbers[0] = 0;
-                _numOfNums = 0;
+                newNumbersPos++;
             }
+            _numbers = newNumbers;
+            if (_operators[pos] != _CalcOperation.Root) {
+                _numOfNums--;
+            }
+
             if (_numOfOps > 0) {
                 for (oldOparatorsPos = 0; oldOparatorsPos < _numOfOps; oldOparatorsPos++) {
                     if (oldOparatorsPos == pos) {

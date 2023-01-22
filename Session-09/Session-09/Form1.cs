@@ -20,8 +20,12 @@ namespace Session_09 {
         }
 
 
-
         //Methods
+
+        private void Form1_Load(object sender, EventArgs e) {
+
+        }
+
         private void btnOne_Click(object sender, EventArgs e) {
             NumberProc("1");
         }
@@ -122,7 +126,5 @@ namespace Session_09 {
                 OperatorPressed();
             }
         }
-
-
     }
 }
