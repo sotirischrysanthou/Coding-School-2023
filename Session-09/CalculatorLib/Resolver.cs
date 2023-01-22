@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using calOps = CalculatorLib.CalcOperations.CalcOperation;
+using MessageLoggerLib;
 
 namespace CalculatorLib {
-    public class Resolver {
+    public class Resolver : MessageLoggerLib.Action {
         // Properties
         private Parser _parser;
         private List<double> _numbers;
@@ -22,13 +23,14 @@ namespace CalculatorLib {
         }
 
         // Methods
-        public string Resolve(String expresion) {
+        public override bool Run(String expresion, out String output) {
             _parser.Parse(expresion, _numbers, _operators);
             double res = 0;
             while (_operators[0] != calOps.Equal) {
                 res = SimpleEquation();
             }
-            return res.ToString();
+            output = res.ToString();
+            return true;
         }
 
         private int FindOperatorWithHighestPiority() {

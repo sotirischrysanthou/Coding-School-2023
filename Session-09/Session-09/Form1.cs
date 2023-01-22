@@ -1,29 +1,37 @@
 ﻿using System.Text;
+using MessageLoggerLib;
 using CalculatorLib;
 
 namespace Session_09 {
     public partial class Form1 : Form {
         //Properties
-        
+
         // It would be true when the last button pressed is an operator
         private bool _isLastBtnNumber;
-        private bool _isOperatorPressed;
         private bool _isEqualPressed;
         private Resolver _resolver;
+        private ActionRequest _actionRequest;
+        private ActionResponse _actionResponse;
+        private ActionResolver _actionResolver;
 
         // Constractors
         public Form1() {
             InitializeComponent();
             _isLastBtnNumber = false;
-            _isOperatorPressed = false;
             _resolver = new Resolver();
+            _actionResolver = new ActionResolver();
         }
 
 
         //Methods
 
         private void Form1_Load(object sender, EventArgs e) {
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+        }
 
+        private void Form1_FormClosing(System.Object sender, FormClosingEventArgs e){
+            MessageBox.Show("closing..");
+            _actionResolver.Logger.ReadAll();
         }
 
         private void btnOne_Click(object sender, EventArgs e) {
@@ -88,11 +96,14 @@ namespace Session_09 {
         }
 
         private void btnEqual_Click(object sender, EventArgs e) {
+            String text;
             if (_isLastBtnNumber) {
                 ctrlDisplay.Text += " = ";
                 OperatorPressed();
                 EqualPressed();
-                ctrlDisplay.Text += _resolver.Resolve(ctrlDisplay.Text);
+                _actionRequest = new ActionRequest(ctrlDisplay.Text, (MessageLoggerLib.Action)_resolver);
+                _actionResponse = _actionResolver.Execute(_actionRequest);
+                ctrlDisplay.Text += _actionResponse.Output;
             }
         }
 
