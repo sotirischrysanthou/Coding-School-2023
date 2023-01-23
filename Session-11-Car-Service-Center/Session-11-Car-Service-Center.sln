@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Session-11-Car-Service-Center", "Session-11-Car-Service-Center\Session-11-Car-Service-Center.csproj", "{BA8429E8-4B27-46FA-AA28-515145259A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Session-11-Car-Service-Center", "Session-11-Car-Service-Center\Session-11-Car-Service-Center.csproj", "{BA8429E8-4B27-46FA-AA28-515145259A95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarServiceCenterLib", "CarServiceCenterLib\CarServiceCenterLib.csproj", "{DBE4D844-CA52-4314-82C8-66C0FC39CBE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenterLib", "CarServiceCenterLib\CarServiceCenterLib.csproj", "{DBE4D844-CA52-4314-82C8-66C0FC39CBE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerializerLib", "SerializerLib\SerializerLib.csproj", "{47A33428-A4AE-4DFA-9AFF-20856DD2398E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DBE4D844-CA52-4314-82C8-66C0FC39CBE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBE4D844-CA52-4314-82C8-66C0FC39CBE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBE4D844-CA52-4314-82C8-66C0FC39CBE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A33428-A4AE-4DFA-9AFF-20856DD2398E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A33428-A4AE-4DFA-9AFF-20856DD2398E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A33428-A4AE-4DFA-9AFF-20856DD2398E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A33428-A4AE-4DFA-9AFF-20856DD2398E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
