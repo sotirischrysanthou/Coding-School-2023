@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CarServiceCenterLib
 {
-    public class Engineer  : Person
+    public class Engineer : Person
     {
         //Properties
         public Guid ManagerID { get; set; }
         public double SalaryPerMonth { get; set; }
+
 
     }
 }
