@@ -19,5 +19,11 @@ namespace CarServiceCenterLib {
 
 
 
+        // method
+
+        public Car() {
+            ID = Guid.NewGuid();
+        }
+
     }
 }
