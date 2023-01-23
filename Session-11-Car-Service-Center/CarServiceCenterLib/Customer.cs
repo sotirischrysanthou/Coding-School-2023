@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace CarServiceCenterLib {
     public class Customer : Person{
+
     }
 }
