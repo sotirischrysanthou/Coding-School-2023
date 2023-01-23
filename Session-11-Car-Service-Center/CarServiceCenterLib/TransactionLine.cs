@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarServiceCenterLib
 {
-    public class TranscasactioLine
+    public class TransactionLine
     {
         public Guid ID { get; set; }
         public Guid TransactionID { get; set; }
@@ -16,7 +16,7 @@ namespace CarServiceCenterLib
 
         public double Price { get; set; }
 
-        public TranscasactioLine(Guid transactionID, Guid serviceTaskID, Guid enginnerID, double pricePerHour, double price)
+        public TransactionLine(Guid transactionID, Guid serviceTaskID, Guid enginnerID, double pricePerHour, double price)
         {
             ID = Guid.NewGuid();
             TransactionID = transactionID;

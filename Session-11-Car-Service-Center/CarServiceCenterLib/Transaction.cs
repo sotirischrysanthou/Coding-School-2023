@@ -16,7 +16,7 @@ namespace CarServiceCenterLib
         public Guid ManagerID { get; set; }
         public double TotalPrice { get; set; }
 
-        List<TransactionLines> transactionLines = new List<TransactionLine>();
+        // List<TransactionLines> transactionLines = new List<TransactionLine>();
 
 
     }
