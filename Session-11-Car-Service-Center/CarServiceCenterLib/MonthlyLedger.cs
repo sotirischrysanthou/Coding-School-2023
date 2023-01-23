@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib
-{
-    public class MonthlyLedger
-    {
-        //Properties
+namespace CarServiceCenterLib {
+    public class MonthlyLedger {
+        // Properties
         public int Year { get; set; }
         public int Month { get; set; }
         public double Income { get; set; }

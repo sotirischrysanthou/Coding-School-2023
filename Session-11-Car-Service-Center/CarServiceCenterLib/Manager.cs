@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 namespace CarServiceCenterLib {
     public class Manager : Person {
 
-        //properties
+        // Properties
         public double SalaryPerMonth { get; set; }
         public List<Engineer> Engineers { get; set; }
 
+        // Constructors
         public Manager(string name, string surname, double salaryPerMonth) : base(name, surname) {
             Engineers = new List<Engineer>();
             SalaryPerMonth = salaryPerMonth;
         }
 
-        //methods
+        // Methods
 
         public void AddEngineer( Engineer engineer ) {
             Engineers.Add(engineer);

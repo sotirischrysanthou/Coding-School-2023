@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib
-{
-    public class ServiceTask
-    {
+namespace CarServiceCenterLib {
+    public class ServiceTask {
         public Guid ID { get; set; }
         public int Code { get; set; }
         public string Description { get; set; }
 
         public decimal Hours { get; set; }
 
-        public ServiceTask(int code, String description, decimal hours)
-        {
+        public ServiceTask(int code, String description, decimal hours) {
             ID = Guid.NewGuid();
             Code = code;
             Description = description;

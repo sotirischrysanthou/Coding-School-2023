@@ -8,11 +8,11 @@ namespace CarServiceCenterLib
 {
     public class Engineer : Person
     {
-        //Properties
+        // Properties
         public Guid ManagerID { get; set; }
         public double SalaryPerMonth { get; set; }
 
-        //Constructors
+        // Constructors
         public Engineer(string name, string surname, Guid managerID, double salaryPerMonth) : base(name, surname)
         {
             ManagerID = managerID;
