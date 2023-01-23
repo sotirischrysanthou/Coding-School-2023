@@ -5,6 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarServiceCenterLib {
-    internal class Class2 {
+    public class Car {
+
+        // properties
+
+        public Guid ID { get; set; }
+
+        public string Brand { get; set; }
+
+        public string Model { get; set; }
+
+        public string CarRegistrationNumber { get; set; }
+
+
+
     }
 }
