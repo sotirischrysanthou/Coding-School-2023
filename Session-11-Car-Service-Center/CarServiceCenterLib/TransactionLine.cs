@@ -10,18 +10,19 @@ namespace CarServiceCenterLib {
         public Guid ID { get; set; }
         public Guid TransactionID { get; set; }
         public Guid ServiceTaskID { get; set; }
-        public Guid EnginnerID { get; set; }
+        public Guid EngineerID { get; set; }
         public double Hours { get; set; }
         public double PricePerHour { get; set; } //constant maybe
         public double Price { get; set; }
 
         //Constrators
-        public TransactionLine(Guid transactionID, Guid serviceTaskID, Guid enginnerID,double hours, double pricePerHour) {
+        public TransactionLine(Guid transactionID, Guid serviceTaskID, Guid engineerID,double hours, double pricePerHour) {
             ID = Guid.NewGuid();
             TransactionID = transactionID;
             ServiceTaskID = serviceTaskID;
-            EnginnerID = enginnerID;
+            EngineerID = engineerID;
             PricePerHour = pricePerHour;
+            Hours = hours;
             Price = pricePerHour * hours;
         }
         // Methods

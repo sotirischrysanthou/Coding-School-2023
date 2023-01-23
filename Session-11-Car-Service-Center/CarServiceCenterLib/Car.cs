@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CarServiceCenterLib {
     public class Car {
 
-        // properties
+        // Properties
 
         public Guid ID { get; set; }
 
@@ -19,11 +19,14 @@ namespace CarServiceCenterLib {
 
 
 
-        // method
-
-        public Car() {
+        // Constructors
+        public Car(String brand, String model, String registrationNumber ) {
             ID = Guid.NewGuid();
+            Brand = brand;
+            Model = model;
+            CarRegistrationNumber = registrationNumber;
         }
+        // Method
 
     }
 }

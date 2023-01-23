@@ -10,9 +10,9 @@ namespace CarServiceCenterLib {
         public int Code { get; set; }
         public string Description { get; set; }
 
-        public decimal Hours { get; set; }
+        public double Hours { get; set; }
 
-        public ServiceTask(int code, String description, decimal hours) {
+        public ServiceTask(int code, String description, double hours) {
             ID = Guid.NewGuid();
             Code = code;
             Description = description;
