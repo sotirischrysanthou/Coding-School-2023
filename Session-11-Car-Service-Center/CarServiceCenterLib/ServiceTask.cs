@@ -8,6 +8,18 @@ namespace CarServiceCenterLib
 {
     public class ServiceTask
     {
+        public Guid ID { get; set; }
+        public int Code { get; set; }
+        public string Description { get; set; }
 
+        public decimal Hours { get; set; }
+
+        public ServiceTask(int code, String description, decimal hours)
+        {
+            ID = Guid.NewGuid();
+            Code = code;
+            Description = description;
+            Hours = hours;
+        }
     }
 }
