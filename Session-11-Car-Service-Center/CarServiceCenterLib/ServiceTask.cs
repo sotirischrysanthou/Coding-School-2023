@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarServiceCenterLib
 {
-    internal class ServiceTask
+    public class ServiceTask
     {
+
     }
 }
