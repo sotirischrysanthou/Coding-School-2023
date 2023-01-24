@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Session_11_Car_Service_Center {
-    public partial class MainMenu : Form {
-        private CarServiceCenter carServiceCenter;
-        public MainMenu() {
+    public partial class MainMenuForm : Form {
+        private CarServiceCenter _carServiceCenter;
+        public MainMenuForm() {
             InitializeComponent();
-            carServiceCenter = new CarServiceCenter();
+            _carServiceCenter = new CarServiceCenter();
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            Transactions t = new Transactions(carServiceCenter);
+            TransactionsForm t = new TransactionsForm(_carServiceCenter);
             t.ShowDialog(); // Shows Form2
         }
 
-        private void MainMenu_Load(object sender, EventArgs e) {
+        private void MainMenuForm_Load(object sender, EventArgs e) {
 
         }
     }

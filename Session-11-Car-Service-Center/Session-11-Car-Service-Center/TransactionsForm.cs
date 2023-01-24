@@ -2,28 +2,16 @@ using CarServiceCenterLib;
 using SerializerLib;
 
 namespace Session_11_Car_Service_Center {
-    public partial class Transactions : Form {
+    public partial class TransactionsForm : Form {
         // Properties
-        //private List<Customer> _customers;
-        //private List<Manager> _managers;
-        //private List<Engineer> _engineers;
-        //private List<Car> _cars;
-        //private List<Transaction> _transactions;
-        //private List<ServiceTask> _serviceTasks;
         private Serializer _serializer;
         private CarServiceCenter _carServiceCenter;
 
         // Constructors
-        public Transactions(CarServiceCenter carServiceCenter) {
+        public TransactionsForm(CarServiceCenter carServiceCenter) {
             InitializeComponent();
             _serializer = new Serializer();
             _carServiceCenter = carServiceCenter;
-            //_customers = new List<Customer>();
-            //_cars = new List<Car>();
-            //_managers = new List<Manager>();
-            //_engineers = new List<Engineer>();
-            //_transactions = new List<Transaction>();
-            //_serviceTasks = new List<ServiceTask>();
         }
 
         // Methods
@@ -57,13 +45,24 @@ namespace Session_11_Car_Service_Center {
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "alagi flatzas", 5.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "filtro ladiou", 7.0));
 
-
-            _carServiceCenter.Transactions.Add(new Transaction(_carServiceCenter.Customers[0].ID, _carServiceCenter.Cars[0].ID, _carServiceCenter.Managers[0].ID));
-            _carServiceCenter.Transactions[0].AddTransactionLine(new TransactionLine(_carServiceCenter.Transactions[0].ID, _carServiceCenter.ServiceTasks[0].ID, _carServiceCenter.Engineers[0].ID, _carServiceCenter.ServiceTasks[0].Hours, 44.5));
-            _carServiceCenter.Transactions[0].AddTransactionLine(new TransactionLine(_carServiceCenter.Transactions[0].ID, _carServiceCenter.ServiceTasks[1].ID, _carServiceCenter.Engineers[0].ID, _carServiceCenter.ServiceTasks[1].Hours, 44.5));
-            _carServiceCenter.Transactions.Add(new Transaction(_carServiceCenter.Customers[1].ID, _carServiceCenter.Cars[1].ID, _carServiceCenter.Managers[0].ID));
-            _carServiceCenter.Transactions[1].AddTransactionLine(new TransactionLine(_carServiceCenter.Transactions[1].ID, _carServiceCenter.ServiceTasks[2].ID, _carServiceCenter.Engineers[0].ID, _carServiceCenter.ServiceTasks[2].Hours, 44.5));
-            _carServiceCenter.Transactions[1].AddTransactionLine(new TransactionLine(_carServiceCenter.Transactions[1].ID, _carServiceCenter.ServiceTasks[3].ID, _carServiceCenter.Engineers[0].ID, _carServiceCenter.ServiceTasks[3].Hours, 44.5));
+            Customer customer = _carServiceCenter.Customers[0];
+            Car car = _carServiceCenter.Cars[0];
+            Manager manager = _carServiceCenter.Managers[0];
+            ServiceTask serviceTask = _carServiceCenter.ServiceTasks[0];
+            Engineer engineer = _carServiceCenter.Engineers[0];
+            _carServiceCenter.Transactions.Add(new Transaction(customer.ID, car.ID, manager.ID));
+            Transaction transaction = _carServiceCenter.Transactions[0];
+            transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
+            serviceTask = _carServiceCenter.ServiceTasks[1];
+            transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
+            customer = _carServiceCenter.Customers[1];
+            car = _carServiceCenter.Cars[1];
+            _carServiceCenter.Transactions.Add(new Transaction(customer.ID, car.ID, manager.ID));
+            transaction = _carServiceCenter.Transactions[1];
+            serviceTask = _carServiceCenter.ServiceTasks[2];
+            transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
+            serviceTask = _carServiceCenter.ServiceTasks[3];
+            transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
 
             bsTransactions.DataSource = _carServiceCenter.Transactions;
             bsTransactionLines.DataSource = bsTransactions;

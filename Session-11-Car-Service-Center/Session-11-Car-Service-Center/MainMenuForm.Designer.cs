@@ -1,5 +1,5 @@
 ﻿namespace Session_11_Car_Service_Center {
-    partial class MainMenu {
+    partial class MainMenuForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -36,15 +36,15 @@
             this.btnTransactions.UseVisualStyleBackColor = true;
             this.btnTransactions.Click += new System.EventHandler(this.button1_Click);
             // 
-            // MainMenu
+            // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnTransactions);
-            this.Name = "MainMenu";
+            this.Name = "MainMenuForm";
             this.Text = "MainMenu";
-            this.Load += new System.EventHandler(this.MainMenu_Load);
+            this.Load += new System.EventHandler(this.MainMenuForm_Load);
             this.ResumeLayout(false);
 
         }
