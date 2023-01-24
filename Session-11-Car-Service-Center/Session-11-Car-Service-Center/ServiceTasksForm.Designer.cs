@@ -26,12 +26,13 @@
             this.components = new System.ComponentModel.Container();
             this.grdServiceTasks = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colHours = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
             this.bsServiceTasks = new System.Windows.Forms.BindingSource(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdServiceTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsServiceTasks)).BeginInit();
@@ -44,6 +45,7 @@
             this.grdServiceTasks.Name = "grdServiceTasks";
             this.grdServiceTasks.Size = new System.Drawing.Size(400, 200);
             this.grdServiceTasks.TabIndex = 0;
+            this.grdServiceTasks.UseEmbeddedNavigator = true;
             this.grdServiceTasks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
@@ -56,6 +58,41 @@
             this.colHours});
             this.gridView1.GridControl = this.grdServiceTasks;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowDetailButtons = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // colID
+            // 
+            this.colID.Caption = "ID";
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
+            this.colID.Visible = true;
+            this.colID.VisibleIndex = 0;
+            // 
+            // colCode
+            // 
+            this.colCode.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.colCode.Caption = "Code";
+            this.colCode.FieldName = "Code";
+            this.colCode.Name = "colCode";
+            this.colCode.Visible = true;
+            this.colCode.VisibleIndex = 1;
+            // 
+            // colDescription
+            // 
+            this.colDescription.Caption = "Description";
+            this.colDescription.FieldName = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.Visible = true;
+            this.colDescription.VisibleIndex = 2;
+            // 
+            // colHours
+            // 
+            this.colHours.Caption = "Hours";
+            this.colHours.FieldName = "Hours";
+            this.colHours.Name = "colHours";
+            this.colHours.Visible = true;
+            this.colHours.VisibleIndex = 3;
             // 
             // labelServiceTask
             // 
@@ -67,44 +104,27 @@
             this.labelServiceTask.TabIndex = 2;
             this.labelServiceTask.Text = "Services";
             // 
-            // colID
+            // btnSave
             // 
-            this.colID.Caption = "ID";
-            this.colID.Name = "colID";
-            this.colID.Visible = true;
-            this.colID.VisibleIndex = 0;
-            // 
-            // colCode
-            // 
-            this.colCode.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.colCode.Caption = "Code";
-            this.colCode.Name = "colCode";
-            this.colCode.Visible = true;
-            this.colCode.VisibleIndex = 1;
-            // 
-            // colDescription
-            // 
-            this.colDescription.Caption = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.Visible = true;
-            this.colDescription.VisibleIndex = 2;
-            // 
-            // colHours
-            // 
-            this.colHours.Caption = "Hours";
-            this.colHours.Name = "colHours";
-            this.colHours.Visible = true;
-            this.colHours.VisibleIndex = 3;
+            this.btnSave.Location = new System.Drawing.Point(327, 271);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(79, 37);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "button1";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ServiceTasksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.grdServiceTasks);
             this.Name = "ServiceTasksForm";
             this.Text = "ServiceTasksForm";
+            this.Load += new System.EventHandler(this.ServiceTasksForm_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.grdServiceTasks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsServiceTasks)).EndInit();
@@ -123,5 +143,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDescription;
         private DevExpress.XtraGrid.Columns.GridColumn colHours;
         private BindingSource bsServiceTasks;
+        private Button btnSave;
     }
 }

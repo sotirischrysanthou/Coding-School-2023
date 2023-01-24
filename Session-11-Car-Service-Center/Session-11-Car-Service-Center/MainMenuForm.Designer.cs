@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.btnTransactions = new System.Windows.Forms.Button();
             this.btnCustomerAndCars = new System.Windows.Forms.Button();
+            this.btnServiceTasks = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTransactions
@@ -47,11 +48,22 @@
             this.btnCustomerAndCars.UseVisualStyleBackColor = true;
             this.btnCustomerAndCars.Click += new System.EventHandler(this.btnCustomerAndCars_Click);
             // 
+            // btnServiceTasks
+            // 
+            this.btnServiceTasks.Location = new System.Drawing.Point(344, 131);
+            this.btnServiceTasks.Name = "btnServiceTasks";
+            this.btnServiceTasks.Size = new System.Drawing.Size(125, 24);
+            this.btnServiceTasks.TabIndex = 2;
+            this.btnServiceTasks.Text = "Service Tasks";
+            this.btnServiceTasks.UseVisualStyleBackColor = true;
+            this.btnServiceTasks.Click += new System.EventHandler(this.btnServiceTasks_Click);
+            // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnServiceTasks);
             this.Controls.Add(this.btnCustomerAndCars);
             this.Controls.Add(this.btnTransactions);
             this.Name = "MainMenuForm";
@@ -65,5 +77,6 @@
 
         private Button btnTransactions;
         private Button btnCustomerAndCars;
+        private Button btnServiceTasks;
     }
 }
