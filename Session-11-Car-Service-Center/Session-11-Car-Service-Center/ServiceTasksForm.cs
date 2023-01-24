@@ -27,7 +27,7 @@ namespace Session_11_Car_Service_Center {
         private void SetControlProperties() {
             
             _serializer = new Serializer();
-            
+            bsServiceTasks.DataSource = _carServiceCenter.ServiceTasks;
             grdServiceTasks.DataSource = bsServiceTasks;
         }
 
