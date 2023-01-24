@@ -29,6 +29,7 @@ namespace CarServiceCenterLib {
         // Methods
         public void AddTransactionLine(TransactionLine transactionLine) {
             TransactionLines.Add(transactionLine);
+            TotalPrice += transactionLine.Price;
         }
     }
 }
