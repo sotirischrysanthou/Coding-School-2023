@@ -24,23 +24,35 @@
         /// </summary>
         private void InitializeComponent() {
             this.btnTransactions = new System.Windows.Forms.Button();
+            this.btnCustomerAndCars = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Location = new System.Drawing.Point(344, 62);
+            this.btnTransactions.Location = new System.Drawing.Point(344, 73);
             this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(96, 23);
+            this.btnTransactions.Size = new System.Drawing.Size(125, 23);
             this.btnTransactions.TabIndex = 0;
             this.btnTransactions.Text = "Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;
             this.btnTransactions.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnCustomerAndCars
+            // 
+            this.btnCustomerAndCars.Location = new System.Drawing.Point(344, 102);
+            this.btnCustomerAndCars.Name = "btnCustomerAndCars";
+            this.btnCustomerAndCars.Size = new System.Drawing.Size(125, 23);
+            this.btnCustomerAndCars.TabIndex = 1;
+            this.btnCustomerAndCars.Text = "Customers and Cars";
+            this.btnCustomerAndCars.UseVisualStyleBackColor = true;
+            this.btnCustomerAndCars.Click += new System.EventHandler(this.btnCustomerAndCars_Click);
             // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCustomerAndCars);
             this.Controls.Add(this.btnTransactions);
             this.Name = "MainMenuForm";
             this.Text = "MainMenu";
@@ -52,5 +64,6 @@
         #endregion
 
         private Button btnTransactions;
+        private Button btnCustomerAndCars;
     }
 }

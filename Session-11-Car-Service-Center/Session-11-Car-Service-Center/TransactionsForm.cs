@@ -1,4 +1,5 @@
 using CarServiceCenterLib;
+using DevExpress.XtraGrid.Views.Grid;
 using SerializerLib;
 
 namespace Session_11_Car_Service_Center {
@@ -27,6 +28,7 @@ namespace Session_11_Car_Service_Center {
             dgvTransactionLines.AutoGenerateColumns = false;
             dgvTransactions.DataSource = bsTransactions;
             dgvTransactionLines.DataSource = bsTransactionLines;
+            grdTransactions.DataSource = bsTransactions;
         }
 
         private void Populate() {
