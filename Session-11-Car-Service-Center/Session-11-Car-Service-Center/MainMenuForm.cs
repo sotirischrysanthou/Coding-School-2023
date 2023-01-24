@@ -1,4 +1,5 @@
 ﻿using CarServiceCenterLib;
+using SerializerLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,10 +13,12 @@ using System.Windows.Forms;
 namespace Session_11_Car_Service_Center {
     public partial class MainMenuForm : Form {
         private CarServiceCenter _carServiceCenter;
+        private Serializer _serializer;
 
         public MainMenuForm() {
             InitializeComponent();
             _carServiceCenter = new CarServiceCenter();
+            _serializer = new Serializer();
         }
         private void MainMenuForm_Load(object sender, EventArgs e) {
 
@@ -80,6 +83,14 @@ namespace Session_11_Car_Service_Center {
         private void btnEmployees_Click(object sender, EventArgs e) {
             EmployeesForm employeesForm = new EmployeesForm(_carServiceCenter); 
             employeesForm.ShowDialog();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e) {
+            _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e) {
+           _carServiceCenter = _serializer.Deserialize<CarServiceCenter>("CarServiceCenter.json");
         }
     }
 }
