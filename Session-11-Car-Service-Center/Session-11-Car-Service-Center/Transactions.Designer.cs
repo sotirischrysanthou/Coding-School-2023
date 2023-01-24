@@ -1,5 +1,5 @@
 ﻿namespace Session_11_Car_Service_Center {
-    partial class Form1 {
+    partial class Transactions {
         /// <summary>
         ///  Required designer variable.
         /// </summary>

@@ -2,7 +2,7 @@ using CarServiceCenterLib;
 using SerializerLib;
 
 namespace Session_11_Car_Service_Center {
-    public partial class Form1 : Form {
+    public partial class Transactions : Form {
         // Properties
         private Serializer _serializer;
         private List<Customer> _customers;
@@ -13,7 +13,7 @@ namespace Session_11_Car_Service_Center {
         private List<ServiceTask> _serviceTasks;
 
         // Constructors
-        public Form1() {
+        public Transactions() {
             InitializeComponent();
             _serializer = new Serializer();
             _customers = new List<Customer>();
