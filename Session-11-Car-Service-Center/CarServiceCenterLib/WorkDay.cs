@@ -12,6 +12,12 @@ namespace CarServiceCenterLib {
         public int NumOfEngineers { get; set; }
         private double _workload { get; set; }
 
+        // Constructor
+        public WorkDay(DateTime date, int numofEngineers) {
+            Date = date;
+            NumOfEngineers = numofEngineers;
+            ServiceTasks = new List<ServiceTask>();
+        }
 
         public double WorkLoad() {
             double sumWorkHours = 0.0;
