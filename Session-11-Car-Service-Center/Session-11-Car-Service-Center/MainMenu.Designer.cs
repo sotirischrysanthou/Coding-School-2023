@@ -23,12 +23,34 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
+            this.btnTransactions = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnTransactions
+            // 
+            this.btnTransactions.Location = new System.Drawing.Point(344, 62);
+            this.btnTransactions.Name = "btnTransactions";
+            this.btnTransactions.Size = new System.Drawing.Size(96, 23);
+            this.btnTransactions.TabIndex = 0;
+            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.UseVisualStyleBackColor = true;
+            this.btnTransactions.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // MainMenu
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnTransactions);
+            this.Name = "MainMenu";
             this.Text = "MainMenu";
+            this.Load += new System.EventHandler(this.MainMenu_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private Button btnTransactions;
     }
 }

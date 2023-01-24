@@ -14,6 +14,7 @@ namespace CarServiceCenterLib {
         public List<Customer> Customers { get; set; }
         public List<Transaction> Transactions { get; set; }
         public List<Car> Cars { get; set; }
+        public List<ServiceTask> ServiceTasks { get; set; }
 
     }
 }

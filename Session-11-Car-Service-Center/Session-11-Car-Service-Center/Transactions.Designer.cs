@@ -150,16 +150,16 @@
             this.TransactionLinePrice.HeaderText = "Price";
             this.TransactionLinePrice.Name = "TransactionLinePrice";
             // 
-            // Form1
+            // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvTransactionLines);
             this.Controls.Add(this.dgvTransactions);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "TransactionsForm";
+            this.Text = "Transactions";
+            this.Load += new System.EventHandler(this.TransactionsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactionLines)).EndInit();
