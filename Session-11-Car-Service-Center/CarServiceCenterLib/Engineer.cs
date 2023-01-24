@@ -11,6 +11,9 @@ namespace CarServiceCenterLib {
         public double SalaryPerMonth { get; set; }
 
         // Constructors
+        public Engineer() {
+
+        }
         public Engineer(string name, string surname, Guid managerID, double salaryPerMonth) : base(name, surname) {
             ManagerID = managerID;
             SalaryPerMonth = salaryPerMonth;
