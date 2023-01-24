@@ -43,7 +43,7 @@
             this.grdServiceTasks.Location = new System.Drawing.Point(21, 42);
             this.grdServiceTasks.MainView = this.gridView1;
             this.grdServiceTasks.Name = "grdServiceTasks";
-            this.grdServiceTasks.Size = new System.Drawing.Size(400, 200);
+            this.grdServiceTasks.Size = new System.Drawing.Size(754, 200);
             this.grdServiceTasks.TabIndex = 0;
             this.grdServiceTasks.UseEmbeddedNavigator = true;
             this.grdServiceTasks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -96,6 +96,8 @@
             // 
             // labelServiceTask
             // 
+            this.labelServiceTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelServiceTask.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelServiceTask.Appearance.Options.UseFont = true;
             this.labelServiceTask.Location = new System.Drawing.Point(21, 12);
@@ -106,11 +108,11 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(327, 271);
+            this.btnSave.Location = new System.Drawing.Point(677, 248);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(79, 37);
+            this.btnSave.Size = new System.Drawing.Size(98, 37);
             this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "SAVE";
+            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
