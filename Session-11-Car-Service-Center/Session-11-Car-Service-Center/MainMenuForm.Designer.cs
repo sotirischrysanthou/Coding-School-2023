@@ -28,6 +28,8 @@
             this.btnPopulate = new System.Windows.Forms.Button();
             this.btnServiceTasks = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTransactions
@@ -84,11 +86,33 @@
             this.btnEmployees.UseVisualStyleBackColor = true;
             this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(710, 438);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(143, 29);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(710, 473);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(143, 29);
+            this.btnLoad.TabIndex = 5;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 600);
+            this.Controls.Add(this.btnLoad);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEmployees);
             this.Controls.Add(this.btnPopulate);
             this.Controls.Add(this.btnServiceTasks);
@@ -109,5 +133,7 @@
         private Button btnPopulate;
         private Button btnServiceTasks;
         private Button btnEmployees;
+        private Button btnSave;
+        private Button btnLoad;
     }
 }
