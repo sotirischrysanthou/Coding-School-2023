@@ -71,5 +71,15 @@ namespace Session_11_Car_Service_Center {
         private void btnPopulate_Click(object sender, EventArgs e) {
             Populate(_carServiceCenter);
         }
+
+        private void btnServiceTasks_Click(object sender, EventArgs e) {
+            ServiceTasksForm serviceTasksForm = new ServiceTasksForm(_carServiceCenter);
+            serviceTasksForm.ShowDialog();  // shows _ServiceTasksForm
+        }
+
+        private void btnEmployees_Click(object sender, EventArgs e) {
+            EmployeesForm employeesForm = new EmployeesForm(_carServiceCenter); 
+            employeesForm.ShowDialog();
+        }
     }
 }

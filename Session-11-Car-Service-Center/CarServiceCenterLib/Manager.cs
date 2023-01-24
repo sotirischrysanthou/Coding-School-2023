@@ -12,6 +12,9 @@ namespace CarServiceCenterLib {
         public List<Engineer> Engineers { get; set; }
 
         // Constructors
+        public Manager() {
+
+        }
         public Manager(string name, string surname, double salaryPerMonth) : base(name, surname) {
             Engineers = new List<Engineer>();
             SalaryPerMonth = salaryPerMonth;
