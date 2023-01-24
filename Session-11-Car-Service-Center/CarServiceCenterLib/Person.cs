@@ -5,8 +5,10 @@
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        // Constructors
+
         public Person() {
-            ID= Guid.NewGuid();
+            ID = Guid.NewGuid();
         }
 
         public Person(String name, String surname) {

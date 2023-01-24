@@ -12,6 +12,10 @@ namespace CarServiceCenterLib {
 
         public double Hours { get; set; }
 
+        // Contructors
+        public ServiceTask() {
+            ID = Guid.NewGuid();
+        }
         public ServiceTask(int code, String description, double hours) {
             ID = Guid.NewGuid();
             Code = code;
