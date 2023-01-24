@@ -11,6 +11,24 @@ namespace CarServiceCenterLib {
         public double SalaryPerMonth { get; set; }
         public List<Engineer> Engineers { get; set; }
 
+        //Christos
+        public DateTime StartDate { get; set; }
+
+        public Manager(Guid id, string name, string surname, double salaryPerMonth, DateTime startDate) {
+            ID = id;
+            Name = name;
+            Surname = surname;
+            SalaryPerMonth = salaryPerMonth;
+            StartDate = startDate;
+        }
+
+
+
+        //Christos
+
+
+
+
         // Constructors
         public Manager() {
 
