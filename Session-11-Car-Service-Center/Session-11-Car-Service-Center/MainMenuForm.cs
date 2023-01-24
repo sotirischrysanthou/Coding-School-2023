@@ -12,12 +12,10 @@ using System.Windows.Forms;
 namespace Session_11_Car_Service_Center {
     public partial class MainMenuForm : Form {
         private CarServiceCenter _carServiceCenter;
-        private TransactionsForm _transactionsForm;
         private CustomersAndCarsForm _customersAndCarsForm;
         public MainMenuForm() {
             InitializeComponent();
             _carServiceCenter = new CarServiceCenter();
-            _transactionsForm = new TransactionsForm(_carServiceCenter);
             _customersAndCarsForm = new CustomersAndCarsForm(_carServiceCenter);
         }
         private void MainMenuForm_Load(object sender, EventArgs e) {
@@ -25,12 +23,18 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            _transactionsForm.ShowDialog(); // Shows _transactionsForm
+            TransactionsForm transactionsForm = new TransactionsForm(_carServiceCenter);
+            transactionsForm.ShowDialog(); // Shows _transactionsForm
         }
 
 
         private void btnCustomerAndCars_Click(object sender, EventArgs e) {
             _customersAndCarsForm.ShowDialog(); // Shows _customerAndCarsForm
+        }
+
+        private void btnServiceTasks_Click(object sender, EventArgs e) {
+            ServiceTasksForm serviceTasksForm = new ServiceTasksForm(_carServiceCenter);
+            serviceTasksForm.ShowDialog();  // shows _ServiceTasksForm
         }
     }
 }
