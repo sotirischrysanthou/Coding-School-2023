@@ -20,7 +20,11 @@ namespace CarServiceCenterLib {
 
 
         // Constructors
-        public Car(String brand, String model, String registrationNumber ) {
+        public Car() {
+
+        }
+
+        public Car(String brand, String model, String registrationNumber) {
             ID = Guid.NewGuid();
             Brand = brand;
             Model = model;
