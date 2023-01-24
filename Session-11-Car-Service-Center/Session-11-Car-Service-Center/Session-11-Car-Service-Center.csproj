@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpress.Win.Design" Version="22.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CarServiceCenterLib\CarServiceCenterLib.csproj" />
     <ProjectReference Include="..\SerializerLib\SerializerLib.csproj" />
   </ItemGroup>
