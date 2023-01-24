@@ -13,5 +13,9 @@ namespace Session_11_Car_Service_Center {
         public EmployeesForm() {
             InitializeComponent();
         }
+
+        private void EmployeesForm_Load(object sender, EventArgs e) {
+
+        }
     }
 }
