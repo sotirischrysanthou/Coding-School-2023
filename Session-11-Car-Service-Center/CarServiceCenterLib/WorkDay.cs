@@ -27,7 +27,10 @@ namespace CarServiceCenterLib {
             NumOfEngineers = Engineers;
             return NumOfEngineers;
         }
-        public bool AddTask(ServiceTask task) {
+        public bool AddTask(ServiceTask task, out String message) {
+            //task cannot be over 8 hours
+            //(WorkLoad + task.Hours) cannot be > than MaxWorkLoad
+            message = "";
             return true;
         }
     }
