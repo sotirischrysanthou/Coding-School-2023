@@ -1,5 +1,5 @@
 ﻿namespace Session_11_Car_Service_Center {
-    partial class Employees {
+    partial class EmployeesForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,10 +23,18 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // EmployeesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "EmployeesForm";
             this.Text = "Employees";
+            this.Load += new System.EventHandler(this.EmployeesForm_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
