@@ -76,5 +76,10 @@ namespace Session_11_Car_Service_Center {
             ServiceTasksForm serviceTasksForm = new ServiceTasksForm(_carServiceCenter);
             serviceTasksForm.ShowDialog();  // shows _ServiceTasksForm
         }
+
+        private void btnEmployees_Click(object sender, EventArgs e) {
+            EmployeesForm employeesForm = new EmployeesForm(_carServiceCenter); 
+            employeesForm.ShowDialog();
+        }
     }
 }
