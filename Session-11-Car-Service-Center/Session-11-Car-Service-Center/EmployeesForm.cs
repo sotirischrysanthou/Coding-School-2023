@@ -21,7 +21,7 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void EmployeesForm_Load(object sender, EventArgs e) {
-
+            SetControlProperties();
         }
         private void SetControlProperties() {
             bsEngineers.DataSource = _carServiceCenter.Engineers;
