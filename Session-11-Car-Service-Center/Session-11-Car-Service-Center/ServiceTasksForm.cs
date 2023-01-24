@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Session_11_Car_Service_Center {
-    public partial class MainMenu : Form {
-        public MainMenu() {
+    public partial class ServiceTasksForm : Form {
+        public ServiceTasksForm() {
             InitializeComponent();
         }
     }

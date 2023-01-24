@@ -1,5 +1,5 @@
 ﻿namespace Session_11_Car_Service_Center {
-    partial class MainMenu {
+    partial class ServiceTasksForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -26,7 +26,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "MainMenu";
+            this.Text = "ServiceTasksForm";
         }
 
         #endregion

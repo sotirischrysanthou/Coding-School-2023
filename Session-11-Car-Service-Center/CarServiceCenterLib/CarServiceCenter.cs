@@ -15,15 +15,17 @@ namespace CarServiceCenterLib {
         public List<Customer> Customers { get; set; }
         public List<Transaction> Transactions { get; set; }
         public List<Car> Cars { get; set; }
+        public List<ServiceTask> ServiceTasks { get; set; }
 
-        // Constractors
+        // Constructors
         public CarServiceCenter() {
-            List<WorkDay> WorkDays = new List<WorkDay>();
-            List<Engineer> Engineers = new List<Engineer>();
-            List<Manager> Managers = new List<Manager>();
-            List<Customer> Customers = new List<Customer>();
-            List<Transaction> Transactions = new List<Transaction>();
-            List<Car> Cars = new List<Car>();
+            WorkDays = new List<WorkDay>();
+            Engineers = new List<Engineer>();
+            Managers = new List<Manager>();
+            Customers = new List<Customer>();
+            Transactions = new List<Transaction>();
+            Cars = new List<Car>();
+            ServiceTasks = new List<ServiceTask>();
 
             //initialize all lists, done(correct??)
         }
