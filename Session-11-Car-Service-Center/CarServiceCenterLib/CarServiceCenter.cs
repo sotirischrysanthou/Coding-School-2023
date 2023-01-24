@@ -40,8 +40,7 @@ namespace CarServiceCenterLib {
                 }
             }
             if (!workDayExists) {
-                WorkDays.Add(new WorkDay());
-                WorkDays.Last().UpdateNumOfEngineers(Engineers.Count);
+                WorkDays.Add(new WorkDay(date, Engineers.Count));
                 ret = WorkDays.Last().AddTask(task, out msg);
             }
             message = msg;
