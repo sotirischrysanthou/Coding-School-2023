@@ -192,3 +192,7 @@ namespace CalculatorLib {
         }
     }
 }
+
+// 15 + 5 - 1 =
+// 19
+// =
