@@ -107,6 +107,39 @@ namespace Session_11_Car_Service_Center {
                 DevExpress.XtraEditors.XtraMessageBox.Show("File Not Found!");
             }
            
+        }   
+
+        private void btnTransactions_Click(object sender, EventArgs e) {
+            TransactionsForm transactionsForm = new TransactionsForm(_carServiceCenter);
+            transactionsForm.ShowDialog(); // Shows _transactionsForm
+        }
+
+        private void btnCustomerAndCars_Click_1(object sender, EventArgs e) {
+            CustomersAndCarsForm customersAndCarsForm = new CustomersAndCarsForm(_carServiceCenter);
+            customersAndCarsForm.ShowDialog(); // Shows _customerAndCarsForm
+        }
+
+        private void btnServiceTasks_Click_1(object sender, EventArgs e) {
+            ServiceTasksForm serviceTasksForm = new ServiceTasksForm(_carServiceCenter);
+            serviceTasksForm.ShowDialog();  // shows _ServiceTasksForm
+        }
+
+        private void btnEmployees_Click_1(object sender, EventArgs e) {
+            EmployeesForm employeesForm = new EmployeesForm(_carServiceCenter);
+            employeesForm.ShowDialog();
+        }
+
+        private void btn_MonthlyLedger_Click_1(object sender, EventArgs e) {
+            MonthlyLedgerForm monthlyLedgerForm = new MonthlyLedgerForm(_carServiceCenter);
+            monthlyLedgerForm.ShowDialog();
+        }
+
+        private void panelMenu_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }
