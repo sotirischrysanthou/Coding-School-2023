@@ -38,17 +38,22 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.CustomerID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCustomerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colCarID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
+            this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).BeginInit();
             this.SuspendLayout();
             // 
             // grdTransactionLines
@@ -133,6 +138,9 @@
             this.grdTransactions.Location = new System.Drawing.Point(12, 12);
             this.grdTransactions.MainView = this.gridView1;
             this.grdTransactions.Name = "grdTransactions";
+            this.grdTransactions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repCustomerName,
+            this.repCustomerSurname});
             this.grdTransactions.Size = new System.Drawing.Size(776, 200);
             this.grdTransactions.TabIndex = 5;
             this.grdTransactions.UseEmbeddedNavigator = true;
@@ -144,7 +152,8 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID,
             this.colDate,
-            this.CustomerID,
+            this.CustomerName,
+            this.colCustomerSurname,
             this.colCarID,
             this.colManagerID,
             this.colTotalPrice});
@@ -168,13 +177,21 @@
             this.colDate.Visible = true;
             this.colDate.VisibleIndex = 1;
             // 
-            // CustomerID
+            // CustomerName
             // 
-            this.CustomerID.Caption = "CustomerID";
-            this.CustomerID.FieldName = "CustomerID";
-            this.CustomerID.Name = "CustomerID";
-            this.CustomerID.Visible = true;
-            this.CustomerID.VisibleIndex = 2;
+            this.CustomerName.Caption = "Customer Name";
+            this.CustomerName.ColumnEdit = this.repCustomerName;
+            this.CustomerName.FieldName = "CustomerID";
+            this.CustomerName.Name = "CustomerName";
+            this.CustomerName.Visible = true;
+            this.CustomerName.VisibleIndex = 2;
+            // 
+            // repCustomerName
+            // 
+            this.repCustomerName.AutoHeight = false;
+            this.repCustomerName.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCustomerName.Name = "repCustomerName";
             // 
             // colCarID
             // 
@@ -182,7 +199,7 @@
             this.colCarID.FieldName = "CarID";
             this.colCarID.Name = "colCarID";
             this.colCarID.Visible = true;
-            this.colCarID.VisibleIndex = 3;
+            this.colCarID.VisibleIndex = 4;
             // 
             // colManagerID
             // 
@@ -190,7 +207,7 @@
             this.colManagerID.FieldName = "ManagerID";
             this.colManagerID.Name = "colManagerID";
             this.colManagerID.Visible = true;
-            this.colManagerID.VisibleIndex = 4;
+            this.colManagerID.VisibleIndex = 5;
             // 
             // colTotalPrice
             // 
@@ -198,7 +215,7 @@
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 5;
+            this.colTotalPrice.VisibleIndex = 6;
             // 
             // btnSave
             // 
@@ -209,6 +226,22 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // repCustomerSurname
+            // 
+            this.repCustomerSurname.AutoHeight = false;
+            this.repCustomerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCustomerSurname.Name = "repCustomerSurname";
+            // 
+            // colCustomerSurname
+            // 
+            this.colCustomerSurname.Caption = "Customer Surname";
+            this.colCustomerSurname.ColumnEdit = this.repCustomerSurname;
+            this.colCustomerSurname.FieldName = "CustomerID";
+            this.colCustomerSurname.Name = "colCustomerSurname";
+            this.colCustomerSurname.Visible = true;
+            this.colCustomerSurname.VisibleIndex = 3;
             // 
             // TransactionsForm
             // 
@@ -227,6 +260,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -241,7 +276,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
-        private DevExpress.XtraGrid.Columns.GridColumn CustomerID;
+        private DevExpress.XtraGrid.Columns.GridColumn CustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCarID;
         private DevExpress.XtraGrid.Columns.GridColumn colManagerID;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
@@ -251,5 +286,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPricePerHour;
         private DevExpress.XtraGrid.Columns.GridColumn Price;
         private Button btnSave;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerSurname;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerSurname;
     }
 }

@@ -1,4 +1,5 @@
 using CarServiceCenterLib;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using SerializerLib;
 
@@ -25,10 +26,28 @@ namespace Session_11_Car_Service_Center {
             grdTransactions.DataSource = bsTransactions;
             grdTransactionLines.DataSource = bsTransactions;
             grdTransactionLines.DataMember = "TransactionLines";
+
+            //repCustomerName.DataSource = _carServiceCenter.Customers;
+            //repCustomerName.DisplayMember = "Name";
+            //repCustomerName.ValueMember = "ID";
+            //repCustomerSurname.DataSource = _carServiceCenter.Customers;
+            //repCustomerSurname.DisplayMember = "Surname";
+            //repCustomerSurname.ValueMember = "ID";
+            SetLookUpEdit<Customer>(repCustomerName, _carServiceCenter.Customers, "Name", "ID");
+            SetLookUpEdit<Customer>(repCustomerSurname, _carServiceCenter.Customers, "Surname", "ID");
+
         }
+
+
 
         private void btnSave_Click(object sender, EventArgs e) {
             _serializer.SerializeToFile(_carServiceCenter,"CarServiceCenter.json");
+        }
+
+        private void SetLookUpEdit<T>(RepositoryItemLookUpEdit rep, List<T> list, String displayMember, String valueMember) {
+            rep.DataSource = list;
+            rep.DisplayMember = displayMember;
+            rep.ValueMember = valueMember;
         }
     }
 }
