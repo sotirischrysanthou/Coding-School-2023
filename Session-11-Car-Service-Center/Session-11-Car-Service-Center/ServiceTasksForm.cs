@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
 
 namespace Session_11_Car_Service_Center {
     public partial class ServiceTasksForm : Form {
@@ -37,6 +39,12 @@ namespace Session_11_Car_Service_Center {
 
         private void btnSave_Click(object sender, EventArgs e) {
             _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
+            DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
         }
+
+        private void btn_Close_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
     }
 }

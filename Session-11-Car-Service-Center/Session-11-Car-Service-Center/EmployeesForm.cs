@@ -29,5 +29,15 @@ namespace Session_11_Car_Service_Center {
             bsManagers.DataSource = _carServiceCenter.Managers;
             grdManagers.DataSource = bsManagers;
         }
+
+        private void btnSave_Click(object sender, EventArgs e) {
+            _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
+            DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

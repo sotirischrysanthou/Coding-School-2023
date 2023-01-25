@@ -46,12 +46,18 @@ namespace Session_11_Car_Service_Center {
 
         private void btnSave_Click(object sender, EventArgs e) {
             _serializer.SerializeToFile(_carServiceCenter,"CarServiceCenter.json");
+            DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
+
         }
 
         private void SetLookUpEdit<T>(RepositoryItemLookUpEdit rep, List<T> list, String displayMember, String valueMember) {
             rep.DataSource = list;
             rep.DisplayMember = displayMember;
             rep.ValueMember = valueMember;
+        }
+
+        private void btn_Close_Click(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }
