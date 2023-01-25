@@ -27,6 +27,7 @@ namespace CarServiceCenterLib {
 
         // Constructors
         public Transaction() {
+            TransactionLines = new List<TransactionLine>();
             ID = Guid.NewGuid();
         }
         public Transaction(Guid customerID, Guid carID, Guid managerID) {

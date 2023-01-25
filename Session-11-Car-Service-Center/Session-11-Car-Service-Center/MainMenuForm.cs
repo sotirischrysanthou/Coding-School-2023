@@ -43,13 +43,15 @@ namespace Session_11_Car_Service_Center {
             _carServiceCenter.Cars.Add(new Car("Ford", "Focus", "IZM 5469"));
             _carServiceCenter.Cars.Add(new Car("Ford", "Fiesta", "IMZ 1234"));
             _carServiceCenter.Cars.Add(new Car("Mazda", "6", "IAM 3369"));
-            _carServiceCenter.Managers.Add(new Manager("Fotis", "Chrysoulas", 15000));
-            _carServiceCenter.Engineers.Add(new Engineer("Demetris", "Raptodimos", _carServiceCenter.Managers[0].ID, 10000));
+            _carServiceCenter.Managers.Add(new Manager("Fotis", "Chrysoulas", 15000, DateTime.Parse("21/3/2023")));
+            _carServiceCenter.Engineers.Add(new Engineer("Demetris", "Raptodimos", _carServiceCenter.Managers[0].ID, 10000, DateTime.Parse("2/7/2023")));
 
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "alagi ladiou", 15.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "geniko service", 1.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "alagi elastikou", 5.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "alagi flatzas", 5.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "filtro ladiou", 7.0));
+
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "filtro ladiou", 7.0));
 
             Customer customer = _carServiceCenter.Customers[0];
