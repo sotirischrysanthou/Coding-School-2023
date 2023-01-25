@@ -31,6 +31,7 @@
             this.btnCustomerAndCars = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -159,13 +160,14 @@
             this.btnTransactions.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
             this.btnTransactions.Size = new System.Drawing.Size(220, 60);
             this.btnTransactions.TabIndex = 1;
-            this.btnTransactions.Text = "Transaction";
+            this.btnTransactions.Text = "Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;
             this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
             // 
             // panelLogo
             // 
             this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(79)))), ((int)(((byte)(117)))));
+            this.panelLogo.Controls.Add(this.label3);
             this.panelLogo.Controls.Add(this.label2);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
@@ -173,15 +175,25 @@
             this.panelLogo.Size = new System.Drawing.Size(220, 80);
             this.panelLogo.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Algerian", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(62, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 25);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Center";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(28, 30);
+            this.label2.Font = new System.Drawing.Font("Algerian", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(37, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(168, 18);
+            this.label2.Size = new System.Drawing.Size(150, 25);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Car Service Center";
+            this.label2.Text = "Car Service";
             // 
             // panelTitleBar
             // 
@@ -220,7 +232,7 @@
             this.btnLoad.FlatAppearance.BorderSize = 0;
             this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoad.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnLoad.Location = new System.Drawing.Point(600, 380);
+            this.btnLoad.Location = new System.Drawing.Point(640, 380);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(145, 45);
@@ -228,6 +240,8 @@
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLoad.MouseEnter += new System.EventHandler(this.btnLoad_MouseEnter);
+            this.btnLoad.MouseLeave += new System.EventHandler(this.btnLoad_MouseLeave);
             // 
             // btnSave
             // 
@@ -235,7 +249,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(440, 380);
+            this.btnSave.Location = new System.Drawing.Point(450, 380);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(145, 45);
@@ -243,6 +257,8 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
+            this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
             // 
             // btnPopulate
             // 
@@ -250,13 +266,15 @@
             this.btnPopulate.FlatAppearance.BorderSize = 0;
             this.btnPopulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPopulate.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPopulate.Location = new System.Drawing.Point(280, 380);
+            this.btnPopulate.Location = new System.Drawing.Point(260, 380);
             this.btnPopulate.Name = "btnPopulate";
             this.btnPopulate.Size = new System.Drawing.Size(145, 45);
             this.btnPopulate.TabIndex = 11;
             this.btnPopulate.Text = "Populate";
             this.btnPopulate.UseVisualStyleBackColor = false;
             this.btnPopulate.Click += new System.EventHandler(this.btnPopulate_Click);
+            this.btnPopulate.MouseEnter += new System.EventHandler(this.btnPopulate_MouseEnter);
+            this.btnPopulate.MouseLeave += new System.EventHandler(this.btnPopulate_MouseLeave);
             // 
             // MainMenuForm
             // 
@@ -298,5 +316,6 @@
         private Button btnLoad;
         private Button btnSave;
         private Button btnPopulate;
+        private Label label3;
     }
 }

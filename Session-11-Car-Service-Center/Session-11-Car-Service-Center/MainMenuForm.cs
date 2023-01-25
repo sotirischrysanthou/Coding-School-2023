@@ -162,5 +162,44 @@ namespace Session_11_Car_Service_Center {
         private void button1_Click_1(object sender, EventArgs e) {
             this.Close();
         }
+
+        //Customize Buttons
+        private void btnPopulate_MouseEnter(object sender, EventArgs e) {
+            btnPopulate.FlatAppearance.MouseOverBackColor = btnPopulate.BackColor;
+            btnPopulate.ForeColor = Color.Blue;
+            btnPopulate.FlatAppearance.BorderColor = Color.Red;
+            btnPopulate.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnPopulate_MouseLeave(object sender, EventArgs e) {
+            btnPopulate.ForeColor = Color.Black;
+            btnPopulate.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btnSave_MouseEnter(object sender, EventArgs e) {
+            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
+            btnSave.ForeColor = Color.Blue;
+            btnSave.FlatAppearance.BorderColor = Color.Red;
+            btnSave.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnSave_MouseLeave(object sender, EventArgs e) {
+            btnSave.ForeColor = Color.Black;
+            btnSave.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btnLoad_MouseEnter(object sender, EventArgs e) {
+            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
+            btnLoad.ForeColor = Color.Blue;
+            btnLoad.FlatAppearance.BorderColor = Color.Red;
+            btnLoad.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnLoad_MouseLeave(object sender, EventArgs e) {
+            btnLoad.ForeColor = Color.Black;
+            btnLoad.FlatAppearance.BorderSize = 0;
+        }
+
+ 
     }
 }
