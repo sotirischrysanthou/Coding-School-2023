@@ -1,6 +1,7 @@
 ﻿using CarServiceCenterLib;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraBars;
+using DevExpress.XtraGantt.Scheduling;
 using SerializerLib;
 using System;
 using System.Collections.Generic;
@@ -50,13 +51,15 @@ namespace Session_11_Car_Service_Center {
 
             string txtYearValue = txtYear.Text;
             string txtMonthValue = txtMonth.Text;
+            int year, month;
 
-            if (!string.IsNullOrEmpty(txtYearValue) && !string.IsNullOrEmpty(txtMonthValue)) {
+            if (!string.IsNullOrEmpty(txtYearValue) && !string.IsNullOrEmpty(txtMonthValue) 
+                && int.TryParse(txtYearValue, out year) && int.TryParse(txtMonthValue, out month)) {
 
                 MessageBox.Show("Added!");
 
             } else {
-                MessageBox.Show("Please enter a value for Years and Month");
+                MessageBox.Show("Please enter valid integers for Years and Month, and not null or empty");
             }
 
         }
