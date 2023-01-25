@@ -12,7 +12,7 @@ namespace CarServiceCenterLib {
         public double EngineersSalary { get; set; }
         public double Expenses { get; set; }
         public double Income { get; set; }
-        public double Total { get { return Income - Expenses; } }
+        public double Total { get; set; }
 
         // Constructors
         public MonthlyLedger(int year, int month, double managerSalary, double engineersSalary) {
@@ -24,8 +24,9 @@ namespace CarServiceCenterLib {
         }
 
         // Methods
-        public void UpdateIncome(double income) {
+        public void UpdateIncomes(double income) {
             Income = income;
+            Total = Income - Expenses;
         }
         public void UpdateExpenses(double expense) {
             Expenses += expense;
