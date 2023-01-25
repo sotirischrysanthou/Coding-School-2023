@@ -50,13 +50,13 @@ namespace Session_11_Car_Service_Center {
             _carServiceCenter.Engineers.Add(new Engineer("Kostas", "Kostaki", _carServiceCenter.Managers[0].ID, 1500, DateTime.Parse("2/1/2023")));
             _carServiceCenter.Engineers.Add(new Engineer("Kostis", "Marvelias", _carServiceCenter.Managers[0].ID, 800, DateTime.Parse("2/3/2023")));
 
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "alagi ladiou", 15.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "geniko service", 1.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "alagi elastikou", 5.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "alagi flatzas", 5.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "filtro ladiou", 7.0));
-
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "filtro ladiou", 7.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "Air Filter", 2.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "General service", 10.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "Tire change", 3.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "Change gasket", 6.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Oil Filter", 4.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Spark plug", 5.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Oil Filter", 7.0));
 
             Customer customer = _carServiceCenter.Customers[0];
             Car car = _carServiceCenter.Cars[0];
