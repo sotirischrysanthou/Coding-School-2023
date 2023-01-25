@@ -189,7 +189,7 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void btnLoad_MouseEnter(object sender, EventArgs e) {
-            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
+            btnLoad.FlatAppearance.MouseOverBackColor = btnLoad.BackColor;
             btnLoad.ForeColor = Color.Blue;
             btnLoad.FlatAppearance.BorderColor = Color.Red;
             btnLoad.FlatAppearance.BorderSize = 2;
