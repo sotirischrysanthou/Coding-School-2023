@@ -27,12 +27,7 @@ namespace Session_11_Car_Service_Center {
             grdTransactionLines.DataSource = bsTransactions;
             grdTransactionLines.DataMember = "TransactionLines";
 
-            //repCustomerName.DataSource = _carServiceCenter.Customers;
-            //repCustomerName.DisplayMember = "Name";
-            //repCustomerName.ValueMember = "ID";
-            //repCustomerSurname.DataSource = _carServiceCenter.Customers;
-            //repCustomerSurname.DisplayMember = "Surname";
-            //repCustomerSurname.ValueMember = "ID";
+
             SetLookUpEdit<Customer>(repCustomerName, _carServiceCenter.Customers, "Name", "ID");
             SetLookUpEdit<Customer>(repCustomerSurname, _carServiceCenter.Customers, "Surname", "ID");
 
