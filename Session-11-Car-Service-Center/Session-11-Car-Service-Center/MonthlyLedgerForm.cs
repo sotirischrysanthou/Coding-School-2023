@@ -1,4 +1,5 @@
 ﻿using CarServiceCenterLib;
+using DevExpress.XtraBars;
 using SerializerLib;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,21 @@ namespace Session_11_Car_Service_Center {
 
         private void SetControlProperties() {
             _serializer = new Serializer();
+            bsCustomer.DataSource = _carServiceCenter.Customers;
+            grdCustomers.DataSource = bsCustomer;
+
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e) {
+
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e) {
+
+        }
+
+        private void grdCustomers_Click(object sender, EventArgs e) {
+
         }
     }
 }
