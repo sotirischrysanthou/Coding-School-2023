@@ -47,9 +47,18 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void btnCreateLedger_Click(object sender, EventArgs e) {
-            if(txtYear.ContainerIsEmpty() || txtMonth.ContainerIsEmpty()) {
-                MessageBox.Show("Complete Year and Month");
+
+            string txtYearValue = txtYear.Text;
+            string txtMonthValue = txtMonth.Text;
+
+            if (!string.IsNullOrEmpty(txtYearValue) && !string.IsNullOrEmpty(txtMonthValue)) {
+
+                MessageBox.Show("Added!");
+
+            } else {
+                MessageBox.Show("Please enter a value for Years and Month");
             }
+
         }
     }
 }
