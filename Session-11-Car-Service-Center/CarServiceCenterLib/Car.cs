@@ -21,7 +21,7 @@ namespace CarServiceCenterLib {
 
         // Constructors
         public Car() {
-
+            ID = Guid.NewGuid();
         }
 
         public Car(String brand, String model, String registrationNumber) {

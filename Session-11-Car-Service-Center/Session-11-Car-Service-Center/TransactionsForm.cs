@@ -59,5 +59,10 @@ namespace Session_11_Car_Service_Center {
         private void btn_Close_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void gridView2_InitNewRow(object sender, InitNewRowEventArgs e) {
+            GridView view = sender as GridView;
+            view.SetRowCellValue(e.RowHandle, view.Columns["TransactionID"], gridView1.GetRowCellValue(gridView1.GetSelectedRows()[0], "ID"));
+        }
     }
 }

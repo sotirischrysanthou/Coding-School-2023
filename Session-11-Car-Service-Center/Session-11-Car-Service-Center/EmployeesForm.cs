@@ -1,4 +1,5 @@
 ﻿using CarServiceCenterLib;
+using DevExpress.XtraEditors.Repository;
 using SerializerLib;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace Session_11_Car_Service_Center {
             grdEngineers.DataSource = bsEngineers;
             bsManagers.DataSource = _carServiceCenter.Managers;
             grdManagers.DataSource = bsManagers;
+            SetLookUpEdit<Manager>(repManagerName, _carServiceCenter.Managers, "Name", "ID");
+            SetLookUpEdit<Manager>(repManagerSurname, _carServiceCenter.Managers, "Surname", "ID");
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
@@ -38,6 +41,12 @@ namespace Session_11_Car_Service_Center {
 
         private void btnClose_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void SetLookUpEdit<T>(RepositoryItemLookUpEdit rep, List<T> list, String displayMember, String valueMember) {
+            rep.DataSource = list;
+            rep.DisplayMember = displayMember;
+            rep.ValueMember = valueMember;
         }
     }
 }
