@@ -67,6 +67,12 @@ namespace Session_11_Car_Service_Center {
             GridView view = sender as GridView;
             view.SetRowCellValue(e.RowHandle, "TransactionID", gridView1.GetRowCellValue(gridView1.GetSelectedRows()[0], "ID"));
         }
+        private void gridView2_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView;
+            Transaction transaction = FindTransactionWithID((Guid)gridView1.GetFocusedRowCellValue("ID"), _carServiceCenter.Transactions);
+            TransactionLine transactionLine = FindTransactionLineWithID((Guid)gridView2.GetFocusedRowCellValue("ID"), transaction.TransactionLines);
+            _carServiceCenter.DeleteTask(transactionLine, transaction.Date);
+        }
 
         private void gridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e) {
             GridView view = sender as GridView;
@@ -123,5 +129,6 @@ namespace Session_11_Car_Service_Center {
             }
             return RetTransactionLine;
         }
+
     }
 }
