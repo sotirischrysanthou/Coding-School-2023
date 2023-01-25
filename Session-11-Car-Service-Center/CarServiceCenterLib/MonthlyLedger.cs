@@ -21,6 +21,12 @@ namespace CarServiceCenterLib {
             ManagersSalary = managerSalary;
             EngineersSalary = engineersSalary;
             Expenses = ManagersSalary + EngineersSalary;
+            Incomes = 0;
+            Total = 0;
+        }
+
+        public MonthlyLedger() {
+
         }
 
         // Methods
