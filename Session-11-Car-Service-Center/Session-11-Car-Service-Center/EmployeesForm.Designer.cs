@@ -39,6 +39,8 @@
             this.labelManagers = new DevExpress.XtraEditors.LabelControl();
             this.bsEngineers = new System.Windows.Forms.BindingSource(this.components);
             this.bsManagers = new System.Windows.Forms.BindingSource(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdManagers)).BeginInit();
@@ -49,11 +51,12 @@
             // 
             // grdEngineers
             // 
-            this.grdEngineers.Location = new System.Drawing.Point(12, 50);
+            this.grdEngineers.Location = new System.Drawing.Point(12, 39);
             this.grdEngineers.MainView = this.gridView1;
             this.grdEngineers.Name = "grdEngineers";
             this.grdEngineers.Size = new System.Drawing.Size(945, 159);
             this.grdEngineers.TabIndex = 0;
+            this.grdEngineers.UseEmbeddedNavigator = true;
             this.grdEngineers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
@@ -112,7 +115,7 @@
             // 
             this.labelEngineers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelEngineers.Appearance.Options.UseFont = true;
-            this.labelEngineers.Location = new System.Drawing.Point(12, 14);
+            this.labelEngineers.Location = new System.Drawing.Point(12, 3);
             this.labelEngineers.Name = "labelEngineers";
             this.labelEngineers.Size = new System.Drawing.Size(108, 30);
             this.labelEngineers.TabIndex = 1;
@@ -120,11 +123,12 @@
             // 
             // grdManagers
             // 
-            this.grdManagers.Location = new System.Drawing.Point(12, 259);
+            this.grdManagers.Location = new System.Drawing.Point(12, 248);
             this.grdManagers.MainView = this.gridView2;
             this.grdManagers.Name = "grdManagers";
             this.grdManagers.Size = new System.Drawing.Size(945, 192);
             this.grdManagers.TabIndex = 2;
+            this.grdManagers.UseEmbeddedNavigator = true;
             this.grdManagers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
             // 
@@ -172,17 +176,39 @@
             // 
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelManagers.Appearance.Options.UseFont = true;
-            this.labelManagers.Location = new System.Drawing.Point(12, 223);
+            this.labelManagers.Location = new System.Drawing.Point(12, 212);
             this.labelManagers.Name = "labelManagers";
             this.labelManagers.Size = new System.Drawing.Size(106, 30);
             this.labelManagers.TabIndex = 3;
             this.labelManagers.Text = "Managers";
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(615, 446);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(148, 40);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(786, 446);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(148, 40);
+            this.btnClose.TabIndex = 5;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // EmployeesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 489);
+            this.ClientSize = new System.Drawing.Size(969, 491);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelManagers);
             this.Controls.Add(this.grdManagers);
             this.Controls.Add(this.labelEngineers);
@@ -219,5 +245,7 @@
         private DevExpress.XtraEditors.LabelControl labelManagers;
         private BindingSource bsEngineers;
         private BindingSource bsManagers;
+        private Button btnSave;
+        private Button btnClose;
     }
 }
