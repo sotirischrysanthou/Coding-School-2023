@@ -27,7 +27,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.dtToDate = new DevExpress.XtraEditors.DateEdit();
             this.dtFromData = new DevExpress.XtraEditors.DateEdit();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.grdMonthlyLedger = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colManagerSalary = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -35,7 +35,6 @@
             this.colIncome = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colExpenses = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btn_Load = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -70,27 +69,26 @@
             // 
             this.layoutControl1.Controls.Add(this.dtToDate);
             this.layoutControl1.Controls.Add(this.dtFromData);
-            this.layoutControl1.Controls.Add(this.simpleButton3);
+            this.layoutControl1.Controls.Add(this.btnPrint);
             this.layoutControl1.Controls.Add(this.grdMonthlyLedger);
-            this.layoutControl1.Controls.Add(this.btn_Load);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(800, 450);
+            this.layoutControl1.Size = new System.Drawing.Size(803, 458);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // dtToDate
             // 
             this.dtToDate.EditValue = null;
-            this.dtToDate.Location = new System.Drawing.Point(346, 12);
+            this.dtToDate.Location = new System.Drawing.Point(347, 12);
             this.dtToDate.Name = "dtToDate";
             this.dtToDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtToDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtToDate.Size = new System.Drawing.Size(186, 20);
+            this.dtToDate.Size = new System.Drawing.Size(187, 20);
             this.dtToDate.StyleController = this.layoutControl1;
             this.dtToDate.TabIndex = 6;
             // 
@@ -103,19 +101,20 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtFromData.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtFromData.Size = new System.Drawing.Size(198, 20);
+            this.dtFromData.Size = new System.Drawing.Size(199, 20);
             this.dtFromData.StyleController = this.layoutControl1;
             this.dtFromData.TabIndex = 5;
             this.dtFromData.EditValueChanged += new System.EventHandler(this.dtFromData_EditValueChanged);
             // 
-            // simpleButton3
+            // btnPrint
             // 
-            this.simpleButton3.Location = new System.Drawing.Point(497, 416);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(148, 22);
-            this.simpleButton3.StyleController = this.layoutControl1;
-            this.simpleButton3.TabIndex = 3;
-            this.simpleButton3.Text = "Print";
+            this.btnPrint.Location = new System.Drawing.Point(638, 413);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(148, 29);
+            this.btnPrint.StyleController = this.layoutControl1;
+            this.btnPrint.TabIndex = 3;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // grdMonthlyLedger
             // 
@@ -175,15 +174,6 @@
             this.colTotal.Visible = true;
             this.colTotal.VisibleIndex = 4;
             // 
-            // btn_Load
-            // 
-            this.btn_Load.Location = new System.Drawing.Point(649, 416);
-            this.btn_Load.Name = "btn_Load";
-            this.btn_Load.Size = new System.Drawing.Size(139, 22);
-            this.btn_Load.StyleController = this.layoutControl1;
-            this.btn_Load.TabIndex = 4;
-            this.btn_Load.Text = "Load";
-            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -194,7 +184,7 @@
             this.layoutControlItem1,
             this.layoutControlItem2});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(800, 450);
+            this.Root.Size = new System.Drawing.Size(803, 458);
             this.Root.TextVisible = false;
             // 
             // emptySpaceItem1
@@ -202,15 +192,15 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 24);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(780, 406);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(783, 414);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(524, 0);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(526, 0);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(256, 24);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(257, 24);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem1
@@ -218,16 +208,16 @@
             this.layoutControlItem1.Control = this.dtFromData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(268, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(269, 24);
             this.layoutControlItem1.Text = "From Date:";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(54, 13);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.dtToDate;
-            this.layoutControlItem2.Location = new System.Drawing.Point(268, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(269, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(256, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(257, 24);
             this.layoutControlItem2.Text = "To Date:";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(54, 13);
             // 
@@ -288,7 +278,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(803, 458);
             this.Controls.Add(this.layoutControl1);
             this.Name = "MonthlyLedgerForm";
             this.Text = "MonthlyLedgerForm";
@@ -314,8 +304,7 @@
         #endregion
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.SimpleButton btn_Load;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;

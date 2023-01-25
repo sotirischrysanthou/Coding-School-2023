@@ -30,6 +30,8 @@
             this.colSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEngineersManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repManagerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colEngineersManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colSalaryPerMonth = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelEngineers = new DevExpress.XtraEditors.LabelControl();
             this.grdManagers = new DevExpress.XtraGrid.GridControl();
@@ -37,23 +39,22 @@
             this.colManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerSalaryPerMonth = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colManagerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelManagers = new DevExpress.XtraEditors.LabelControl();
             this.bsEngineers = new System.Windows.Forms.BindingSource(this.components);
             this.bsManagers = new System.Windows.Forms.BindingSource(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.colStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colManagerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEngineersManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colEngineerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdManagers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsManagers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).BeginInit();
             this.SuspendLayout();
             // 
             // grdEngineers
@@ -79,7 +80,8 @@
             this.colSurname,
             this.colEngineersManagerName,
             this.colEngineersManagerSurname,
-            this.colSalaryPerMonth});
+            this.colSalaryPerMonth,
+            this.colEngineerStartDate});
             this.gridView1.DetailHeight = 262;
             this.gridView1.GridControl = this.grdEngineers;
             this.gridView1.Name = "gridView1";
@@ -122,6 +124,22 @@
             this.repManagerName.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repManagerName.Name = "repManagerName";
+            // 
+            // colEngineersManagerSurname
+            // 
+            this.colEngineersManagerSurname.Caption = "Manager Surname";
+            this.colEngineersManagerSurname.ColumnEdit = this.repManagerSurname;
+            this.colEngineersManagerSurname.FieldName = "ManagerID";
+            this.colEngineersManagerSurname.Name = "colEngineersManagerSurname";
+            this.colEngineersManagerSurname.Visible = true;
+            this.colEngineersManagerSurname.VisibleIndex = 3;
+            // 
+            // repManagerSurname
+            // 
+            this.repManagerSurname.AutoHeight = false;
+            this.repManagerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repManagerSurname.Name = "repManagerSurname";
             // 
             // colSalaryPerMonth
             // 
@@ -199,6 +217,15 @@
             this.colManagerSalaryPerMonth.VisibleIndex = 2;
             this.colManagerSalaryPerMonth.Width = 82;
             // 
+            // colManagerStartDate
+            // 
+            this.colManagerStartDate.Caption = "Start Date";
+            this.colManagerStartDate.FieldName = "StartDate";
+            this.colManagerStartDate.Name = "colManagerStartDate";
+            this.colManagerStartDate.Visible = true;
+            this.colManagerStartDate.VisibleIndex = 3;
+            this.colManagerStartDate.Width = 66;
+            // 
             // labelManagers
             // 
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -241,30 +268,13 @@
             this.colStartDate.VisibleIndex = 4;
             this.colStartDate.Width = 66;
             // 
-            // colManagerStartDate
+            // colEngineerStartDate
             // 
-            this.colManagerStartDate.Caption = "Start Date";
-            this.colManagerStartDate.FieldName = "StartDate";
-            this.colManagerStartDate.Name = "colManagerStartDate";
-            this.colManagerStartDate.Visible = true;
-            this.colManagerStartDate.VisibleIndex = 3;
-            this.colManagerStartDate.Width = 66;
-            // 
-            // colEngineersManagerSurname
-            // 
-            this.colEngineersManagerSurname.Caption = "Manager Surname";
-            this.colEngineersManagerSurname.ColumnEdit = this.repManagerSurname;
-            this.colEngineersManagerSurname.FieldName = "ManagerID";
-            this.colEngineersManagerSurname.Name = "colEngineersManagerSurname";
-            this.colEngineersManagerSurname.Visible = true;
-            this.colEngineersManagerSurname.VisibleIndex = 3;
-            // 
-            // repManagerSurname
-            // 
-            this.repManagerSurname.AutoHeight = false;
-            this.repManagerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repManagerSurname.Name = "repManagerSurname";
+            this.colEngineerStartDate.Caption = "Start Date";
+            this.colEngineerStartDate.FieldName = "StartDate";
+            this.colEngineerStartDate.Name = "colEngineerStartDate";
+            this.colEngineerStartDate.Visible = true;
+            this.colEngineerStartDate.VisibleIndex = 5;
             // 
             // EmployeesForm
             // 
@@ -283,11 +293,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdManagers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEngineers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsManagers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,5 +327,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repManagerSurname;
         private DevExpress.XtraGrid.Columns.GridColumn colStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colManagerStartDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colEngineerStartDate;
     }
 }

@@ -27,6 +27,7 @@ namespace CarServiceCenterLib {
 
         // Constructors
         public Transaction() {
+            TransactionLines = new List<TransactionLine>();
             ID = Guid.NewGuid();
         }
         public Transaction(Guid customerID, Guid carID, Guid managerID) {
@@ -43,6 +44,13 @@ namespace CarServiceCenterLib {
         public void AddTransactionLine(TransactionLine transactionLine) {
             TransactionLines.Add(transactionLine);
             TotalPrice += transactionLine.Price;
+        }
+
+        public void UpdateTotalPrice() {
+            TotalPrice = 0;
+            foreach (TransactionLine transactionLine in TransactionLines) {
+                TotalPrice += transactionLine.Price;
+            }
         }
     }
 }
