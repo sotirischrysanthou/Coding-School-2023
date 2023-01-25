@@ -109,7 +109,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(573, 248);
+            this.btnSave.Location = new System.Drawing.Point(553, 248);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(98, 37);
             this.btnSave.TabIndex = 3;
@@ -119,7 +119,7 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(677, 248);
+            this.btn_Close.Location = new System.Drawing.Point(668, 248);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(98, 37);
             this.btn_Close.TabIndex = 4;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 304);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelServiceTask);
