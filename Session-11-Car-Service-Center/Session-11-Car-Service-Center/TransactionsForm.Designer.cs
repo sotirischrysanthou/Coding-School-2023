@@ -28,37 +28,53 @@
             this.bsTransactionLines = new System.Windows.Forms.BindingSource(this.components);
             this.grdTransactionLines = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colTransactionID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colServiceTaskID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEngineerID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colServiceTaskDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repServiceTasksDescription = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colEngineerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repEngineersName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.EngineerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repEngineersSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colHours = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repTransactionLineHours = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colPricePerHour = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repTransactionLinePricePerHour = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.Price = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repTransactionLinelPrice = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repCustomerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colCarBrand = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colManagerID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCarBrand = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colCarModel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCarModel = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repManagerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.conManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
-            this.repCarModel = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.colCarModel = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repCarBrand = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repServiceTasksDescription)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repEngineersName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repEngineersSurname)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLineHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinePricePerHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinelPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repCarModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCarBrand)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCarModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).BeginInit();
             this.SuspendLayout();
             // 
             // grdTransactionLines
@@ -69,17 +85,25 @@
             this.grdTransactionLines.Location = new System.Drawing.Point(12, 237);
             this.grdTransactionLines.MainView = this.gridView2;
             this.grdTransactionLines.Name = "grdTransactionLines";
+            this.grdTransactionLines.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repServiceTasksDescription,
+            this.repEngineersName,
+            this.repEngineersSurname,
+            this.repTransactionLineHours,
+            this.repTransactionLinePricePerHour,
+            this.repTransactionLinelPrice});
             this.grdTransactionLines.Size = new System.Drawing.Size(776, 171);
             this.grdTransactionLines.TabIndex = 3;
+            this.grdTransactionLines.UseEmbeddedNavigator = true;
             this.grdTransactionLines.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
             // 
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colTransactionID,
-            this.colServiceTaskID,
-            this.colEngineerID,
+            this.colServiceTaskDescription,
+            this.colEngineerName,
+            this.EngineerSurname,
             this.colHours,
             this.colPricePerHour,
             this.Price});
@@ -87,53 +111,101 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
-            // colTransactionID
+            // colServiceTaskDescription
             // 
-            this.colTransactionID.Caption = "TransactionID";
-            this.colTransactionID.FieldName = "TransactionID";
-            this.colTransactionID.Name = "colTransactionID";
-            this.colTransactionID.Visible = true;
-            this.colTransactionID.VisibleIndex = 0;
+            this.colServiceTaskDescription.Caption = "Sevice Task Description";
+            this.colServiceTaskDescription.ColumnEdit = this.repServiceTasksDescription;
+            this.colServiceTaskDescription.FieldName = "ServiceTaskID";
+            this.colServiceTaskDescription.Name = "colServiceTaskDescription";
+            this.colServiceTaskDescription.Visible = true;
+            this.colServiceTaskDescription.VisibleIndex = 0;
             // 
-            // colServiceTaskID
+            // repServiceTasksDescription
             // 
-            this.colServiceTaskID.Caption = "Sevice Task ID";
-            this.colServiceTaskID.FieldName = "ServiceTaskID";
-            this.colServiceTaskID.Name = "colServiceTaskID";
-            this.colServiceTaskID.Visible = true;
-            this.colServiceTaskID.VisibleIndex = 1;
+            this.repServiceTasksDescription.AutoHeight = false;
+            this.repServiceTasksDescription.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repServiceTasksDescription.Name = "repServiceTasksDescription";
             // 
-            // colEngineerID
+            // colEngineerName
             // 
-            this.colEngineerID.Caption = "EngineerID";
-            this.colEngineerID.FieldName = "EngineerID";
-            this.colEngineerID.Name = "colEngineerID";
-            this.colEngineerID.Visible = true;
-            this.colEngineerID.VisibleIndex = 2;
+            this.colEngineerName.Caption = "Engineer Name";
+            this.colEngineerName.ColumnEdit = this.repEngineersName;
+            this.colEngineerName.FieldName = "EngineerID";
+            this.colEngineerName.Name = "colEngineerName";
+            this.colEngineerName.Visible = true;
+            this.colEngineerName.VisibleIndex = 1;
+            // 
+            // repEngineersName
+            // 
+            this.repEngineersName.AutoHeight = false;
+            this.repEngineersName.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repEngineersName.Name = "repEngineersName";
+            // 
+            // EngineerSurname
+            // 
+            this.EngineerSurname.Caption = "Engineer Surname";
+            this.EngineerSurname.ColumnEdit = this.repEngineersSurname;
+            this.EngineerSurname.FieldName = "EngineerID";
+            this.EngineerSurname.Name = "EngineerSurname";
+            this.EngineerSurname.Visible = true;
+            this.EngineerSurname.VisibleIndex = 2;
+            // 
+            // repEngineersSurname
+            // 
+            this.repEngineersSurname.AutoHeight = false;
+            this.repEngineersSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repEngineersSurname.Name = "repEngineersSurname";
             // 
             // colHours
             // 
             this.colHours.Caption = "Hours";
-            this.colHours.FieldName = "Hours";
+            this.colHours.ColumnEdit = this.repTransactionLineHours;
+            this.colHours.FieldName = "ID";
             this.colHours.Name = "colHours";
             this.colHours.Visible = true;
             this.colHours.VisibleIndex = 3;
             // 
+            // repTransactionLineHours
+            // 
+            this.repTransactionLineHours.AutoHeight = false;
+            this.repTransactionLineHours.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repTransactionLineHours.Name = "repTransactionLineHours";
+            // 
             // colPricePerHour
             // 
             this.colPricePerHour.Caption = "Price Per Hour";
-            this.colPricePerHour.FieldName = "PricePerHour";
+            this.colPricePerHour.ColumnEdit = this.repTransactionLinePricePerHour;
+            this.colPricePerHour.FieldName = "SeviceTaskID";
             this.colPricePerHour.Name = "colPricePerHour";
             this.colPricePerHour.Visible = true;
             this.colPricePerHour.VisibleIndex = 4;
             // 
+            // repTransactionLinePricePerHour
+            // 
+            this.repTransactionLinePricePerHour.AutoHeight = false;
+            this.repTransactionLinePricePerHour.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repTransactionLinePricePerHour.Name = "repTransactionLinePricePerHour";
+            // 
             // Price
             // 
             this.Price.Caption = "Price";
-            this.Price.FieldName = "Price";
+            this.Price.ColumnEdit = this.repTransactionLinelPrice;
+            this.Price.FieldName = "ServiceTaskID";
             this.Price.Name = "Price";
             this.Price.Visible = true;
             this.Price.VisibleIndex = 5;
+            // 
+            // repTransactionLinelPrice
+            // 
+            this.repTransactionLinelPrice.AutoHeight = false;
+            this.repTransactionLinelPrice.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repTransactionLinelPrice.Name = "repTransactionLinelPrice";
             // 
             // grdTransactions
             // 
@@ -147,7 +219,9 @@
             this.repCustomerName,
             this.repCustomerSurname,
             this.repCarModel,
-            this.repCarBrand});
+            this.repCarBrand,
+            this.repManagerName,
+            this.repManagerSurname});
             this.grdTransactions.Size = new System.Drawing.Size(776, 200);
             this.grdTransactions.TabIndex = 5;
             this.grdTransactions.UseEmbeddedNavigator = true;
@@ -157,25 +231,17 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colID,
             this.colDate,
             this.CustomerName,
             this.colCustomerSurname,
             this.colCarBrand,
             this.colCarModel,
-            this.colManagerID,
+            this.colManagerName,
+            this.conManagerSurname,
             this.colTotalPrice});
             this.gridView1.GridControl = this.grdTransactions;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // colID
-            // 
-            this.colID.Caption = "ID";
-            this.colID.FieldName = "ID";
-            this.colID.Name = "colID";
-            this.colID.Visible = true;
-            this.colID.VisibleIndex = 0;
             // 
             // colDate
             // 
@@ -183,7 +249,7 @@
             this.colDate.FieldName = "Date";
             this.colDate.Name = "colDate";
             this.colDate.Visible = true;
-            this.colDate.VisibleIndex = 1;
+            this.colDate.VisibleIndex = 0;
             // 
             // CustomerName
             // 
@@ -192,7 +258,7 @@
             this.CustomerName.FieldName = "CustomerID";
             this.CustomerName.Name = "CustomerName";
             this.CustomerName.Visible = true;
-            this.CustomerName.VisibleIndex = 2;
+            this.CustomerName.VisibleIndex = 1;
             // 
             // repCustomerName
             // 
@@ -208,7 +274,7 @@
             this.colCustomerSurname.FieldName = "CustomerID";
             this.colCustomerSurname.Name = "colCustomerSurname";
             this.colCustomerSurname.Visible = true;
-            this.colCustomerSurname.VisibleIndex = 3;
+            this.colCustomerSurname.VisibleIndex = 2;
             // 
             // repCustomerSurname
             // 
@@ -224,15 +290,62 @@
             this.colCarBrand.FieldName = "CarID";
             this.colCarBrand.Name = "colCarBrand";
             this.colCarBrand.Visible = true;
-            this.colCarBrand.VisibleIndex = 4;
+            this.colCarBrand.VisibleIndex = 3;
             // 
-            // colManagerID
+            // repCarBrand
             // 
-            this.colManagerID.Caption = "ManagerID";
-            this.colManagerID.FieldName = "ManagerID";
-            this.colManagerID.Name = "colManagerID";
-            this.colManagerID.Visible = true;
-            this.colManagerID.VisibleIndex = 6;
+            this.repCarBrand.AutoHeight = false;
+            this.repCarBrand.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCarBrand.Name = "repCarBrand";
+            // 
+            // colCarModel
+            // 
+            this.colCarModel.Caption = "Car Model";
+            this.colCarModel.ColumnEdit = this.repCarModel;
+            this.colCarModel.FieldName = "CarID";
+            this.colCarModel.Name = "colCarModel";
+            this.colCarModel.Visible = true;
+            this.colCarModel.VisibleIndex = 4;
+            // 
+            // repCarModel
+            // 
+            this.repCarModel.AutoHeight = false;
+            this.repCarModel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCarModel.Name = "repCarModel";
+            // 
+            // colManagerName
+            // 
+            this.colManagerName.Caption = "Manager Name";
+            this.colManagerName.ColumnEdit = this.repManagerName;
+            this.colManagerName.FieldName = "ManagerID";
+            this.colManagerName.Name = "colManagerName";
+            this.colManagerName.Visible = true;
+            this.colManagerName.VisibleIndex = 5;
+            // 
+            // repManagerName
+            // 
+            this.repManagerName.AutoHeight = false;
+            this.repManagerName.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repManagerName.Name = "repManagerName";
+            // 
+            // conManagerSurname
+            // 
+            this.conManagerSurname.Caption = "ManagerSurname";
+            this.conManagerSurname.ColumnEdit = this.repManagerSurname;
+            this.conManagerSurname.FieldName = "ManagerID";
+            this.conManagerSurname.Name = "conManagerSurname";
+            this.conManagerSurname.Visible = true;
+            this.conManagerSurname.VisibleIndex = 6;
+            // 
+            // repManagerSurname
+            // 
+            this.repManagerSurname.AutoHeight = false;
+            this.repManagerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repManagerSurname.Name = "repManagerSurname";
             // 
             // colTotalPrice
             // 
@@ -252,29 +365,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // repCarModel
-            // 
-            this.repCarModel.AutoHeight = false;
-            this.repCarModel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repCarModel.Name = "repCarModel";
-            // 
-            // colCarModel
-            // 
-            this.colCarModel.Caption = "Car Model";
-            this.colCarModel.ColumnEdit = this.repCarModel;
-            this.colCarModel.FieldName = "CarID";
-            this.colCarModel.Name = "colCarModel";
-            this.colCarModel.Visible = true;
-            this.colCarModel.VisibleIndex = 5;
-            // 
-            // repCarBrand
-            // 
-            this.repCarBrand.AutoHeight = false;
-            this.repCarBrand.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repCarBrand.Name = "repCarBrand";
-            // 
             // TransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -290,12 +380,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repServiceTasksDescription)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repEngineersName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repEngineersSurname)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLineHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinePricePerHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinelPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repCarModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCarBrand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCarModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -305,17 +403,15 @@
         private BindingSource bsTransactionLines;
         private DevExpress.XtraGrid.GridControl grdTransactionLines;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn colTransactionID;
         private DevExpress.XtraGrid.GridControl grdTransactions;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
         private DevExpress.XtraGrid.Columns.GridColumn CustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCarBrand;
-        private DevExpress.XtraGrid.Columns.GridColumn colManagerID;
+        private DevExpress.XtraGrid.Columns.GridColumn colManagerName;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn colServiceTaskID;
-        private DevExpress.XtraGrid.Columns.GridColumn colEngineerID;
+        private DevExpress.XtraGrid.Columns.GridColumn colServiceTaskDescription;
+        private DevExpress.XtraGrid.Columns.GridColumn colEngineerName;
         private DevExpress.XtraGrid.Columns.GridColumn colHours;
         private DevExpress.XtraGrid.Columns.GridColumn colPricePerHour;
         private DevExpress.XtraGrid.Columns.GridColumn Price;
@@ -326,5 +422,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCarModel;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCarModel;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCarBrand;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repManagerName;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repManagerSurname;
+        private DevExpress.XtraGrid.Columns.GridColumn conManagerSurname;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repServiceTasksDescription;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repEngineersName;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repEngineersSurname;
+        private DevExpress.XtraGrid.Columns.GridColumn EngineerSurname;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repTransactionLineHours;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repTransactionLinePricePerHour;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repTransactionLinelPrice;
     }
 }

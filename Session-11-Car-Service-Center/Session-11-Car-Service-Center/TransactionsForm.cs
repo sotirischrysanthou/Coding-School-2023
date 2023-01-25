@@ -32,7 +32,14 @@ namespace Session_11_Car_Service_Center {
             SetLookUpEdit<Customer>(repCustomerSurname, _carServiceCenter.Customers, "Surname", "ID");
             SetLookUpEdit<Car>(repCarBrand, _carServiceCenter.Cars, "Brand", "ID");
             SetLookUpEdit<Car>(repCarModel, _carServiceCenter.Cars, "Model", "ID");
-
+            SetLookUpEdit<Manager>(repManagerName, _carServiceCenter.Managers, "Name", "ID");
+            SetLookUpEdit<Manager>(repManagerSurname, _carServiceCenter.Managers, "Surname", "ID");
+            SetLookUpEdit<Engineer>(repEngineersName, _carServiceCenter.Engineers, "Name", "ID");
+            SetLookUpEdit<Engineer>(repEngineersSurname, _carServiceCenter.Engineers, "Surname", "ID");
+            SetLookUpEdit<ServiceTask>(repServiceTasksDescription, _carServiceCenter.ServiceTasks, "Description", "ID");
+            SetLookUpEdit<TransactionLine>(repTransactionLineHours, _carServiceCenter.Transactions, "Hours", "ID");
+            SetLookUpEdit<ServiceTask>(repTransactionLinePricePerHour, _carServiceCenter.ServiceTasks, "PricePerHour", "ID");
+            SetLookUpEdit<ServiceTask>(repTransactionLinelPrice, _carServiceCenter.ServiceTasks, "Price", "ID");
         }
 
 
