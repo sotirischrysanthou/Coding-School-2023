@@ -44,5 +44,12 @@ namespace CarServiceCenterLib {
             TransactionLines.Add(transactionLine);
             TotalPrice += transactionLine.Price;
         }
+
+        public void UpdateTotalPrice() {
+            TotalPrice = 0;
+            foreach (TransactionLine transactionLine in TransactionLines) {
+                TotalPrice += transactionLine.Price;
+            }
+        }
     }
 }

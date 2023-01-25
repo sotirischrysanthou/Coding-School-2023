@@ -36,11 +36,8 @@
             this.EngineerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repEngineersSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colHours = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repTransactionLineHours = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colPricePerHour = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repTransactionLinePricePerHour = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.Price = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repTransactionLinelPrice = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -67,9 +64,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repServiceTasksDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersSurname)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLineHours)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinePricePerHour)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinelPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).BeginInit();
@@ -91,10 +85,7 @@
             this.grdTransactionLines.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repServiceTasksDescription,
             this.repEngineersName,
-            this.repEngineersSurname,
-            this.repTransactionLineHours,
-            this.repTransactionLinePricePerHour,
-            this.repTransactionLinelPrice});
+            this.repEngineersSurname});
             this.grdTransactionLines.Size = new System.Drawing.Size(776, 171);
             this.grdTransactionLines.TabIndex = 3;
             this.grdTransactionLines.UseEmbeddedNavigator = true;
@@ -115,6 +106,7 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
+            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             // 
             // colTransactionID
             // 
@@ -173,50 +165,26 @@
             // colHours
             // 
             this.colHours.Caption = "Hours";
-            this.colHours.ColumnEdit = this.repTransactionLineHours;
-            this.colHours.FieldName = "ID";
+            this.colHours.FieldName = "Hours";
             this.colHours.Name = "colHours";
             this.colHours.Visible = true;
             this.colHours.VisibleIndex = 3;
             // 
-            // repTransactionLineHours
-            // 
-            this.repTransactionLineHours.AutoHeight = false;
-            this.repTransactionLineHours.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repTransactionLineHours.Name = "repTransactionLineHours";
-            // 
             // colPricePerHour
             // 
             this.colPricePerHour.Caption = "Price Per Hour";
-            this.colPricePerHour.ColumnEdit = this.repTransactionLinePricePerHour;
-            this.colPricePerHour.FieldName = "SeviceTaskID";
+            this.colPricePerHour.FieldName = "PricePerHour";
             this.colPricePerHour.Name = "colPricePerHour";
             this.colPricePerHour.Visible = true;
             this.colPricePerHour.VisibleIndex = 4;
             // 
-            // repTransactionLinePricePerHour
-            // 
-            this.repTransactionLinePricePerHour.AutoHeight = false;
-            this.repTransactionLinePricePerHour.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repTransactionLinePricePerHour.Name = "repTransactionLinePricePerHour";
-            // 
             // Price
             // 
             this.Price.Caption = "Price";
-            this.Price.ColumnEdit = this.repTransactionLinelPrice;
-            this.Price.FieldName = "ServiceTaskID";
+            this.Price.FieldName = "Price";
             this.Price.Name = "Price";
             this.Price.Visible = true;
             this.Price.VisibleIndex = 5;
-            // 
-            // repTransactionLinelPrice
-            // 
-            this.repTransactionLinelPrice.AutoHeight = false;
-            this.repTransactionLinelPrice.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repTransactionLinelPrice.Name = "repTransactionLinelPrice";
             // 
             // grdTransactions
             // 
@@ -412,9 +380,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repServiceTasksDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersSurname)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLineHours)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinePricePerHour)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repTransactionLinelPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).EndInit();
@@ -458,9 +423,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repEngineersName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repEngineersSurname;
         private DevExpress.XtraGrid.Columns.GridColumn EngineerSurname;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repTransactionLineHours;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repTransactionLinePricePerHour;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repTransactionLinelPrice;
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionID;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
