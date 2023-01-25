@@ -15,6 +15,16 @@ namespace CarServiceCenterLib {
         public double TotalPrice { get; set; }
         public List<TransactionLine> TransactionLines { get; set; }
 
+
+        public Transaction(Guid id, DateTime date, Guid customerID, Guid carID, Guid managerID, double totalPrice) {
+            ID = id;
+            Date = date;
+            CustomerID = customerID;
+            CarID = carID;
+            ManagerID = managerID;
+            TotalPrice = totalPrice;
+        }
+
         // Constructors
         public Transaction() {
             ID = Guid.NewGuid();
