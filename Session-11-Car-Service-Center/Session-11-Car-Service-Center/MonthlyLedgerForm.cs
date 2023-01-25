@@ -1,4 +1,5 @@
 ﻿using CarServiceCenterLib;
+using DevExpress.Utils.Extensions;
 using DevExpress.XtraBars;
 using SerializerLib;
 using System;
@@ -36,13 +37,19 @@ namespace Session_11_Car_Service_Center {
 
         }
 
-        private void dtFromData_EditValueChanged(object sender, EventArgs e) {
+        private void deFrom_EditValueChanged(object sender, EventArgs e) {
             
-            MessageBox.Show(dtFromData.EditValue.ToString());
+            MessageBox.Show(deFrom.EditValue.ToString());
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
 
+        }
+
+        private void btnCreateLedger_Click(object sender, EventArgs e) {
+            if(txtYear.ContainerIsEmpty() || txtMonth.ContainerIsEmpty()) {
+                MessageBox.Show("Complete Year and Month");
+            }
         }
     }
 }

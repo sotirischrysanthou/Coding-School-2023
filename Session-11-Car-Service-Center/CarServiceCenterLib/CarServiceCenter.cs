@@ -16,9 +16,11 @@ namespace CarServiceCenterLib {
         public List<Transaction> Transactions { get; set; }
         public List<Car> Cars { get; set; }
         public List<ServiceTask> ServiceTasks { get; set; }
+        public List<MonthlyLedger> MonthlyLedgers { get; set; }
 
         // Constructors
         public CarServiceCenter() {
+            //initialize all lists
             WorkDays = new List<WorkDay>();
             Engineers = new List<Engineer>();
             Managers = new List<Manager>();
@@ -26,9 +28,10 @@ namespace CarServiceCenterLib {
             Transactions = new List<Transaction>();
             Cars = new List<Car>();
             ServiceTasks = new List<ServiceTask>();
-
-            //initialize all lists, done(correct??)
+            MonthlyLedgers = new List<MonthlyLedger>();
         }
+
+        // Methods
         public bool AddTask(ServiceTask task, DateTime date, out String message) {
             //find from Workday list WorkDay.date==date
             //WorkDay.Add(task, message);
@@ -66,6 +69,14 @@ namespace CarServiceCenterLib {
                 }
             }
             return TotalSalary;
+        }
+
+        public void UpdateMonthlyLedger(DateTime FromDate, double Salary) {
+            foreach(MonthlyLedger monthlyLedger in MonthlyLedgers) {
+                if(monthlyLedger.Year >= FromDate.Year && monthlyLedger.Month >= FromDate.Month) {
+                    monthlyLedger.UpdateExpenses(Salary);
+                }
+            }
         }
 
 
