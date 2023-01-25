@@ -87,6 +87,12 @@ namespace Session_11_Car_Service_Center {
             employeesForm.ShowDialog();
         }
 
+
+        private void btn_MonthlyLedger_Click(object sender, EventArgs e) {
+            MonthlyLedgerForm monthlyLedgerForm = new MonthlyLedgerForm(_carServiceCenter);
+            monthlyLedgerForm.ShowDialog();
+        }
+
         private void btnSave_Click(object sender, EventArgs e) {
             _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
             DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");

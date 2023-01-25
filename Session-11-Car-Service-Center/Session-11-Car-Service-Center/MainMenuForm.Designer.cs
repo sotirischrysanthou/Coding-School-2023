@@ -30,14 +30,14 @@
             this.btnEmployees = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.btn_MonthlyLedger = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Location = new System.Drawing.Point(393, 97);
-            this.btnTransactions.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnTransactions.Location = new System.Drawing.Point(344, 73);
             this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(143, 31);
+            this.btnTransactions.Size = new System.Drawing.Size(125, 23);
             this.btnTransactions.TabIndex = 0;
             this.btnTransactions.Text = "Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;
@@ -45,10 +45,9 @@
             // 
             // btnCustomerAndCars
             // 
-            this.btnCustomerAndCars.Location = new System.Drawing.Point(393, 136);
-            this.btnCustomerAndCars.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCustomerAndCars.Location = new System.Drawing.Point(344, 102);
             this.btnCustomerAndCars.Name = "btnCustomerAndCars";
-            this.btnCustomerAndCars.Size = new System.Drawing.Size(143, 31);
+            this.btnCustomerAndCars.Size = new System.Drawing.Size(125, 23);
             this.btnCustomerAndCars.TabIndex = 1;
             this.btnCustomerAndCars.Text = "Customers and Cars";
             this.btnCustomerAndCars.UseVisualStyleBackColor = true;
@@ -56,10 +55,9 @@
             // 
             // btnPopulate
             // 
-            this.btnPopulate.Location = new System.Drawing.Point(710, 509);
-            this.btnPopulate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnPopulate.Location = new System.Drawing.Point(621, 382);
             this.btnPopulate.Name = "btnPopulate";
-            this.btnPopulate.Size = new System.Drawing.Size(143, 31);
+            this.btnPopulate.Size = new System.Drawing.Size(125, 23);
             this.btnPopulate.TabIndex = 2;
             this.btnPopulate.Text = "Populate";
             this.btnPopulate.UseVisualStyleBackColor = true;
@@ -67,10 +65,9 @@
             // 
             // btnServiceTasks
             // 
-            this.btnServiceTasks.Location = new System.Drawing.Point(393, 175);
-            this.btnServiceTasks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnServiceTasks.Location = new System.Drawing.Point(344, 131);
             this.btnServiceTasks.Name = "btnServiceTasks";
-            this.btnServiceTasks.Size = new System.Drawing.Size(143, 32);
+            this.btnServiceTasks.Size = new System.Drawing.Size(125, 24);
             this.btnServiceTasks.TabIndex = 2;
             this.btnServiceTasks.Text = "Service Tasks";
             this.btnServiceTasks.UseVisualStyleBackColor = true;
@@ -78,9 +75,10 @@
             // 
             // btnEmployees
             // 
-            this.btnEmployees.Location = new System.Drawing.Point(393, 214);
+            this.btnEmployees.Location = new System.Drawing.Point(344, 160);
+            this.btnEmployees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEmployees.Name = "btnEmployees";
-            this.btnEmployees.Size = new System.Drawing.Size(143, 32);
+            this.btnEmployees.Size = new System.Drawing.Size(125, 24);
             this.btnEmployees.TabIndex = 3;
             this.btnEmployees.Text = "Employees";
             this.btnEmployees.UseVisualStyleBackColor = true;
@@ -88,9 +86,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(710, 438);
+            this.btnSave.Location = new System.Drawing.Point(621, 328);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(143, 29);
+            this.btnSave.Size = new System.Drawing.Size(125, 22);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -98,19 +97,32 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(710, 473);
+            this.btnLoad.Location = new System.Drawing.Point(621, 355);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(143, 29);
+            this.btnLoad.Size = new System.Drawing.Size(125, 22);
             this.btnLoad.TabIndex = 5;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // btn_MonthlyLedger
+            // 
+            this.btn_MonthlyLedger.Location = new System.Drawing.Point(344, 188);
+            this.btn_MonthlyLedger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_MonthlyLedger.Name = "btn_MonthlyLedger";
+            this.btn_MonthlyLedger.Size = new System.Drawing.Size(125, 24);
+            this.btn_MonthlyLedger.TabIndex = 6;
+            this.btn_MonthlyLedger.Text = "MonthlyLedger";
+            this.btn_MonthlyLedger.UseVisualStyleBackColor = true;
+            this.btn_MonthlyLedger.Click += new System.EventHandler(this.btn_MonthlyLedger_Click);
+            // 
             // MainMenuForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 600);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_MonthlyLedger);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEmployees);
@@ -118,7 +130,6 @@
             this.Controls.Add(this.btnServiceTasks);
             this.Controls.Add(this.btnCustomerAndCars);
             this.Controls.Add(this.btnTransactions);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainMenuForm";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenuForm_Load);
@@ -135,5 +146,6 @@
         private Button btnEmployees;
         private Button btnSave;
         private Button btnLoad;
+        private Button btn_MonthlyLedger;
     }
 }
