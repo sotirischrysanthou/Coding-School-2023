@@ -52,19 +52,19 @@ namespace CarServiceCenterLib {
             return ret;
         }
 
-        public double FromToEngineers(DateTime FromDate) {
+        public double SalaryEngineersFrom(int Year, int Month) {
             double TotalSalary = 0;
             foreach (Engineer engineer in Engineers) {
-                if (engineer.StartDate < FromDate) {
+                if (engineer.StartDate.Year <= Year && engineer.StartDate.Month <= Month) {
                     TotalSalary += engineer.SalaryPerMonth;
                 }
             }
             return TotalSalary;
         }
-        public double FromToManagers(DateTime FromDate) {
+        public double SalaryManagersFrom(int Year, int Month) {
             double TotalSalary = 0;
             foreach (Manager manager in Managers) {
-                if (manager.StartDate < FromDate) {
+                if (manager.StartDate.Year <= Year && manager.StartDate.Month <= Month) {
                     TotalSalary += manager.SalaryPerMonth;
                 }
             }
@@ -72,11 +72,28 @@ namespace CarServiceCenterLib {
         }
 
         public void UpdateMonthlyLedger(DateTime FromDate, double Salary) {
-            foreach(MonthlyLedger monthlyLedger in MonthlyLedgers) {
-                if(monthlyLedger.Year >= FromDate.Year && monthlyLedger.Month >= FromDate.Month) {
+            foreach (MonthlyLedger monthlyLedger in MonthlyLedgers) {
+                if (monthlyLedger.Year >= FromDate.Year && monthlyLedger.Month >= FromDate.Month) {
                     monthlyLedger.UpdateExpenses(Salary);
                 }
             }
+        }
+
+        public List<MonthlyLedger> BookKeepingFromTo(DateTime from, DateTime to) {
+            double incomes = 0;
+            List<MonthlyLedger> bookKeeping = new List<MonthlyLedger>();
+            foreach (MonthlyLedger monthlyLedger in MonthlyLedgers) {
+                if (monthlyLedger.Year >= from.Year && monthlyLedger.Month >= from.Month && monthlyLedger.Year <= to.Year && monthlyLedger.Month <= to.Month) {
+                    foreach (Transaction transaction in Transactions) {
+                        if (transaction.Date.Year == monthlyLedger.Year && transaction.Date.Month == monthlyLedger.Month) {
+                            incomes += transaction.TotalPrice;
+                        }
+                    }
+                    monthlyLedger.UpdateIncomes(incomes);
+                    bookKeeping.Add(monthlyLedger);
+                }
+            }
+            return bookKeeping;
         }
 
 
