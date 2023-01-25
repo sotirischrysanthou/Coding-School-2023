@@ -39,6 +39,9 @@ namespace CarServiceCenterLib {
 
 
         // Constructors
+        public Transaction() {
+            ID = Guid.NewGuid();
+        }
         public Transaction(Guid customerID, Guid carID, Guid managerID) {
             ID = Guid.NewGuid();
             Date = DateTime.Now;
