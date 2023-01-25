@@ -224,14 +224,14 @@
             // 
             // txtYear
             // 
-            this.txtYear.Location = new System.Drawing.Point(808, 96);
+            this.txtYear.Location = new System.Drawing.Point(782, 199);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(100, 20);
             this.txtYear.TabIndex = 5;
             // 
             // txtMonth
             // 
-            this.txtMonth.Location = new System.Drawing.Point(808, 135);
+            this.txtMonth.Location = new System.Drawing.Point(782, 236);
             this.txtMonth.Name = "txtMonth";
             this.txtMonth.Size = new System.Drawing.Size(100, 20);
             this.txtMonth.TabIndex = 6;
@@ -240,7 +240,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(734, 92);
+            this.labelControl1.Location = new System.Drawing.Point(696, 193);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(41, 24);
             this.labelControl1.TabIndex = 7;
@@ -250,7 +250,7 @@
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(734, 131);
+            this.labelControl2.Location = new System.Drawing.Point(696, 232);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(55, 24);
             this.labelControl2.TabIndex = 8;
@@ -260,7 +260,7 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(659, 38);
+            this.labelControl3.Location = new System.Drawing.Point(633, 139);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(267, 40);
             this.labelControl3.TabIndex = 9;
@@ -269,7 +269,7 @@
             // btnCreateLedger
             // 
             this.btnCreateLedger.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCreateLedger.Location = new System.Drawing.Point(659, 186);
+            this.btnCreateLedger.Location = new System.Drawing.Point(633, 272);
             this.btnCreateLedger.Name = "btnCreateLedger";
             this.btnCreateLedger.Size = new System.Drawing.Size(267, 39);
             this.btnCreateLedger.TabIndex = 10;
