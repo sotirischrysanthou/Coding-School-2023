@@ -121,8 +121,6 @@
             this.colTransactionID.Caption = "TransactionID";
             this.colTransactionID.FieldName = "TransactionID";
             this.colTransactionID.Name = "colTransactionID";
-            this.colTransactionID.Visible = true;
-            this.colTransactionID.VisibleIndex = 0;
             // 
             // colServiceTaskDescription
             // 
@@ -131,7 +129,7 @@
             this.colServiceTaskDescription.FieldName = "ServiceTaskID";
             this.colServiceTaskDescription.Name = "colServiceTaskDescription";
             this.colServiceTaskDescription.Visible = true;
-            this.colServiceTaskDescription.VisibleIndex = 1;
+            this.colServiceTaskDescription.VisibleIndex = 0;
             // 
             // repServiceTasksDescription
             // 
@@ -147,7 +145,7 @@
             this.colEngineerName.FieldName = "EngineerID";
             this.colEngineerName.Name = "colEngineerName";
             this.colEngineerName.Visible = true;
-            this.colEngineerName.VisibleIndex = 2;
+            this.colEngineerName.VisibleIndex = 1;
             // 
             // repEngineersName
             // 
@@ -163,7 +161,7 @@
             this.EngineerSurname.FieldName = "EngineerID";
             this.EngineerSurname.Name = "EngineerSurname";
             this.EngineerSurname.Visible = true;
-            this.EngineerSurname.VisibleIndex = 3;
+            this.EngineerSurname.VisibleIndex = 2;
             // 
             // repEngineersSurname
             // 
@@ -179,7 +177,7 @@
             this.colHours.FieldName = "ID";
             this.colHours.Name = "colHours";
             this.colHours.Visible = true;
-            this.colHours.VisibleIndex = 4;
+            this.colHours.VisibleIndex = 3;
             // 
             // repTransactionLineHours
             // 
@@ -195,7 +193,7 @@
             this.colPricePerHour.FieldName = "SeviceTaskID";
             this.colPricePerHour.Name = "colPricePerHour";
             this.colPricePerHour.Visible = true;
-            this.colPricePerHour.VisibleIndex = 5;
+            this.colPricePerHour.VisibleIndex = 4;
             // 
             // repTransactionLinePricePerHour
             // 
@@ -211,7 +209,7 @@
             this.Price.FieldName = "ServiceTaskID";
             this.Price.Name = "Price";
             this.Price.Visible = true;
-            this.Price.VisibleIndex = 6;
+            this.Price.VisibleIndex = 5;
             // 
             // repTransactionLinelPrice
             // 
@@ -262,8 +260,6 @@
             this.colID.Caption = "ID";
             this.colID.FieldName = "ID";
             this.colID.Name = "colID";
-            this.colID.Visible = true;
-            this.colID.VisibleIndex = 0;
             // 
             // colDate
             // 
@@ -271,7 +267,7 @@
             this.colDate.FieldName = "Date";
             this.colDate.Name = "colDate";
             this.colDate.Visible = true;
-            this.colDate.VisibleIndex = 1;
+            this.colDate.VisibleIndex = 0;
             // 
             // CustomerName
             // 
@@ -280,7 +276,7 @@
             this.CustomerName.FieldName = "CustomerID";
             this.CustomerName.Name = "CustomerName";
             this.CustomerName.Visible = true;
-            this.CustomerName.VisibleIndex = 2;
+            this.CustomerName.VisibleIndex = 1;
             // 
             // repCustomerName
             // 
@@ -296,7 +292,7 @@
             this.colCustomerSurname.FieldName = "CustomerID";
             this.colCustomerSurname.Name = "colCustomerSurname";
             this.colCustomerSurname.Visible = true;
-            this.colCustomerSurname.VisibleIndex = 3;
+            this.colCustomerSurname.VisibleIndex = 2;
             // 
             // repCustomerSurname
             // 
@@ -312,7 +308,7 @@
             this.colCarBrand.FieldName = "CarID";
             this.colCarBrand.Name = "colCarBrand";
             this.colCarBrand.Visible = true;
-            this.colCarBrand.VisibleIndex = 4;
+            this.colCarBrand.VisibleIndex = 3;
             // 
             // repCarBrand
             // 
@@ -328,7 +324,7 @@
             this.colCarModel.FieldName = "CarID";
             this.colCarModel.Name = "colCarModel";
             this.colCarModel.Visible = true;
-            this.colCarModel.VisibleIndex = 5;
+            this.colCarModel.VisibleIndex = 4;
             // 
             // repCarModel
             // 
@@ -344,7 +340,7 @@
             this.colManagerName.FieldName = "ManagerID";
             this.colManagerName.Name = "colManagerName";
             this.colManagerName.Visible = true;
-            this.colManagerName.VisibleIndex = 6;
+            this.colManagerName.VisibleIndex = 5;
             // 
             // repManagerName
             // 
@@ -360,7 +356,7 @@
             this.conManagerSurname.FieldName = "ManagerID";
             this.conManagerSurname.Name = "conManagerSurname";
             this.conManagerSurname.Visible = true;
-            this.conManagerSurname.VisibleIndex = 7;
+            this.conManagerSurname.VisibleIndex = 6;
             // 
             // repManagerSurname
             // 
@@ -375,7 +371,7 @@
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 8;
+            this.colTotalPrice.VisibleIndex = 7;
             // 
             // btnSave
             // 
