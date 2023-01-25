@@ -15,7 +15,6 @@ namespace CarServiceCenterLib {
         public double TotalPrice { get; set; }
         public List<TransactionLine> TransactionLines { get; set; }
 
-        //Christos
 
         public Transaction(Guid id, DateTime date, Guid customerID, Guid carID, Guid managerID, double totalPrice) {
             ID = id;
@@ -25,18 +24,6 @@ namespace CarServiceCenterLib {
             ManagerID = managerID;
             TotalPrice = totalPrice;
         }
-
-
-
-
-        //Christos
-
-
-
-
-
-
-
 
         // Constructors
         public Transaction() {
