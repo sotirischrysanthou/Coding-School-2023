@@ -49,6 +49,25 @@ namespace CarServiceCenterLib {
             return ret;
         }
 
+        public double FromToEngineers(DateTime FromDate) {
+            double TotalSalary = 0;
+            foreach (Engineer engineer in Engineers) {
+                if (engineer.StartDate < FromDate) {
+                    TotalSalary += engineer.SalaryPerMonth;
+                }
+            }
+            return TotalSalary;
+        }
+        public double FromToManagers(DateTime FromDate) {
+            double TotalSalary = 0;
+            foreach (Manager manager in Managers) {
+                if (manager.StartDate < FromDate) {
+                    TotalSalary += manager.SalaryPerMonth;
+                }
+            }
+            return TotalSalary;
+        }
+
 
     }
 }

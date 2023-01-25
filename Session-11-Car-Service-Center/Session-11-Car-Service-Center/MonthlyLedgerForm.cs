@@ -29,9 +29,9 @@ namespace Session_11_Car_Service_Center {
 
         private void SetControlProperties() {
             _serializer = new Serializer();
-            bsCustomer.DataSource = _carServiceCenter.Customers;
-            grdCustomers.DataSource = bsCustomer;
 
+            bsManagers.DataSource = _carServiceCenter.Managers;
+            grdMonthlyLedger.DataSource = bsManagers;
         }
 
         private void simpleButton3_Click(object sender, EventArgs e) {
@@ -44,6 +44,11 @@ namespace Session_11_Car_Service_Center {
 
         private void grdCustomers_Click(object sender, EventArgs e) {
 
+        }
+
+        private void dtFromData_EditValueChanged(object sender, EventArgs e) {
+            
+            MessageBox.Show(dtFromData.EditValue.ToString());
         }
     }
 }

@@ -25,16 +25,22 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.dtToDate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFromData = new DevExpress.XtraEditors.DateEdit();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.grdCustomers = new DevExpress.XtraGrid.GridControl();
+            this.grdMonthlyLedger = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            this.colManagerSalary = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEngineerSalary = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIncome = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colExpenses = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btn_Load = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -42,37 +48,31 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPhone = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTIN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bsManagers = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtToDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtToDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFromData.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFromData.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdMonthlyLedger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsManagers)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.dtToDate);
+            this.layoutControl1.Controls.Add(this.dtFromData);
             this.layoutControl1.Controls.Add(this.simpleButton3);
-            this.layoutControl1.Controls.Add(this.grdCustomers);
-            this.layoutControl1.Controls.Add(this.dateEdit2);
-            this.layoutControl1.Controls.Add(this.dateEdit1);
+            this.layoutControl1.Controls.Add(this.grdMonthlyLedger);
             this.layoutControl1.Controls.Add(this.btn_Load);
-            this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -80,6 +80,33 @@
             this.layoutControl1.Size = new System.Drawing.Size(800, 450);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // dtToDate
+            // 
+            this.dtToDate.EditValue = null;
+            this.dtToDate.Location = new System.Drawing.Point(346, 12);
+            this.dtToDate.Name = "dtToDate";
+            this.dtToDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtToDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtToDate.Size = new System.Drawing.Size(186, 20);
+            this.dtToDate.StyleController = this.layoutControl1;
+            this.dtToDate.TabIndex = 6;
+            // 
+            // dtFromData
+            // 
+            this.dtFromData.EditValue = null;
+            this.dtFromData.Location = new System.Drawing.Point(78, 12);
+            this.dtFromData.Name = "dtFromData";
+            this.dtFromData.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFromData.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFromData.Size = new System.Drawing.Size(198, 20);
+            this.dtFromData.StyleController = this.layoutControl1;
+            this.dtFromData.TabIndex = 5;
+            this.dtFromData.EditValueChanged += new System.EventHandler(this.dtFromData_EditValueChanged);
             // 
             // simpleButton3
             // 
@@ -90,47 +117,63 @@
             this.simpleButton3.TabIndex = 3;
             this.simpleButton3.Text = "Print";
             // 
-            // grdCustomers
+            // grdMonthlyLedger
             // 
-            this.grdCustomers.Location = new System.Drawing.Point(18, 39);
-            this.grdCustomers.MainView = this.gridView1;
-            this.grdCustomers.Name = "grdCustomers";
-            this.grdCustomers.Size = new System.Drawing.Size(200, 376);
-            this.grdCustomers.TabIndex = 3;
-            this.grdCustomers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grdMonthlyLedger.Location = new System.Drawing.Point(10, 50);
+            this.grdMonthlyLedger.MainView = this.gridView1;
+            this.grdMonthlyLedger.Name = "grdMonthlyLedger";
+            this.grdMonthlyLedger.Size = new System.Drawing.Size(776, 360);
+            this.grdMonthlyLedger.TabIndex = 3;
+            this.grdMonthlyLedger.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.grdCustomers.Click += new System.EventHandler(this.grdCustomers_Click);
+            this.grdMonthlyLedger.Click += new System.EventHandler(this.grdCustomers_Click);
             // 
             // gridView1
             // 
-            this.gridView1.GridControl = this.grdCustomers;
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colManagerSalary,
+            this.colEngineerSalary,
+            this.colIncome,
+            this.colExpenses,
+            this.colTotal});
+            this.gridView1.GridControl = this.grdMonthlyLedger;
             this.gridView1.Name = "gridView1";
             // 
-            // dateEdit2
+            // colManagerSalary
             // 
-            this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(288, 12);
-            this.dateEdit2.Name = "dateEdit2";
-            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Size = new System.Drawing.Size(162, 20);
-            this.dateEdit2.StyleController = this.layoutControl1;
-            this.dateEdit2.TabIndex = 2;
+            this.colManagerSalary.Caption = "Manager Salary";
+            this.colManagerSalary.Name = "colManagerSalary";
+            this.colManagerSalary.Visible = true;
+            this.colManagerSalary.VisibleIndex = 0;
             // 
-            // dateEdit1
+            // colEngineerSalary
             // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(78, 12);
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(140, 20);
-            this.dateEdit1.StyleController = this.layoutControl1;
-            this.dateEdit1.TabIndex = 0;
+            this.colEngineerSalary.Caption = "Engineer Salary";
+            this.colEngineerSalary.Name = "colEngineerSalary";
+            this.colEngineerSalary.Visible = true;
+            this.colEngineerSalary.VisibleIndex = 1;
+            // 
+            // colIncome
+            // 
+            this.colIncome.Caption = "Income";
+            this.colIncome.Name = "colIncome";
+            this.colIncome.Visible = true;
+            this.colIncome.VisibleIndex = 2;
+            // 
+            // colExpenses
+            // 
+            this.colExpenses.Caption = "Expenses";
+            this.colExpenses.Name = "colExpenses";
+            this.colExpenses.Visible = true;
+            this.colExpenses.VisibleIndex = 3;
+            // 
+            // colTotal
+            // 
+            this.colTotal.Caption = "Total";
+            this.colTotal.FieldName = "Total";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.Visible = true;
+            this.colTotal.VisibleIndex = 4;
             // 
             // btn_Load
             // 
@@ -147,7 +190,9 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.emptySpaceItem1,
-            this.emptySpaceItem2});
+            this.emptySpaceItem2,
+            this.layoutControlItem1,
+            this.layoutControlItem2});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(800, 450);
             this.Root.TextVisible = false;
@@ -163,10 +208,28 @@
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(524, 0);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(780, 24);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(256, 24);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.dtFromData;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(268, 24);
+            this.layoutControlItem1.Text = "From Date:";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(54, 13);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.dtToDate;
+            this.layoutControlItem2.Location = new System.Drawing.Point(268, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(256, 24);
+            this.layoutControlItem2.Text = "To Date:";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(54, 13);
             // 
             // colName
             // 
@@ -221,61 +284,6 @@
             this.colTIN.Visible = true;
             this.colTIN.VisibleIndex = 3;
             // 
-            // gridControl1
-            // 
-            this.gridControl1.Location = new System.Drawing.Point(12, 145);
-            this.gridControl1.MainView = this.gridView2;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(776, 160);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.UseEmbeddedNavigator = true;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
-            // 
-            // gridView2
-            // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6});
-            this.gridView2.GridControl = this.gridControl1;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            this.gridView2.Tag = "Name";
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Name";
-            this.gridColumn3.FieldName = "Name";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "Surname";
-            this.gridColumn4.FieldName = "Surname";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 1;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Phone";
-            this.gridColumn5.FieldName = "Phone";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 2;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "TIN";
-            this.gridColumn6.FieldName = "TIN";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 3;
-            // 
             // MonthlyLedgerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -286,19 +294,19 @@
             this.Text = "MonthlyLedgerForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtToDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtToDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFromData.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFromData.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdMonthlyLedger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsManagers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -307,14 +315,11 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.DateEdit dateEdit2;
-        private DevExpress.XtraEditors.DateEdit dateEdit1;
         private DevExpress.XtraEditors.SimpleButton btn_Load;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private BindingSource bsCustomer;
-        private DevExpress.XtraGrid.GridControl grdCustomers;
+        private DevExpress.XtraGrid.GridControl grdMonthlyLedger;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn colName;
         private DevExpress.XtraGrid.Columns.GridColumn colSurname;
@@ -323,11 +328,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn colPhone;
         private DevExpress.XtraGrid.Columns.GridColumn colTIN;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.DateEdit dtToDate;
+        private DevExpress.XtraEditors.DateEdit dtFromData;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraGrid.Columns.GridColumn colManagerSalary;
+        private DevExpress.XtraGrid.Columns.GridColumn colEngineerSalary;
+        private DevExpress.XtraGrid.Columns.GridColumn colIncome;
+        private DevExpress.XtraGrid.Columns.GridColumn colExpenses;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotal;
+        private BindingSource bsManagers;
     }
 }
