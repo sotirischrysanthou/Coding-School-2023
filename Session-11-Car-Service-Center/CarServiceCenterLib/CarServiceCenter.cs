@@ -83,7 +83,9 @@ namespace CarServiceCenterLib {
             double incomes = 0;
             List<MonthlyLedger> bookKeeping = new List<MonthlyLedger>();
             foreach (MonthlyLedger monthlyLedger in MonthlyLedgers) {
-                if (monthlyLedger.Year >= from.Year && monthlyLedger.Month >= from.Month && monthlyLedger.Year <= to.Year && monthlyLedger.Month <= to.Month) {
+                DateTime date = new DateTime(monthlyLedger.Year, monthlyLedger.Month, 1);
+                
+                if (date >= from && date<= to) {
                     foreach (Transaction transaction in Transactions) {
                         if (transaction.Date.Year == monthlyLedger.Year && transaction.Date.Month == monthlyLedger.Month) {
                             incomes += transaction.TotalPrice;
