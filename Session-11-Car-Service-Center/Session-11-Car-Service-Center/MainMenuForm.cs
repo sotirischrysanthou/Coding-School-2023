@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,8 +93,14 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void btnLoad_Click(object sender, EventArgs e) {
-           _carServiceCenter = _serializer.Deserialize<CarServiceCenter>("CarServiceCenter.json");
-            DevExpress.XtraEditors.XtraMessageBox.Show("Load Successful!");
+            if (File.Exists("CarServiceCenter.json")) {
+                _carServiceCenter = _serializer.Deserialize<CarServiceCenter>("CarServiceCenter.json");
+                DevExpress.XtraEditors.XtraMessageBox.Show("Load Successful!");
+            }
+            else {
+                DevExpress.XtraEditors.XtraMessageBox.Show("File Not Found!");
+            }
+           
         }
     }
 }
