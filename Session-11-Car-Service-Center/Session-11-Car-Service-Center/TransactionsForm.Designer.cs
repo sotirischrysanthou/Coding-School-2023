@@ -40,12 +40,13 @@
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repCustomerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colCarID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
-            this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
@@ -193,6 +194,22 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repCustomerName.Name = "repCustomerName";
             // 
+            // colCustomerSurname
+            // 
+            this.colCustomerSurname.Caption = "Customer Surname";
+            this.colCustomerSurname.ColumnEdit = this.repCustomerSurname;
+            this.colCustomerSurname.FieldName = "CustomerID";
+            this.colCustomerSurname.Name = "colCustomerSurname";
+            this.colCustomerSurname.Visible = true;
+            this.colCustomerSurname.VisibleIndex = 3;
+            // 
+            // repCustomerSurname
+            // 
+            this.repCustomerSurname.AutoHeight = false;
+            this.repCustomerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCustomerSurname.Name = "repCustomerSurname";
+            // 
             // colCarID
             // 
             this.colCarID.Caption = "CarID";
@@ -219,7 +236,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(713, 415);
+            this.btnSave.Location = new System.Drawing.Point(632, 415);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 6;
@@ -227,27 +244,22 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // repCustomerSurname
+            // btn_Close
             // 
-            this.repCustomerSurname.AutoHeight = false;
-            this.repCustomerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repCustomerSurname.Name = "repCustomerSurname";
-            // 
-            // colCustomerSurname
-            // 
-            this.colCustomerSurname.Caption = "Customer Surname";
-            this.colCustomerSurname.ColumnEdit = this.repCustomerSurname;
-            this.colCustomerSurname.FieldName = "CustomerID";
-            this.colCustomerSurname.Name = "colCustomerSurname";
-            this.colCustomerSurname.Visible = true;
-            this.colCustomerSurname.VisibleIndex = 3;
+            this.btn_Close.Location = new System.Drawing.Point(713, 415);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(75, 23);
+            this.btn_Close.TabIndex = 7;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // TransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grdTransactions);
             this.Controls.Add(this.grdTransactionLines);
@@ -289,5 +301,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerSurname;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerSurname;
+        private Button btn_Close;
     }
 }

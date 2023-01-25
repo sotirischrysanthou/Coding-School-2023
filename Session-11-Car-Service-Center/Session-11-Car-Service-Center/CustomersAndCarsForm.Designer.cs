@@ -41,6 +41,7 @@
             this.bsCars = new System.Windows.Forms.BindingSource(this.components);
             this.bsService = new System.Windows.Forms.BindingSource(this.components);
             this.btn_Save = new System.Windows.Forms.Button();
+            this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
@@ -184,7 +185,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(711, 404);
+            this.btn_Save.Location = new System.Drawing.Point(628, 404);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(77, 34);
             this.btn_Save.TabIndex = 4;
@@ -192,11 +193,22 @@
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
+            // btn_Close
+            // 
+            this.btn_Close.Location = new System.Drawing.Point(711, 404);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(77, 34);
+            this.btn_Close.TabIndex = 5;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            // 
             // CustomersAndCarsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.grdCars);
             this.Controls.Add(this.labelControl1);
@@ -236,5 +248,6 @@
         private BindingSource bsCars;
         private BindingSource bsService;
         private Button btn_Save;
+        private Button btn_Close;
     }
 }

@@ -44,5 +44,9 @@ namespace Session_11_Car_Service_Center {
             rep.DisplayMember = displayMember;
             rep.ValueMember = valueMember;
         }
+
+        private void btn_Close_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

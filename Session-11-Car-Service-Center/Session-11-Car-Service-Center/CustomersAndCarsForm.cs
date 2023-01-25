@@ -59,5 +59,9 @@ namespace Session_11_Car_Service_Center {
         private void btn_Save_Click(object sender, EventArgs e) {
             _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
         }
+
+        private void btn_Close_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }
