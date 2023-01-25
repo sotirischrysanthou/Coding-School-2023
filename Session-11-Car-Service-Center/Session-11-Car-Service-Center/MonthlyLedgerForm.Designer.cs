@@ -31,25 +31,31 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPhone = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTIN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bsManagers = new System.Windows.Forms.BindingSource(this.components);
+            this.bsMonthlyLedger = new System.Windows.Forms.BindingSource(this.components);
             this.deFrom = new DevExpress.XtraEditors.DateEdit();
             this.labelFrom = new DevExpress.XtraEditors.LabelControl();
             this.labelTo = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            this.deTo = new DevExpress.XtraEditors.DateEdit();
             this.grdMonthlyLedger = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colManagersSalary = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEngineersSalary = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIncomes = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colExpenses = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtYear = new DevExpress.XtraEditors.TextEdit();
             this.txtMonth = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.btnCreateLedger = new System.Windows.Forms.Button();
+            this.btnCalculate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsManagers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMonthlyLedger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMonthlyLedger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYear.Properties)).BeginInit();
@@ -142,17 +148,17 @@
             this.labelTo.TabIndex = 3;
             this.labelTo.Text = "To";
             // 
-            // dateEdit1
+            // deTo
             // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(245, 12);
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deTo.EditValue = null;
+            this.deTo.Location = new System.Drawing.Point(245, 12);
+            this.deTo.Name = "deTo";
+            this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit1.TabIndex = 2;
+            this.deTo.Size = new System.Drawing.Size(100, 20);
+            this.deTo.TabIndex = 2;
             // 
             // grdMonthlyLedger
             // 
@@ -166,8 +172,55 @@
             // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colManagersSalary,
+            this.colEngineersSalary,
+            this.colIncomes,
+            this.colExpenses,
+            this.colTotal});
             this.gridView1.GridControl = this.grdMonthlyLedger;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // colManagersSalary
+            // 
+            this.colManagersSalary.Caption = "Managers Salary";
+            this.colManagersSalary.FieldName = "ManagersSalary";
+            this.colManagersSalary.Name = "colManagersSalary";
+            this.colManagersSalary.Visible = true;
+            this.colManagersSalary.VisibleIndex = 0;
+            // 
+            // colEngineersSalary
+            // 
+            this.colEngineersSalary.Caption = "Engineers Salary";
+            this.colEngineersSalary.FieldName = "EngineersSalary";
+            this.colEngineersSalary.Name = "colEngineersSalary";
+            this.colEngineersSalary.Visible = true;
+            this.colEngineersSalary.VisibleIndex = 1;
+            // 
+            // colIncomes
+            // 
+            this.colIncomes.Caption = "Incomes";
+            this.colIncomes.FieldName = "Incomes";
+            this.colIncomes.Name = "colIncomes";
+            this.colIncomes.Visible = true;
+            this.colIncomes.VisibleIndex = 2;
+            // 
+            // colExpenses
+            // 
+            this.colExpenses.Caption = "Expenses";
+            this.colExpenses.FieldName = "Expenses";
+            this.colExpenses.Name = "colExpenses";
+            this.colExpenses.Visible = true;
+            this.colExpenses.VisibleIndex = 3;
+            // 
+            // colTotal
+            // 
+            this.colTotal.Caption = "Total";
+            this.colTotal.FieldName = "Total";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.Visible = true;
+            this.colTotal.VisibleIndex = 4;
             // 
             // txtYear
             // 
@@ -224,11 +277,22 @@
             this.btnCreateLedger.UseVisualStyleBackColor = true;
             this.btnCreateLedger.Click += new System.EventHandler(this.btnCreateLedger_Click);
             // 
+            // btnCalculate
+            // 
+            this.btnCalculate.Location = new System.Drawing.Point(379, 10);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(75, 23);
+            this.btnCalculate.TabIndex = 11;
+            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.UseVisualStyleBackColor = true;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
+            // 
             // MonthlyLedgerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(938, 465);
+            this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.btnCreateLedger);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
@@ -237,17 +301,17 @@
             this.Controls.Add(this.txtYear);
             this.Controls.Add(this.grdMonthlyLedger);
             this.Controls.Add(this.labelTo);
-            this.Controls.Add(this.dateEdit1);
+            this.Controls.Add(this.deTo);
             this.Controls.Add(this.labelFrom);
             this.Controls.Add(this.deFrom);
             this.Name = "MonthlyLedgerForm";
             this.Text = "MonthlyLedgerForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsManagers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMonthlyLedger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMonthlyLedger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYear.Properties)).EndInit();
@@ -265,11 +329,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn colPhone;
         private DevExpress.XtraGrid.Columns.GridColumn colTIN;
-        private BindingSource bsManagers;
+        private BindingSource bsMonthlyLedger;
         private DevExpress.XtraEditors.DateEdit deFrom;
         private DevExpress.XtraEditors.LabelControl labelFrom;
         private DevExpress.XtraEditors.LabelControl labelTo;
-        private DevExpress.XtraEditors.DateEdit dateEdit1;
+        private DevExpress.XtraEditors.DateEdit deTo;
         private DevExpress.XtraGrid.GridControl grdMonthlyLedger;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.TextEdit txtYear;
@@ -278,5 +342,11 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private Button btnCreateLedger;
+        private Button btnCalculate;
+        private DevExpress.XtraGrid.Columns.GridColumn colManagersSalary;
+        private DevExpress.XtraGrid.Columns.GridColumn colEngineersSalary;
+        private DevExpress.XtraGrid.Columns.GridColumn colIncomes;
+        private DevExpress.XtraGrid.Columns.GridColumn colExpenses;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotal;
     }
 }

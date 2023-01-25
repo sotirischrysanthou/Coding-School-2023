@@ -11,7 +11,7 @@ namespace CarServiceCenterLib {
         public double ManagersSalary { get; set; }
         public double EngineersSalary { get; set; }
         public double Expenses { get; set; }
-        public double Income { get; set; }
+        public double Incomes { get; set; }
         public double Total { get; set; }
 
         // Constructors
@@ -25,8 +25,8 @@ namespace CarServiceCenterLib {
 
         // Methods
         public void UpdateIncomes(double income) {
-            Income = income;
-            Total = Income - Expenses;
+            Incomes = income;
+            Total = Incomes - Expenses;
         }
         public void UpdateExpenses(double expense) {
             Expenses += expense;
