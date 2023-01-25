@@ -32,20 +32,20 @@ namespace CarServiceCenterLib {
         }
 
         // Methods
-        public bool AddTask(ServiceTask task, DateTime date, out String message) {
+        public bool AddTask(TransactionLine task, DateTime date, out String message) {
             //find from Workday list WorkDay.date==date
             //WorkDay.Add(task, message);
             bool ret = false;
             bool workDayExists = false;
             String msg = "";
             foreach (WorkDay workDay in WorkDays) {
-                if (workDay.Date == date) {
+                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
                     ret = workDay.AddTask(task, out msg);
                     workDayExists = true;
                 }
             }
             if (!workDayExists) {
-                WorkDays.Add(new WorkDay(date, Engineers.Count));
+                WorkDays.Add(new WorkDay(new DateTime(date.Year, date.Month, date.Day), Engineers.Count));
                 ret = WorkDays.Last().AddTask(task, out msg);
             }
             message = msg;

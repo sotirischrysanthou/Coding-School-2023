@@ -76,11 +76,17 @@ namespace Session_11_Car_Service_Center {
                 view.SetRowCellValue(e.RowHandle, "Hours", serviceTask.Hours);
                 view.SetRowCellValue(e.RowHandle, "PricePerHour", 44.5); // PRICE PER HOUR
                 view.SetRowCellValue(e.RowHandle, "Price", serviceTask.Hours * 44.5); // PRICE PER HOUR
-
                 Transaction transaction = FindTransactionWithID((Guid)gridView1.GetFocusedRowCellValue("ID"), _carServiceCenter.Transactions);
-                transaction.UpdateTotalPrice();
-                gridView1.RefreshData();
+                TransactionLine transactionLine = FindTransactionLineWithID((Guid)gridView2.GetFocusedRowCellValue("ID"), transaction.TransactionLines);
+                String message; 
+                if(_carServiceCenter.AddTask(transactionLine,transaction.Date, out message)){
+                    transaction.UpdateTotalPrice();
+                    gridView1.RefreshData();
+                } else {
+                    view.DeleteRow(e.RowHandle);
+                }
 
+                MessageBox.Show(message);
             }
         }
 
@@ -98,12 +104,24 @@ namespace Session_11_Car_Service_Center {
             Transaction RetTransaction = null;
 
             foreach (Transaction transaction in _carServiceCenter.Transactions) {
-                if (transaction.ID == (Guid)gridView1.GetFocusedRowCellValue("ID")) {
+                if (transaction.ID == transactionID) {
                     RetTransaction = transaction;
                     break;
                 }
             }
             return RetTransaction;
+        }
+
+        private TransactionLine FindTransactionLineWithID(Guid transactionLineID, List<TransactionLine> transactionsLines) {
+            TransactionLine RetTransactionLine = null;
+
+            foreach (TransactionLine transactionLine in transactionsLines) {
+                if (transactionLine.ID == transactionLineID) {
+                    RetTransactionLine = transactionLine;
+                    break;
+                }
+            }
+            return RetTransactionLine;
         }
     }
 }

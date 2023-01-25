@@ -39,18 +39,22 @@ namespace Session_11_Car_Service_Center {
         private void Populate(CarServiceCenter _carServiceCenter) {
             _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "1303"));
             _carServiceCenter.Customers.Add(new Customer("Demetris", "Manolas", "6912342136", "5585"));
-            _carServiceCenter.Customers.Add(new Customer("Giannis", "Tsimpris", "6912341234", "1234"));
+            _carServiceCenter.Customers.Add(new Customer("Giannis", "Tsimpris", "6912341234", "1365"));
+            _carServiceCenter.Customers.Add(new Customer("Giannis", "Antetokoumpo", "6910646234", "2576"));
+            _carServiceCenter.Customers.Add(new Customer("Panos", "Ioannides", "6912334867", "6453"));
             _carServiceCenter.Cars.Add(new Car("Ford", "Focus", "IZM 5469"));
             _carServiceCenter.Cars.Add(new Car("Ford", "Fiesta", "IMZ 1234"));
             _carServiceCenter.Cars.Add(new Car("Mazda", "6", "IAM 3369"));
+            _carServiceCenter.Cars.Add(new Car("Suzuki", "Swift", "IAM 8888"));
             _carServiceCenter.Managers.Add(new Manager("Fotis", "Chrysoulas", 15000, DateTime.Parse("21/1/2023")));
             _carServiceCenter.Managers.Add(new Manager("Giannis", "Ioannou", 10000, DateTime.Parse("15/3/2023")));
             _carServiceCenter.Managers.Add(new Manager("Fotis", "Mitsou", 8000, DateTime.Parse("21/2/2023")));
+            _carServiceCenter.Managers.Add(new Manager("Sotiris", "Kontizas", 8000, DateTime.Parse("21/2/2023")));
             _carServiceCenter.Engineers.Add(new Engineer("Demetris", "Raptodimos", _carServiceCenter.Managers[0].ID, 1000, DateTime.Parse("2/2/2023")));
             _carServiceCenter.Engineers.Add(new Engineer("Kostas", "Kostaki", _carServiceCenter.Managers[0].ID, 1500, DateTime.Parse("2/1/2023")));
             _carServiceCenter.Engineers.Add(new Engineer("Kostis", "Marvelias", _carServiceCenter.Managers[0].ID, 800, DateTime.Parse("2/3/2023")));
 
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "alagi ladiou", 15.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "alagi ladiou", 3.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "geniko service", 1.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "alagi elastikou", 5.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "alagi flatzas", 5.0));
@@ -68,6 +72,9 @@ namespace Session_11_Car_Service_Center {
             transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
             serviceTask = _carServiceCenter.ServiceTasks[1];
             transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
+            foreach (TransactionLine transactionLine in transaction.TransactionLines) {
+                _carServiceCenter.AddTask(transactionLine, transaction.Date, out _);
+            }
             customer = _carServiceCenter.Customers[1];
             car = _carServiceCenter.Cars[1];
             _carServiceCenter.Transactions.Add(new Transaction(customer.ID, car.ID, manager.ID));
@@ -76,7 +83,9 @@ namespace Session_11_Car_Service_Center {
             transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
             serviceTask = _carServiceCenter.ServiceTasks[3];
             transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
-            
+            foreach (TransactionLine transactionLine in transaction.TransactionLines) {
+                _carServiceCenter.AddTask(transactionLine, transaction.Date, out _);
+            }
             int year = 2023;
             int month = 1;
             _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));

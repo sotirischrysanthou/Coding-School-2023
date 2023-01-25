@@ -19,7 +19,6 @@ namespace Session_11_Car_Service_Center {
             InitializeComponent();
             _serializer = new Serializer();
             _carServiceCenter = carServiceCenter;
-            
         }
         private void CustomersAndCarsForm_Load(object sender, EventArgs e) {
             SetControlProperties();
