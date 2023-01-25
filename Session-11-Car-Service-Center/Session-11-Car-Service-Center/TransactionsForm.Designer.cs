@@ -40,12 +40,15 @@
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repCustomerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.colCarID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colCarBrand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
-            this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCarModel = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colCarModel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repCarBrand = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
@@ -54,6 +57,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCarModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCarBrand)).BeginInit();
             this.SuspendLayout();
             // 
             // grdTransactionLines
@@ -140,7 +145,9 @@
             this.grdTransactions.Name = "grdTransactions";
             this.grdTransactions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repCustomerName,
-            this.repCustomerSurname});
+            this.repCustomerSurname,
+            this.repCarModel,
+            this.repCarBrand});
             this.grdTransactions.Size = new System.Drawing.Size(776, 200);
             this.grdTransactions.TabIndex = 5;
             this.grdTransactions.UseEmbeddedNavigator = true;
@@ -154,7 +161,8 @@
             this.colDate,
             this.CustomerName,
             this.colCustomerSurname,
-            this.colCarID,
+            this.colCarBrand,
+            this.colCarModel,
             this.colManagerID,
             this.colTotalPrice});
             this.gridView1.GridControl = this.grdTransactions;
@@ -193,13 +201,30 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repCustomerName.Name = "repCustomerName";
             // 
-            // colCarID
+            // colCustomerSurname
             // 
-            this.colCarID.Caption = "CarID";
-            this.colCarID.FieldName = "CarID";
-            this.colCarID.Name = "colCarID";
-            this.colCarID.Visible = true;
-            this.colCarID.VisibleIndex = 4;
+            this.colCustomerSurname.Caption = "Customer Surname";
+            this.colCustomerSurname.ColumnEdit = this.repCustomerSurname;
+            this.colCustomerSurname.FieldName = "CustomerID";
+            this.colCustomerSurname.Name = "colCustomerSurname";
+            this.colCustomerSurname.Visible = true;
+            this.colCustomerSurname.VisibleIndex = 3;
+            // 
+            // repCustomerSurname
+            // 
+            this.repCustomerSurname.AutoHeight = false;
+            this.repCustomerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCustomerSurname.Name = "repCustomerSurname";
+            // 
+            // colCarBrand
+            // 
+            this.colCarBrand.Caption = "Car Brand";
+            this.colCarBrand.ColumnEdit = this.repCarBrand;
+            this.colCarBrand.FieldName = "CarID";
+            this.colCarBrand.Name = "colCarBrand";
+            this.colCarBrand.Visible = true;
+            this.colCarBrand.VisibleIndex = 4;
             // 
             // colManagerID
             // 
@@ -207,7 +232,7 @@
             this.colManagerID.FieldName = "ManagerID";
             this.colManagerID.Name = "colManagerID";
             this.colManagerID.Visible = true;
-            this.colManagerID.VisibleIndex = 5;
+            this.colManagerID.VisibleIndex = 6;
             // 
             // colTotalPrice
             // 
@@ -215,7 +240,7 @@
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
             this.colTotalPrice.Visible = true;
-            this.colTotalPrice.VisibleIndex = 6;
+            this.colTotalPrice.VisibleIndex = 7;
             // 
             // btnSave
             // 
@@ -227,21 +252,28 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // repCustomerSurname
+            // repCarModel
             // 
-            this.repCustomerSurname.AutoHeight = false;
-            this.repCustomerSurname.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.repCarModel.AutoHeight = false;
+            this.repCarModel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repCustomerSurname.Name = "repCustomerSurname";
+            this.repCarModel.Name = "repCarModel";
             // 
-            // colCustomerSurname
+            // colCarModel
             // 
-            this.colCustomerSurname.Caption = "Customer Surname";
-            this.colCustomerSurname.ColumnEdit = this.repCustomerSurname;
-            this.colCustomerSurname.FieldName = "CustomerID";
-            this.colCustomerSurname.Name = "colCustomerSurname";
-            this.colCustomerSurname.Visible = true;
-            this.colCustomerSurname.VisibleIndex = 3;
+            this.colCarModel.Caption = "Car Model";
+            this.colCarModel.ColumnEdit = this.repCarModel;
+            this.colCarModel.FieldName = "CarID";
+            this.colCarModel.Name = "colCarModel";
+            this.colCarModel.Visible = true;
+            this.colCarModel.VisibleIndex = 5;
+            // 
+            // repCarBrand
+            // 
+            this.repCarBrand.AutoHeight = false;
+            this.repCarBrand.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repCarBrand.Name = "repCarBrand";
             // 
             // TransactionsForm
             // 
@@ -262,6 +294,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCarModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repCarBrand)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -277,7 +311,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
         private DevExpress.XtraGrid.Columns.GridColumn CustomerName;
-        private DevExpress.XtraGrid.Columns.GridColumn colCarID;
+        private DevExpress.XtraGrid.Columns.GridColumn colCarBrand;
         private DevExpress.XtraGrid.Columns.GridColumn colManagerID;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
         private DevExpress.XtraGrid.Columns.GridColumn colServiceTaskID;
@@ -289,5 +323,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerSurname;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerSurname;
+        private DevExpress.XtraGrid.Columns.GridColumn colCarModel;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCarModel;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCarBrand;
     }
 }

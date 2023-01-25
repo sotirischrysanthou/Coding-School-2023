@@ -30,6 +30,8 @@ namespace Session_11_Car_Service_Center {
 
             SetLookUpEdit<Customer>(repCustomerName, _carServiceCenter.Customers, "Name", "ID");
             SetLookUpEdit<Customer>(repCustomerSurname, _carServiceCenter.Customers, "Surname", "ID");
+            SetLookUpEdit<Car>(repCarBrand, _carServiceCenter.Cars, "Brand", "ID");
+            SetLookUpEdit<Car>(repCarModel, _carServiceCenter.Cars, "Model", "ID");
 
         }
 
