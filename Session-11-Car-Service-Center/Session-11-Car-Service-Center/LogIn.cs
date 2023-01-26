@@ -22,7 +22,17 @@ namespace Session_11_Car_Service_Center {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
-
+            if (username == "admin" && password == "admin") {
+                MessageBox.Show("Successful Admin Login");
+                MainMenuForm mainMenuForm = new MainMenuForm();
+                this.Hide();
+                mainMenuForm.ShowDialog();
+                this.Close();
+            } else if (username == "user" && password == "user") {
+                MessageBox.Show("Successful User Login");
+            } else {
+                MessageBox.Show("ERROR: Incorrect username or password.");
+            }
         }
     }
 }
