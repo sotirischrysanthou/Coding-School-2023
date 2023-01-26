@@ -37,6 +37,7 @@
             this.labelEngineers = new DevExpress.XtraEditors.LabelControl();
             this.grdManagers = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colManagerSalaryPerMonth = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,7 +48,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.colStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).BeginInit();
@@ -60,9 +60,10 @@
             // 
             // grdEngineers
             // 
-            this.grdEngineers.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.grdEngineers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdEngineers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grdEngineers.Location = new System.Drawing.Point(10, 29);
+            this.grdEngineers.Location = new System.Drawing.Point(10, 40);
             this.grdEngineers.MainView = this.gridView1;
             this.grdEngineers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdEngineers.Name = "grdEngineers";
@@ -163,10 +164,11 @@
             // 
             // labelEngineers
             // 
-            this.labelEngineers.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelEngineers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelEngineers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelEngineers.Appearance.Options.UseFont = true;
-            this.labelEngineers.Location = new System.Drawing.Point(10, 2);
+            this.labelEngineers.Location = new System.Drawing.Point(10, 13);
             this.labelEngineers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelEngineers.Name = "labelEngineers";
             this.labelEngineers.Size = new System.Drawing.Size(87, 24);
@@ -175,9 +177,10 @@
             // 
             // grdManagers
             // 
-            this.grdManagers.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.grdManagers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdManagers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grdManagers.Location = new System.Drawing.Point(10, 186);
+            this.grdManagers.Location = new System.Drawing.Point(10, 197);
             this.grdManagers.MainView = this.gridView2;
             this.grdManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdManagers.Name = "grdManagers";
@@ -200,6 +203,12 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
+            // 
+            // colID
+            // 
+            this.colID.Caption = "ID";
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
             // 
             // colManagerName
             // 
@@ -242,10 +251,11 @@
             // 
             // labelManagers
             // 
-            this.labelManagers.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelManagers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelManagers.Appearance.Options.UseFont = true;
-            this.labelManagers.Location = new System.Drawing.Point(10, 159);
+            this.labelManagers.Location = new System.Drawing.Point(10, 170);
             this.labelManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelManagers.Name = "labelManagers";
             this.labelManagers.Size = new System.Drawing.Size(86, 24);
@@ -254,8 +264,8 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.Location = new System.Drawing.Point(570, 334);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(571, 358);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 30);
@@ -266,8 +276,8 @@
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnClose.Location = new System.Drawing.Point(706, 334);
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(707, 358);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(130, 30);
@@ -285,24 +295,18 @@
             this.colStartDate.VisibleIndex = 4;
             this.colStartDate.Width = 66;
             // 
-            // colID
-            // 
-            this.colID.Caption = "ID";
-            this.colID.FieldName = "ID";
-            this.colID.Name = "colID";
-            // 
             // EmployeesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 368);
+            this.ClientSize = new System.Drawing.Size(862, 405);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelManagers);
             this.Controls.Add(this.grdManagers);
             this.Controls.Add(this.labelEngineers);
             this.Controls.Add(this.grdEngineers);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimumSize = new System.Drawing.Size(878, 444);
             this.Name = "EmployeesForm";
             this.Text = "Employees";
             this.Load += new System.EventHandler(this.EmployeesForm_Load);

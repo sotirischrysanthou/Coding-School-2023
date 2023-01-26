@@ -78,7 +78,7 @@
             // 
             // grdTransactionLines
             // 
-            this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTransactionLines.Location = new System.Drawing.Point(12, 237);
             this.grdTransactionLines.MainView = this.gridView2;
@@ -190,7 +190,8 @@
             // 
             // grdTransactions
             // 
-            this.grdTransactions.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.grdTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTransactions.Location = new System.Drawing.Point(12, 42);
             this.grdTransactions.MainView = this.gridView1;
             this.grdTransactions.Name = "grdTransactions";
@@ -344,9 +345,9 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(632, 415);
+            this.btnSave.Location = new System.Drawing.Point(523, 414);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(130, 30);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -355,9 +356,9 @@
             // btn_Close
             // 
             this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Close.Location = new System.Drawing.Point(713, 415);
+            this.btn_Close.Location = new System.Drawing.Point(659, 414);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(75, 23);
+            this.btn_Close.Size = new System.Drawing.Size(130, 30);
             this.btn_Close.TabIndex = 7;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = true;
@@ -365,7 +366,8 @@
             // 
             // labelServiceTask
             // 
-            this.labelServiceTask.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelServiceTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelServiceTask.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelServiceTask.Appearance.Options.UseFont = true;
             this.labelServiceTask.Location = new System.Drawing.Point(12, 12);
@@ -376,7 +378,8 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(12, 207);
@@ -396,8 +399,6 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grdTransactions);
             this.Controls.Add(this.grdTransactionLines);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximumSize = new System.Drawing.Size(816, 489);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "TransactionsForm";
             this.Text = "Transactions";

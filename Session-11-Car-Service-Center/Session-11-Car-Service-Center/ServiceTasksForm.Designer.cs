@@ -41,8 +41,10 @@
             // 
             // grdServiceTasks
             // 
-            this.grdServiceTasks.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.grdServiceTasks.Location = new System.Drawing.Point(21, 42);
+            this.grdServiceTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdServiceTasks.Location = new System.Drawing.Point(21, 47);
             this.grdServiceTasks.MainView = this.gridView1;
             this.grdServiceTasks.Name = "grdServiceTasks";
             this.grdServiceTasks.Size = new System.Drawing.Size(643, 200);
@@ -97,7 +99,8 @@
             // 
             // labelServiceTask
             // 
-            this.labelServiceTask.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelServiceTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelServiceTask.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelServiceTask.Appearance.Options.UseFont = true;
             this.labelServiceTask.Location = new System.Drawing.Point(21, 12);
@@ -108,10 +111,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.Location = new System.Drawing.Point(462, 248);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(398, 253);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 37);
+            this.btnSave.Size = new System.Drawing.Size(130, 30);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -119,10 +122,10 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_Close.Location = new System.Drawing.Point(566, 248);
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Close.Location = new System.Drawing.Point(534, 253);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(98, 37);
+            this.btn_Close.Size = new System.Drawing.Size(130, 30);
             this.btn_Close.TabIndex = 4;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = true;
@@ -137,7 +140,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.grdServiceTasks);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimumSize = new System.Drawing.Size(705, 334);
             this.Name = "ServiceTasksForm";
             this.Text = "ServiceTasksForm";
             this.Load += new System.EventHandler(this.ServiceTasksForm_Load_1);
