@@ -75,24 +75,24 @@ namespace Session_11_Car_Service_Center {
         //    }
         //}
 
-        private void btnCalculate_Click(object sender, EventArgs e) {
-            List<MonthlyLedger> monthlyLedgers = null;
-            if (deFrom.EditValue != null && deTo.EditValue != null) {
-                if ((DateTime)deTo.EditValue > (DateTime)deFrom.EditValue) {
-                    monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, (DateTime)deTo.EditValue);
-                    bsMonthlyLedger.DataSource = monthlyLedgers;
-                    grdMonthlyLedger.DataSource = bsMonthlyLedger;
-                    gridView1.RefreshData();
-                }
-                else {
-                    MessageBox.Show("From should be before To");
-                }
+        //private void btnCalculate_Click(object sender, EventArgs e) {
+        //    List<MonthlyLedger> monthlyLedgers = null;
+        //    if (deFrom.EditValue != null && deTo.EditValue != null) {
+        //        if ((DateTime)deTo.EditValue > (DateTime)deFrom.EditValue) {
+        //            monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, (DateTime)deTo.EditValue);
+        //            bsMonthlyLedger.DataSource = monthlyLedgers;
+        //            grdMonthlyLedger.DataSource = bsMonthlyLedger;
+        //            gridView1.RefreshData();
+        //        }
+        //        else {
+        //            MessageBox.Show("From should be before To");
+        //        }
                 //} else if (deFrom.EditValue != null && (bool)(deTo.EditValue != null)) {
                 //    monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, );
                 //    bsMonthlyLedger.DataSource = monthlyLedgers;
                 //    grdMonthlyLedger.DataSource = bsMonthlyLedger;
                 //    gridView1.RefreshData();
-            }
-        }
+            //}
+        //}
     }
 }
