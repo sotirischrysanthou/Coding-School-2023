@@ -64,5 +64,31 @@ namespace Session_11_Car_Service_Center {
         private void btn_Close_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        //Customize Buttons
+
+        private void btn_Save_MouseEnter(object sender, EventArgs e) {
+            btn_Save.FlatAppearance.MouseOverBackColor = btn_Save.BackColor;
+            btn_Save.ForeColor = Color.Blue;
+            btn_Save.FlatAppearance.BorderColor = Color.Red;
+            btn_Save.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btn_Save_MouseLeave(object sender, EventArgs e) {
+            btn_Save.ForeColor = Color.Black;
+            btn_Save.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btn_Close_MouseEnter(object sender, EventArgs e) {
+            btn_Close.FlatAppearance.MouseOverBackColor = btn_Close.BackColor;
+            btn_Close.ForeColor = Color.Blue;
+            btn_Close.FlatAppearance.BorderColor = Color.Red;
+            btn_Close.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btn_Close_MouseLeave(object sender, EventArgs e) {
+            btn_Close.ForeColor = Color.Black;
+            btn_Close.FlatAppearance.BorderSize = 0;
+        }
     }
 }
