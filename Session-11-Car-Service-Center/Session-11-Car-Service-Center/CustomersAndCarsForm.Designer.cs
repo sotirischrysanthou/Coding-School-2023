@@ -53,6 +53,7 @@
             // 
             // grdCustomers
             // 
+            this.grdCustomers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.grdCustomers.Location = new System.Drawing.Point(12, 42);
             this.grdCustomers.MainView = this.gridView1;
             this.grdCustomers.Name = "grdCustomers";
@@ -108,6 +109,7 @@
             // 
             // labelCustomers
             // 
+            this.labelCustomers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelCustomers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelCustomers.Appearance.Options.UseFont = true;
             this.labelCustomers.Location = new System.Drawing.Point(12, 12);
@@ -122,6 +124,7 @@
             // 
             // labelControl1
             // 
+            this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(12, 208);
@@ -132,6 +135,7 @@
             // 
             // grdCars
             // 
+            this.grdCars.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.grdCars.Location = new System.Drawing.Point(12, 238);
             this.grdCars.MainView = this.gridView2;
             this.grdCars.Name = "grdCars";
@@ -185,6 +189,7 @@
             // 
             // btn_Save
             // 
+            this.btn_Save.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Save.Location = new System.Drawing.Point(628, 404);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(77, 34);
@@ -195,6 +200,7 @@
             // 
             // btn_Close
             // 
+            this.btn_Close.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Close.Location = new System.Drawing.Point(711, 404);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(77, 34);

@@ -76,9 +76,7 @@
             // 
             // grdTransactionLines
             // 
-            this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdTransactionLines.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.grdTransactionLines.Location = new System.Drawing.Point(12, 237);
             this.grdTransactionLines.MainView = this.gridView2;
             this.grdTransactionLines.Name = "grdTransactionLines";
@@ -189,9 +187,7 @@
             // 
             // grdTransactions
             // 
-            this.grdTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdTransactions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.grdTransactions.Location = new System.Drawing.Point(12, 12);
             this.grdTransactions.MainView = this.gridView1;
             this.grdTransactions.Name = "grdTransactions";
@@ -344,6 +340,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.Location = new System.Drawing.Point(632, 415);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -354,7 +351,8 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(713, 415);
+            this.btn_Close.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Close.Location = new System.Drawing.Point(714, 415);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(75, 23);
             this.btn_Close.TabIndex = 7;

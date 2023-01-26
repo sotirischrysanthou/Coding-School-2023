@@ -33,6 +33,7 @@
             this.colEngineersManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colSalaryPerMonth = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEngineerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelEngineers = new DevExpress.XtraEditors.LabelControl();
             this.grdManagers = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -46,7 +47,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.colStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEngineerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).BeginInit();
@@ -59,6 +59,7 @@
             // 
             // grdEngineers
             // 
+            this.grdEngineers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.grdEngineers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdEngineers.Location = new System.Drawing.Point(10, 29);
             this.grdEngineers.MainView = this.gridView1;
@@ -151,8 +152,17 @@
             this.colSalaryPerMonth.VisibleIndex = 4;
             this.colSalaryPerMonth.Width = 82;
             // 
+            // colEngineerStartDate
+            // 
+            this.colEngineerStartDate.Caption = "Start Date";
+            this.colEngineerStartDate.FieldName = "StartDate";
+            this.colEngineerStartDate.Name = "colEngineerStartDate";
+            this.colEngineerStartDate.Visible = true;
+            this.colEngineerStartDate.VisibleIndex = 5;
+            // 
             // labelEngineers
             // 
+            this.labelEngineers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelEngineers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelEngineers.Appearance.Options.UseFont = true;
             this.labelEngineers.Location = new System.Drawing.Point(10, 2);
@@ -164,6 +174,7 @@
             // 
             // grdManagers
             // 
+            this.grdManagers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.grdManagers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdManagers.Location = new System.Drawing.Point(10, 186);
             this.grdManagers.MainView = this.gridView2;
@@ -228,6 +239,7 @@
             // 
             // labelManagers
             // 
+            this.labelManagers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelManagers.Appearance.Options.UseFont = true;
             this.labelManagers.Location = new System.Drawing.Point(10, 159);
@@ -239,6 +251,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.Location = new System.Drawing.Point(538, 334);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
@@ -250,6 +263,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClose.Location = new System.Drawing.Point(688, 334);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
@@ -267,14 +281,6 @@
             this.colStartDate.Visible = true;
             this.colStartDate.VisibleIndex = 4;
             this.colStartDate.Width = 66;
-            // 
-            // colEngineerStartDate
-            // 
-            this.colEngineerStartDate.Caption = "Start Date";
-            this.colEngineerStartDate.FieldName = "StartDate";
-            this.colEngineerStartDate.Name = "colEngineerStartDate";
-            this.colEngineerStartDate.Visible = true;
-            this.colEngineerStartDate.VisibleIndex = 5;
             // 
             // EmployeesForm
             // 

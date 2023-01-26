@@ -48,6 +48,7 @@
             // 
             // panelMenu
             // 
+            this.panelMenu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.panelMenu.Controls.Add(this.button1);
             this.panelMenu.Controls.Add(this.btn_MonthlyLedger);
@@ -56,7 +57,6 @@
             this.panelMenu.Controls.Add(this.btnCustomerAndCars);
             this.panelMenu.Controls.Add(this.btnTransactions);
             this.panelMenu.Controls.Add(this.panelLogo);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(220, 450);
@@ -65,7 +65,7 @@
             // 
             // button1
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Black;
@@ -82,7 +82,7 @@
             // 
             // btn_MonthlyLedger
             // 
-            this.btn_MonthlyLedger.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_MonthlyLedger.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_MonthlyLedger.FlatAppearance.BorderSize = 0;
             this.btn_MonthlyLedger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_MonthlyLedger.ForeColor = System.Drawing.Color.Black;
@@ -99,7 +99,7 @@
             // 
             // btnEmployees
             // 
-            this.btnEmployees.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnEmployees.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEmployees.FlatAppearance.BorderSize = 0;
             this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEmployees.ForeColor = System.Drawing.Color.Black;
@@ -116,7 +116,7 @@
             // 
             // btnServiceTasks
             // 
-            this.btnServiceTasks.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnServiceTasks.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnServiceTasks.FlatAppearance.BorderSize = 0;
             this.btnServiceTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnServiceTasks.ForeColor = System.Drawing.Color.Black;
@@ -133,7 +133,7 @@
             // 
             // btnCustomerAndCars
             // 
-            this.btnCustomerAndCars.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCustomerAndCars.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCustomerAndCars.FlatAppearance.BorderSize = 0;
             this.btnCustomerAndCars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomerAndCars.ForeColor = System.Drawing.Color.Black;
@@ -150,7 +150,7 @@
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTransactions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnTransactions.FlatAppearance.BorderSize = 0;
             this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransactions.ForeColor = System.Drawing.Color.Black;
@@ -167,10 +167,10 @@
             // 
             // panelLogo
             // 
+            this.panelLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(79)))), ((int)(((byte)(117)))));
             this.panelLogo.Controls.Add(this.label3);
             this.panelLogo.Controls.Add(this.label2);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(220, 80);
@@ -178,6 +178,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Algerian", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(62, 43);
@@ -188,6 +189,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Algerian", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(37, 18);
@@ -198,9 +200,9 @@
             // 
             // panelTitleBar
             // 
+            this.panelTitleBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
             this.panelTitleBar.Controls.Add(this.label1);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
             this.panelTitleBar.Name = "panelTitleBar";
             this.panelTitleBar.Size = new System.Drawing.Size(580, 80);
@@ -219,6 +221,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = global::Session_11_Car_Service_Center.Properties.Resources.Logo;
             this.pictureBox1.Location = new System.Drawing.Point(350, 120);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(300, 200);
@@ -229,6 +232,7 @@
             // 
             // btnLoad
             // 
+            this.btnLoad.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.btnLoad.FlatAppearance.BorderSize = 0;
             this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -246,6 +250,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -263,6 +268,7 @@
             // 
             // btnPopulate
             // 
+            this.btnPopulate.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnPopulate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.btnPopulate.FlatAppearance.BorderSize = 0;
             this.btnPopulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
