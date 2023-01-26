@@ -304,6 +304,7 @@
             this.Controls.Add(this.deTo);
             this.Controls.Add(this.labelFrom);
             this.Controls.Add(this.deFrom);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MonthlyLedgerForm";
             this.Text = "MonthlyLedgerForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();

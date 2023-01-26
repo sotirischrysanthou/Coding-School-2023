@@ -57,6 +57,8 @@
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
+            this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
@@ -188,7 +190,7 @@
             // grdTransactions
             // 
             this.grdTransactions.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.grdTransactions.Location = new System.Drawing.Point(12, 12);
+            this.grdTransactions.Location = new System.Drawing.Point(12, 42);
             this.grdTransactions.MainView = this.gridView1;
             this.grdTransactions.Name = "grdTransactions";
             this.grdTransactions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -198,7 +200,7 @@
             this.repCarBrand,
             this.repManagerName,
             this.repManagerSurname});
-            this.grdTransactions.Size = new System.Drawing.Size(776, 200);
+            this.grdTransactions.Size = new System.Drawing.Size(777, 143);
             this.grdTransactions.TabIndex = 5;
             this.grdTransactions.UseEmbeddedNavigator = true;
             this.grdTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -360,15 +362,42 @@
             this.btn_Close.UseVisualStyleBackColor = true;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
+            // labelServiceTask
+            // 
+            this.labelServiceTask.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelServiceTask.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelServiceTask.Appearance.Options.UseFont = true;
+            this.labelServiceTask.Location = new System.Drawing.Point(12, 12);
+            this.labelServiceTask.Name = "labelServiceTask";
+            this.labelServiceTask.Size = new System.Drawing.Size(113, 24);
+            this.labelServiceTask.TabIndex = 8;
+            this.labelServiceTask.Text = "Transactions";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(12, 207);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(141, 24);
+            this.labelControl1.TabIndex = 9;
+            this.labelControl1.Text = "TransactionLine";
+            // 
             // TransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grdTransactions);
             this.Controls.Add(this.grdTransactionLines);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "TransactionsForm";
             this.Text = "Transactions";
             this.Load += new System.EventHandler(this.TransactionsForm_Load);
@@ -388,6 +417,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -425,5 +455,7 @@
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionID;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
+        private DevExpress.XtraEditors.LabelControl labelServiceTask;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }

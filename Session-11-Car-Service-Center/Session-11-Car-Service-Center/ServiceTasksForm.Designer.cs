@@ -109,7 +109,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.Location = new System.Drawing.Point(430, 248);
+            this.btnSave.Location = new System.Drawing.Point(462, 248);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(98, 37);
             this.btnSave.TabIndex = 3;
@@ -137,6 +137,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.grdServiceTasks);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ServiceTasksForm";
             this.Text = "ServiceTasksForm";
             this.Load += new System.EventHandler(this.ServiceTasksForm_Load_1);

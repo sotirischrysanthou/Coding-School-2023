@@ -252,7 +252,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.Location = new System.Drawing.Point(538, 334);
+            this.btnSave.Location = new System.Drawing.Point(570, 334);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 30);
@@ -264,7 +264,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnClose.Location = new System.Drawing.Point(688, 334);
+            this.btnClose.Location = new System.Drawing.Point(706, 334);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(130, 30);
@@ -293,6 +293,7 @@
             this.Controls.Add(this.grdManagers);
             this.Controls.Add(this.labelEngineers);
             this.Controls.Add(this.grdEngineers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "EmployeesForm";
             this.Text = "Employees";
             this.Load += new System.EventHandler(this.EmployeesForm_Load);

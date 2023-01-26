@@ -294,7 +294,10 @@
             this.Controls.Add(this.btnPopulate);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainMenuForm";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenuForm_Load);

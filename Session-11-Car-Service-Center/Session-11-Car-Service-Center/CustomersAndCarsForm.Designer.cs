@@ -220,6 +220,7 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelCustomers);
             this.Controls.Add(this.grdCustomers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CustomersAndCarsForm";
             this.Text = "CustomersAndCars";
             this.Load += new System.EventHandler(this.CustomersAndCarsForm_Load);
