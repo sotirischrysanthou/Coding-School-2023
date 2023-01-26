@@ -51,6 +51,12 @@ namespace CarServiceCenterLib {
             return ret;
         }
 
+        public void UpdateWorkDays() {
+            foreach (WorkDay workDay in WorkDays) {
+                workDay.UpdateNumOfEngineers(Engineers.Count());
+            }
+        }
+
         public void DeleteTask(TransactionLine task, DateTime date) {
             foreach (WorkDay workDay in WorkDays) {
                 if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {

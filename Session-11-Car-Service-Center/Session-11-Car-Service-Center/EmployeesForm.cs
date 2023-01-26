@@ -297,5 +297,9 @@ namespace Session_11_Car_Service_Center {
                 }
             }
         }
+
+        private void gridView1_RowCountChanged(object sender, EventArgs e) {
+            _carServiceCenter.UpdateWorkDays();
+        }
     }
 }

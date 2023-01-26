@@ -70,7 +70,7 @@
             this.grdEngineers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repManagerName,
             this.repManagerSurname});
-            this.grdEngineers.Size = new System.Drawing.Size(920, 119);
+            this.grdEngineers.Size = new System.Drawing.Size(920, 136);
             this.grdEngineers.TabIndex = 0;
             this.grdEngineers.UseEmbeddedNavigator = true;
             this.grdEngineers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -91,6 +91,7 @@
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
             this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
+            this.gridView1.RowCountChanged += new System.EventHandler(this.gridView1_RowCountChanged);
             // 
             // colName
             // 
@@ -170,7 +171,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelEngineers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelEngineers.Appearance.Options.UseFont = true;
-            this.labelEngineers.Location = new System.Drawing.Point(10, 13);
+            this.labelEngineers.Location = new System.Drawing.Point(10, 12);
             this.labelEngineers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelEngineers.Name = "labelEngineers";
             this.labelEngineers.Size = new System.Drawing.Size(87, 24);
@@ -259,7 +260,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelManagers.Appearance.Options.UseFont = true;
-            this.labelManagers.Location = new System.Drawing.Point(10, 170);
+            this.labelManagers.Location = new System.Drawing.Point(9, 180);
             this.labelManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelManagers.Name = "labelManagers";
             this.labelManagers.Size = new System.Drawing.Size(86, 24);
