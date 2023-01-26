@@ -92,25 +92,11 @@ namespace Session_11_Car_Service_Center {
             foreach (TransactionLine transactionLine in transaction.TransactionLines) {
                 _carServiceCenter.AddTask(transactionLine, transaction.Date, out _);
             }
-            int year = 2023;
-            int month = 1;
-            _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));
-            year = 2023;
-            month = 2;
-            _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));
-            year = 2023;
-            month = 3;
-            _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));
         }
 
         private void btnPopulate_Click(object sender, EventArgs e) {
             Populate(_carServiceCenter);
             DevExpress.XtraEditors.XtraMessageBox.Show("Populate Successful!");
-            List<MonthlyLedger> monthlyLedgers = _carServiceCenter.BookKeepingFromTo(DateTime.Parse("1/1/2023"), DateTime.Parse("31/3/2023"));
-            //1.157
-            //16500
-            //25500
-            //36300
         }
 
         private void btnServiceTasks_Click(object sender, EventArgs e) {
