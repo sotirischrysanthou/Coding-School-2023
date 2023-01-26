@@ -111,7 +111,7 @@ namespace Session_11_Car_Service_Center {
             if (brand == null) {
                 e.Valid = false;
                 view.SetColumnError(colBrand, "Insert Valid Brand");
-            } else if (brand == " ") {
+            } else if (brand == "") {
                 e.Valid = false;
                 view.SetColumnError(colBrand, "Fill Brand cell");
             }
@@ -150,7 +150,7 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colBrand, "Insert Valid Brand");
-                } else if (cellVal == " ") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colBrand, "Fill Brand cell");
                 }
@@ -194,7 +194,7 @@ namespace Session_11_Car_Service_Center {
             if (name == null) {
                 e.Valid = false;
                 view.SetColumnError(colName, "Insert Valid Name");
-            } else if (name == " ") {
+            } else if (name == "") {
                 e.Valid = false;
                 view.SetColumnError(colName, "Fill Name cell");
             }
@@ -202,7 +202,7 @@ namespace Session_11_Car_Service_Center {
             if (surname == null) {
                 e.Valid = false;
                 view.SetColumnError(colSurname, "Insert Valid Surname");
-            } else if (surname == " ") {
+            } else if (surname == "") {
                 e.Valid = false;
                 view.SetColumnError(colSurname, "Fill Surname cell");
             }
@@ -210,7 +210,7 @@ namespace Session_11_Car_Service_Center {
             if (phone == null) {
                 e.Valid = false;
                 view.SetColumnError(colPhone, "Insert Valid Phone");
-            } else if (phone == " ") {
+            } else if (phone == "") {
                 e.Valid = false;
                 view.SetColumnError(colPhone, "Fill Phone cell");
             } else if (phone.Count() != 10 && !Regex.IsMatch(phone, @"^[0-9]+$")) {
@@ -221,7 +221,7 @@ namespace Session_11_Car_Service_Center {
             if (tin == null) {
                 e.Valid = false;
                 view.SetColumnError(colTIN, "Insert Valid TIN");
-            } else if (tin == " ") {
+            } else if (tin == "") {
                 e.Valid = false;
                 view.SetColumnError(colTIN, "Fill TIN cell");
             } else if (tin.Count() != 9 && !Regex.IsMatch(tin, @"^[0-9]+$")) {
@@ -244,7 +244,7 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colName, "Insert Valid Name");
-                } else if (cellVal == " ") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colName, "Fill Name cell");
                 }
@@ -254,7 +254,7 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colSurname, "Insert Valid Surname");
-                } else if (cellVal == " ") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colSurname, "Fill Surname cell");
                 }
@@ -264,7 +264,7 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colPhone, "Insert Valid Phone");
-                } else if (cellVal == " ") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colPhone, "Fill Car Phone cell");
                 } else if (cellVal.Count() == 10 && Regex.IsMatch(cellVal, @"^[0-9]+$")) {
@@ -279,7 +279,7 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colTIN, "Insert Valid TIN");
-                } else if (cellVal == " ") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colTIN, "Fill TIN cell");
                 } else if (cellVal.Count() == 9 && Regex.IsMatch(cellVal, @"^[0-9]+$")) {
