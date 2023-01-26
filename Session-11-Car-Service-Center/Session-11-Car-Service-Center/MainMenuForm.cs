@@ -37,11 +37,11 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void Populate(CarServiceCenter _carServiceCenter) {
-            _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "1303"));
-            _carServiceCenter.Customers.Add(new Customer("Demetris", "Manolas", "6912342136", "5585"));
-            _carServiceCenter.Customers.Add(new Customer("Giannis", "Tsimpris", "6912341234", "1365"));
-            _carServiceCenter.Customers.Add(new Customer("Giannis", "Antetokoumpo", "6910646234", "2576"));
-            _carServiceCenter.Customers.Add(new Customer("Panos", "Ioannides", "6912334867", "6453"));
+            _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "154852984"));
+            _carServiceCenter.Customers.Add(new Customer("Demetris", "Manolas", "6912342136", "165826475"));
+            _carServiceCenter.Customers.Add(new Customer("Giannis", "Tsimpris", "6912341234", "182349528"));
+            _carServiceCenter.Customers.Add(new Customer("Giannis", "Antetokoumpo", "6910646234", "123456982"));
+            _carServiceCenter.Customers.Add(new Customer("Panos", "Ioannides", "6912334867", "165942358"));
             _carServiceCenter.Cars.Add(new Car("Ford", "Focus", "IZM 5469"));
             _carServiceCenter.Cars.Add(new Car("Ford", "Fiesta", "IMZ 1234"));
             _carServiceCenter.Cars.Add(new Car("Mazda", "6", "IAM 3369"));

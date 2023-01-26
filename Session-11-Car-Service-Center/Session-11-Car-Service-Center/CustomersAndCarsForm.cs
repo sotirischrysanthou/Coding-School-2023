@@ -155,7 +155,7 @@ namespace Session_11_Car_Service_Center {
                     view.SetColumnError(colBrand, "Fill Brand cell");
                 }
             } else if (column.FieldName == "Model") {
-                // colBrand changed
+                // colModel changed
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colModel, "Insert Valid Model");
@@ -171,11 +171,122 @@ namespace Session_11_Car_Service_Center {
                 } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colCarRegistrationNumber, "Fill Car Registration Number cell");
-                } else if (cellVal.Count() == 8 && Regex.IsMatch(cellVal.Substring(0, 3), @"^[a-zA-Z]+$") && cellVal[3] == ' ' && Regex.IsMatch(cellVal.Substring(4, 4), @"^[1-9]+$")) {
+                } else if (cellVal.Count() == 8 && Regex.IsMatch(cellVal.Substring(0, 3), @"^[a-zA-Z]+$") && cellVal[3] == ' ' && Regex.IsMatch(cellVal.Substring(4, 4), @"^[0-9]+$")) {
                     // Correct
                 } else {
                     e.Valid = false;
                     view.SetColumnError(colCarRegistrationNumber, "Insert Valid Registration number with format for e.g [IZM 1234] ");
+                }
+            }
+        }
+
+        private void gridView1_ValidateRow(object sender, ValidateRowEventArgs e) {
+            GridView view = sender as GridView;
+            GridColumn colName = view.Columns["Name"];
+            GridColumn colSurname = view.Columns["Surname"];
+            GridColumn colPhone = view.Columns["Phone"];
+            GridColumn colTIN = view.Columns["TIN"];
+            String name = view.GetRowCellValue(e.RowHandle, colName) as String;
+            String surname = view.GetRowCellValue(e.RowHandle, colSurname) as String;
+            String phone = view.GetRowCellValue(e.RowHandle, colPhone) as String;
+            String tin = view.GetRowCellValue(e.RowHandle, colTIN) as String;
+            // Name Cell
+            if (name == null) {
+                e.Valid = false;
+                view.SetColumnError(colName, "Insert Valid Name");
+            } else if (name == " ") {
+                e.Valid = false;
+                view.SetColumnError(colName, "Fill Name cell");
+            }
+            // Surname Cell
+            if (surname == null) {
+                e.Valid = false;
+                view.SetColumnError(colSurname, "Insert Valid Surname");
+            } else if (surname == " ") {
+                e.Valid = false;
+                view.SetColumnError(colSurname, "Fill Surname cell");
+            }
+            // Phone Cell
+            if (phone == null) {
+                e.Valid = false;
+                view.SetColumnError(colPhone, "Insert Valid Phone");
+            } else if (phone == " ") {
+                e.Valid = false;
+                view.SetColumnError(colPhone, "Fill Phone cell");
+            } else if (phone.Count() != 10 && !Regex.IsMatch(phone, @"^[0-9]+$")) {
+                e.Valid = false;
+                view.SetColumnError(colPhone, "Insert Valid Phone");
+            }
+            // TIN Cell
+            if (tin == null) {
+                e.Valid = false;
+                view.SetColumnError(colTIN, "Insert Valid TIN");
+            } else if (tin == " ") {
+                e.Valid = false;
+                view.SetColumnError(colTIN, "Fill TIN cell");
+            } else if (tin.Count() != 9 && !Regex.IsMatch(tin, @"^[0-9]+$")) {
+                e.Valid = false;
+                view.SetColumnError(colTIN, "Insert Valid TIN");
+            }
+
+            if (e.Valid) {
+                view.ClearColumnErrors();
+            }
+        }
+
+        private void gridView1_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
+            ColumnView view = sender as ColumnView;
+            GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
+            String cellVal = e.Value as String;
+
+            // colName changed
+            if (column.FieldName == "Name") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colName, "Insert Valid Name");
+                } else if (cellVal == " ") {
+                    e.Valid = false;
+                    view.SetColumnError(colName, "Fill Name cell");
+                }
+            }
+            // colSurname changed
+            if (column.FieldName == "Surname") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colSurname, "Insert Valid Surname");
+                } else if (cellVal == " ") {
+                    e.Valid = false;
+                    view.SetColumnError(colSurname, "Fill Surname cell");
+                }
+            }
+            // colPhone changed
+            if (column.FieldName == "Phone") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colPhone, "Insert Valid Phone");
+                } else if (cellVal == " ") {
+                    e.Valid = false;
+                    view.SetColumnError(colPhone, "Fill Car Phone cell");
+                } else if (cellVal.Count() == 10 && Regex.IsMatch(cellVal, @"^[0-9]+$")) {
+                    // Correct
+                } else {
+                    e.Valid = false;
+                    view.SetColumnError(colPhone, "Insert Valid Phone with format for e.g [6912345678]");
+                }
+            }
+            // colTIN changed
+            if (column.FieldName == "TIN") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colTIN, "Insert Valid TIN");
+                } else if (cellVal == " ") {
+                    e.Valid = false;
+                    view.SetColumnError(colTIN, "Fill TIN cell");
+                } else if (cellVal.Count() == 9 && Regex.IsMatch(cellVal, @"^[0-9]+$")) {
+                    // Correct
+                } else {
+                    e.Valid = false;
+                    view.SetColumnError(colPhone, "Insert Valid TIN with format for e.g [165485219]");
                 }
             }
         }
