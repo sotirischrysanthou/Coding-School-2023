@@ -339,6 +339,7 @@
             this.colTotalPrice.Caption = "Total Price";
             this.colTotalPrice.FieldName = "TotalPrice";
             this.colTotalPrice.Name = "colTotalPrice";
+            this.colTotalPrice.OptionsColumn.AllowEdit = false;
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 7;
             // 

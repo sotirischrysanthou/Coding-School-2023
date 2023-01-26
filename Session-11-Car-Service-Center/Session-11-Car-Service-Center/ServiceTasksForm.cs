@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
+using System.Text.RegularExpressions;
+using DevExpress.XtraEditors.ColorPick.Picker;
+using DevExpress.XtraGrid.Views.Base;
 
 namespace Session_11_Car_Service_Center {
     public partial class ServiceTasksForm : Form {
@@ -68,6 +71,93 @@ namespace Session_11_Car_Service_Center {
         private void btn_Close_MouseLeave(object sender, EventArgs e) {
             btn_Close.ForeColor = Color.Black;
             btn_Close.FlatAppearance.BorderSize = 0;
+        }
+
+        private void gridView1_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
+            GridView view = sender as GridView;
+            //GridColumn colCode = view.Columns["Code"];
+            //GridColumn colDescription = view.Columns["Description"];
+            //GridColumn colHours = view.Columns["Hours"];
+            String code = view.GetRowCellValue(e.RowHandle, colCode).ToString();
+            String description = view.GetRowCellValue(e.RowHandle, colDescription) as String;
+            String hours = view.GetRowCellValue(e.RowHandle, colHours).ToString();
+            // Code Cell
+            if (code == null) {
+                e.Valid = false;
+                view.SetColumnError(colCode, "Insert Valid Brand");
+            }
+            else if (code == " ") {
+                e.Valid = false;
+                view.SetColumnError(colCode, "Fill Code cell");
+            }
+            // Description Cell
+            if (description == null) {
+                e.Valid = false;
+                view.SetColumnError(colDescription, "Insert Valid Description");
+            }
+            else if (description == "") {
+                e.Valid = false;
+                view.SetColumnError(colDescription, "Fill Description cell");
+            }
+            // Hours Cell
+            if (hours == null) {
+                e.Valid = false;
+                view.SetColumnError(colHours, "Insert Valid Hours");
+            }
+            else if (hours == "") {
+                e.Valid = false;
+                view.SetColumnError(colHours, "Fill Hours cell");
+            }
+            else if (!double.TryParse(hours, out _)) {
+                e.Valid = false;
+                view.SetColumnError(colHours, "Insert Valid Hours");
+            }
+            if (e.Valid) {
+                view.ClearColumnErrors();
+            }
+        }
+
+        private void gridView1_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
+            ColumnView view = sender as ColumnView;
+            GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
+            String cellVal = e.Value as String;
+            if (column.FieldName == "Code") {
+                // colCode changed
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colCode, "Insert Valid Code");
+                }
+                else if (cellVal == " ") {
+                    e.Valid = false;
+                    view.SetColumnError(colCode, "Fill Code cell");
+                }
+            }
+            else if (column.FieldName == "Description") {
+                // colDescription changed
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colDescription, "Insert Valid Description");
+                }
+                else if (cellVal == "") {
+                    e.Valid = false;
+                    view.SetColumnError(colDescription, "Fill Description cell");
+                }
+            }
+            if (column.FieldName == "Hours") {
+                // colHours changed
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colHours, "Insert Valid Hours");
+                }
+                else if (cellVal == "") {
+                    e.Valid = false;
+                    view.SetColumnError(colHours, "Fill Hours cell");
+                }
+                else if(!double.TryParse(cellVal, out _)){
+                    e.Valid = false;
+                    view.SetColumnError(colHours, "Insert Valid Hours");
+                }
+            }
         }
     }
 }
