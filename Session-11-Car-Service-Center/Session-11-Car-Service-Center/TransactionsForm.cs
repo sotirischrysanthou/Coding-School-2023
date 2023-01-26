@@ -1,6 +1,8 @@
 using CarServiceCenterLib;
+using DevExpress.Mvvm.Native;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraScheduler.Native;
 using SerializerLib;
 
 namespace Session_11_Car_Service_Center {
@@ -91,7 +93,7 @@ namespace Session_11_Car_Service_Center {
                 } else {
                     view.DeleteRow(e.RowHandle);
                 }
-
+                UpdateLabelWorkHour();
                 MessageBox.Show(message);
             }
         }
@@ -153,6 +155,22 @@ namespace Session_11_Car_Service_Center {
         private void btn_Close_MouseLeave(object sender, EventArgs e) {
             btn_Close.ForeColor = Color.Black;
             btn_Close.FlatAppearance.BorderSize = 0;
+        }
+
+        private void gridView1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e) {
+            UpdateLabelWorkHour();
+        }
+        private void UpdateLabelWorkHour() {
+            Transaction transaction = FindTransactionWithID((Guid)gridView1.GetFocusedRowCellValue("ID"), _carServiceCenter.Transactions);
+            foreach (WorkDay workDay in _carServiceCenter.WorkDays) {
+                if (workDay.Date.Year == transaction.Date.Year && workDay.Date.Month == transaction.Date.Month && workDay.Date.Day == transaction.Date.Day) {
+                    labelWorkHours.Text = (workDay.MaxWorkLoad() - workDay.WorkLoad()).ToString();
+                }
+            }
+        }
+
+        private void gridView2_RowDeleted(object sender, DevExpress.Data.RowDeletedEventArgs e) {
+            UpdateLabelWorkHour();
         }
     }
 }

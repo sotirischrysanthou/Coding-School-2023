@@ -59,6 +59,8 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelWorkHours = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
@@ -109,6 +111,7 @@
             this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
             this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gridView2.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
+            this.gridView2.RowDeleted += new DevExpress.Data.RowDeletedEventHandler(this.gridView2_RowDeleted);
             // 
             // colTransactionID
             // 
@@ -169,6 +172,7 @@
             this.colHours.Caption = "Hours";
             this.colHours.FieldName = "Hours";
             this.colHours.Name = "colHours";
+            this.colHours.OptionsColumn.AllowEdit = false;
             this.colHours.Visible = true;
             this.colHours.VisibleIndex = 3;
             // 
@@ -177,6 +181,7 @@
             this.colPricePerHour.Caption = "Price Per Hour";
             this.colPricePerHour.FieldName = "PricePerHour";
             this.colPricePerHour.Name = "colPricePerHour";
+            this.colPricePerHour.OptionsColumn.AllowEdit = false;
             this.colPricePerHour.Visible = true;
             this.colPricePerHour.VisibleIndex = 4;
             // 
@@ -185,6 +190,7 @@
             this.Price.Caption = "Price";
             this.Price.FieldName = "Price";
             this.Price.Name = "Price";
+            this.Price.OptionsColumn.AllowEdit = false;
             this.Price.Visible = true;
             this.Price.VisibleIndex = 5;
             // 
@@ -223,6 +229,7 @@
             this.gridView1.GridControl = this.grdTransactions;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView1_SelectionChanged);
             // 
             // colID
             // 
@@ -401,11 +408,37 @@
             this.labelControl1.TabIndex = 9;
             this.labelControl1.Text = "TransactionLine";
             // 
+            // labelControl2
+            // 
+            this.labelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(521, 207);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(217, 24);
+            this.labelControl2.TabIndex = 10;
+            this.labelControl2.Text = "Total Remaining Hours: ";
+            // 
+            // labelWorkHours
+            // 
+            this.labelWorkHours.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWorkHours.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelWorkHours.Appearance.Options.UseFont = true;
+            this.labelWorkHours.Location = new System.Drawing.Point(744, 207);
+            this.labelWorkHours.Name = "labelWorkHours";
+            this.labelWorkHours.Size = new System.Drawing.Size(11, 24);
+            this.labelWorkHours.TabIndex = 11;
+            this.labelWorkHours.Text = "0";
+            // 
             // TransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelWorkHours);
+            this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.btn_Close);
@@ -472,5 +505,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraEditors.LabelControl labelServiceTask;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelWorkHours;
     }
 }
