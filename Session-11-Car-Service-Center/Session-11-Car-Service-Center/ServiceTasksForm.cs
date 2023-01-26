@@ -14,6 +14,7 @@ using DevExpress.XtraGrid.Columns;
 using System.Text.RegularExpressions;
 using DevExpress.XtraEditors.ColorPick.Picker;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid;
 
 namespace Session_11_Car_Service_Center {
     public partial class ServiceTasksForm : Form {
@@ -75,9 +76,6 @@ namespace Session_11_Car_Service_Center {
 
         private void gridView1_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
             GridView view = sender as GridView;
-            //GridColumn colCode = view.Columns["Code"];
-            //GridColumn colDescription = view.Columns["Description"];
-            //GridColumn colHours = view.Columns["Hours"];
             String code = view.GetRowCellValue(e.RowHandle, colCode).ToString();
             String description = view.GetRowCellValue(e.RowHandle, colDescription) as String;
             String hours = view.GetRowCellValue(e.RowHandle, colHours).ToString();
@@ -131,6 +129,7 @@ namespace Session_11_Car_Service_Center {
                     e.Valid = false;
                     view.SetColumnError(colCode, "Fill Code cell");
                 }
+               //else if (Convert.ToInt32(cellVal) == gridView1.Data  )
             }
             else if (column.FieldName == "Description") {
                 // colDescription changed

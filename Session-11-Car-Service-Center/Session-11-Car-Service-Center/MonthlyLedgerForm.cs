@@ -40,27 +40,20 @@ namespace Session_11_Car_Service_Center {
 
         }
 
-        private void deFrom_EditValueChanged(object sender, EventArgs e) {
-
-            MessageBox.Show(deFrom.EditValue.ToString());
-        }
-
         private void btnCalculate_Click(object sender, EventArgs e) {
             List<MonthlyLedger> list = new List<MonthlyLedger>();
             MonthlyLedger monthlyLedger;
-            if (deFrom.EditValue == null && deTo.EditValue == null) {
-                int year = DateTime.Now.Year;
-                for (int month = 1; month <= 12; month++) {
-                    monthlyLedger = new MonthlyLedger(year, month);
-                    monthlyLedger.Expenses += _carServiceCenter.SalaryEngineersFrom(year, month);
-                    monthlyLedger.Expenses += _carServiceCenter.SalaryManagersFrom(year, month);
-                    foreach (Transaction transaction in _carServiceCenter.Transactions) {
-                        if (transaction.Date.Year == year && transaction.Date.Month == month) {
-                            monthlyLedger.Incomes += transaction.TotalPrice;
-                        }
+            int year = DateTime.Now.Year;
+            for (int month = 1; month <= 12; month++) {
+                monthlyLedger = new MonthlyLedger(year, month);
+                monthlyLedger.Expenses += _carServiceCenter.SalaryEngineersFrom(year, month);
+                monthlyLedger.Expenses += _carServiceCenter.SalaryManagersFrom(year, month);
+                foreach (Transaction transaction in _carServiceCenter.Transactions) {
+                    if (transaction.Date.Year == year && transaction.Date.Month == month) {
+                        monthlyLedger.Incomes += transaction.TotalPrice;
                     }
-                    list.Add(monthlyLedger);
                 }
+                list.Add(monthlyLedger);
             }
             bsMonthlyLedger.DataSource = list;
             grdMonthlyLedger.DataSource = bsMonthlyLedger;

@@ -65,8 +65,8 @@ namespace Session_11_Car_Service_Center {
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "Tire change", 3.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "Change gasket", 6.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Oil Filter", 4.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Spark plug", 5.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Oil Filter", 7.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(6, "Spark plug", 5.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(7, "Oil Filter", 7.0));
 
             Customer customer = _carServiceCenter.Customers[0];
             Car car = _carServiceCenter.Cars[0];
