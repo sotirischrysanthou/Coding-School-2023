@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Session_11_Car_Service_Center {
     public partial class EmployeesForm : Form {
@@ -47,6 +48,10 @@ namespace Session_11_Car_Service_Center {
             rep.DataSource = list;
             rep.DisplayMember = displayMember;
             rep.ValueMember = valueMember;
+        }
+
+        private void gridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e) {
+            GridView view = sender as GridView;
         }
     }
 }

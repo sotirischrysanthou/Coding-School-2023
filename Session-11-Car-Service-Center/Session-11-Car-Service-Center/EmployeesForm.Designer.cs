@@ -33,6 +33,7 @@
             this.colEngineersManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colSalaryPerMonth = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEngineerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelEngineers = new DevExpress.XtraEditors.LabelControl();
             this.grdManagers = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -46,7 +47,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.colStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEngineerStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).BeginInit();
@@ -151,6 +152,14 @@
             this.colSalaryPerMonth.VisibleIndex = 4;
             this.colSalaryPerMonth.Width = 82;
             // 
+            // colEngineerStartDate
+            // 
+            this.colEngineerStartDate.Caption = "Start Date";
+            this.colEngineerStartDate.FieldName = "StartDate";
+            this.colEngineerStartDate.Name = "colEngineerStartDate";
+            this.colEngineerStartDate.Visible = true;
+            this.colEngineerStartDate.VisibleIndex = 5;
+            // 
             // labelEngineers
             // 
             this.labelEngineers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -178,6 +187,7 @@
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colID,
             this.colManagerName,
             this.colManagerSurname,
             this.colManagerSalaryPerMonth,
@@ -186,6 +196,7 @@
             this.gridView2.GridControl = this.grdManagers;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
             // 
             // colManagerName
             // 
@@ -268,13 +279,11 @@
             this.colStartDate.VisibleIndex = 4;
             this.colStartDate.Width = 66;
             // 
-            // colEngineerStartDate
+            // colID
             // 
-            this.colEngineerStartDate.Caption = "Start Date";
-            this.colEngineerStartDate.FieldName = "StartDate";
-            this.colEngineerStartDate.Name = "colEngineerStartDate";
-            this.colEngineerStartDate.Visible = true;
-            this.colEngineerStartDate.VisibleIndex = 5;
+            this.colID.Caption = "ID";
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
             // 
             // EmployeesForm
             // 
@@ -328,5 +337,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colManagerStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colEngineerStartDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colID;
     }
 }
