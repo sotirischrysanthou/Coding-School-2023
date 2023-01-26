@@ -166,6 +166,7 @@ namespace Session_11_Car_Service_Center {
                 }
                 if (flag) {
                     gridView1.SetRowCellValue(e.RowHandle, "Code", j);
+                    return;
                 }
             }
         }

@@ -73,6 +73,7 @@
             this.colCode.Caption = "Code";
             this.colCode.FieldName = "Code";
             this.colCode.Name = "colCode";
+            this.colCode.OptionsColumn.AllowEdit = false;
             this.colCode.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.colCode.Visible = true;
             this.colCode.VisibleIndex = 0;
