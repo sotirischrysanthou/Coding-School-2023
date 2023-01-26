@@ -47,6 +47,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.colStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdEngineers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).BeginInit();
@@ -189,6 +190,7 @@
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colID,
             this.colManagerName,
             this.colManagerSurname,
             this.colManagerSalaryPerMonth,
@@ -197,6 +199,7 @@
             this.gridView2.GridControl = this.grdManagers;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
             // 
             // colManagerName
             // 
@@ -282,6 +285,12 @@
             this.colStartDate.VisibleIndex = 4;
             this.colStartDate.Width = 66;
             // 
+            // colID
+            // 
+            this.colID.Caption = "ID";
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
+            // 
             // EmployeesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -335,5 +344,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colManagerStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colEngineerStartDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colID;
     }
 }

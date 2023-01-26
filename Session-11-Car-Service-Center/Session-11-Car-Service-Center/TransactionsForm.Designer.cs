@@ -78,7 +78,8 @@
             // 
             // grdTransactionLines
             // 
-            this.grdTransactionLines.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTransactionLines.Location = new System.Drawing.Point(12, 237);
             this.grdTransactionLines.MainView = this.gridView2;
             this.grdTransactionLines.Name = "grdTransactionLines";
@@ -342,7 +343,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(632, 415);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -353,8 +354,8 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_Close.Location = new System.Drawing.Point(714, 415);
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Close.Location = new System.Drawing.Point(713, 415);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(75, 23);
             this.btn_Close.TabIndex = 7;

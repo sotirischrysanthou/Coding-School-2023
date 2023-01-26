@@ -106,6 +106,33 @@ namespace CarServiceCenterLib {
         //    return bookKeeping;
         //}
 
+        public void addManagerProfile(Guid managerID, String username, String password) {
+            foreach (Manager manager in Managers) {
+                if(manager.ID == managerID) {
+                    manager.Username = username;
+                    manager.Password = password;
+                }
+            }
+        }
+
+        public bool ManagerExists() {
+            bool ret = true;
+            if(Managers.Count == 0) {
+                ret = false;
+            }
+            return ret;
+        }
+
+        public bool LogIn(String username, String password) {
+            bool ret = false;
+            foreach(Manager manager in Managers) {
+                if(manager.Username == username && manager.Password == password) {
+                    ret = true;
+                }
+            }
+            return ret;
+        }
+
 
     }
 }
