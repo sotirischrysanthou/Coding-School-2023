@@ -86,13 +86,11 @@ namespace Session_11_Car_Service_Center {
                 else {
                     MessageBox.Show("From should be before To");
                 }
-            } else if (deFrom.EditValue != null && (bool)(deTo.EditValue != null)) {
-                monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, DateTime.Now);
-                bsMonthlyLedger.DataSource = monthlyLedgers;
-                grdMonthlyLedger.DataSource = bsMonthlyLedger;
-                gridView1.RefreshData();
-
-
+                //} else if (deFrom.EditValue != null && (bool)(deTo.EditValue != null)) {
+                //    monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, );
+                //    bsMonthlyLedger.DataSource = monthlyLedgers;
+                //    grdMonthlyLedger.DataSource = bsMonthlyLedger;
+                //    gridView1.RefreshData();
             }
         }
     }
