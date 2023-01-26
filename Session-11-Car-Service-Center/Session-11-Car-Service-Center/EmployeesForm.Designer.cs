@@ -70,7 +70,7 @@
             this.grdEngineers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repManagerName,
             this.repManagerSurname});
-            this.grdEngineers.Size = new System.Drawing.Size(827, 119);
+            this.grdEngineers.Size = new System.Drawing.Size(920, 119);
             this.grdEngineers.TabIndex = 0;
             this.grdEngineers.UseEmbeddedNavigator = true;
             this.grdEngineers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -89,6 +89,8 @@
             this.gridView1.GridControl = this.grdEngineers;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
+            this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
             // 
             // colName
             // 
@@ -184,7 +186,7 @@
             this.grdManagers.MainView = this.gridView2;
             this.grdManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdManagers.Name = "grdManagers";
-            this.grdManagers.Size = new System.Drawing.Size(827, 144);
+            this.grdManagers.Size = new System.Drawing.Size(920, 144);
             this.grdManagers.TabIndex = 2;
             this.grdManagers.UseEmbeddedNavigator = true;
             this.grdManagers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -203,6 +205,8 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
+            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
+            this.gridView2.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
             // 
             // colID
             // 
@@ -269,7 +273,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(571, 358);
+            this.btnSave.Location = new System.Drawing.Point(664, 358);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 30);
@@ -287,7 +291,7 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnClose.Location = new System.Drawing.Point(707, 358);
+            this.btnClose.Location = new System.Drawing.Point(800, 358);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(130, 30);
@@ -311,14 +315,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 405);
+            this.ClientSize = new System.Drawing.Size(955, 405);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelManagers);
             this.Controls.Add(this.grdManagers);
             this.Controls.Add(this.labelEngineers);
             this.Controls.Add(this.grdEngineers);
-            this.MinimumSize = new System.Drawing.Size(878, 444);
+            this.MinimumSize = new System.Drawing.Size(878, 442);
             this.Name = "EmployeesForm";
             this.Text = "Employees";
             this.Load += new System.EventHandler(this.EmployeesForm_Load);
