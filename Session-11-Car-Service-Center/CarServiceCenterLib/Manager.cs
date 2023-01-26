@@ -10,7 +10,7 @@ namespace CarServiceCenterLib {
         // Properties
         public double SalaryPerMonth { get; set; }
         public List<Engineer> Engineers { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         public String Username { get; set; }
         public String Password { get; set; }
 
@@ -18,7 +18,7 @@ namespace CarServiceCenterLib {
 
         // Constructors
         public Manager() {
-
+            StartDate = null;
         }
         public Manager(string name, string surname, double salaryPerMonth, DateTime startDate) : base(name, surname) {
             Engineers = new List<Engineer>();
@@ -31,6 +31,7 @@ namespace CarServiceCenterLib {
         public void AddEngineer( Engineer engineer ) {
             Engineers.Add(engineer);
         } 
+
     }
 
 

@@ -62,7 +62,7 @@ namespace CarServiceCenterLib {
         public double SalaryEngineersFrom(int Year, int Month) {
             double TotalSalary = 0;
             foreach (Engineer engineer in Engineers) {
-                if (engineer.StartDate.Year <= Year && engineer.StartDate.Month <= Month) {
+                if (((DateTime)engineer.StartDate).Year <= Year && ((DateTime)engineer.StartDate).Month <= Month) {
                     TotalSalary += engineer.SalaryPerMonth;
                 }
             }
@@ -71,7 +71,7 @@ namespace CarServiceCenterLib {
         public double SalaryManagersFrom(int Year, int Month) {
             double TotalSalary = 0;
             foreach (Manager manager in Managers) {
-                if (manager.StartDate.Year <= Year && manager.StartDate.Month <= Month) {
+                if (((DateTime)manager.StartDate).Year <= Year && ((DateTime)manager.StartDate).Month <= Month) {
                     TotalSalary += manager.SalaryPerMonth;
                 }
             }
