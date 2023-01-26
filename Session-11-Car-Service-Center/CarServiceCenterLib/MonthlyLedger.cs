@@ -8,25 +8,17 @@ namespace CarServiceCenterLib {
     public class MonthlyLedger {
         public int Year { get; set; }
         public int Month { get; set; }
-        public double ManagersSalary { get; set; }
-        public double EngineersSalary { get; set; }
         public double Expenses { get; set; }
         public double Incomes { get; set; }
         public double Total { get; set; }
 
         // Constructors
-        public MonthlyLedger(int year, int month, double managerSalary, double engineersSalary) {
-            Year = year;
-            Month = month;
-            ManagersSalary = managerSalary;
-            EngineersSalary = engineersSalary;
-            Expenses = ManagersSalary + EngineersSalary;
+        public MonthlyLedger(int year, int month) {
+            Expenses = 0;
             Incomes = 0;
             Total = 0;
-        }
-
-        public MonthlyLedger() {
-
+            Year = year;
+            Month = month;
         }
 
     }
