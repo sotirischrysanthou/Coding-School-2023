@@ -19,7 +19,9 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void btnLogIn_Click(object sender, EventArgs e) {
-            string  username = txtUsername.Text;
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+
 
         }
     }
