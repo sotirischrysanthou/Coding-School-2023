@@ -46,10 +46,16 @@ namespace Session_11_Car_Service_Center {
             _carServiceCenter.Cars.Add(new Car("Ford", "Fiesta", "IMZ 1234"));
             _carServiceCenter.Cars.Add(new Car("Mazda", "6", "IAM 3369"));
             _carServiceCenter.Cars.Add(new Car("Suzuki", "Swift", "IAM 8888"));
+
             _carServiceCenter.Managers.Add(new Manager("Fotis", "Chrysoulas", 15000, DateTime.Parse("21/1/2023")));
+            _carServiceCenter.addManagerProfile(_carServiceCenter.Managers.Last().ID, "FotisChrysoulas", "1234");
             _carServiceCenter.Managers.Add(new Manager("Giannis", "Ioannou", 10000, DateTime.Parse("15/3/2023")));
+            _carServiceCenter.addManagerProfile(_carServiceCenter.Managers.Last().ID, "GiannisIoannou", "2345");
             _carServiceCenter.Managers.Add(new Manager("Fotis", "Mitsou", 8000, DateTime.Parse("21/2/2023")));
+            _carServiceCenter.addManagerProfile(_carServiceCenter.Managers.Last().ID, "FotisMitsou", "3456");
             _carServiceCenter.Managers.Add(new Manager("Sotiris", "Kontizas", 8000, DateTime.Parse("21/2/2023")));
+            _carServiceCenter.addManagerProfile(_carServiceCenter.Managers.Last().ID, "SotirisKontizas", "4567");
+
             _carServiceCenter.Engineers.Add(new Engineer("Demetris", "Raptodimos", _carServiceCenter.Managers[0].ID, 1000, DateTime.Parse("2/2/2023")));
             _carServiceCenter.Engineers.Add(new Engineer("Kostas", "Kostaki", _carServiceCenter.Managers[0].ID, 1500, DateTime.Parse("2/1/2023")));
             _carServiceCenter.Engineers.Add(new Engineer("Kostis", "Marvelias", _carServiceCenter.Managers[0].ID, 800, DateTime.Parse("2/3/2023")));
@@ -86,25 +92,11 @@ namespace Session_11_Car_Service_Center {
             foreach (TransactionLine transactionLine in transaction.TransactionLines) {
                 _carServiceCenter.AddTask(transactionLine, transaction.Date, out _);
             }
-            int year = 2023;
-            int month = 1;
-            _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));
-            year = 2023;
-            month = 2;
-            _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));
-            year = 2023;
-            month = 3;
-            _carServiceCenter.MonthlyLedgers.Add(new MonthlyLedger(year, month, _carServiceCenter.SalaryManagersFrom(year, month), _carServiceCenter.SalaryEngineersFrom(year, month)));
         }
 
         private void btnPopulate_Click(object sender, EventArgs e) {
             Populate(_carServiceCenter);
             DevExpress.XtraEditors.XtraMessageBox.Show("Populate Successful!");
-            List<MonthlyLedger> monthlyLedgers = _carServiceCenter.BookKeepingFromTo(DateTime.Parse("1/1/2023"), DateTime.Parse("31/3/2023"));
-            //1.157
-            //16500
-            //25500
-            //36300
         }
 
         private void btnServiceTasks_Click(object sender, EventArgs e) {

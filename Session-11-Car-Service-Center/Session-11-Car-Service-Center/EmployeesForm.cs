@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Session_11_Car_Service_Center {
     public partial class EmployeesForm : Form {
@@ -47,6 +48,35 @@ namespace Session_11_Car_Service_Center {
             rep.DataSource = list;
             rep.DisplayMember = displayMember;
             rep.ValueMember = valueMember;
+        }
+
+        private void gridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e) {
+            GridView view = sender as GridView;
+        }
+        //Customize Buttons
+
+        private void btnSave_MouseEnter(object sender, EventArgs e) {
+            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
+            btnSave.ForeColor = Color.Blue;
+            btnSave.FlatAppearance.BorderColor = Color.Red;
+            btnSave.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnSave_MouseLeave(object sender, EventArgs e) {
+            btnSave.ForeColor = Color.Black;
+            btnSave.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btnClose_MouseEnter(object sender, EventArgs e) {
+            btnClose.FlatAppearance.MouseOverBackColor = btnClose.BackColor;
+            btnClose.ForeColor = Color.Blue;
+            btnClose.FlatAppearance.BorderColor = Color.Red;
+            btnClose.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnClose_MouseLeave(object sender, EventArgs e) {
+            btnClose.ForeColor = Color.Black;
+            btnClose.FlatAppearance.BorderSize = 0;
         }
     }
 }

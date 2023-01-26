@@ -57,6 +57,8 @@
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
+            this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
@@ -76,8 +78,7 @@
             // 
             // grdTransactionLines
             // 
-            this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTransactionLines.Location = new System.Drawing.Point(12, 237);
             this.grdTransactionLines.MainView = this.gridView2;
@@ -189,10 +190,9 @@
             // 
             // grdTransactions
             // 
-            this.grdTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdTransactions.Location = new System.Drawing.Point(12, 12);
+            this.grdTransactions.Location = new System.Drawing.Point(12, 42);
             this.grdTransactions.MainView = this.gridView1;
             this.grdTransactions.Name = "grdTransactions";
             this.grdTransactions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -202,7 +202,7 @@
             this.repCarBrand,
             this.repManagerName,
             this.repManagerSurname});
-            this.grdTransactions.Size = new System.Drawing.Size(776, 200);
+            this.grdTransactions.Size = new System.Drawing.Size(777, 143);
             this.grdTransactions.TabIndex = 5;
             this.grdTransactions.UseEmbeddedNavigator = true;
             this.grdTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -345,33 +345,74 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(632, 415);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSave.Location = new System.Drawing.Point(523, 414);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(130, 30);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
+            this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(713, 415);
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.btn_Close.FlatAppearance.BorderSize = 0;
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Close.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_Close.Location = new System.Drawing.Point(659, 414);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(75, 23);
+            this.btn_Close.Size = new System.Drawing.Size(130, 30);
             this.btn_Close.TabIndex = 7;
             this.btn_Close.Text = "Close";
-            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            this.btn_Close.MouseEnter += new System.EventHandler(this.btn_Close_MouseEnter);
+            this.btn_Close.MouseLeave += new System.EventHandler(this.btn_Close_MouseLeave);
+            // 
+            // labelServiceTask
+            // 
+            this.labelServiceTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelServiceTask.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelServiceTask.Appearance.Options.UseFont = true;
+            this.labelServiceTask.Location = new System.Drawing.Point(12, 12);
+            this.labelServiceTask.Name = "labelServiceTask";
+            this.labelServiceTask.Size = new System.Drawing.Size(113, 24);
+            this.labelServiceTask.TabIndex = 8;
+            this.labelServiceTask.Text = "Transactions";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(12, 207);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(141, 24);
+            this.labelControl1.TabIndex = 9;
+            this.labelControl1.Text = "TransactionLine";
             // 
             // TransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grdTransactions);
             this.Controls.Add(this.grdTransactionLines);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "TransactionsForm";
             this.Text = "Transactions";
             this.Load += new System.EventHandler(this.TransactionsForm_Load);
@@ -391,6 +432,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repManagerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repManagerSurname)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -428,5 +470,7 @@
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionID;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
+        private DevExpress.XtraEditors.LabelControl labelServiceTask;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }

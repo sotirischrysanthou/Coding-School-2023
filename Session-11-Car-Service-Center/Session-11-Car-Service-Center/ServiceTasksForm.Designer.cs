@@ -41,7 +41,10 @@
             // 
             // grdServiceTasks
             // 
-            this.grdServiceTasks.Location = new System.Drawing.Point(21, 42);
+            this.grdServiceTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdServiceTasks.Location = new System.Drawing.Point(21, 47);
             this.grdServiceTasks.MainView = this.gridView1;
             this.grdServiceTasks.Name = "grdServiceTasks";
             this.grdServiceTasks.Size = new System.Drawing.Size(643, 200);
@@ -108,23 +111,37 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(430, 248);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSave.Location = new System.Drawing.Point(398, 253);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 37);
+            this.btnSave.Size = new System.Drawing.Size(130, 30);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
+            this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(566, 248);
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.btn_Close.FlatAppearance.BorderSize = 0;
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Close.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_Close.Location = new System.Drawing.Point(534, 253);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(98, 37);
+            this.btn_Close.Size = new System.Drawing.Size(130, 30);
             this.btn_Close.TabIndex = 4;
             this.btn_Close.Text = "Close";
-            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            this.btn_Close.MouseEnter += new System.EventHandler(this.btn_Close_MouseEnter);
+            this.btn_Close.MouseLeave += new System.EventHandler(this.btn_Close_MouseLeave);
             // 
             // ServiceTasksForm
             // 
@@ -135,6 +152,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.grdServiceTasks);
+            this.MinimumSize = new System.Drawing.Size(705, 334);
             this.Name = "ServiceTasksForm";
             this.Text = "ServiceTasksForm";
             this.Load += new System.EventHandler(this.ServiceTasksForm_Load_1);

@@ -230,7 +230,6 @@
             this.btnCalculate.TabIndex = 11;
             this.btnCalculate.Text = "Calculate";
             this.btnCalculate.UseVisualStyleBackColor = true;
-            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
             // MonthlyLedgerForm
             // 
@@ -243,6 +242,7 @@
             this.Controls.Add(this.deTo);
             this.Controls.Add(this.labelFrom);
             this.Controls.Add(this.deFrom);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MonthlyLedgerForm";
             this.Text = "MonthlyLedgerForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();

@@ -84,8 +84,8 @@ namespace Session_11_Car_Service_Center {
                 view.SetRowCellValue(e.RowHandle, "Price", serviceTask.Hours * 44.5); // PRICE PER HOUR
                 Transaction transaction = FindTransactionWithID((Guid)gridView1.GetFocusedRowCellValue("ID"), _carServiceCenter.Transactions);
                 TransactionLine transactionLine = FindTransactionLineWithID((Guid)gridView2.GetFocusedRowCellValue("ID"), transaction.TransactionLines);
-                String message; 
-                if(_carServiceCenter.AddTask(transactionLine,transaction.Date, out message)){
+                String message;
+                if (_carServiceCenter.AddTask(transactionLine, transaction.Date, out message)) {
                     transaction.UpdateTotalPrice();
                     gridView1.RefreshData();
                 } else {
@@ -130,5 +130,29 @@ namespace Session_11_Car_Service_Center {
             return RetTransactionLine;
         }
 
+        //Customize Buttons
+        private void btnSave_MouseEnter(object sender, EventArgs e) {
+            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
+            btnSave.ForeColor = Color.Blue;
+            btnSave.FlatAppearance.BorderColor = Color.Red;
+            btnSave.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnSave_MouseLeave(object sender, EventArgs e) {
+            btnSave.ForeColor = Color.Black;
+            btnSave.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btn_Close_MouseEnter(object sender, EventArgs e) {
+            btn_Close.FlatAppearance.MouseOverBackColor = btn_Close.BackColor;
+            btn_Close.ForeColor = Color.Blue;
+            btn_Close.FlatAppearance.BorderColor = Color.Red;
+            btn_Close.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btn_Close_MouseLeave(object sender, EventArgs e) {
+            btn_Close.ForeColor = Color.Black;
+            btn_Close.FlatAppearance.BorderSize = 0;
+        }
     }
 }
