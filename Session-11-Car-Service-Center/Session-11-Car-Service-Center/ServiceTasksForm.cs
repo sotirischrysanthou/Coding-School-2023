@@ -20,18 +20,18 @@ namespace Session_11_Car_Service_Center {
     public partial class ServiceTasksForm : Form {
         private CarServiceCenter _carServiceCenter;
         private Serializer _serializer;
-        
+
         public ServiceTasksForm(CarServiceCenter carServiceCenter) {
             InitializeComponent();
             _carServiceCenter = carServiceCenter;
-            _serializer = new Serializer();   
+            _serializer = new Serializer();
         }
         private void ServiceTasksForm_Load_1(object sender, EventArgs e) {
             SetControlProperties();
         }
 
         private void SetControlProperties() {
-            
+
             _serializer = new Serializer();
             bsServiceTasks.DataSource = _carServiceCenter.ServiceTasks;
             grdServiceTasks.DataSource = bsServiceTasks;
@@ -83,8 +83,7 @@ namespace Session_11_Car_Service_Center {
             if (code == null) {
                 e.Valid = false;
                 view.SetColumnError(colCode, "Insert Valid Brand");
-            }
-            else if (code == " ") {
+            } else if (code == " ") {
                 e.Valid = false;
                 view.SetColumnError(colCode, "Fill Code cell");
             }
@@ -92,8 +91,7 @@ namespace Session_11_Car_Service_Center {
             if (description == null) {
                 e.Valid = false;
                 view.SetColumnError(colDescription, "Insert Valid Description");
-            }
-            else if (description == "") {
+            } else if (description == "") {
                 e.Valid = false;
                 view.SetColumnError(colDescription, "Fill Description cell");
             }
@@ -101,12 +99,10 @@ namespace Session_11_Car_Service_Center {
             if (hours == null) {
                 e.Valid = false;
                 view.SetColumnError(colHours, "Insert Valid Hours");
-            }
-            else if (hours == "") {
+            } else if (hours == "") {
                 e.Valid = false;
                 view.SetColumnError(colHours, "Fill Hours cell");
-            }
-            else if (!double.TryParse(hours, out _)) {
+            } else if (!double.TryParse(hours, out _)) {
                 e.Valid = false;
                 view.SetColumnError(colHours, "Insert Valid Hours");
             }
@@ -124,20 +120,17 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colCode, "Insert Valid Code");
-                }
-                else if (cellVal == " ") {
+                } else if (cellVal == " ") {
                     e.Valid = false;
                     view.SetColumnError(colCode, "Fill Code cell");
                 }
-               //else if (Convert.ToInt32(cellVal) == gridView1.Data  )
-            }
-            else if (column.FieldName == "Description") {
+                //else if (Convert.ToInt32(cellVal) == gridView1.Data  )
+            } else if (column.FieldName == "Description") {
                 // colDescription changed
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colDescription, "Insert Valid Description");
-                }
-                else if (cellVal == "") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colDescription, "Fill Description cell");
                 }
@@ -147,14 +140,33 @@ namespace Session_11_Car_Service_Center {
                 if (cellVal == null) {
                     e.Valid = false;
                     view.SetColumnError(colHours, "Insert Valid Hours");
-                }
-                else if (cellVal == "") {
+                } else if (cellVal == "") {
                     e.Valid = false;
                     view.SetColumnError(colHours, "Fill Hours cell");
-                }
-                else if(!double.TryParse(cellVal, out _)){
+                } else if (!double.TryParse(cellVal, out _)) {
                     e.Valid = false;
                     view.SetColumnError(colHours, "Insert Valid Hours");
+                }
+            }
+        }
+
+        private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e) {
+            DevExpress.XtraGrid.Columns.GridColumn col = gridView1.Columns.ColumnByFieldName("Code");
+            int dataRowCount = gridView1.DataRowCount;
+            bool flag;
+            // Traverse data rows and change the Price field values. 
+            for (int j = 0; j <= dataRowCount; j++) {
+                flag = true;
+                for (int i = 0; i < dataRowCount; i++) {
+                    object cellValue = gridView1.GetRowCellValue(i, col);
+                    int newValue = Convert.ToInt32(cellValue);
+                    if (j == newValue) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    gridView1.SetRowCellValue(e.RowHandle, "Code", j);
+                    return;
                 }
             }
         }

@@ -64,6 +64,7 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowDetailButtons = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView1_InitNewRow);
             this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
             this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
             // 
@@ -72,6 +73,7 @@
             this.colCode.Caption = "Code";
             this.colCode.FieldName = "Code";
             this.colCode.Name = "colCode";
+            this.colCode.OptionsColumn.AllowEdit = false;
             this.colCode.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.colCode.Visible = true;
             this.colCode.VisibleIndex = 0;
