@@ -93,11 +93,14 @@ namespace Session_11_Car_Service_Center {
             GridColumn colEngineerStartDate = view.Columns["StartDate"];
             String name = view.GetRowCellValue(e.RowHandle, colName) as String;
             String surname = view.GetRowCellValue(e.RowHandle, colSurName) as String;
-            String managerName = view.GetRowCellValue(e.RowHandle, colEngineersManagerName) as String;
-            String managerSurname = view.GetRowCellValue(e.RowHandle, colEngineersManagerSurname) as String;
+            String managerName = view.GetRowCellValue(e.RowHandle, colEngineersManagerName).ToString();
+            String managerSurname = view.GetRowCellValue(e.RowHandle, colEngineersManagerSurname).ToString();
             String salaryPerMonth = view.GetRowCellValue(e.RowHandle, colSalaryPerMonth).ToString();
-            String startDay = view.GetRowCellValue(e.RowHandle, colEngineerStartDate) as String;
-            // Name Cell
+            String startDay;
+            if (view.GetRowCellValue(e.RowHandle, colEngineerStartDate) != null)
+                startDay = view.GetRowCellValue(e.RowHandle, colEngineerStartDate).ToString();
+            else
+                startDay = null;
             if (name == null) {
                 e.Valid = false;
                 view.SetColumnError(colName, "Insert Valid Name");
@@ -133,7 +136,7 @@ namespace Session_11_Car_Service_Center {
             if (salaryPerMonth == null) {
                 e.Valid = false;
                 view.SetColumnError(colSalaryPerMonth, "Insert Valid Salary Per Month");
-            } else if (!double.TryParse(salaryPerMonth, out _)) {
+            } else if (salaryPerMonth == "0") {
                 e.Valid = false;
                 view.SetColumnError(colSalaryPerMonth, "Fill Salary Per Month cell");
             }
@@ -145,18 +148,6 @@ namespace Session_11_Car_Service_Center {
                 e.Valid = false;
                 view.SetColumnError(colEngineerStartDate, "Fill Start Day cell");
             }
-            //// Car Registration Number Cell
-            //if (regNum == null) {
-            //    e.Valid = false;
-            //    view.SetColumnError(colRegNum, "Insert Valid Registration number");
-            //} else if (regNum == "") {
-            //    view.SetColumnError(colModel, "Fill Car Registration Number cell");
-            //} else if (Regex.IsMatch(regNum.Substring(0, 3), @"^[a-zA-Z]+$") && regNum[3] == ' ' && Regex.IsMatch(regNum.Substring(4, 4), @"^[1-9]+$")) {
-            //    // Correct
-            //} else {
-            //    e.Valid = false;
-            //    view.SetColumnError(colRegNum, "Insert Valid Registration number with format for e.g [IZM 1234] ");
-            //}
 
             if (e.Valid) {
                 view.ClearColumnErrors();
@@ -166,7 +157,7 @@ namespace Session_11_Car_Service_Center {
         private void gridView1_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
             ColumnView view = sender as ColumnView;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
-            String cellVal = e.Value as String;
+            String cellVal = e.Value.ToString();
             if (column.FieldName == "Name") {
                 // colName changed
                 if (cellVal == null) {
@@ -180,20 +171,129 @@ namespace Session_11_Car_Service_Center {
                 // colSurname changed
                 if (cellVal == null) {
                     e.Valid = false;
-                    view.SetColumnError(colSurname, "Insert Valid Model");
+                    view.SetColumnError(colSurname, "Insert Valid Surname");
                 } else if (cellVal == "") {
                     e.Valid = false;
-                    view.SetColumnError(colSurname, "Fill Model cell");
+                    view.SetColumnError(colSurname, "Fill Surname cell");
                 }
             } else if (column.FieldName == "ManagerID") {
                 if (cellVal == null) {
                     e.Valid = false;
-                    view.SetColumnError(colEngineersManagerName, "Insert Valid Model");
-                    view.SetColumnError(colEngineersManagerSurname, "Insert Valid Model");
+                    view.SetColumnError(colEngineersManagerName, "Insert Valid Manager");
+                    view.SetColumnError(colEngineersManagerSurname, "Insert Valid Manager");
                 } else if (cellVal == "") {
                     e.Valid = false;
-                    view.SetColumnError(colEngineersManagerName, "Fill Model cell");
-                    view.SetColumnError(colEngineersManagerSurname, "Insert Valid Model");
+                    view.SetColumnError(colEngineersManagerName, "Fill Manager cell");
+                    view.SetColumnError(colEngineersManagerSurname, "fill Manager cell");
+                }
+            }else if (column.FieldName == "SalaryPerMonth") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colSalaryPerMonth, "Insert Valid Salary Per Month");
+                } else if (cellVal == "0") {
+                    e.Valid = false;
+                    view.SetColumnError(colSalaryPerMonth, "Fill Salary Per Month cell");
+                }
+            } else if (column.FieldName == "StartDate") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colEngineerStartDate, "Insert Valid Start Day");
+                } else if (cellVal == "") {
+                    e.Valid = false;
+                    view.SetColumnError(colEngineerStartDate, "Fill Start Day cell");
+                }
+            }
+        }
+
+        private void gridView2_ValidateRow(object sender, ValidateRowEventArgs e) {
+            GridView view = sender as GridView;
+            GridColumn colName = view.Columns["Name"];
+            GridColumn colSurName = view.Columns["Surname"];
+            GridColumn colSalaryPerMonth = view.Columns["SalaryPerMonth"];
+            GridColumn colEngineerStartDate = view.Columns["StartDate"];
+            String name = view.GetRowCellValue(e.RowHandle, colName) as String;
+            String surname = view.GetRowCellValue(e.RowHandle, colSurName) as String;
+            String salaryPerMonth = view.GetRowCellValue(e.RowHandle, colSalaryPerMonth).ToString();
+            String startDay;
+            if (view.GetRowCellValue(e.RowHandle, colEngineerStartDate) != null)
+                startDay = view.GetRowCellValue(e.RowHandle, colEngineerStartDate).ToString();
+            else
+                startDay = null;
+            // Name Cell
+            if (name == null) {
+                e.Valid = false;
+                view.SetColumnError(colName, "Insert Valid Name");
+            } else if (name == "") {
+                e.Valid = false;
+                view.SetColumnError(colName, "Fill Name cell");
+            }
+            // Surname Cell
+            if (surname == null) {
+                e.Valid = false;
+                view.SetColumnError(colSurName, "Insert Valid Surname");
+            } else if (surname == "") {
+                e.Valid = false;
+                view.SetColumnError(colSurName, "Fill Surname cell");
+            }
+            // Salary Per Month Cell
+            if (salaryPerMonth == null) {
+                e.Valid = false;
+                view.SetColumnError(colSalaryPerMonth, "Insert Valid Salary Per Month");
+            } else if (salaryPerMonth == "0") {
+                e.Valid = false;
+                view.SetColumnError(colSalaryPerMonth, "Fill Salary Per Month cell");
+            }
+            // Start Day Cell
+            if (startDay == null) {
+                e.Valid = false;
+                view.SetColumnError(colEngineerStartDate, "Insert Valid Start Day");
+            } else if (startDay == "") {
+                e.Valid = false;
+                view.SetColumnError(colEngineerStartDate, "Fill Start Day cell");
+            }
+
+            if (e.Valid) {
+                view.ClearColumnErrors();
+            }
+        }
+
+        private void gridView2_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
+            ColumnView view = sender as ColumnView;
+            GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
+            String cellVal = e.Value.ToString();
+            if (column.FieldName == "Name") {
+                // colName changed
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colName, "Insert Valid Name");
+                } else if (cellVal == "") {
+                    e.Valid = false;
+                    view.SetColumnError(colName, "Fill Name cell");
+                }
+            } else if (column.FieldName == "Surname") {
+                // colSurname changed
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colSurname, "Insert Valid Surname");
+                } else if (cellVal == "") {
+                    e.Valid = false;
+                    view.SetColumnError(colSurname, "Fill Surname cell");
+                }
+            } else if (column.FieldName == "SalaryPerMonth") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colSalaryPerMonth, "Insert Valid Salary Per Month");
+                } else if (cellVal == "0") {
+                    e.Valid = false;
+                    view.SetColumnError(colSalaryPerMonth, "Fill Salary Per Month cell");
+                }
+            } else if (column.FieldName == "StartDate") {
+                if (cellVal == null) {
+                    e.Valid = false;
+                    view.SetColumnError(colEngineerStartDate, "Insert Valid Start Day");
+                } else if (cellVal == "") {
+                    e.Valid = false;
+                    view.SetColumnError(colEngineerStartDate, "Fill Start Day cell");
                 }
             }
         }

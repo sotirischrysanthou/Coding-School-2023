@@ -62,13 +62,15 @@
             // 
             this.grdEngineers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdEngineers.Location = new System.Drawing.Point(11, 53);
+            this.grdEngineers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grdEngineers.Location = new System.Drawing.Point(10, 40);
             this.grdEngineers.MainView = this.gridView1;
+            this.grdEngineers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdEngineers.Name = "grdEngineers";
             this.grdEngineers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repManagerName,
             this.repManagerSurname});
-            this.grdEngineers.Size = new System.Drawing.Size(1051, 159);
+            this.grdEngineers.Size = new System.Drawing.Size(920, 119);
             this.grdEngineers.TabIndex = 0;
             this.grdEngineers.UseEmbeddedNavigator = true;
             this.grdEngineers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -83,7 +85,7 @@
             this.colEngineersManagerSurname,
             this.colSalaryPerMonth,
             this.colEngineerStartDate});
-            this.gridView1.DetailHeight = 349;
+            this.gridView1.DetailHeight = 262;
             this.gridView1.GridControl = this.grdEngineers;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -94,32 +96,32 @@
             // 
             this.colName.Caption = "Name";
             this.colName.FieldName = "Name";
-            this.colName.MinWidth = 25;
+            this.colName.MinWidth = 22;
             this.colName.Name = "colName";
             this.colName.Visible = true;
             this.colName.VisibleIndex = 0;
-            this.colName.Width = 94;
+            this.colName.Width = 82;
             // 
             // colSurname
             // 
             this.colSurname.Caption = "Surname";
             this.colSurname.FieldName = "Surname";
-            this.colSurname.MinWidth = 25;
+            this.colSurname.MinWidth = 22;
             this.colSurname.Name = "colSurname";
             this.colSurname.Visible = true;
             this.colSurname.VisibleIndex = 1;
-            this.colSurname.Width = 94;
+            this.colSurname.Width = 82;
             // 
             // colEngineersManagerName
             // 
             this.colEngineersManagerName.Caption = "Manager Name";
             this.colEngineersManagerName.ColumnEdit = this.repManagerName;
             this.colEngineersManagerName.FieldName = "ManagerID";
-            this.colEngineersManagerName.MinWidth = 25;
+            this.colEngineersManagerName.MinWidth = 22;
             this.colEngineersManagerName.Name = "colEngineersManagerName";
             this.colEngineersManagerName.Visible = true;
             this.colEngineersManagerName.VisibleIndex = 2;
-            this.colEngineersManagerName.Width = 94;
+            this.colEngineersManagerName.Width = 82;
             // 
             // repManagerName
             // 
@@ -133,11 +135,9 @@
             this.colEngineersManagerSurname.Caption = "Manager Surname";
             this.colEngineersManagerSurname.ColumnEdit = this.repManagerSurname;
             this.colEngineersManagerSurname.FieldName = "ManagerID";
-            this.colEngineersManagerSurname.MinWidth = 23;
             this.colEngineersManagerSurname.Name = "colEngineersManagerSurname";
             this.colEngineersManagerSurname.Visible = true;
             this.colEngineersManagerSurname.VisibleIndex = 3;
-            this.colEngineersManagerSurname.Width = 86;
             // 
             // repManagerSurname
             // 
@@ -150,21 +150,19 @@
             // 
             this.colSalaryPerMonth.Caption = "Salary per Month";
             this.colSalaryPerMonth.FieldName = "SalaryPerMonth";
-            this.colSalaryPerMonth.MinWidth = 25;
+            this.colSalaryPerMonth.MinWidth = 22;
             this.colSalaryPerMonth.Name = "colSalaryPerMonth";
             this.colSalaryPerMonth.Visible = true;
             this.colSalaryPerMonth.VisibleIndex = 4;
-            this.colSalaryPerMonth.Width = 94;
+            this.colSalaryPerMonth.Width = 82;
             // 
             // colEngineerStartDate
             // 
             this.colEngineerStartDate.Caption = "Start Date";
             this.colEngineerStartDate.FieldName = "StartDate";
-            this.colEngineerStartDate.MinWidth = 23;
             this.colEngineerStartDate.Name = "colEngineerStartDate";
             this.colEngineerStartDate.Visible = true;
             this.colEngineerStartDate.VisibleIndex = 5;
-            this.colEngineerStartDate.Width = 86;
             // 
             // labelEngineers
             // 
@@ -172,9 +170,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelEngineers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelEngineers.Appearance.Options.UseFont = true;
-            this.labelEngineers.Location = new System.Drawing.Point(11, 17);
+            this.labelEngineers.Location = new System.Drawing.Point(10, 13);
+            this.labelEngineers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelEngineers.Name = "labelEngineers";
-            this.labelEngineers.Size = new System.Drawing.Size(108, 30);
+            this.labelEngineers.Size = new System.Drawing.Size(87, 24);
             this.labelEngineers.TabIndex = 1;
             this.labelEngineers.Text = "Engineers";
             // 
@@ -182,10 +181,12 @@
             // 
             this.grdManagers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdManagers.Location = new System.Drawing.Point(11, 263);
+            this.grdManagers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grdManagers.Location = new System.Drawing.Point(10, 197);
             this.grdManagers.MainView = this.gridView2;
+            this.grdManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdManagers.Name = "grdManagers";
-            this.grdManagers.Size = new System.Drawing.Size(1051, 192);
+            this.grdManagers.Size = new System.Drawing.Size(920, 144);
             this.grdManagers.TabIndex = 2;
             this.grdManagers.UseEmbeddedNavigator = true;
             this.grdManagers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -199,58 +200,58 @@
             this.colManagerSurname,
             this.colManagerSalaryPerMonth,
             this.colManagerStartDate});
-            this.gridView2.DetailHeight = 349;
+            this.gridView2.DetailHeight = 262;
             this.gridView2.GridControl = this.grdManagers;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
+            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
+            this.gridView2.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
             // 
             // colID
             // 
             this.colID.Caption = "ID";
             this.colID.FieldName = "ID";
-            this.colID.MinWidth = 23;
             this.colID.Name = "colID";
-            this.colID.Width = 86;
             // 
             // colManagerName
             // 
             this.colManagerName.Caption = "Name";
             this.colManagerName.FieldName = "Name";
-            this.colManagerName.MinWidth = 25;
+            this.colManagerName.MinWidth = 22;
             this.colManagerName.Name = "colManagerName";
             this.colManagerName.Visible = true;
             this.colManagerName.VisibleIndex = 0;
-            this.colManagerName.Width = 94;
+            this.colManagerName.Width = 82;
             // 
             // colManagerSurname
             // 
             this.colManagerSurname.Caption = "Surname";
             this.colManagerSurname.FieldName = "Surname";
-            this.colManagerSurname.MinWidth = 25;
+            this.colManagerSurname.MinWidth = 22;
             this.colManagerSurname.Name = "colManagerSurname";
             this.colManagerSurname.Visible = true;
             this.colManagerSurname.VisibleIndex = 1;
-            this.colManagerSurname.Width = 94;
+            this.colManagerSurname.Width = 82;
             // 
             // colManagerSalaryPerMonth
             // 
             this.colManagerSalaryPerMonth.Caption = "Salary per Month";
             this.colManagerSalaryPerMonth.FieldName = "SalaryPerMonth";
-            this.colManagerSalaryPerMonth.MinWidth = 25;
+            this.colManagerSalaryPerMonth.MinWidth = 22;
             this.colManagerSalaryPerMonth.Name = "colManagerSalaryPerMonth";
             this.colManagerSalaryPerMonth.Visible = true;
             this.colManagerSalaryPerMonth.VisibleIndex = 2;
-            this.colManagerSalaryPerMonth.Width = 94;
+            this.colManagerSalaryPerMonth.Width = 82;
             // 
             // colManagerStartDate
             // 
             this.colManagerStartDate.Caption = "Start Date";
             this.colManagerStartDate.FieldName = "StartDate";
-            this.colManagerStartDate.MinWidth = 23;
             this.colManagerStartDate.Name = "colManagerStartDate";
             this.colManagerStartDate.Visible = true;
             this.colManagerStartDate.VisibleIndex = 3;
+            this.colManagerStartDate.Width = 66;
             // 
             // labelManagers
             // 
@@ -258,9 +259,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelManagers.Appearance.Options.UseFont = true;
-            this.labelManagers.Location = new System.Drawing.Point(11, 227);
+            this.labelManagers.Location = new System.Drawing.Point(10, 170);
+            this.labelManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelManagers.Name = "labelManagers";
-            this.labelManagers.Size = new System.Drawing.Size(106, 30);
+            this.labelManagers.Size = new System.Drawing.Size(86, 24);
             this.labelManagers.TabIndex = 3;
             this.labelManagers.Text = "Managers";
             // 
@@ -271,9 +273,10 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(759, 477);
+            this.btnSave.Location = new System.Drawing.Point(664, 358);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(149, 40);
+            this.btnSave.Size = new System.Drawing.Size(130, 30);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -288,9 +291,10 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnClose.Location = new System.Drawing.Point(914, 477);
+            this.btnClose.Location = new System.Drawing.Point(800, 358);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(149, 40);
+            this.btnClose.Size = new System.Drawing.Size(130, 30);
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -309,17 +313,16 @@
             // 
             // EmployeesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 540);
+            this.ClientSize = new System.Drawing.Size(955, 405);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelManagers);
             this.Controls.Add(this.grdManagers);
             this.Controls.Add(this.labelEngineers);
             this.Controls.Add(this.grdEngineers);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(1001, 576);
+            this.MinimumSize = new System.Drawing.Size(878, 442);
             this.Name = "EmployeesForm";
             this.Text = "Employees";
             this.Load += new System.EventHandler(this.EmployeesForm_Load);
