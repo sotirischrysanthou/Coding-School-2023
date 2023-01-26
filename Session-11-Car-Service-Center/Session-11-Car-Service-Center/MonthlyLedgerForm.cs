@@ -3,6 +3,7 @@ using DevExpress.Utils.Extensions;
 using DevExpress.XtraBars;
 using DevExpress.XtraCharts.GLGraphics;
 using DevExpress.XtraGantt.Scheduling;
+using DevExpress.XtraSpreadsheet.Commands;
 using SerializerLib;
 using System;
 using System.Collections.Generic;
@@ -44,8 +45,26 @@ namespace Session_11_Car_Service_Center {
             MessageBox.Show(deFrom.EditValue.ToString());
         }
 
-        private void btnPrint_Click(object sender, EventArgs e) {
-
+        private void btnCalculate_Click(object sender, EventArgs e) {
+            List<MonthlyLedger> list = new List<MonthlyLedger>();
+            MonthlyLedger monthlyLedger;
+            if (deFrom.EditValue == null && deTo.EditValue == null) {
+                int year = DateTime.Now.Year;
+                for (int month = 1; month <= 12; month++) {
+                    monthlyLedger = new MonthlyLedger(year, month);
+                    monthlyLedger.Expenses += _carServiceCenter.SalaryEngineersFrom(year, month);
+                    monthlyLedger.Expenses += _carServiceCenter.SalaryManagersFrom(year, month);
+                    foreach (Transaction transaction in _carServiceCenter.Transactions) {
+                        if (transaction.Date.Year == year && transaction.Date.Month == month) {
+                            monthlyLedger.Incomes += transaction.TotalPrice;
+                        }
+                    }
+                    list.Add(monthlyLedger);
+                }
+            }
+            bsMonthlyLedger.DataSource = list;
+            grdMonthlyLedger.DataSource = bsMonthlyLedger;
+            gridView1.RefreshData();
         }
 
         //TODO : Delete this
@@ -78,17 +97,21 @@ namespace Session_11_Car_Service_Center {
         //private void btnCalculate_Click(object sender, EventArgs e) {
         //    List<MonthlyLedger> monthlyLedgers = null;
         //    if (deFrom.EditValue != null && deTo.EditValue != null) {
-        //        if((DateTime)deTo.EditValue > (DateTime)deFrom.EditValue) {
+        //        if ((DateTime)deTo.EditValue > (DateTime)deFrom.EditValue) {
         //            monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, (DateTime)deTo.EditValue);
         //            bsMonthlyLedger.DataSource = monthlyLedgers;
         //            grdMonthlyLedger.DataSource = bsMonthlyLedger;
         //            gridView1.RefreshData();
-        //        } else {
+        //        }
+        //        else {
         //            MessageBox.Show("From should be before To");
         //        }
-        //    } else {
-        //        MessageBox.Show("Give Dates");
-        //    }
+        //} else if (deFrom.EditValue != null && (bool)(deTo.EditValue != null)) {
+        //    monthlyLedgers = _carServiceCenter.BookKeepingFromTo((DateTime)deFrom.EditValue, );
+        //    bsMonthlyLedger.DataSource = monthlyLedgers;
+        //    grdMonthlyLedger.DataSource = bsMonthlyLedger;
+        //    gridView1.RefreshData();
+        //}
         //}
     }
 }

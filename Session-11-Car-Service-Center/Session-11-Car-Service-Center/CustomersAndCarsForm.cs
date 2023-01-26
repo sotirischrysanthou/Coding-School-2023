@@ -129,7 +129,7 @@ namespace Session_11_Car_Service_Center {
                 view.SetColumnError(colRegNum, "Insert Valid Registration number");
             } else if (regNum == "") {
                 view.SetColumnError(colModel, "Fill Car Registration Number cell");
-            } else if (Regex.IsMatch(regNum.Substring(0, 3), @"^[a-zA-Z]+$") && regNum[3] == ' ' && Regex.IsMatch(regNum.Substring(4, 4), @"^[1-9]+$")) {
+            } else if (regNum.Count() == 8 &&Regex.IsMatch(regNum.Substring(0, 3), @"^[a-zA-Z]+$") && regNum[3] == ' ' && Regex.IsMatch(regNum.Substring(4, 4), @"^[1-9]+$")) {
                 // Correct
             } else {
                 e.Valid = false;
