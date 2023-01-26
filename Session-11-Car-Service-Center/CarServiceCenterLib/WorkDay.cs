@@ -59,6 +59,10 @@ namespace CarServiceCenterLib {
             }
             return ret;
         }
+
+        public void DeleteTask(TransactionLine task) {
+            Tasks.Remove(task);
+        }
     }
 }
 

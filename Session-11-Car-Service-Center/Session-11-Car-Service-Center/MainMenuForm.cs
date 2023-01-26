@@ -55,7 +55,7 @@ namespace Session_11_Car_Service_Center {
             _carServiceCenter.Engineers.Add(new Engineer("Kostis", "Marvelias", _carServiceCenter.Managers[0].ID, 800, DateTime.Parse("2/3/2023")));
 
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "Air Filter", 2.0));
-            _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "General service", 10.0));
+            _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "General service", 8.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "Tire change", 3.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "Change gasket", 6.0));
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Oil Filter", 4.0));

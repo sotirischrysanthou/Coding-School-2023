@@ -52,6 +52,14 @@ namespace CarServiceCenterLib {
             return ret;
         }
 
+        public void DeleteTask(TransactionLine task, DateTime date) {
+            foreach (WorkDay workDay in WorkDays) {
+                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
+                    workDay.DeleteTask(task);
+                }
+            }
+        }
+
         public double SalaryEngineersFrom(int Year, int Month) {
             double TotalSalary = 0;
             foreach (Engineer engineer in Engineers) {
@@ -84,8 +92,8 @@ namespace CarServiceCenterLib {
             List<MonthlyLedger> bookKeeping = new List<MonthlyLedger>();
             foreach (MonthlyLedger monthlyLedger in MonthlyLedgers) {
                 DateTime date = new DateTime(monthlyLedger.Year, monthlyLedger.Month, 1);
-                
-                if (date >= from && date<= to) {
+
+                if (date >= from && date <= to) {
                     foreach (Transaction transaction in Transactions) {
                         if (transaction.Date.Year == monthlyLedger.Year && transaction.Date.Month == monthlyLedger.Month) {
                             incomes += transaction.TotalPrice;
