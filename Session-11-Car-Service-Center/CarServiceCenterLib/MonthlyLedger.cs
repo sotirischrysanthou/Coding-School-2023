@@ -29,14 +29,5 @@ namespace CarServiceCenterLib {
 
         }
 
-        // Methods
-        public void UpdateIncomes(double income) {
-            Incomes = income;
-            Total = Incomes - Expenses;
-        }
-        public void UpdateExpenses(double expense) {
-            Expenses += expense;
-        }
-
     }
 }
