@@ -84,34 +84,6 @@ namespace CarServiceCenterLib {
             return TotalSalary;
         }
 
-        // TODO Delete this
-        //public void UpdateMonthlyLedger(DateTime FromDate, double Salary) {
-        //    foreach (MonthlyLedger monthlyLedger in MonthlyLedgers) {
-        //        if (monthlyLedger.Year >= FromDate.Year && monthlyLedger.Month >= FromDate.Month) {
-        //            monthlyLedger.UpdateExpenses(Salary);
-        //        }
-        //    }
-        //}
-
-        //public List<MonthlyLedger> BookKeepingFromTo(DateTime from, DateTime to) {
-        //    double incomes = 0;
-        //    List<MonthlyLedger> bookKeeping = new List<MonthlyLedger>();
-        //    foreach (MonthlyLedger monthlyLedger in MonthlyLedgers) {
-        //        DateTime date = new DateTime(monthlyLedger.Year, monthlyLedger.Month, 1);
-
-        //        if (date >= from && date <= to) {
-        //            foreach (Transaction transaction in Transactions) {
-        //                if (transaction.Date.Year == monthlyLedger.Year && transaction.Date.Month == monthlyLedger.Month) {
-        //                    incomes += transaction.TotalPrice;
-        //                }
-        //            }
-        //            monthlyLedger.UpdateIncomes(incomes);
-        //            bookKeeping.Add(monthlyLedger);
-        //        }
-        //    }
-        //    return bookKeeping;
-        //}
-
         public void addManagerProfile(Guid managerID, String username, String password) {
             foreach (Manager manager in Managers) {
                 if(manager.ID == managerID) {
