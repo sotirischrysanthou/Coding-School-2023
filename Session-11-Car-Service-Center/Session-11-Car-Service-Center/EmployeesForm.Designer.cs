@@ -183,7 +183,7 @@
             this.grdManagers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdManagers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grdManagers.Location = new System.Drawing.Point(10, 197);
+            this.grdManagers.Location = new System.Drawing.Point(9, 216);
             this.grdManagers.MainView = this.gridView2;
             this.grdManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdManagers.Name = "grdManagers";
@@ -260,7 +260,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelManagers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelManagers.Appearance.Options.UseFont = true;
-            this.labelManagers.Location = new System.Drawing.Point(9, 180);
+            this.labelManagers.Location = new System.Drawing.Point(10, 188);
             this.labelManagers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelManagers.Name = "labelManagers";
             this.labelManagers.Size = new System.Drawing.Size(86, 24);
@@ -274,7 +274,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(664, 358);
+            this.btnSave.Location = new System.Drawing.Point(664, 364);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 30);
@@ -292,7 +292,7 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnClose.Location = new System.Drawing.Point(800, 358);
+            this.btnClose.Location = new System.Drawing.Point(800, 364);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(130, 30);
