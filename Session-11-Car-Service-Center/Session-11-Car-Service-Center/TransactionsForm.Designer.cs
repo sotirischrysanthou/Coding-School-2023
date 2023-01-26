@@ -172,6 +172,7 @@
             this.colHours.Caption = "Hours";
             this.colHours.FieldName = "Hours";
             this.colHours.Name = "colHours";
+            this.colHours.OptionsColumn.AllowEdit = false;
             this.colHours.Visible = true;
             this.colHours.VisibleIndex = 3;
             // 
@@ -180,6 +181,7 @@
             this.colPricePerHour.Caption = "Price Per Hour";
             this.colPricePerHour.FieldName = "PricePerHour";
             this.colPricePerHour.Name = "colPricePerHour";
+            this.colPricePerHour.OptionsColumn.AllowEdit = false;
             this.colPricePerHour.Visible = true;
             this.colPricePerHour.VisibleIndex = 4;
             // 
@@ -188,6 +190,7 @@
             this.Price.Caption = "Price";
             this.Price.FieldName = "Price";
             this.Price.Name = "Price";
+            this.Price.OptionsColumn.AllowEdit = false;
             this.Price.Visible = true;
             this.Price.VisibleIndex = 5;
             // 
