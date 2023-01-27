@@ -32,6 +32,19 @@ namespace CarServiceCenterLib {
         public void AddEngineer( Engineer engineer ) {
             Engineers.Add(engineer);
         }
+        // TODO :
+        public bool LogIn(String userName, String password ) {
+            bool ret = false;
+            if (true) {
+                ret = true;
+            }
+            return ret;
+        }
+        //TODO: 
+        public void CreateProfile(String userName, String password) { 
+            _username = userName;
+            _password = password;
+        }
 
         public bool LogIn(String userName, String password ) {
             bool ret = false;
