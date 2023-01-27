@@ -201,12 +201,13 @@
             // 
             this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btn_Save.FlatAppearance.BorderSize = 0;
+            this.btn_Save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_Save.FlatAppearance.BorderSize = 2;
             this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Save.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Save.Location = new System.Drawing.Point(524, 409);
+            this.btn_Save.Location = new System.Drawing.Point(534, 404);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(130, 30);
+            this.btn_Save.Size = new System.Drawing.Size(125, 40);
             this.btn_Save.TabIndex = 4;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
@@ -218,12 +219,13 @@
             // 
             this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btn_Close.FlatAppearance.BorderSize = 0;
+            this.btn_Close.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_Close.FlatAppearance.BorderSize = 2;
             this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Close.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Close.Location = new System.Drawing.Point(660, 409);
+            this.btn_Close.Location = new System.Drawing.Point(665, 404);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(130, 30);
+            this.btn_Close.Size = new System.Drawing.Size(125, 40);
             this.btn_Close.TabIndex = 5;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = false;
@@ -235,6 +237,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(804, 451);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);

@@ -108,7 +108,7 @@
             this.grdMonthlyLedger.Location = new System.Drawing.Point(12, 12);
             this.grdMonthlyLedger.MainView = this.gridView1;
             this.grdMonthlyLedger.Name = "grdMonthlyLedger";
-            this.grdMonthlyLedger.Size = new System.Drawing.Size(798, 431);
+            this.grdMonthlyLedger.Size = new System.Drawing.Size(798, 413);
             this.grdMonthlyLedger.TabIndex = 4;
             this.grdMonthlyLedger.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -173,23 +173,31 @@
             // btnCalculate
             // 
             this.btnCalculate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCalculate.Location = new System.Drawing.Point(683, 449);
+            this.btnCalculate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCalculate.FlatAppearance.BorderSize = 2;
+            this.btnCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalculate.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCalculate.Location = new System.Drawing.Point(685, 434);
             this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(127, 25);
+            this.btnCalculate.Size = new System.Drawing.Size(125, 40);
             this.btnCalculate.TabIndex = 11;
             this.btnCalculate.Text = "Calculate";
             this.btnCalculate.UseVisualStyleBackColor = true;
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
+            this.btnCalculate.MouseEnter += new System.EventHandler(this.btnCalculate_MouseEnter);
+            this.btnCalculate.MouseLeave += new System.EventHandler(this.btnCalculate_MouseLeave);
             // 
             // MonthlyLedgerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(822, 486);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.grdMonthlyLedger);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(838, 525);
             this.Name = "MonthlyLedgerForm";
             this.Text = "MonthlyLedgerForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();

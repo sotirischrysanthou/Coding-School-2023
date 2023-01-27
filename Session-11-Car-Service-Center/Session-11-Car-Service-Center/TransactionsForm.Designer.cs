@@ -83,7 +83,7 @@
             // 
             this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdTransactionLines.Location = new System.Drawing.Point(12, 237);
+            this.grdTransactionLines.Location = new System.Drawing.Point(12, 230);
             this.grdTransactionLines.MainView = this.gridView2;
             this.grdTransactionLines.Name = "grdTransactionLines";
             this.grdTransactionLines.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -355,12 +355,14 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSave.FlatAppearance.BorderSize = 2;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(523, 414);
+            this.btnSave.Location = new System.Drawing.Point(521, 404);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(130, 30);
+            this.btnSave.Size = new System.Drawing.Size(125, 40);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -372,12 +374,14 @@
             // 
             this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btn_Close.FlatAppearance.BorderSize = 0;
+            this.btn_Close.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_Close.FlatAppearance.BorderSize = 2;
             this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Close.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Close.Location = new System.Drawing.Point(659, 414);
+            this.btn_Close.Location = new System.Drawing.Point(663, 404);
+            this.btn_Close.Margin = new System.Windows.Forms.Padding(0);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(130, 30);
+            this.btn_Close.Size = new System.Drawing.Size(125, 40);
             this.btn_Close.TabIndex = 7;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = false;
@@ -403,7 +407,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(12, 207);
+            this.labelControl1.Location = new System.Drawing.Point(12, 200);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(141, 24);
             this.labelControl1.TabIndex = 9;
@@ -415,7 +419,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(521, 207);
+            this.labelControl2.Location = new System.Drawing.Point(521, 200);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(217, 24);
             this.labelControl2.TabIndex = 10;
@@ -427,7 +431,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelWorkHours.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelWorkHours.Appearance.Options.UseFont = true;
-            this.labelWorkHours.Location = new System.Drawing.Point(744, 207);
+            this.labelWorkHours.Location = new System.Drawing.Point(744, 200);
             this.labelWorkHours.Name = "labelWorkHours";
             this.labelWorkHours.Size = new System.Drawing.Size(11, 24);
             this.labelWorkHours.TabIndex = 11;
@@ -437,6 +441,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.labelWorkHours);
             this.Controls.Add(this.labelControl2);

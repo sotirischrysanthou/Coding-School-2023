@@ -105,7 +105,7 @@ namespace Session_11_Car_Service_Center {
         }
 
         private void btnEmployees_Click(object sender, EventArgs e) {
-            EmployeesForm employeesForm = new EmployeesForm(_carServiceCenter); 
+            EmployeesForm employeesForm = new EmployeesForm(_carServiceCenter);
             employeesForm.ShowDialog();
         }
 
@@ -124,12 +124,11 @@ namespace Session_11_Car_Service_Center {
             if (File.Exists("CarServiceCenter.json")) {
                 _carServiceCenter = _serializer.Deserialize<CarServiceCenter>("CarServiceCenter.json");
                 DevExpress.XtraEditors.XtraMessageBox.Show("Load Successful!");
-            }
-            else {
+            } else {
                 DevExpress.XtraEditors.XtraMessageBox.Show("File Not Found!");
             }
-           
-        }   
+
+        }
 
         private void btnTransactions_Click(object sender, EventArgs e) {
             TransactionsForm transactionsForm = new TransactionsForm(_carServiceCenter);
@@ -160,11 +159,92 @@ namespace Session_11_Car_Service_Center {
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e) {
+        private void btnExit_Click(object sender, EventArgs e) {
             this.Close();
         }
 
         //Customize Buttons
+        private void btnTransactions_MouseEnter(object sender, EventArgs e) {
+            btnTransactions.BackColor = Color.FromArgb(145, 31, 31);
+            btnTransactions.FlatAppearance.MouseOverBackColor = btnTransactions.BackColor;
+            btnTransactions.ForeColor = Color.White;
+            btnTransactions.FlatAppearance.BorderColor = Color.Black;
+            btnTransactions.FlatAppearance.BorderSize = 1;
+        }
+        private void btnTransactions_MouseLeave(object sender, EventArgs e) {
+            btnTransactions.BackColor = Color.FromArgb(237, 234, 218);
+            btnTransactions.ForeColor = Color.Black;
+            btnTransactions.FlatAppearance.BorderSize = 0;
+        }
+        private void btnCustomerAndCars_MouseEnter(object sender, EventArgs e) {
+            btnCustomerAndCars.BackColor = Color.FromArgb(145, 31, 31);
+            btnCustomerAndCars.FlatAppearance.MouseOverBackColor = btnCustomerAndCars.BackColor;
+            btnCustomerAndCars.ForeColor = Color.White;
+            btnCustomerAndCars.FlatAppearance.BorderColor = Color.Black;
+            btnCustomerAndCars.FlatAppearance.BorderSize = 1;
+        }
+
+        private void btnCustomerAndCars_MouseLeave(object sender, EventArgs e) {
+            btnCustomerAndCars.BackColor = Color.FromArgb(237, 234, 218);
+            btnCustomerAndCars.ForeColor = Color.Black;
+            btnCustomerAndCars.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btnServiceTasks_MouseEnter(object sender, EventArgs e) {
+            btnServiceTasks.BackColor = Color.FromArgb(145, 31, 31);
+            btnServiceTasks.FlatAppearance.MouseOverBackColor = btnServiceTasks.BackColor;
+            btnServiceTasks.ForeColor = Color.White;
+            btnServiceTasks.FlatAppearance.BorderColor = Color.Black;
+            btnServiceTasks.FlatAppearance.BorderSize = 1;
+        }
+
+        private void btnServiceTasks_MouseLeave(object sender, EventArgs e) {
+            btnServiceTasks.BackColor = Color.FromArgb(237, 234, 218);
+            btnServiceTasks.ForeColor = Color.Black;
+            btnServiceTasks.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btnEmployees_MouseEnter(object sender, EventArgs e) {
+            btnEmployees.BackColor = Color.FromArgb(145, 31, 31);
+            btnEmployees.FlatAppearance.MouseOverBackColor = btnEmployees.BackColor;
+            btnEmployees.ForeColor = Color.White;
+            btnEmployees.FlatAppearance.BorderColor = Color.Black;
+            btnEmployees.FlatAppearance.BorderSize = 1;
+        }
+
+        private void btnEmployees_MouseLeave(object sender, EventArgs e) {
+            btnEmployees.BackColor = Color.FromArgb(237, 234, 218);
+            btnEmployees.ForeColor = Color.Black;
+            btnEmployees.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btn_MonthlyLedger_MouseEnter(object sender, EventArgs e) {
+            btn_MonthlyLedger.BackColor = Color.FromArgb(145, 31, 31);
+            btn_MonthlyLedger.FlatAppearance.MouseOverBackColor = btn_MonthlyLedger.BackColor;
+            btn_MonthlyLedger.ForeColor = Color.White;
+            btn_MonthlyLedger.FlatAppearance.BorderColor = Color.Black;
+            btn_MonthlyLedger.FlatAppearance.BorderSize = 1;
+        }
+
+        private void btn_MonthlyLedger_MouseLeave(object sender, EventArgs e) {
+            btn_MonthlyLedger.BackColor = Color.FromArgb(237, 234, 218);
+            btn_MonthlyLedger.ForeColor = Color.Black;
+            btn_MonthlyLedger.FlatAppearance.BorderSize = 0;
+        }
+
+        private void btnExit_MouseEnter(object sender, EventArgs e) {
+            btnExit.BackColor = Color.FromArgb(145, 31, 31);
+            btnExit.FlatAppearance.MouseOverBackColor = btnExit.BackColor;
+            btnExit.ForeColor = Color.White;
+            btnExit.FlatAppearance.BorderColor = Color.Black;
+            btnExit.FlatAppearance.BorderSize = 1;
+        }
+
+        private void btnExit_MouseLeave(object sender, EventArgs e) {
+            btnExit.BackColor = Color.FromArgb(237, 234, 218);
+            btnExit.ForeColor = Color.Black;
+            btnExit.FlatAppearance.BorderSize = 0;
+        }
         private void btnPopulate_MouseEnter(object sender, EventArgs e) {
             btnPopulate.FlatAppearance.MouseOverBackColor = btnPopulate.BackColor;
             btnPopulate.ForeColor = Color.Blue;
@@ -200,7 +280,5 @@ namespace Session_11_Car_Service_Center {
             btnLoad.ForeColor = Color.Black;
             btnLoad.FlatAppearance.BorderSize = 0;
         }
-
- 
     }
 }

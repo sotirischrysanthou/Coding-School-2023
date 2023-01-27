@@ -52,7 +52,6 @@ namespace Session_11_Car_Service_Center {
         private void btnSave_Click(object sender, EventArgs e) {
             _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
             DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
-
         }
 
         private void SetLookUpEdit<T>(RepositoryItemLookUpEdit rep, List<T> list, String displayMember, String valueMember) {
@@ -142,7 +141,8 @@ namespace Session_11_Car_Service_Center {
 
         private void btnSave_MouseLeave(object sender, EventArgs e) {
             btnSave.ForeColor = Color.Black;
-            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatAppearance.BorderColor = Color.Black;
+            btnSave.FlatAppearance.BorderSize = 2;
         }
 
         private void btn_Close_MouseEnter(object sender, EventArgs e) {
@@ -154,7 +154,8 @@ namespace Session_11_Car_Service_Center {
 
         private void btn_Close_MouseLeave(object sender, EventArgs e) {
             btn_Close.ForeColor = Color.Black;
-            btn_Close.FlatAppearance.BorderSize = 0;
+            btn_Close.FlatAppearance.BorderColor = Color.Black;
+            btn_Close.FlatAppearance.BorderSize = 2;
         }
 
         private void gridView1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e) {

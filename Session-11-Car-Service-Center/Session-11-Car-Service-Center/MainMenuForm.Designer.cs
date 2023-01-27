@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btn_MonthlyLedger = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
             this.btnServiceTasks = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@
             // 
             this.panelMenu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.panelMenu.Controls.Add(this.button1);
+            this.panelMenu.Controls.Add(this.btnExit);
             this.panelMenu.Controls.Add(this.btn_MonthlyLedger);
             this.panelMenu.Controls.Add(this.btnEmployees);
             this.panelMenu.Controls.Add(this.btnServiceTasks);
@@ -63,28 +63,32 @@
             this.panelMenu.TabIndex = 7;
             this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
             // 
-            // button1
+            // btnExit
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = global::Session_11_Car_Service_Center.Properties.Resources.exit;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 380);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
-            this.button1.Size = new System.Drawing.Size(220, 60);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Exit ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnExit.ForeColor = System.Drawing.Color.Black;
+            this.btnExit.Image = global::Session_11_Car_Service_Center.Properties.Resources.exit;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(0, 380);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
+            this.btnExit.Size = new System.Drawing.Size(220, 60);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "Exit ";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
+            this.btnExit.MouseLeave += new System.EventHandler(this.btnExit_MouseLeave);
             // 
             // btn_MonthlyLedger
             // 
             this.btn_MonthlyLedger.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_MonthlyLedger.FlatAppearance.BorderSize = 0;
             this.btn_MonthlyLedger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_MonthlyLedger.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_MonthlyLedger.ForeColor = System.Drawing.Color.Black;
             this.btn_MonthlyLedger.Image = global::Session_11_Car_Service_Center.Properties.Resources.monthlyledger;
             this.btn_MonthlyLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -96,12 +100,15 @@
             this.btn_MonthlyLedger.Text = "MonthlyLedger";
             this.btn_MonthlyLedger.UseVisualStyleBackColor = true;
             this.btn_MonthlyLedger.Click += new System.EventHandler(this.btn_MonthlyLedger_Click_1);
+            this.btn_MonthlyLedger.MouseEnter += new System.EventHandler(this.btn_MonthlyLedger_MouseEnter);
+            this.btn_MonthlyLedger.MouseLeave += new System.EventHandler(this.btn_MonthlyLedger_MouseLeave);
             // 
             // btnEmployees
             // 
             this.btnEmployees.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEmployees.FlatAppearance.BorderSize = 0;
             this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmployees.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEmployees.ForeColor = System.Drawing.Color.Black;
             this.btnEmployees.Image = global::Session_11_Car_Service_Center.Properties.Resources.employee;
             this.btnEmployees.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -113,12 +120,15 @@
             this.btnEmployees.Text = "Employees";
             this.btnEmployees.UseVisualStyleBackColor = true;
             this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click_1);
+            this.btnEmployees.MouseEnter += new System.EventHandler(this.btnEmployees_MouseEnter);
+            this.btnEmployees.MouseLeave += new System.EventHandler(this.btnEmployees_MouseLeave);
             // 
             // btnServiceTasks
             // 
             this.btnServiceTasks.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnServiceTasks.FlatAppearance.BorderSize = 0;
             this.btnServiceTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnServiceTasks.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnServiceTasks.ForeColor = System.Drawing.Color.Black;
             this.btnServiceTasks.Image = global::Session_11_Car_Service_Center.Properties.Resources.serviceTasks;
             this.btnServiceTasks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -130,29 +140,36 @@
             this.btnServiceTasks.Text = "Service Tasks";
             this.btnServiceTasks.UseVisualStyleBackColor = true;
             this.btnServiceTasks.Click += new System.EventHandler(this.btnServiceTasks_Click_1);
+            this.btnServiceTasks.MouseEnter += new System.EventHandler(this.btnServiceTasks_MouseEnter);
+            this.btnServiceTasks.MouseLeave += new System.EventHandler(this.btnServiceTasks_MouseLeave);
             // 
             // btnCustomerAndCars
             // 
             this.btnCustomerAndCars.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCustomerAndCars.FlatAppearance.BorderSize = 0;
             this.btnCustomerAndCars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomerAndCars.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCustomerAndCars.ForeColor = System.Drawing.Color.Black;
             this.btnCustomerAndCars.Image = global::Session_11_Car_Service_Center.Properties.Resources.customerandcar;
             this.btnCustomerAndCars.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCustomerAndCars.Location = new System.Drawing.Point(0, 140);
             this.btnCustomerAndCars.Name = "btnCustomerAndCars";
-            this.btnCustomerAndCars.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
+            this.btnCustomerAndCars.Padding = new System.Windows.Forms.Padding(10, 10, 30, 0);
             this.btnCustomerAndCars.Size = new System.Drawing.Size(220, 60);
             this.btnCustomerAndCars.TabIndex = 2;
-            this.btnCustomerAndCars.Text = "Customers And Cars";
+            this.btnCustomerAndCars.Text = "Customers / Cars";
+            this.btnCustomerAndCars.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCustomerAndCars.UseVisualStyleBackColor = true;
             this.btnCustomerAndCars.Click += new System.EventHandler(this.btnCustomerAndCars_Click_1);
+            this.btnCustomerAndCars.MouseEnter += new System.EventHandler(this.btnCustomerAndCars_MouseEnter);
+            this.btnCustomerAndCars.MouseLeave += new System.EventHandler(this.btnCustomerAndCars_MouseLeave);
             // 
             // btnTransactions
             // 
             this.btnTransactions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnTransactions.FlatAppearance.BorderSize = 0;
             this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransactions.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnTransactions.ForeColor = System.Drawing.Color.Black;
             this.btnTransactions.Image = global::Session_11_Car_Service_Center.Properties.Resources.transaction;
             this.btnTransactions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -164,6 +181,8 @@
             this.btnTransactions.Text = "Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;
             this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
+            this.btnTransactions.MouseEnter += new System.EventHandler(this.btnTransactions_MouseEnter);
+            this.btnTransactions.MouseLeave += new System.EventHandler(this.btnTransactions_MouseLeave);
             // 
             // panelLogo
             // 
@@ -322,7 +341,7 @@
         private Label label2;
         private Panel panelTitleBar;
         private Label label1;
-        private Button button1;
+        private Button btnExit;
         private PictureBox pictureBox1;
         private Button btnLoad;
         private Button btnSave;
