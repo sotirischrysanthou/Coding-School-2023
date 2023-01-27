@@ -68,7 +68,8 @@ namespace Session_11_Car_Service_Center {
 
         private void btnSave_MouseLeave(object sender, EventArgs e) {
             btnSave.ForeColor = Color.Black;
-            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatAppearance.BorderColor = Color.Black;
+            btnSave.FlatAppearance.BorderSize = 2;
         }
 
         private void btnClose_MouseEnter(object sender, EventArgs e) {
@@ -80,7 +81,8 @@ namespace Session_11_Car_Service_Center {
 
         private void btnClose_MouseLeave(object sender, EventArgs e) {
             btnClose.ForeColor = Color.Black;
-            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatAppearance.BorderColor = Color.Black;
+            btnSave.FlatAppearance.BorderSize = 2;
         }
         //gridView1_ValidateRow Giannis
         private void gridView1_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {

@@ -59,5 +59,19 @@ namespace Session_11_Car_Service_Center {
             grdMonthlyLedger.DataSource = bsMonthlyLedger;
             gridView1.RefreshData();
         }
+
+        //Customize Button
+        private void btnCalculate_MouseEnter(object sender, EventArgs e) {
+            btnCalculate.FlatAppearance.MouseOverBackColor = btnCalculate.BackColor;
+            btnCalculate.ForeColor = Color.Blue;
+            btnCalculate.FlatAppearance.BorderColor = Color.Red;
+            btnCalculate.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btnCalculate_MouseLeave(object sender, EventArgs e) {
+            btnCalculate.ForeColor = Color.Black;
+            btnCalculate.FlatAppearance.BorderColor = Color.Black;
+            btnCalculate.FlatAppearance.BorderSize = 2;
+        }
     }
 }
