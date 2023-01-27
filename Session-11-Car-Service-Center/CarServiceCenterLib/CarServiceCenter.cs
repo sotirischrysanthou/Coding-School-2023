@@ -87,8 +87,7 @@ namespace CarServiceCenterLib {
         public void addManagerProfile(Guid managerID, String username, String password) {
             foreach (Manager manager in Managers) {
                 if(manager.ID == managerID) {
-                    manager.Username = username;
-                    manager.Password = password;
+                    manager.CreateProfile(username, password);
                 }
             }
         }
@@ -104,7 +103,7 @@ namespace CarServiceCenterLib {
         public bool LogIn(String username, String password) {
             bool ret = false;
             foreach(Manager manager in Managers) {
-                if(manager.Username == username && manager.Password == password) {
+                if(manager.LogIn(username, password)) {
                     ret = true;
                 }
             }
