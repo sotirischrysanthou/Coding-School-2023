@@ -10,9 +10,16 @@ using System.Threading.Tasks;
 namespace CarServiceCenterLib.Orm.Context {
     public class AppDbContext : DbContext {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Engineer> Engineers { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Car> Cars { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new EngineerConfiguration());
+            modelBuilder.ApplyConfiguration(new ManagerConfiguration());
+            modelBuilder.ApplyConfiguration(new CarConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
