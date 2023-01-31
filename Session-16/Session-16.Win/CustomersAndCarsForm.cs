@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using CarServiceCenterLib.Models;
+using CarServiceCenterLib.Orm.Repositories;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Session_16.Win {
     public partial class CustomersAndCarsForm : Form {
@@ -129,7 +131,7 @@ namespace Session_16.Win {
                 view.SetColumnError(colRegNum, "Insert Valid Registration number");
             } else if (regNum == "") {
                 view.SetColumnError(colModel, "Fill Car Registration Number cell");
-            } else if (regNum.Count() == 8 &&Regex.IsMatch(regNum.Substring(0, 3), @"^[a-zA-Z]+$") && regNum[3] == ' ' && Regex.IsMatch(regNum.Substring(4, 4), @"^[1-9]+$")) {
+            } else if (regNum.Count() == 8 && Regex.IsMatch(regNum.Substring(0, 3), @"^[a-zA-Z]+$") && regNum[3] == ' ' && Regex.IsMatch(regNum.Substring(4, 4), @"^[1-9]+$")) {
                 // Correct
             } else {
                 e.Valid = false;
@@ -181,11 +183,13 @@ namespace Session_16.Win {
         }
 
         private void gridView1_ValidateRow(object sender, ValidateRowEventArgs e) {
+            CustomerRepo customerRepo = new CustomerRepo();
             GridView view = sender as GridView;
             GridColumn colName = view.Columns["Name"];
             GridColumn colSurname = view.Columns["Surname"];
             GridColumn colPhone = view.Columns["Phone"];
             GridColumn colTIN = view.Columns["TIN"];
+            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colID).ToString());
             String name = view.GetRowCellValue(e.RowHandle, colName) as String;
             String surname = view.GetRowCellValue(e.RowHandle, colSurname) as String;
             String phone = view.GetRowCellValue(e.RowHandle, colPhone) as String;
@@ -231,14 +235,15 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
+                customerRepo.Add(FindCustomerWithID(id));
             }
+
         }
 
         private void gridView1_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
             ColumnView view = sender as ColumnView;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
             String cellVal = e.Value as String;
-
             // colName changed
             if (column.FieldName == "Name") {
                 if (cellVal == null) {
@@ -289,6 +294,29 @@ namespace Session_16.Win {
                     view.SetColumnError(colPhone, "Insert Valid TIN with format for e.g [165485219]");
                 }
             }
+        }
+        private void gridView1_RowUpdated(object sender, RowObjectEventArgs e) {
+            GridView view = sender as GridView;
+            CustomerRepo customerRepo = new CustomerRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            customerRepo.Update(id, FindCustomerWithID(id));
+        }
+
+        private Customer FindCustomerWithID(Guid id) {
+            Customer retCustomer = null; 
+            foreach (Customer customer in _carServiceCenter.Customers) {
+                if (customer.ID == id) {
+                    retCustomer =  customer;
+                }
+            }
+            return retCustomer;
+        }
+
+        private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView;
+            CustomerRepo customerRepo = new CustomerRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colID).ToString());
+            customerRepo.Delete(id);
         }
     }
 }

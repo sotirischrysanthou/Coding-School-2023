@@ -1,4 +1,5 @@
 ﻿using CarServiceCenterLib.Models;
+using CarServiceCenterLib.Orm.Repositories;
 using SerializerLib;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Session_16.Win {
     public partial class MainMenuForm : Form {
         private CarServiceCenter _carServiceCenter;
         private Serializer _serializer;
+        
 
         public MainMenuForm() {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace Session_16.Win {
             _serializer = new Serializer();
         }
         private void MainMenuForm_Load(object sender, EventArgs e) {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -37,11 +39,17 @@ namespace Session_16.Win {
         }
 
         private void Populate(CarServiceCenter _carServiceCenter) {
+            CustomerRepo customerRepo = new CustomerRepo();
             _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "154852984"));
+            customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Customers.Add(new Customer("Demetris", "Manolas", "6912342136", "165826475"));
+            customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Customers.Add(new Customer("Giannis", "Tsimpris", "6912341234", "182349528"));
+            customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Customers.Add(new Customer("Giannis", "Antetokoumpo", "6910646234", "123456982"));
+            customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Customers.Add(new Customer("Panos", "Ioannides", "6912334867", "165942358"));
+            customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Cars.Add(new Car("Ford", "Focus", "IZM 5469"));
             _carServiceCenter.Cars.Add(new Car("Ford", "Fiesta", "IMZ 1234"));
             _carServiceCenter.Cars.Add(new Car("Mazda", "6", "IAM 3369"));
@@ -97,6 +105,7 @@ namespace Session_16.Win {
         private void btnPopulate_Click(object sender, EventArgs e) {
             Populate(_carServiceCenter);
             DevExpress.XtraEditors.XtraMessageBox.Show("Populate Successful!");
+
         }
 
         private void btnServiceTasks_Click(object sender, EventArgs e) {
@@ -121,12 +130,15 @@ namespace Session_16.Win {
         }
 
         private void btnLoad_Click(object sender, EventArgs e) {
-            if (File.Exists("CarServiceCenter.json")) {
-                _carServiceCenter = _serializer.Deserialize<CarServiceCenter>("CarServiceCenter.json");
-                DevExpress.XtraEditors.XtraMessageBox.Show("Load Successful!");
-            } else {
-                DevExpress.XtraEditors.XtraMessageBox.Show("File Not Found!");
-            }
+            //if (File.Exists("CarServiceCenter.json")) {
+            //    _carServiceCenter = _serializer.Deserialize<CarServiceCenter>("CarServiceCenter.json");
+            //    DevExpress.XtraEditors.XtraMessageBox.Show("Load Successful!");
+            //} else {
+            //    DevExpress.XtraEditors.XtraMessageBox.Show("File Not Found!");
+            //}
+            CustomerRepo customerRepo = new CustomerRepo();
+            _carServiceCenter.Customers = customerRepo.GetAll().ToList();
+            MessageBox.Show("Loaded!");
 
         }
 
