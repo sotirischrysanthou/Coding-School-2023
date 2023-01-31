@@ -9,19 +9,23 @@ namespace CarServiceCenterLib.Models {
 
         // Properties
         public double SalaryPerMonth { get; set; }
-        public List<Engineer> Engineers { get; set; }
         public DateTime? StartDate { get; set; }
         public String Username { get; set; }
         public String Password { get; set; }
 
-        
+        // Relations
+        public List<Engineer> Engineers { get; set; }
+        public List<Transaction> Transactions { get; set; }        
 
         // Constructors
         public Manager() {
+            Engineers = new List<Engineer>();
+            Transactions = new List<Transaction>();
             StartDate = null;
         }
         public Manager(string name, string surname, double salaryPerMonth, DateTime startDate) : base(name, surname) {
             Engineers = new List<Engineer>();
+            Transactions = new List<Transaction>();
             SalaryPerMonth = salaryPerMonth;
             StartDate = startDate;
         }

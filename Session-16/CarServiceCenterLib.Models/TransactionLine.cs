@@ -8,12 +8,17 @@ namespace CarServiceCenterLib.Models {
     public class TransactionLine {
         // Properties
         public Guid ID { get; set; }
-        public Guid TransactionID { get; set; }
-        public Guid ServiceTaskID { get; set; }
-        public Guid EngineerID { get; set; }
         public double Hours { get; set; }
         public double PricePerHour { get; set; } //constant maybe
         public double Price { get; set; }
+
+        // Relations
+        public Guid TransactionID { get; set; }
+        public Transaction Transaction { get; set; }
+        public Guid EngineerID { get; set; }
+        public Engineer Engineer { get; set; }
+        public Guid ServiceTaskID { get; set; }
+        public ServiceTask ServiceTask { get; set; }
 
         //Constrators
         public TransactionLine() {

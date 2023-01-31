@@ -13,6 +13,9 @@ namespace CarServiceCenterLib.Orm.Context {
         public DbSet<Engineer> Engineers { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<ServiceTask> ServiceTasks { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionLine> TransactionLines { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -20,6 +23,9 @@ namespace CarServiceCenterLib.Orm.Context {
             modelBuilder.ApplyConfiguration(new EngineerConfiguration());
             modelBuilder.ApplyConfiguration(new ManagerConfiguration());
             modelBuilder.ApplyConfiguration(new CarConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceTaskConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionLineConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

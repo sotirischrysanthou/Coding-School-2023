@@ -4,6 +4,7 @@ using CarServiceCenterLib.Orm.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarServiceCenterLib.Orm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230131115258_TransactionLine")]
+    partial class TransactionLine
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,12 +194,6 @@ namespace CarServiceCenterLib.Orm.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CarID");
-
-                    b.HasIndex("CustomerID");
-
-                    b.HasIndex("ManagerID");
-
                     b.ToTable("Transactions", (string)null);
                 });
 
@@ -226,10 +223,6 @@ namespace CarServiceCenterLib.Orm.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("EngineerID");
-
-                    b.HasIndex("ServiceTaskID");
-
                     b.HasIndex("TransactionID");
 
                     b.ToTable("TransactionLines", (string)null);
@@ -246,82 +239,20 @@ namespace CarServiceCenterLib.Orm.Migrations
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("CarServiceCenterLib.Models.Transaction", b =>
-                {
-                    b.HasOne("CarServiceCenterLib.Models.Car", "Car")
-                        .WithMany("Transactions")
-                        .HasForeignKey("CarID")
-                        .IsRequired();
-
-                    b.HasOne("CarServiceCenterLib.Models.Customer", "Customer")
-                        .WithMany("Transactions")
-                        .HasForeignKey("CustomerID")
-                        .IsRequired();
-
-                    b.HasOne("CarServiceCenterLib.Models.Manager", "Manager")
-                        .WithMany("Transactions")
-                        .HasForeignKey("ManagerID")
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Manager");
-                });
-
             modelBuilder.Entity("CarServiceCenterLib.Models.TransactionLine", b =>
                 {
-                    b.HasOne("CarServiceCenterLib.Models.Engineer", "Engineer")
-                        .WithMany("TransactionLines")
-                        .HasForeignKey("EngineerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarServiceCenterLib.Models.ServiceTask", "ServiceTask")
-                        .WithMany("TransactionLines")
-                        .HasForeignKey("ServiceTaskID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarServiceCenterLib.Models.Transaction", "Transaction")
                         .WithMany("TransactionLines")
                         .HasForeignKey("TransactionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Engineer");
-
-                    b.Navigation("ServiceTask");
-
                     b.Navigation("Transaction");
-                });
-
-            modelBuilder.Entity("CarServiceCenterLib.Models.Car", b =>
-                {
-                    b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("CarServiceCenterLib.Models.Customer", b =>
-                {
-                    b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("CarServiceCenterLib.Models.Engineer", b =>
-                {
-                    b.Navigation("TransactionLines");
                 });
 
             modelBuilder.Entity("CarServiceCenterLib.Models.Manager", b =>
                 {
                     b.Navigation("Engineers");
-
-                    b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("CarServiceCenterLib.Models.ServiceTask", b =>
-                {
-                    b.Navigation("TransactionLines");
                 });
 
             modelBuilder.Entity("CarServiceCenterLib.Models.Transaction", b =>

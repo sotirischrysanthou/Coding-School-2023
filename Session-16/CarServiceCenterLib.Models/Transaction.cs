@@ -9,21 +9,17 @@ namespace CarServiceCenterLib.Models {
         //Properties 
         public Guid ID { get; set; }
         public DateTime Date { get; set; }
-        public Guid CustomerID { get; set; }
-        public Guid CarID { get; set; }
-        public Guid ManagerID { get; set; }
         public double TotalPrice { get; set; }
+
+        // Relations
         public List<TransactionLine> TransactionLines { get; set; }
+        public Guid CustomerID { get; set; }
+        public Customer Customer { get; set; }
+        public Guid CarID { get; set; }
+        public Car Car { get; set; }
+        public Guid ManagerID { get; set; }
+        public Manager Manager { get; set; }
 
-
-        public Transaction(Guid id, DateTime date, Guid customerID, Guid carID, Guid managerID, double totalPrice) {
-            ID = id;
-            Date = date;
-            CustomerID = customerID;
-            CarID = carID;
-            ManagerID = managerID;
-            TotalPrice = totalPrice;
-        }
 
         // Constructors
         public Transaction() {

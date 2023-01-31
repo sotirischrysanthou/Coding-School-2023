@@ -10,11 +10,15 @@ namespace CarServiceCenterLib.Models {
         public String Phone { get; set; }
         public String TIN { get; set; }
 
+        // Relations
+        public List<Transaction> Transactions { get; set; }
+
         // Constructors
         public Customer() {
-
+            Transactions = new List<Transaction>();
         }
         public Customer(String name, String surname, String phone, String tin) : base(name, surname) {
+            Transactions = new List<Transaction>();
             Phone = phone;
             TIN = tin;
         }

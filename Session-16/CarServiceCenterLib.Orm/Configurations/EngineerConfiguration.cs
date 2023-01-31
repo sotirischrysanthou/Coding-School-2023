@@ -11,9 +11,12 @@ namespace CarServiceCenterLib.Orm.Configurations {
     public class EngineerConfiguration : IEntityTypeConfiguration<Engineer> {
         public void Configure(EntityTypeBuilder<Engineer> builder) {
             builder.ToTable("Engineers");
-            builder.HasKey(managers => managers.ID);
-            builder.Property(managers => managers.Name).HasMaxLength(50);
-            builder.Property(managers => managers.Surname).HasMaxLength(50);
+            builder.HasKey(engineer => engineer.ID);
+            builder.Property(engineer => engineer.Name).HasMaxLength(50);
+            builder.Property(engineer => engineer.Surname).HasMaxLength(50);
+            builder.HasOne(engineer => engineer.Manager)
+                .WithMany(manager => manager.Engineers)
+                .HasForeignKey(engineer => engineer.ManagerID);
         }
     }
 }
