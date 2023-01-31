@@ -213,11 +213,13 @@ namespace Session_16.Win {
         }
 
         private void gridView2_ValidateRow(object sender, ValidateRowEventArgs e) {
+            ManagerRepo managerRepo = new ManagerRepo();
             GridView view = sender as GridView;
             GridColumn colName = view.Columns["Name"];
             GridColumn colSurName = view.Columns["Surname"];
             GridColumn colSalaryPerMonth = view.Columns["SalaryPerMonth"];
             GridColumn colEngineerStartDate = view.Columns["StartDate"];
+            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colID).ToString());
             String name = view.GetRowCellValue(e.RowHandle, colName) as String;
             String surname = view.GetRowCellValue(e.RowHandle, colSurName) as String;
             String salaryPerMonth = view.GetRowCellValue(e.RowHandle, colSalaryPerMonth).ToString();
@@ -261,6 +263,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
+                managerRepo.Add(FindManagerWithID(id));
             }
         }
 
@@ -342,6 +345,20 @@ namespace Session_16.Win {
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEngineerID).ToString());
             engineerRepo.Update(id,FindEngineerWithID(id));
 
+        }
+
+        private void gridView2_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView;
+            ManagerRepo managerRepo = new ManagerRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            managerRepo.Delete(id);
+        }
+
+        private void gridView2_RowUpdated(object sender, RowObjectEventArgs e) {
+            GridView view = sender as GridView;
+            ManagerRepo managerRepo = new ManagerRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            managerRepo.Update(id, FindManagerWithID(id));
         }
     }
 }
