@@ -15,6 +15,8 @@ using DevExpress.XtraGrid.Columns;
 using System.Text.RegularExpressions;
 using DevExpress.XtraEditors.ColorPick.Picker;
 using DevExpress.XtraGrid.Views.Base;
+using CarServiceCenterLib.Orm.Repositories;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Session_16.Win {
     public partial class EmployeesForm : Form {
@@ -86,6 +88,7 @@ namespace Session_16.Win {
         }
         //gridView1_ValidateRow Giannis
         private void gridView1_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
+            EngineerRepo engineerRepo = new EngineerRepo();
             GridView view = sender as GridView;
             GridColumn colName = view.Columns["Name"];
             GridColumn colSurName = view.Columns["Surname"];
@@ -93,6 +96,7 @@ namespace Session_16.Win {
             GridColumn colEngineersManagerSurname = view.Columns["ManagerID"];
             GridColumn colSalaryPerMonth = view.Columns["SalaryPerMonth"];
             GridColumn colEngineerStartDate = view.Columns["StartDate"];
+            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colEngineerID).ToString());
             String name = view.GetRowCellValue(e.RowHandle, colName) as String;
             String surname = view.GetRowCellValue(e.RowHandle, colSurName) as String;
             String managerName = view.GetRowCellValue(e.RowHandle, colEngineersManagerName).ToString();
@@ -153,6 +157,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
+                engineerRepo.Add(FindEngineerWithID(id));
             }
         }
 
@@ -302,6 +307,41 @@ namespace Session_16.Win {
 
         private void gridView1_RowCountChanged(object sender, EventArgs e) {
             _carServiceCenter.UpdateWorkDays();
+        }
+
+        private Engineer FindEngineerWithID(Guid id) {
+            Engineer retEngineer = null;
+            foreach (Engineer engineer in _carServiceCenter.Engineers) {
+                if (engineer.ID == id) {
+                    retEngineer = engineer;
+                }
+            }
+            return retEngineer;
+        }
+
+        private Manager FindManagerWithID(Guid id) {
+            Manager retManager = null;
+            foreach (Manager manager in _carServiceCenter.Managers) {
+                if (manager.ID == id) {
+                    retManager = manager;
+                }
+            }
+            return retManager;
+        }
+
+        private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView; 
+            EngineerRepo engineerRepo = new EngineerRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEngineerID).ToString());
+            engineerRepo.Delete(id);
+        }
+
+        private void gridView1_RowUpdated(object sender, RowObjectEventArgs e) {
+            GridView view = sender as GridView;
+            EngineerRepo engineerRepo = new EngineerRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEngineerID).ToString());
+            engineerRepo.Update(id,FindEngineerWithID(id));
+
         }
     }
 }

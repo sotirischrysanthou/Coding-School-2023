@@ -36,7 +36,7 @@ namespace CarServiceCenterLib.Orm.Repositories {
                 .SingleOrDefault();
             if (CustomerDb is null) {
                 var Customer1Db = context.Customers
-                .Where(customer => customer.ID == entity.ID);
+                .Where(customer => customer.ID == entity.ID).SingleOrDefault();
                 if (Customer1Db is null) {
                     return false;
                 } else return true;

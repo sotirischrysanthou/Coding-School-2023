@@ -315,7 +315,7 @@ namespace Session_16.Win {
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
             GridView view = sender as GridView;
             CustomerRepo customerRepo = new CustomerRepo();
-            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colID).ToString());
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
             customerRepo.Delete(id);
         }
     }

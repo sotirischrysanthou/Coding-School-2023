@@ -27,6 +27,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeesForm));
             this.grdEngineers = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colEngineerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEngineersManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -80,6 +81,7 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colEngineerID,
             this.colName,
             this.colSurname,
             this.colEngineersManagerName,
@@ -90,9 +92,17 @@
             this.gridView1.GridControl = this.grdEngineers;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView1_RowDeleting);
             this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
+            this.gridView1.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridView1_RowUpdated);
             this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
             this.gridView1.RowCountChanged += new System.EventHandler(this.gridView1_RowCountChanged);
+            // 
+            // colEngineerID
+            // 
+            this.colEngineerID.Caption = "ID";
+            this.colEngineerID.FieldName = "ID";
+            this.colEngineerID.Name = "colEngineerID";
             // 
             // colName
             // 
@@ -371,5 +381,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colManagerStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colEngineerStartDate;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
+        private DevExpress.XtraGrid.Columns.GridColumn colEngineerID;
     }
 }

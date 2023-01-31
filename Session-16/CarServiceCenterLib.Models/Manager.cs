@@ -10,8 +10,8 @@ namespace CarServiceCenterLib.Models {
         // Properties
         public double SalaryPerMonth { get; set; }
         public DateTime? StartDate { get; set; }
-        public String Username { get; set; }
-        public String Password { get; set; }
+        //public String Username { get; set; }
+        //public String Password { get; set; }
 
         // Relations
         public List<Engineer> Engineers { get; set; }
