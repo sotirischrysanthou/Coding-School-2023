@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using DevExpress.XtraEditors.ColorPick.Picker;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid;
+using CarServiceCenterLib.Orm.Repositories;
 
 namespace Session_16.Win {
     public partial class ServiceTasksForm : Form {
@@ -77,7 +78,9 @@ namespace Session_16.Win {
         }
 
         private void gridView1_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
+            ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
             String code = view.GetRowCellValue(e.RowHandle, colCode).ToString();
             String description = view.GetRowCellValue(e.RowHandle, colDescription) as String;
             String hours = view.GetRowCellValue(e.RowHandle, colHours).ToString();
@@ -110,6 +113,7 @@ namespace Session_16.Win {
             }
             if (e.Valid) {
                 view.ClearColumnErrors();
+                serviceTaskRepo.Add(FindServiceTaskWithID(id));
             }
         }
 
@@ -171,6 +175,30 @@ namespace Session_16.Win {
                     return;
                 }
             }
+        }
+
+        private ServiceTask FindServiceTaskWithID(Guid id) {
+            ServiceTask retServiceTask = null;
+            foreach (ServiceTask serviceTask in _carServiceCenter.ServiceTasks) {
+                if (serviceTask.ID == id) {
+                    retServiceTask = serviceTask;
+                }
+            }
+            return retServiceTask;
+        }
+
+        private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView;
+            ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            serviceTaskRepo.Delete(id);
+        }
+
+        private void gridView1_RowUpdated(object sender, RowObjectEventArgs e) {
+            GridView view = sender as GridView;
+            ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            serviceTaskRepo.Update(id, FindServiceTaskWithID(id));
         }
     }
 }

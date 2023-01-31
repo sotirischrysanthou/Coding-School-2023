@@ -43,6 +43,7 @@ namespace Session_16.Win {
             EngineerRepo engineerRepo = new EngineerRepo();
             ManagerRepo managerRepo = new ManagerRepo();
             CarRepo carRepo = new CarRepo();
+            ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "154852984"));
             customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Customers.Add(new Customer("Demetris", "Manolas", "6912342136", "165826475"));
@@ -83,12 +84,19 @@ namespace Session_16.Win {
             engineerRepo.Add(_carServiceCenter.Engineers.Last());
 
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(1, "Air Filter", 2.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(2, "General service", 8.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(3, "Tire change", 3.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(4, "Change gasket", 6.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(5, "Oil Filter", 4.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(6, "Spark plug", 5.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
             _carServiceCenter.ServiceTasks.Add(new ServiceTask(7, "Oil Filter", 7.0));
+            serviceTaskRepo.Add(_carServiceCenter.ServiceTasks.Last());
 
             Customer customer = _carServiceCenter.Customers[0];
             Car car = _carServiceCenter.Cars[0];
@@ -154,10 +162,12 @@ namespace Session_16.Win {
             EngineerRepo engineerRepo = new EngineerRepo();
             ManagerRepo managerRepo = new ManagerRepo();
             CarRepo carRepo = new CarRepo();
+            ServiceTaskRepo serviceTask = new ServiceTaskRepo();
             _carServiceCenter.Customers = customerRepo.GetAll().ToList();
             _carServiceCenter.Managers = managerRepo.GetAll().ToList();
             _carServiceCenter.Engineers = engineerRepo.GetAll().ToList();
             _carServiceCenter.Cars = carRepo.GetAll().ToList();
+            _carServiceCenter.ServiceTasks = serviceTask.GetAll().ToList();
             MessageBox.Show("Loaded!");
 
         }

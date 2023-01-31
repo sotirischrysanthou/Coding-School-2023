@@ -15,12 +15,7 @@ namespace CarServiceCenterLib.Orm.Configurations {
             builder.HasOne(transactionLine => transactionLine.Transaction)
                 .WithMany(transaction => transaction.TransactionLines)
                 .HasForeignKey(transactionLine => transactionLine.TransactionID);
-            builder.HasOne(transactionLine => transactionLine.Engineer)
-                .WithMany(engineer => engineer.TransactionLines)
-                .HasForeignKey(transactionLine => transactionLine.EngineerID);
-            builder.HasOne(transactionLine => transactionLine.ServiceTask)
-                .WithMany(serviceTask => serviceTask.TransactionLines)
-                .HasForeignKey(transactionLine => transactionLine.ServiceTaskID);
+
         }
     }
 }
