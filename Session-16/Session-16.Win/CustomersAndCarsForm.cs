@@ -102,10 +102,12 @@ namespace Session_16.Win {
         }
 
         private void gridView2_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
+            CarRepo carRepo = new CarRepo();
             GridView view = sender as GridView;
             GridColumn colBrand = view.Columns["Brand"];
             GridColumn colModel = view.Columns["Model"];
             GridColumn colRegNum = view.Columns["CarRegistrationNumber"];
+            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colCarID).ToString());
             String brand = view.GetRowCellValue(e.RowHandle, colBrand) as String;
             String model = view.GetRowCellValue(e.RowHandle, colModel) as String;
             String regNum = view.GetRowCellValue(e.RowHandle, colRegNum) as String;
@@ -140,6 +142,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
+                carRepo.Add(FindCarWithID(id));
             }
         }
 
@@ -312,11 +315,35 @@ namespace Session_16.Win {
             return retCustomer;
         }
 
+        private Car FindCarWithID(Guid id) {
+            Car retCar = null;
+            foreach (Car car in _carServiceCenter.Cars) {
+                if (car.ID == id) {
+                    retCar = car;
+                }
+            }
+            return retCar;
+        }
+
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
             GridView view = sender as GridView;
             CustomerRepo customerRepo = new CustomerRepo();
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
             customerRepo.Delete(id);
+        }
+
+        private void gridView2_RowUpdated(object sender, RowObjectEventArgs e) {
+            GridView view = sender as GridView;
+            CarRepo carRepo = new CarRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colCarID).ToString());
+            carRepo.Update(id, FindCarWithID(id));
+        }
+
+        private void gridView2_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView;
+            CarRepo carRepo = new CarRepo();
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colCarID).ToString());
+            carRepo.Delete(id);
         }
     }
 }

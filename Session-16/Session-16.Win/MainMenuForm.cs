@@ -42,6 +42,7 @@ namespace Session_16.Win {
             CustomerRepo customerRepo = new CustomerRepo();
             EngineerRepo engineerRepo = new EngineerRepo();
             ManagerRepo managerRepo = new ManagerRepo();
+            CarRepo carRepo = new CarRepo();
             _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "154852984"));
             customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Customers.Add(new Customer("Demetris", "Manolas", "6912342136", "165826475"));
@@ -53,9 +54,13 @@ namespace Session_16.Win {
             _carServiceCenter.Customers.Add(new Customer("Panos", "Ioannides", "6912334867", "165942358"));
             customerRepo.Add(_carServiceCenter.Customers.Last());
             _carServiceCenter.Cars.Add(new Car("Ford", "Focus", "IZM 5469"));
+            carRepo.Add(_carServiceCenter.Cars.Last());
             _carServiceCenter.Cars.Add(new Car("Ford", "Fiesta", "IMZ 1234"));
+            carRepo.Add(_carServiceCenter.Cars.Last());
             _carServiceCenter.Cars.Add(new Car("Mazda", "6", "IAM 3369"));
+            carRepo.Add(_carServiceCenter.Cars.Last());
             _carServiceCenter.Cars.Add(new Car("Suzuki", "Swift", "IAM 8888"));
+            carRepo.Add(_carServiceCenter.Cars.Last());
 
             _carServiceCenter.Managers.Add(new Manager("Fotis", "Chrysoulas", 15000, DateTime.Parse("21/1/2023")));
             managerRepo.Add(_carServiceCenter.Managers.Last());
@@ -148,9 +153,11 @@ namespace Session_16.Win {
             CustomerRepo customerRepo = new CustomerRepo();
             EngineerRepo engineerRepo = new EngineerRepo();
             ManagerRepo managerRepo = new ManagerRepo();
+            CarRepo carRepo = new CarRepo();
             _carServiceCenter.Customers = customerRepo.GetAll().ToList();
             _carServiceCenter.Managers = managerRepo.GetAll().ToList();
             _carServiceCenter.Engineers = engineerRepo.GetAll().ToList();
+            _carServiceCenter.Cars = carRepo.GetAll().ToList();
             MessageBox.Show("Loaded!");
 
         }

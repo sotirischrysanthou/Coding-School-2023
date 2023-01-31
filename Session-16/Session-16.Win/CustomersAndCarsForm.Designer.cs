@@ -37,6 +37,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.grdCars = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCarID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colBrand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colModel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCarRegistrationNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -165,6 +166,7 @@
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colCarID,
             this.colBrand,
             this.colModel,
             this.colCarRegistrationNumber});
@@ -172,8 +174,16 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
+            this.gridView2.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
             this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
+            this.gridView2.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridView2_RowUpdated);
             this.gridView2.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
+            // 
+            // colCarID
+            // 
+            this.colCarID.Caption = "ID";
+            this.colCarID.FieldName = "ID";
+            this.colCarID.Name = "colCarID";
             // 
             // colBrand
             // 
@@ -293,5 +303,6 @@
         private Button btn_Save;
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
+        private DevExpress.XtraGrid.Columns.GridColumn colCarID;
     }
 }
