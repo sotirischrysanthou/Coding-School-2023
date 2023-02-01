@@ -32,10 +32,11 @@ namespace Session_16.Win {
         }
 
         private void SetControlProperties() {
-
+            ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             _serializer = new Serializer();
-            bsServiceTasks.DataSource = _carServiceCenter.ServiceTasks;
+            bsServiceTasks.DataSource = serviceTaskRepo.GetAll();
             grdServiceTasks.DataSource = bsServiceTasks;
+
         }
 
         private void dgvServiceTasks_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -113,7 +114,8 @@ namespace Session_16.Win {
             }
             if (e.Valid) {
                 view.ClearColumnErrors();
-                serviceTaskRepo.Add(FindServiceTaskWithID(id));
+                serviceTaskRepo.Add((ServiceTask)bsServiceTasks.Current);
+                 
             }
         }
 
@@ -198,7 +200,7 @@ namespace Session_16.Win {
             GridView view = sender as GridView;
             ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
-            serviceTaskRepo.Update(id, FindServiceTaskWithID(id));
+            serviceTaskRepo.Update(id, (ServiceTask)bsServiceTasks.Current);
         }
     }
 }

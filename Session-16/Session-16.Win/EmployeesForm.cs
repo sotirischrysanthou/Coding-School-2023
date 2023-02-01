@@ -32,9 +32,11 @@ namespace Session_16.Win {
             SetControlProperties();
         }
         private void SetControlProperties() {
-            bsEngineers.DataSource = _carServiceCenter.Engineers;
+            EngineerRepo engineerRepo = new EngineerRepo();
+            ManagerRepo managerRepo = new ManagerRepo();
+            bsEngineers.DataSource = engineerRepo.GetAll();//_carServiceCenter.Engineers;
             grdEngineers.DataSource = bsEngineers;
-            bsManagers.DataSource = _carServiceCenter.Managers;
+            bsManagers.DataSource = managerRepo.GetAll();//_carServiceCenter.Managers;
             grdManagers.DataSource = bsManagers;
             SetLookUpEdit<Manager>(repManagerName, _carServiceCenter.Managers, "Name", "ID");
             SetLookUpEdit<Manager>(repManagerSurname, _carServiceCenter.Managers, "Surname", "ID");
@@ -157,7 +159,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
-                engineerRepo.Add(FindEngineerWithID(id));
+                engineerRepo.Add((Engineer)bsEngineers.Current);
             }
         }
 
@@ -263,7 +265,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
-                managerRepo.Add(FindManagerWithID(id));
+                managerRepo.Add((Manager)bsManagers.Current);
             }
         }
 
@@ -343,7 +345,7 @@ namespace Session_16.Win {
             GridView view = sender as GridView;
             EngineerRepo engineerRepo = new EngineerRepo();
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEngineerID).ToString());
-            engineerRepo.Update(id,FindEngineerWithID(id));
+            engineerRepo.Update(id,(Engineer)bsEngineers.Current);
 
         }
 
@@ -358,7 +360,7 @@ namespace Session_16.Win {
             GridView view = sender as GridView;
             ManagerRepo managerRepo = new ManagerRepo();
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
-            managerRepo.Update(id, FindManagerWithID(id));
+            managerRepo.Update(id, (Manager)bsManagers.Current);
         }
     }
 }

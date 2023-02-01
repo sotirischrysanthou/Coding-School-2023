@@ -34,13 +34,12 @@ namespace Session_16.Win {
 
         private void SetControlProperties() {
             _serializer = new Serializer();
-            bsService.DataSource = _carServiceCenter;
-            bsCustomers.DataSource = bsService;
-
-            bsCustomers.DataSource = _carServiceCenter.Customers;
+            CustomerRepo customerRepo = new CustomerRepo();
+            CarRepo carRepo = new CarRepo();
+            bsCustomers.DataSource = customerRepo.GetAll(); //_carServiceCenter.Customers;
             grdCustomers.DataSource = bsCustomers;
 
-            bsCars.DataSource = _carServiceCenter.Cars;
+            bsCars.DataSource = carRepo.GetAll();//_carServiceCenter.Cars;
             grdCars.DataSource = bsCars;
 
         }
@@ -142,7 +141,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
-                carRepo.Add(FindCarWithID(id));
+                carRepo.Add((Car)bsCars.Current);
             }
         }
 
@@ -238,7 +237,7 @@ namespace Session_16.Win {
 
             if (e.Valid) {
                 view.ClearColumnErrors();
-                customerRepo.Add(FindCustomerWithID(id));
+                customerRepo.Add((Customer)bsCustomers.Current);
             }
 
         }
@@ -302,28 +301,28 @@ namespace Session_16.Win {
             GridView view = sender as GridView;
             CustomerRepo customerRepo = new CustomerRepo();
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
-            customerRepo.Update(id, FindCustomerWithID(id));
+            customerRepo.Update(id, (Customer)bsCustomers.Current);
         }
 
-        private Customer FindCustomerWithID(Guid id) {
-            Customer retCustomer = null; 
-            foreach (Customer customer in _carServiceCenter.Customers) {
-                if (customer.ID == id) {
-                    retCustomer =  customer;
-                }
-            }
-            return retCustomer;
-        }
+        //private Customer FindCustomerWithID(Guid id) {
+        //    Customer retCustomer = null; 
+        //    foreach (Customer customer in _carServiceCenter.Customers) {
+        //        if (customer.ID == id) {
+        //            retCustomer =  customer;
+        //        }
+        //    }
+        //    return retCustomer;
+        //}
 
-        private Car FindCarWithID(Guid id) {
-            Car retCar = null;
-            foreach (Car car in _carServiceCenter.Cars) {
-                if (car.ID == id) {
-                    retCar = car;
-                }
-            }
-            return retCar;
-        }
+        //private Car FindCarWithID(Guid id) {
+        //    Car retCar = null;
+        //    foreach (Car car in _carServiceCenter.Cars) {
+        //        if (car.ID == id) {
+        //            retCar = car;
+        //        }
+        //    }
+        //    return retCar;
+        //}
 
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
             GridView view = sender as GridView;
@@ -336,7 +335,7 @@ namespace Session_16.Win {
             GridView view = sender as GridView;
             CarRepo carRepo = new CarRepo();
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colCarID).ToString());
-            carRepo.Update(id, FindCarWithID(id));
+            carRepo.Update(id, (Car)bsCars.Current);
         }
 
         private void gridView2_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
