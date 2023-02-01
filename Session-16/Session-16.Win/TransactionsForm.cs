@@ -27,21 +27,26 @@ namespace Session_16.Win {
         private void SetControlProperties() {
             TransactionRepo transactionRepo = new TransactionRepo();
             TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
+            CustomerRepo customerRepo = new CustomerRepo();
+            CarRepo carRepo = new CarRepo();
+            ManagerRepo managerRepo = new ManagerRepo();
+            EngineerRepo engineerRepo = new EngineerRepo();
+            ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             bsTransactions.DataSource = transactionRepo.GetAll(); //_carServiceCenter.Transactions;
             grdTransactions.DataSource = bsTransactions;
             grdTransactionLines.DataSource = bsTransactions;
             grdTransactionLines.DataMember = "TransactionLines";
 
 
-            SetLookUpEdit<Customer>(repCustomerName, _carServiceCenter.Customers, "Name", "ID");
-            SetLookUpEdit<Customer>(repCustomerSurname, _carServiceCenter.Customers, "Surname", "ID");
-            SetLookUpEdit<Car>(repCarBrand, _carServiceCenter.Cars, "Brand", "ID");
-            SetLookUpEdit<Car>(repCarModel, _carServiceCenter.Cars, "Model", "ID");
-            SetLookUpEdit<Manager>(repManagerName, _carServiceCenter.Managers, "Name", "ID");
-            SetLookUpEdit<Manager>(repManagerSurname, _carServiceCenter.Managers, "Surname", "ID");
-            SetLookUpEdit<Engineer>(repEngineersName, _carServiceCenter.Engineers, "Name", "ID");
-            SetLookUpEdit<Engineer>(repEngineersSurname, _carServiceCenter.Engineers, "Surname", "ID");
-            SetLookUpEdit<ServiceTask>(repServiceTasksDescription, _carServiceCenter.ServiceTasks, "Description", "ID");
+            SetLookUpEdit<Customer>(repCustomerName, customerRepo.GetAll().ToList(), "Name", "ID");
+            SetLookUpEdit<Customer>(repCustomerSurname, customerRepo.GetAll().ToList(), "Surname", "ID");
+            SetLookUpEdit<Car>(repCarBrand, carRepo.GetAll().ToList(), "Brand", "ID");
+            SetLookUpEdit<Car>(repCarModel, carRepo.GetAll().ToList(), "Model", "ID");
+            SetLookUpEdit<Manager>(repManagerName, managerRepo.GetAll().ToList(), "Name", "ID");
+            SetLookUpEdit<Manager>(repManagerSurname, managerRepo.GetAll().ToList(), "Surname", "ID");
+            SetLookUpEdit<Engineer>(repEngineersName, engineerRepo.GetAll().ToList(), "Name", "ID");
+            SetLookUpEdit<Engineer>(repEngineersSurname, engineerRepo.GetAll().ToList(), "Surname", "ID");
+            SetLookUpEdit<ServiceTask>(repServiceTasksDescription, serviceTaskRepo.GetAll().ToList(), "Description", "ID");
         }
 
         public List<TransactionLine> ReturnAllTransactionLines() {
