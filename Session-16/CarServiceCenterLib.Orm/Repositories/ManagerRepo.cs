@@ -31,7 +31,7 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public Manager? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.Managers.SingleOrDefault();
+            return context.Managers.Where(manager => manager.ID == id).SingleOrDefault();
         }
 
         public void Update(Guid id, Manager entity) {

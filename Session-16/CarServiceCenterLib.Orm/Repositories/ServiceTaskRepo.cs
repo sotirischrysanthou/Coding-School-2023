@@ -31,7 +31,7 @@ namespace CarServiceCenterLib.Orm.Repositories {
         }
         public ServiceTask? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.ServiceTasks.SingleOrDefault();
+            return context.ServiceTasks.Where(serviceTask => serviceTask.ID == id).SingleOrDefault();
 
         }
         public void Update(Guid id, ServiceTask entity) {

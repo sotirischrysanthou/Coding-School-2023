@@ -43,6 +43,7 @@ namespace Session_16.Win {
             EngineerRepo engineerRepo = new EngineerRepo();
             ManagerRepo managerRepo = new ManagerRepo();
             CarRepo carRepo = new CarRepo();
+            TransactionRepo transactionRepo = new TransactionRepo();
             ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             _carServiceCenter.Customers.Add(new Customer("Sotiris", "Chrysanthou", "6954872136", "154852984"));
             customerRepo.Add(_carServiceCenter.Customers.Last());
@@ -103,7 +104,7 @@ namespace Session_16.Win {
             Manager manager = _carServiceCenter.Managers[0];
             ServiceTask serviceTask = _carServiceCenter.ServiceTasks[0];
             Engineer engineer = _carServiceCenter.Engineers[0];
-            _carServiceCenter.Transactions.Add(new Transaction(customer.ID, car.ID, manager.ID));
+            _carServiceCenter.Transactions.Add(new Transaction(customer.ID, car.ID, manager.ID));  
             Transaction transaction = _carServiceCenter.Transactions[0];
             transaction.AddTransactionLine(new TransactionLine(transaction.ID, serviceTask.ID, engineer.ID, serviceTask.Hours, 44.5));
             serviceTask = _carServiceCenter.ServiceTasks[1];
@@ -111,6 +112,7 @@ namespace Session_16.Win {
             foreach (TransactionLine transactionLine in transaction.TransactionLines) {
                 _carServiceCenter.AddTask(transactionLine, transaction.Date, out _);
             }
+            transactionRepo.Add(_carServiceCenter.Transactions.Last());
             customer = _carServiceCenter.Customers[1];
             car = _carServiceCenter.Cars[1];
             _carServiceCenter.Transactions.Add(new Transaction(customer.ID, car.ID, manager.ID));
@@ -122,6 +124,7 @@ namespace Session_16.Win {
             foreach (TransactionLine transactionLine in transaction.TransactionLines) {
                 _carServiceCenter.AddTask(transactionLine, transaction.Date, out _);
             }
+            transactionRepo.Add(_carServiceCenter.Transactions.Last());
         }
 
         private void btnPopulate_Click(object sender, EventArgs e) {

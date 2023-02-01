@@ -1,4 +1,5 @@
 using CarServiceCenterLib.Models;
+using CarServiceCenterLib.Orm.Repositories;
 using DevExpress.Mvvm.Native;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -24,7 +25,9 @@ namespace Session_16.Win {
         }
 
         private void SetControlProperties() {
-            bsTransactions.DataSource = _carServiceCenter.Transactions;
+            TransactionRepo transactionRepo = new TransactionRepo();
+            TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
+            bsTransactions.DataSource = transactionRepo.GetAll(); //_carServiceCenter.Transactions;
             grdTransactions.DataSource = bsTransactions;
             grdTransactionLines.DataSource = bsTransactions;
             grdTransactionLines.DataMember = "TransactionLines";
