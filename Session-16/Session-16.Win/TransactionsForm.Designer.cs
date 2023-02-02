@@ -112,10 +112,10 @@
             this.grvTransactionLines.OptionsView.ShowGroupPanel = false;
             this.grvTransactionLines.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvTransactionLines_InitNewRow);
             this.grvTransactionLines.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvTransactionLines_CellValueChanged);
-            this.grvTransactionLines.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
+            this.grvTransactionLines.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.grvTransactionLines_RowDeleting);
             this.grvTransactionLines.RowDeleted += new DevExpress.Data.RowDeletedEventHandler(this.grvTransactionLines_RowDeleted);
-            this.grvTransactionLines.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
-            this.grvTransactionLines.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
+            this.grvTransactionLines.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvTransactionLines_ValidateRow);
+            this.grvTransactionLines.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvTransactionLines_ValidatingEditor);
             // 
             // colLineID
             // 

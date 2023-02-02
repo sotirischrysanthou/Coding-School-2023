@@ -26,35 +26,7 @@ namespace Session_16.Win {
             SetControlProperties();
         }
 
-        private void CalculateWorkDays() {
-            TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
-            List<TransactionLine> transactionLines = transactionLineRepo.GetAll().ToList();
-            foreach (TransactionLine transactionLine in transactionLines) {
-                AddTask(transactionLine, transactionLine.Transaction.Date, out _);
-            }
-            UpdateWorkDays();
-        }
-
-        public bool AddTask(TransactionLine task, DateTime date, out String message) {
-            //find from Workday list WorkDay.date==date
-            //WorkDay.Add(task, message);
-            EngineerRepo engineerRepo = new EngineerRepo();
-            bool ret = false;
-            bool workDayExists = false;
-            String msg = "";
-            foreach (WorkDay workDay in _workDays) {
-                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
-                    ret = workDay.AddTask(task, out msg);
-                    workDayExists = true;
-                }
-            }
-            if (!workDayExists) {
-                _workDays.Add(new WorkDay(new DateTime(date.Year, date.Month, date.Day), engineerRepo.GetAll().Count));
-                ret = _workDays.Last().AddTask(task, out msg);
-            }
-            message = msg;
-            return ret;
-        }
+        
 
         private void SetControlProperties() {
             TransactionRepo transactionRepo = new TransactionRepo();
@@ -194,71 +166,7 @@ namespace Session_16.Win {
             }
         }
 
-        private void grvTransactionLines_InitNewRow(object sender, InitNewRowEventArgs e) {
-            GridView view = sender as GridView;
-            view.SetRowCellValue(e.RowHandle, "TransactionID", grvTransactions.GetRowCellValue(grvTransactions.GetSelectedRows()[0], "ID"));
-        }
-        private void gridView2_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            GridView view = sender as GridView;
-            TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
-            Transaction transaction = (Transaction)bsTransactions.Current;
-            TransactionLine transactionLine = (TransactionLine)bsTransactionLines.Current;
-            DeleteTask(transactionLine, transaction.Date);
-            transactionLineRepo.Delete(transactionLine.ID);
-
-        }
-
-        
-        private void btn_Close_Click(object sender, EventArgs e) {
-            this.Close();
-        }
-
-        private void btn_Close_MouseEnter(object sender, EventArgs e) {
-            btn_Close.FlatAppearance.MouseOverBackColor = btn_Close.BackColor;
-            btn_Close.ForeColor = Color.Blue;
-            btn_Close.FlatAppearance.BorderColor = Color.Red;
-            btn_Close.FlatAppearance.BorderSize = 2;
-        }
-
-        private void btn_Close_MouseLeave(object sender, EventArgs e) {
-            btn_Close.ForeColor = Color.Black;
-            btn_Close.FlatAppearance.BorderColor = Color.Black;
-            btn_Close.FlatAppearance.BorderSize = 2;
-        }
-
-        
-        private void UpdateLabelWorkHour() {
-            TransactionRepo transactionRepo = new TransactionRepo();
-            Guid id = (Guid)grvTransactions.GetFocusedRowCellValue("ID");
-            Transaction transaction = transactionRepo.GetById(id);
-            foreach (WorkDay workDay in _workDays) {
-                if (workDay.Date.Year == transaction.Date.Year && workDay.Date.Month == transaction.Date.Month && workDay.Date.Day == transaction.Date.Day) {
-                    labelWorkHours.Text = (workDay.MaxWorkLoad() - workDay.WorkLoad()).ToString();
-                }
-            }
-        }
-
-        private void gridView2_RowDeleted(object sender, DevExpress.Data.RowDeletedEventArgs e) {
-            UpdateWorkDays();
-            UpdateLabelWorkHour();
-        }
-
-        public void DeleteTask(TransactionLine task, DateTime date) {
-            foreach (WorkDay workDay in _workDays) {
-                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
-                    workDay.DeleteTask(task);
-                }
-            }
-        }
-
-        public void UpdateWorkDays() {
-            EngineerRepo engineerRepo = new EngineerRepo();
-            foreach (WorkDay workDay in _workDays) {
-                workDay.UpdateNumOfEngineers(engineerRepo.GetAll().Count());
-            }
-        }
-
-        private void gridView2_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
+        private void grvTransactionLines_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
             TransactionRepo transactionRepo = new TransactionRepo();
             TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
             GridView view = sender as GridView;
@@ -287,7 +195,7 @@ namespace Session_16.Win {
             }
         }
 
-        private void gridView2_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
+        private void grvTransactionLines_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
             GridView view = sender as GridView;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
             Guid id = (Guid)e.Value;
@@ -305,8 +213,102 @@ namespace Session_16.Win {
             }
         }
 
-        private void grvTransactionLines_RowDeleted(object sender, DevExpress.Data.RowDeletedEventArgs e) {
+        private void grvTransactionLines_InitNewRow(object sender, InitNewRowEventArgs e) {
+            GridView view = sender as GridView;
+            view.SetRowCellValue(e.RowHandle, "TransactionID", grvTransactions.GetRowCellValue(grvTransactions.GetSelectedRows()[0], "ID"));
+        }
+        private void grvTransactionLines_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
+            GridView view = sender as GridView;
+            TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
+            Transaction transaction = (Transaction)bsTransactions.Current;
+            TransactionLine transactionLine = (TransactionLine)bsTransactionLines.Current;
+            DeleteTask(transactionLine, transaction.Date);
+            transactionLineRepo.Delete(transactionLine.ID);
 
         }
+
+        private void grvTransactionLines_RowDeleted(object sender, DevExpress.Data.RowDeletedEventArgs e) {
+            UpdateWorkDays();
+            UpdateLabelWorkHour();
+        }
+
+        //--------------------------------------------------------------------------------------
+        // ---------------------------------Buttons Events--------------------------------------
+        //--------------------------------------------------------------------------------------
+        private void btn_Close_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void btn_Close_MouseEnter(object sender, EventArgs e) {
+            btn_Close.FlatAppearance.MouseOverBackColor = btn_Close.BackColor;
+            btn_Close.ForeColor = Color.Blue;
+            btn_Close.FlatAppearance.BorderColor = Color.Red;
+            btn_Close.FlatAppearance.BorderSize = 2;
+        }
+
+        private void btn_Close_MouseLeave(object sender, EventArgs e) {
+            btn_Close.ForeColor = Color.Black;
+            btn_Close.FlatAppearance.BorderColor = Color.Black;
+            btn_Close.FlatAppearance.BorderSize = 2;
+        }
+
+        //--------------------------------------------------------------------------------------
+        // -----------------------------WorkLoad Managment--------------------------------------
+        //--------------------------------------------------------------------------------------
+        private void UpdateLabelWorkHour() {
+            TransactionRepo transactionRepo = new TransactionRepo();
+            Guid id = (Guid)grvTransactions.GetFocusedRowCellValue("ID");
+            Transaction transaction = transactionRepo.GetById(id);
+            foreach (WorkDay workDay in _workDays) {
+                if (workDay.Date.Year == transaction.Date.Year && workDay.Date.Month == transaction.Date.Month && workDay.Date.Day == transaction.Date.Day) {
+                    labelWorkHours.Text = (workDay.MaxWorkLoad() - workDay.WorkLoad()).ToString();
+                }
+            }
+        }
+
+        private void CalculateWorkDays() {
+            TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
+            List<TransactionLine> transactionLines = transactionLineRepo.GetAll().ToList();
+            foreach (TransactionLine transactionLine in transactionLines) {
+                AddTask(transactionLine, transactionLine.Transaction.Date, out _);
+            }
+            UpdateWorkDays();
+        }
+
+        public bool AddTask(TransactionLine task, DateTime date, out String message) {
+            //find from Workday list WorkDay.date==date
+            //WorkDay.Add(task, message);
+            EngineerRepo engineerRepo = new EngineerRepo();
+            bool ret = false;
+            bool workDayExists = false;
+            String msg = "";
+            foreach (WorkDay workDay in _workDays) {
+                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
+                    ret = workDay.AddTask(task, out msg);
+                    workDayExists = true;
+                }
+            }
+            if (!workDayExists) {
+                _workDays.Add(new WorkDay(new DateTime(date.Year, date.Month, date.Day), engineerRepo.GetAll().Count));
+                ret = _workDays.Last().AddTask(task, out msg);
+            }
+            message = msg;
+            return ret;
+        }
+
+        public void DeleteTask(TransactionLine task, DateTime date) {
+            foreach (WorkDay workDay in _workDays) {
+                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
+                    workDay.DeleteTask(task);
+                }
+            }
+        }
+
+        public void UpdateWorkDays() {
+            EngineerRepo engineerRepo = new EngineerRepo();
+            foreach (WorkDay workDay in _workDays) {
+                workDay.UpdateNumOfEngineers(engineerRepo.GetAll().Count());
+            }
+        }        
     }
 }
