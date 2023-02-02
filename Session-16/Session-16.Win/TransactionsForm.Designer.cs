@@ -28,7 +28,7 @@
             this.bsTransactions = new System.Windows.Forms.BindingSource(this.components);
             this.bsTransactionLines = new System.Windows.Forms.BindingSource(this.components);
             this.grdTransactionLines = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.grvTransactionLines = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colLineID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTransactionID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colServiceTaskDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -41,7 +41,7 @@
             this.colPricePerHour = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Price = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.grvTransactions = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,7 +57,6 @@
             this.colManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
             this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -66,12 +65,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvTransactionLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repServiceTasksDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersSurname)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCarBrand)).BeginInit();
@@ -85,7 +84,7 @@
             this.grdTransactionLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTransactionLines.Location = new System.Drawing.Point(12, 230);
-            this.grdTransactionLines.MainView = this.gridView2;
+            this.grdTransactionLines.MainView = this.grvTransactionLines;
             this.grdTransactionLines.Name = "grdTransactionLines";
             this.grdTransactionLines.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repServiceTasksDescription,
@@ -95,11 +94,11 @@
             this.grdTransactionLines.TabIndex = 3;
             this.grdTransactionLines.UseEmbeddedNavigator = true;
             this.grdTransactionLines.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
+            this.grvTransactionLines});
             // 
-            // gridView2
+            // grvTransactionLines
             // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.grvTransactionLines.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colLineID,
             this.colTransactionID,
             this.colServiceTaskDescription,
@@ -108,15 +107,15 @@
             this.colHours,
             this.colPricePerHour,
             this.Price});
-            this.gridView2.GridControl = this.grdTransactionLines;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView2_InitNewRow);
-            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
-            this.gridView2.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
-            this.gridView2.RowDeleted += new DevExpress.Data.RowDeletedEventHandler(this.gridView2_RowDeleted);
-            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
-            this.gridView2.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
+            this.grvTransactionLines.GridControl = this.grdTransactionLines;
+            this.grvTransactionLines.Name = "grvTransactionLines";
+            this.grvTransactionLines.OptionsView.ShowGroupPanel = false;
+            this.grvTransactionLines.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvTransactionLines_InitNewRow);
+            this.grvTransactionLines.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvTransactionLines_CellValueChanged);
+            this.grvTransactionLines.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
+            this.grvTransactionLines.RowDeleted += new DevExpress.Data.RowDeletedEventHandler(this.grvTransactionLines_RowDeleted);
+            this.grvTransactionLines.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
+            this.grvTransactionLines.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
             // 
             // colLineID
             // 
@@ -210,7 +209,7 @@
             this.grdTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdTransactions.Location = new System.Drawing.Point(12, 42);
-            this.grdTransactions.MainView = this.gridView1;
+            this.grdTransactions.MainView = this.grvTransactions;
             this.grdTransactions.Name = "grdTransactions";
             this.grdTransactions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repCustomerName,
@@ -223,11 +222,11 @@
             this.grdTransactions.TabIndex = 5;
             this.grdTransactions.UseEmbeddedNavigator = true;
             this.grdTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.grvTransactions});
             // 
-            // gridView1
+            // grvTransactions
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.grvTransactions.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID,
             this.colDate,
             this.colCustomerName,
@@ -237,13 +236,13 @@
             this.colManagerName,
             this.colManagerSurname,
             this.colTotalPrice});
-            this.gridView1.GridControl = this.grdTransactions;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView1_SelectionChanged);
-            this.gridView1.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView1_RowDeleting);
-            this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
-            this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
+            this.grvTransactions.GridControl = this.grdTransactions;
+            this.grvTransactions.Name = "grvTransactions";
+            this.grvTransactions.OptionsView.ShowGroupPanel = false;
+            this.grvTransactions.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.grvTransactions_SelectionChanged);
+            this.grvTransactions.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.grvTransactions_RowDeleting);
+            this.grvTransactions.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvTransactions_ValidateRow);
+            this.grvTransactions.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvTransactions_ValidatingEditor);
             // 
             // colID
             // 
@@ -364,25 +363,6 @@
             this.colTotalPrice.Visible = true;
             this.colTotalPrice.VisibleIndex = 7;
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnSave.FlatAppearance.BorderSize = 2;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(521, 404);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(125, 40);
-            this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
-            this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
-            // 
             // btn_Close
             // 
             this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -461,7 +441,6 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.btn_Close);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grdTransactions);
             this.Controls.Add(this.grdTransactionLines);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -472,12 +451,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactionLines)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactionLines)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvTransactionLines)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repServiceTasksDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repEngineersSurname)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCustomerSurname)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repCarBrand)).EndInit();
@@ -493,9 +472,9 @@
         private BindingSource bsTransactions;
         private BindingSource bsTransactionLines;
         private DevExpress.XtraGrid.GridControl grdTransactionLines;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvTransactionLines;
         private DevExpress.XtraGrid.GridControl grdTransactions;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvTransactions;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCarBrand;
@@ -506,7 +485,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colHours;
         private DevExpress.XtraGrid.Columns.GridColumn colPricePerHour;
         private DevExpress.XtraGrid.Columns.GridColumn Price;
-        private Button btnSave;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerSurname;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCustomerSurname;
