@@ -21,7 +21,7 @@ namespace CarServiceCenterLib.Models {
         //Constrators
         public TransactionLine() {
             ID = Guid.NewGuid();
-            Transaction = null;
+            //Transaction = null;
         }
         public TransactionLine(Guid transactionID, Guid serviceTaskID, Guid engineerID, double hours, double pricePerHour) {
             ID = Guid.NewGuid();
@@ -31,7 +31,7 @@ namespace CarServiceCenterLib.Models {
             PricePerHour = pricePerHour;
             Hours = hours;
             Price = pricePerHour * hours;
-            Transaction = null;
+            //Transaction = null;
         }
         // Methods
     }

@@ -114,8 +114,7 @@ namespace Session_16.Win {
             }
             if (e.Valid) {
                 view.ClearColumnErrors();
-                serviceTaskRepo.Add((ServiceTask)bsServiceTasks.Current);
-                 
+                serviceTaskRepo.Add((ServiceTask)bsServiceTasks.Current);   
             }
         }
 

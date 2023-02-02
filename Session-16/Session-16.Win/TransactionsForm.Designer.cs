@@ -29,12 +29,13 @@
             this.bsTransactionLines = new System.Windows.Forms.BindingSource(this.components);
             this.grdTransactionLines = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colLineID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTransactionID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colServiceTaskDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repServiceTasksDescription = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colEngineerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repEngineersName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.EngineerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEngineerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repEngineersSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colHours = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPricePerHour = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -43,7 +44,7 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repCustomerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colCustomerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repCustomerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
@@ -53,7 +54,7 @@
             this.repCarModel = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repManagerName = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.conManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colManagerSurname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repManagerSurname = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnSave = new System.Windows.Forms.Button();
@@ -99,10 +100,11 @@
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colLineID,
             this.colTransactionID,
             this.colServiceTaskDescription,
             this.colEngineerName,
-            this.EngineerSurname,
+            this.colEngineerSurname,
             this.colHours,
             this.colPricePerHour,
             this.Price});
@@ -113,6 +115,14 @@
             this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gridView2.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
             this.gridView2.RowDeleted += new DevExpress.Data.RowDeletedEventHandler(this.gridView2_RowDeleted);
+            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
+            this.gridView2.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
+            // 
+            // colLineID
+            // 
+            this.colLineID.Caption = "ID";
+            this.colLineID.FieldName = "ID";
+            this.colLineID.Name = "colLineID";
             // 
             // colTransactionID
             // 
@@ -152,14 +162,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repEngineersName.Name = "repEngineersName";
             // 
-            // EngineerSurname
+            // colEngineerSurname
             // 
-            this.EngineerSurname.Caption = "Engineer Surname";
-            this.EngineerSurname.ColumnEdit = this.repEngineersSurname;
-            this.EngineerSurname.FieldName = "EngineerID";
-            this.EngineerSurname.Name = "EngineerSurname";
-            this.EngineerSurname.Visible = true;
-            this.EngineerSurname.VisibleIndex = 2;
+            this.colEngineerSurname.Caption = "Engineer Surname";
+            this.colEngineerSurname.ColumnEdit = this.repEngineersSurname;
+            this.colEngineerSurname.FieldName = "EngineerID";
+            this.colEngineerSurname.Name = "colEngineerSurname";
+            this.colEngineerSurname.Visible = true;
+            this.colEngineerSurname.VisibleIndex = 2;
             // 
             // repEngineersSurname
             // 
@@ -220,17 +230,20 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID,
             this.colDate,
-            this.CustomerName,
+            this.colCustomerName,
             this.colCustomerSurname,
             this.colCarBrand,
             this.colCarModel,
             this.colManagerName,
-            this.conManagerSurname,
+            this.colManagerSurname,
             this.colTotalPrice});
             this.gridView1.GridControl = this.grdTransactions;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView1_SelectionChanged);
+            this.gridView1.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView1_RowDeleting);
+            this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
+            this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
             // 
             // colID
             // 
@@ -246,14 +259,14 @@
             this.colDate.Visible = true;
             this.colDate.VisibleIndex = 0;
             // 
-            // CustomerName
+            // colCustomerName
             // 
-            this.CustomerName.Caption = "Customer Name";
-            this.CustomerName.ColumnEdit = this.repCustomerName;
-            this.CustomerName.FieldName = "CustomerID";
-            this.CustomerName.Name = "CustomerName";
-            this.CustomerName.Visible = true;
-            this.CustomerName.VisibleIndex = 1;
+            this.colCustomerName.Caption = "Customer Name";
+            this.colCustomerName.ColumnEdit = this.repCustomerName;
+            this.colCustomerName.FieldName = "CustomerID";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.Visible = true;
+            this.colCustomerName.VisibleIndex = 1;
             // 
             // repCustomerName
             // 
@@ -326,14 +339,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repManagerName.Name = "repManagerName";
             // 
-            // conManagerSurname
+            // colManagerSurname
             // 
-            this.conManagerSurname.Caption = "ManagerSurname";
-            this.conManagerSurname.ColumnEdit = this.repManagerSurname;
-            this.conManagerSurname.FieldName = "ManagerID";
-            this.conManagerSurname.Name = "conManagerSurname";
-            this.conManagerSurname.Visible = true;
-            this.conManagerSurname.VisibleIndex = 6;
+            this.colManagerSurname.Caption = "ManagerSurname";
+            this.colManagerSurname.ColumnEdit = this.repManagerSurname;
+            this.colManagerSurname.FieldName = "ManagerID";
+            this.colManagerSurname.Name = "colManagerSurname";
+            this.colManagerSurname.Visible = true;
+            this.colManagerSurname.VisibleIndex = 6;
             // 
             // repManagerSurname
             // 
@@ -484,7 +497,7 @@
         private DevExpress.XtraGrid.GridControl grdTransactions;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
-        private DevExpress.XtraGrid.Columns.GridColumn CustomerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCarBrand;
         private DevExpress.XtraGrid.Columns.GridColumn colManagerName;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalPrice;
@@ -502,11 +515,11 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repCarBrand;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repManagerName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repManagerSurname;
-        private DevExpress.XtraGrid.Columns.GridColumn conManagerSurname;
+        private DevExpress.XtraGrid.Columns.GridColumn colManagerSurname;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repServiceTasksDescription;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repEngineersName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repEngineersSurname;
-        private DevExpress.XtraGrid.Columns.GridColumn EngineerSurname;
+        private DevExpress.XtraGrid.Columns.GridColumn colEngineerSurname;
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionID;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
@@ -514,5 +527,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelWorkHours;
+        private DevExpress.XtraGrid.Columns.GridColumn colLineID;
     }
 }

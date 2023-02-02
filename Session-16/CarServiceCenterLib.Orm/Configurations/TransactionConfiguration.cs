@@ -12,6 +12,9 @@ namespace CarServiceCenterLib.Orm.Configurations {
         public void Configure(EntityTypeBuilder<Transaction> builder) {
             builder.ToTable("Transactions");
             builder.HasKey(transaction => transaction.ID);
+            //builder.HasMany(transaction => transaction.TransactionLines)
+            //    .WithOne(transactionLine => transactionLine.Transaction)
+            //    .OnDelete(DeleteBehavior.Cascade);
             
         }
     }

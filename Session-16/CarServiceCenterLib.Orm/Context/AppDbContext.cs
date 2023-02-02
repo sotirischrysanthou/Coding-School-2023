@@ -24,8 +24,8 @@ namespace CarServiceCenterLib.Orm.Context {
             modelBuilder.ApplyConfiguration(new ManagerConfiguration());
             modelBuilder.ApplyConfiguration(new CarConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceTaskConfiguration());
-            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionLineConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

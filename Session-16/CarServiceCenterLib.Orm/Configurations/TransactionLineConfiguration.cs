@@ -15,7 +15,7 @@ namespace CarServiceCenterLib.Orm.Configurations {
             builder.HasOne(transactionLine => transactionLine.Transaction)
                 .WithMany(transaction => transaction.TransactionLines)
                 .HasForeignKey(transactionLine => transactionLine.TransactionID)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientCascade);
                 
 
         }

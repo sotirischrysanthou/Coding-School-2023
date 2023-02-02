@@ -1,5 +1,6 @@
 ﻿using CarServiceCenterLib.Models;
 using CarServiceCenterLib.Orm.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(Guid id) {
             using var context = new AppDbContext();
-            var TransactionLineDb = context.Transactions.Where(transactionLine => transactionLine.ID == id).SingleOrDefault();
+            var TransactionLineDb = context.TransactionLines.Where(transactionLine => transactionLine.ID == id).SingleOrDefault();
             if (TransactionLineDb is null)
                 return;
             context.Remove(TransactionLineDb);
@@ -44,7 +45,7 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public IList<TransactionLine> GetAll() {
             using var context = new AppDbContext();
-            return context.TransactionLines.ToList();
+            return context.TransactionLines.Include(transactionLine => transactionLine.Transaction).ToList();
         }
 
         public TransactionLine? GetById(Guid id) {
