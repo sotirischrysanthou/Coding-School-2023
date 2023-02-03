@@ -128,8 +128,8 @@ namespace Session_16.Win {
         private void grvTransactions_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
             GridView view = sender as GridView;
             TransactionRepo transactionRepo = new TransactionRepo();
-            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
-            transactionRepo.Delete(id);
+            Transaction transaction = (Transaction)bsTransactions.Current;
+            transactionRepo.Delete(transaction.ID);
         }
 
         private void grvTransactions_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e) {
@@ -215,7 +215,8 @@ namespace Session_16.Win {
 
         private void grvTransactionLines_InitNewRow(object sender, InitNewRowEventArgs e) {
             GridView view = sender as GridView;
-            view.SetRowCellValue(e.RowHandle, "TransactionID", grvTransactions.GetRowCellValue(grvTransactions.GetSelectedRows()[0], "ID"));
+            ((TransactionLine)bsTransactionLines.Current).TransactionID = ((Transaction)bsTransactions.Current).ID;
+            //view.SetRowCellValue(e.RowHandle, "TransactionID", ((Transaction)bsTransactions.Current).ID);
         }
         private void grvTransactionLines_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
             GridView view = sender as GridView;
