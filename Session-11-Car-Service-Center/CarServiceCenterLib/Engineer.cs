@@ -10,13 +10,18 @@ namespace CarServiceCenterLib {
         public Guid ManagerID { get; set; }
         public double SalaryPerMonth { get; set; }
 
+        public DateTime? StartDate { get; set; }
+        
+
+
         // Constructors
         public Engineer() {
-
+            StartDate = null;
         }
-        public Engineer(string name, string surname, Guid managerID, double salaryPerMonth) : base(name, surname) {
+        public Engineer(string name, string surname, Guid managerID, double salaryPerMonth, DateTime startDate) : base(name, surname) {
             ManagerID = managerID;
             SalaryPerMonth = salaryPerMonth;
+            StartDate = startDate;
         }
     }
 }

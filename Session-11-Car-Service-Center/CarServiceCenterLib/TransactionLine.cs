@@ -16,6 +16,9 @@ namespace CarServiceCenterLib {
         public double Price { get; set; }
 
         //Constrators
+        public TransactionLine() {
+            ID = Guid.NewGuid();
+        }
         public TransactionLine(Guid transactionID, Guid serviceTaskID, Guid engineerID, double hours, double pricePerHour) {
             ID = Guid.NewGuid();
             TransactionID = transactionID;

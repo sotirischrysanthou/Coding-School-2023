@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CarServiceCenterLib {
     public class WorkDay {
         public DateTime Date { get; set; }
-        public List<ServiceTask> ServiceTasks { get; set; }
+        public List<TransactionLine> Tasks { get; set; }
         public int NumOfEngineers { get; set; }
         private double _workload { get; set; }
 
@@ -16,13 +16,13 @@ namespace CarServiceCenterLib {
         public WorkDay(DateTime date, int numofEngineers) {
             Date = date;
             NumOfEngineers = numofEngineers;
-            ServiceTasks = new List<ServiceTask>();
+            Tasks = new List<TransactionLine>();
         }
 
         public double WorkLoad() {
             double sumWorkHours = 0.0;
-            foreach (ServiceTask serviceTask in ServiceTasks) {
-                sumWorkHours = sumWorkHours + serviceTask.Hours;
+            foreach (TransactionLine task in Tasks) {
+                sumWorkHours = sumWorkHours + task.Hours;
             }
             _workload = sumWorkHours;
             return sumWorkHours;
@@ -35,17 +35,17 @@ namespace CarServiceCenterLib {
             NumOfEngineers = Engineers;
             return NumOfEngineers;
         }
-        public bool AddTask(ServiceTask task, out String message) {
+        public bool AddTask(TransactionLine task, out String message) {
             //task cannot be over 8 hours
             //(WorkLoad + task.Hours) cannot be > than MaxWorkLoad
 
             bool ret = false;
             //Check if task is less than 8 hours
-            if (task.Hours < 8) {
+            if (task.Hours <= 8) {
                 //Check if adding the task will not exceed the MaxWorkLoad
-                if (WorkLoad() + task.Hours < MaxWorkLoad()) {
+                if (WorkLoad() + task.Hours <= MaxWorkLoad()) {
                     //If task is valid, add it to the list and update the WorkLoad
-                    ServiceTasks.Add(task);
+                    Tasks.Add(task);
                     message = "Task added successfully";
                     _workload += task.Hours;
                     ret = true;
@@ -58,6 +58,10 @@ namespace CarServiceCenterLib {
                 ret = false;
             }
             return ret;
+        }
+
+        public void DeleteTask(TransactionLine task) {
+            Tasks.Remove(task);
         }
     }
 }

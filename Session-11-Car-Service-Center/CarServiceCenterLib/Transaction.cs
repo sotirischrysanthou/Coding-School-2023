@@ -15,7 +15,21 @@ namespace CarServiceCenterLib {
         public double TotalPrice { get; set; }
         public List<TransactionLine> TransactionLines { get; set; }
 
+
+        public Transaction(Guid id, DateTime date, Guid customerID, Guid carID, Guid managerID, double totalPrice) {
+            ID = id;
+            Date = date;
+            CustomerID = customerID;
+            CarID = carID;
+            ManagerID = managerID;
+            TotalPrice = totalPrice;
+        }
+
         // Constructors
+        public Transaction() {
+            TransactionLines = new List<TransactionLine>();
+            ID = Guid.NewGuid();
+        }
         public Transaction(Guid customerID, Guid carID, Guid managerID) {
             ID = Guid.NewGuid();
             Date = DateTime.Now;
@@ -30,6 +44,13 @@ namespace CarServiceCenterLib {
         public void AddTransactionLine(TransactionLine transactionLine) {
             TransactionLines.Add(transactionLine);
             TotalPrice += transactionLine.Price;
+        }
+
+        public void UpdateTotalPrice() {
+            TotalPrice = 0;
+            foreach (TransactionLine transactionLine in TransactionLines) {
+                TotalPrice += transactionLine.Price;
+            }
         }
     }
 }

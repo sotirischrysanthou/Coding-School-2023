@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomersAndCarsForm));
             this.grdCustomers = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -41,6 +42,7 @@
             this.bsCars = new System.Windows.Forms.BindingSource(this.components);
             this.bsService = new System.Windows.Forms.BindingSource(this.components);
             this.btn_Save = new System.Windows.Forms.Button();
+            this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
@@ -52,7 +54,9 @@
             // 
             // grdCustomers
             // 
-            this.grdCustomers.Location = new System.Drawing.Point(12, 42);
+            this.grdCustomers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdCustomers.Location = new System.Drawing.Point(14, 42);
             this.grdCustomers.MainView = this.gridView1;
             this.grdCustomers.Name = "grdCustomers";
             this.grdCustomers.Size = new System.Drawing.Size(776, 160);
@@ -72,6 +76,8 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.Tag = "Name";
+            this.gridView1.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView1_ValidateRow);
+            this.gridView1.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView1_ValidatingEditor);
             // 
             // colName
             // 
@@ -107,9 +113,11 @@
             // 
             // labelCustomers
             // 
+            this.labelCustomers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCustomers.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelCustomers.Appearance.Options.UseFont = true;
-            this.labelCustomers.Location = new System.Drawing.Point(12, 12);
+            this.labelCustomers.Location = new System.Drawing.Point(14, 12);
             this.labelCustomers.Name = "labelCustomers";
             this.labelCustomers.Size = new System.Drawing.Size(94, 24);
             this.labelCustomers.TabIndex = 1;
@@ -121,9 +129,11 @@
             // 
             // labelControl1
             // 
+            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(12, 208);
+            this.labelControl1.Location = new System.Drawing.Point(14, 208);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(39, 24);
             this.labelControl1.TabIndex = 2;
@@ -131,7 +141,9 @@
             // 
             // grdCars
             // 
-            this.grdCars.Location = new System.Drawing.Point(12, 238);
+            this.grdCars.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdCars.Location = new System.Drawing.Point(14, 238);
             this.grdCars.MainView = this.gridView2;
             this.grdCars.Name = "grdCars";
             this.grdCars.Size = new System.Drawing.Size(776, 160);
@@ -149,6 +161,9 @@
             this.gridView2.GridControl = this.grdCars;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
+            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
+            this.gridView2.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gridView2_ValidatingEditor);
             // 
             // colBrand
             // 
@@ -168,7 +183,7 @@
             // 
             // colCarRegistrationNumber
             // 
-            this.colCarRegistrationNumber.Caption = "CarRegistrationNumber";
+            this.colCarRegistrationNumber.Caption = "Car Registration Number";
             this.colCarRegistrationNumber.FieldName = "CarRegistrationNumber";
             this.colCarRegistrationNumber.Name = "colCarRegistrationNumber";
             this.colCarRegistrationNumber.Visible = true;
@@ -184,24 +199,54 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(711, 404);
+            this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.btn_Save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_Save.FlatAppearance.BorderSize = 2;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Save.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_Save.Location = new System.Drawing.Point(534, 404);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(77, 34);
+            this.btn_Save.Size = new System.Drawing.Size(125, 40);
             this.btn_Save.TabIndex = 4;
             this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.UseVisualStyleBackColor = false;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            this.btn_Save.MouseEnter += new System.EventHandler(this.btn_Save_MouseEnter);
+            this.btn_Save.MouseLeave += new System.EventHandler(this.btn_Save_MouseLeave);
+            // 
+            // btn_Close
+            // 
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.btn_Close.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_Close.FlatAppearance.BorderSize = 2;
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Close.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_Close.Location = new System.Drawing.Point(665, 404);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(125, 40);
+            this.btn_Close.TabIndex = 5;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            this.btn_Close.MouseEnter += new System.EventHandler(this.btn_Close_MouseEnter);
+            this.btn_Close.MouseLeave += new System.EventHandler(this.btn_Close_MouseLeave);
             // 
             // CustomersAndCarsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
+            this.ClientSize = new System.Drawing.Size(804, 451);
+            this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.grdCars);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelCustomers);
             this.Controls.Add(this.grdCustomers);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(820, 490);
             this.Name = "CustomersAndCarsForm";
             this.Text = "CustomersAndCars";
             this.Load += new System.EventHandler(this.CustomersAndCarsForm_Load);
@@ -236,5 +281,6 @@
         private BindingSource bsCars;
         private BindingSource bsService;
         private Button btn_Save;
+        private Button btn_Close;
     }
 }
