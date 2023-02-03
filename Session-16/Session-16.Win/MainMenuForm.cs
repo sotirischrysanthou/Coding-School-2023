@@ -28,7 +28,7 @@ namespace Session_16.Win {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            TransactionsForm transactionsForm = new TransactionsForm(_carServiceCenter);
+            TransactionsForm transactionsForm = new TransactionsForm();
             transactionsForm.ShowDialog(); // Shows _transactionsForm
         }
 
@@ -176,7 +176,7 @@ namespace Session_16.Win {
         }
 
         private void btnTransactions_Click(object sender, EventArgs e) {
-            TransactionsForm transactionsForm = new TransactionsForm(_carServiceCenter);
+            TransactionsForm transactionsForm = new TransactionsForm();
             transactionsForm.ShowDialog(); // Shows _transactionsForm
         }
 
