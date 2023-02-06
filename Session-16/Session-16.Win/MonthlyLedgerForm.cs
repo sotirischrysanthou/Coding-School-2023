@@ -42,8 +42,8 @@ namespace Session_16.Win {
         }
 
         private void btnCalculate_Click(object sender, EventArgs e) {
-            TransactionRepo transactionRepo = new TransactionRepo();
-            List<Transaction> transactions = transactionRepo.GetAll().ToList();
+            
+            
             List<MonthlyLedger> list = new List<MonthlyLedger>();
             MonthlyLedger monthlyLedger;
             int year = DateTime.Now.Year;
@@ -51,11 +51,7 @@ namespace Session_16.Win {
                 monthlyLedger = new MonthlyLedger(year, month);
                 monthlyLedger.Expenses += SalaryEngineersFrom(year, month);
                 monthlyLedger.Expenses += SalaryManagersFrom(year, month);
-                foreach (Transaction transaction in transactions) {
-                    if (transaction.Date.Year == year && transaction.Date.Month == month) {
-                        monthlyLedger.Incomes += transaction.TotalPrice;
-                    }
-                }
+                monthlyLedger.Incomes = CalculateIncomes(year, month);
                 monthlyLedger.Total = monthlyLedger.Incomes - monthlyLedger.Expenses;
                 list.Add(monthlyLedger);
             }
@@ -81,23 +77,46 @@ namespace Session_16.Win {
             double TotalSalary = 0;
             EngineerRepo engineerRepo = new EngineerRepo();
             List<Engineer> engineers = engineerRepo.GetAll().ToList();
+            DateTime date = new DateTime(Year, Month, DateTime.DaysInMonth(Year, Month));
             foreach (Engineer engineer in engineers) {
-                if (((DateTime)engineer.StartDate).Year <= Year && ((DateTime)engineer.StartDate).Month <= Month) {
+                if (((DateTime)engineer.StartDate) <= date) {
                     TotalSalary += engineer.SalaryPerMonth;
                 }
             }
             return TotalSalary;
         }
+
+        /*
+         * year: 2023
+         * month: 1
+         *              sotiris: 1/12/22
+         * (sotiris.year <= year) = true
+         * (sotiris.month <= month) = false
+         */
+
         private double SalaryManagersFrom(int Year, int Month) {
             double TotalSalary = 0;
             ManagerRepo managerRepo = new ManagerRepo();
             List<Manager> managers = managerRepo.GetAll().ToList();
+            DateTime date =new DateTime(Year,Month,DateTime.DaysInMonth(Year,Month));
             foreach (Manager manager in managers) {
-                if (((DateTime)manager.StartDate).Year <= Year && ((DateTime)manager.StartDate).Month <= Month) {
+                if (((DateTime)manager.StartDate)<=date) {
                     TotalSalary += manager.SalaryPerMonth;
                 }
             }
             return TotalSalary;
+        }
+
+        private double CalculateIncomes(int Year, int Month) {
+            double TotalIncome = 0;
+            TransactionRepo transactionRepo = new TransactionRepo();
+            List<Transaction> transactions = transactionRepo.GetAll().ToList();
+            foreach (Transaction transaction in transactions) {
+                if (transaction.Date.Year == Year && transaction.Date.Month == Month) {
+                    TotalIncome += transaction.TotalPrice;
+                }
+            }
+            return TotalIncome;
         }
     }
 
