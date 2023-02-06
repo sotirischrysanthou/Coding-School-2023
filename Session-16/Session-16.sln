@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerializerLib", "Serializer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenterLib.Models", "CarServiceCenterLib.Models\CarServiceCenterLib.Models.csproj", "{77EC97E4-B5C3-4AA1-B660-0657A72E9D6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarServiceCenterLib.Orm", "CarServiceCenterLib.Orm\CarServiceCenterLib.Orm.csproj", "{2988B94B-AF22-4111-858B-F8991B6B8FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenterLib.Orm", "CarServiceCenterLib.Orm\CarServiceCenterLib.Orm.csproj", "{2988B94B-AF22-4111-858B-F8991B6B8FC4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Session-16.Win", "Session-16.Win\Session-16.Win.csproj", "{9424B525-4365-4037-B86F-92F596EB2B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarServiceCenterLib.Functions", "CarServiceCenterLib.Functions\CarServiceCenterLib.Functions.csproj", "{8BFA7C5A-CA33-4BC7-BFD6-F1730A14296C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9424B525-4365-4037-B86F-92F596EB2B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9424B525-4365-4037-B86F-92F596EB2B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9424B525-4365-4037-B86F-92F596EB2B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFA7C5A-CA33-4BC7-BFD6-F1730A14296C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFA7C5A-CA33-4BC7-BFD6-F1730A14296C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFA7C5A-CA33-4BC7-BFD6-F1730A14296C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFA7C5A-CA33-4BC7-BFD6-F1730A14296C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

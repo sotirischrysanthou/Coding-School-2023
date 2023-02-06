@@ -1,3 +1,5 @@
+
+using CarServiceCenterLib.Functions;
 using CarServiceCenterLib.Models;
 using CarServiceCenterLib.Orm.Repositories;
 using DevExpress.Mvvm.Native;
@@ -11,18 +13,18 @@ using System.Reflection.Emit;
 namespace Session_16.Win {
     public partial class TransactionsForm : Form {
         // Properties
-        private List<WorkDay> _workDays;
+        private WorkloadManagment _workloadManagment;
 
         // Constructors
         public TransactionsForm() {
             InitializeComponent();
-            _workDays = new List<WorkDay>();
+            _workloadManagment = new WorkloadManagment();
         }
 
         // Methods
         // Initial Methods-----------------------------------------------------------------------------------------------------
         private void TransactionsForm_Load(object sender, EventArgs e) {
-            CalculateWorkDays();
+            _workloadManagment.CalculateWorkDays();
             SetControlProperties();
         }
 
@@ -134,11 +136,9 @@ namespace Session_16.Win {
 
         private void grvTransactions_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e) {
             GridView view = sender as GridView;
-            Guid id = (Guid)view.GetRowCellValue(view.FocusedRowHandle, colCustomerName);
-            if (id != Guid.Empty) {
-                UpdateWorkDays();
-                UpdateLabelWorkHour();
-            }
+            Transaction transaction = (Transaction)(bsTransactions.Current);
+                _workloadManagment.UpdateWorkDays();
+                labelWorkHours.Text = _workloadManagment.UpdateLabelWorkHour(transaction);
         }
         //--------------------------------------------------------------------------------------
         // ------------------------grvTransactionLines Events-----------------------------------
@@ -155,13 +155,13 @@ namespace Session_16.Win {
                 Transaction transaction = (Transaction)bsTransactions.Current;
                 TransactionLine transactionLine = (TransactionLine)bsTransactionLines.Current;
                 String message;
-                if (AddTask(transactionLine, transaction.Date, out message)) {
+                if (_workloadManagment.AddTask(transactionLine, transaction.Date, out message)) {
                     transaction.UpdateTotalPrice();
                     grvTransactions.RefreshData();
                 } else {
                     view.DeleteRow(e.RowHandle);
                 }
-                UpdateLabelWorkHour();
+                labelWorkHours.Text = _workloadManagment.UpdateLabelWorkHour(transaction);
                 MessageBox.Show(message);
             }
         }
@@ -223,14 +223,14 @@ namespace Session_16.Win {
             TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
             Transaction transaction = (Transaction)bsTransactions.Current;
             TransactionLine transactionLine = (TransactionLine)bsTransactionLines.Current;
-            DeleteTask(transactionLine, transaction.Date);
+            _workloadManagment.DeleteTask(transactionLine, transaction.Date);
             transactionLineRepo.Delete(transactionLine.ID);
 
         }
 
         private void grvTransactionLines_RowDeleted(object sender, DevExpress.Data.RowDeletedEventArgs e) {
-            UpdateWorkDays();
-            UpdateLabelWorkHour();
+            _workloadManagment.UpdateWorkDays();
+            labelWorkHours.Text = _workloadManagment.UpdateLabelWorkHour((Transaction)bsTransactions.Current);
         }
 
         //--------------------------------------------------------------------------------------
@@ -251,65 +251,6 @@ namespace Session_16.Win {
             btn_Close.ForeColor = Color.Black;
             btn_Close.FlatAppearance.BorderColor = Color.Black;
             btn_Close.FlatAppearance.BorderSize = 2;
-        }
-
-        //--------------------------------------------------------------------------------------
-        // -----------------------------WorkLoad Managment--------------------------------------
-        //--------------------------------------------------------------------------------------
-        private void UpdateLabelWorkHour() {
-            TransactionRepo transactionRepo = new TransactionRepo();
-            Guid id = (Guid)grvTransactions.GetFocusedRowCellValue("ID");
-            Transaction transaction = transactionRepo.GetById(id);
-            foreach (WorkDay workDay in _workDays) {
-                if (workDay.Date.Year == transaction.Date.Year && workDay.Date.Month == transaction.Date.Month && workDay.Date.Day == transaction.Date.Day) {
-                    labelWorkHours.Text = (workDay.MaxWorkLoad() - workDay.WorkLoad()).ToString();
-                }
-            }
-        }
-
-        private void CalculateWorkDays() {
-            TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
-            List<TransactionLine> transactionLines = transactionLineRepo.GetAll().ToList();
-            foreach (TransactionLine transactionLine in transactionLines) {
-                AddTask(transactionLine, transactionLine.Transaction.Date, out _);
-            }
-            UpdateWorkDays();
-        }
-
-        public bool AddTask(TransactionLine task, DateTime date, out String message) {
-            //find from Workday list WorkDay.date==date
-            //WorkDay.Add(task, message);
-            EngineerRepo engineerRepo = new EngineerRepo();
-            bool ret = false;
-            bool workDayExists = false;
-            String msg = "";
-            foreach (WorkDay workDay in _workDays) {
-                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
-                    ret = workDay.AddTask(task, out msg);
-                    workDayExists = true;
-                }
-            }
-            if (!workDayExists) {
-                _workDays.Add(new WorkDay(new DateTime(date.Year, date.Month, date.Day), engineerRepo.GetAll().Count));
-                ret = _workDays.Last().AddTask(task, out msg);
-            }
-            message = msg;
-            return ret;
-        }
-
-        public void DeleteTask(TransactionLine task, DateTime date) {
-            foreach (WorkDay workDay in _workDays) {
-                if (workDay.Date.Year == date.Year && workDay.Date.Month == date.Month && workDay.Date.Day == date.Day) {
-                    workDay.DeleteTask(task);
-                }
-            }
-        }
-
-        public void UpdateWorkDays() {
-            EngineerRepo engineerRepo = new EngineerRepo();
-            foreach (WorkDay workDay in _workDays) {
-                workDay.UpdateNumOfEngineers(engineerRepo.GetAll().Count());
-            }
-        }        
+        }              
     }
 }

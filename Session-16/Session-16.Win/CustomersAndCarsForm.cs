@@ -18,13 +18,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Session_16.Win {
     public partial class CustomersAndCarsForm : Form {
-        private CarServiceCenter _carServiceCenter;
         private Serializer _serializer;
 
-        public CustomersAndCarsForm(CarServiceCenter carServiceCenter) {
+        public CustomersAndCarsForm() {
             InitializeComponent();
             _serializer = new Serializer();
-            _carServiceCenter = carServiceCenter;
         }
         private void CustomersAndCarsForm_Load(object sender, EventArgs e) {
             SetControlProperties();
@@ -44,45 +42,11 @@ namespace Session_16.Win {
 
         }
 
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e) {
-
-        }
-
-        private void bsCustomers_CurrentChanged(object sender, EventArgs e) {
-
-        }
-
-        private void bsCars_CurrentChanged(object sender, EventArgs e) {
-
-        }
-
-        private void bsService_CurrentChanged(object sender, EventArgs e) {
-
-        }
-
-        private void btn_Save_Click(object sender, EventArgs e) {
-            _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
-            DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
-
-        }
-
         private void btn_Close_Click(object sender, EventArgs e) {
             this.Close();
         }
 
         //Customize Buttons
-
-        private void btn_Save_MouseEnter(object sender, EventArgs e) {
-            btn_Save.FlatAppearance.MouseOverBackColor = btn_Save.BackColor;
-            btn_Save.ForeColor = Color.Blue;
-            btn_Save.FlatAppearance.BorderColor = Color.Red;
-            btn_Save.FlatAppearance.BorderSize = 2;
-        }
-
-        private void btn_Save_MouseLeave(object sender, EventArgs e) {
-            btn_Save.ForeColor = Color.Black;
-            btn_Save.FlatAppearance.BorderSize = 0;
-        }
 
         private void btn_Close_MouseEnter(object sender, EventArgs e) {
             btn_Close.FlatAppearance.MouseOverBackColor = btn_Close.BackColor;
@@ -95,11 +59,6 @@ namespace Session_16.Win {
             btn_Close.ForeColor = Color.Black;
             btn_Close.FlatAppearance.BorderSize = 0;
         }
-
-        private void gridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e) {
-
-        }
-
         private void gridView2_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
             CarRepo carRepo = new CarRepo();
             GridView view = sender as GridView;
@@ -303,27 +262,6 @@ namespace Session_16.Win {
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
             customerRepo.Update(id, (Customer)bsCustomers.Current);
         }
-
-        //private Customer FindCustomerWithID(Guid id) {
-        //    Customer retCustomer = null; 
-        //    foreach (Customer customer in _carServiceCenter.Customers) {
-        //        if (customer.ID == id) {
-        //            retCustomer =  customer;
-        //        }
-        //    }
-        //    return retCustomer;
-        //}
-
-        //private Car FindCarWithID(Guid id) {
-        //    Car retCar = null;
-        //    foreach (Car car in _carServiceCenter.Cars) {
-        //        if (car.ID == id) {
-        //            retCar = car;
-        //        }
-        //    }
-        //    return retCar;
-        //}
-
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
             GridView view = sender as GridView;
             CustomerRepo customerRepo = new CustomerRepo();

@@ -21,11 +21,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Session_16.Win {
     public partial class EmployeesForm : Form {
         private Serializer _serializer;
-        private CarServiceCenter _carServiceCenter;
-        public EmployeesForm(CarServiceCenter carServiceCenter) {
+        public EmployeesForm() {
             InitializeComponent();
             _serializer = new Serializer();
-            _carServiceCenter = carServiceCenter;
         }
 
         private void EmployeesForm_Load(object sender, EventArgs e) {
@@ -38,14 +36,8 @@ namespace Session_16.Win {
             grdEngineers.DataSource = bsEngineers;
             bsManagers.DataSource = managerRepo.GetAll();//_carServiceCenter.Managers;
             grdManagers.DataSource = bsManagers;
-            SetLookUpEdit<Manager>(repManagerName, _carServiceCenter.Managers, "Name", "ID");
-            SetLookUpEdit<Manager>(repManagerSurname, _carServiceCenter.Managers, "Surname", "ID");
-        }
-
-        private void btnSave_Click(object sender, EventArgs e) {
-            _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
-            DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
-
+            SetLookUpEdit<Manager>(repManagerName, managerRepo.GetAll().ToList(), "Name", "ID");
+            SetLookUpEdit<Manager>(repManagerSurname, managerRepo.GetAll().ToList(), "Surname", "ID");
         }
 
         private void btnClose_Click(object sender, EventArgs e) {
@@ -63,19 +55,6 @@ namespace Session_16.Win {
         }
         //Customize Buttons
 
-        private void btnSave_MouseEnter(object sender, EventArgs e) {
-            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
-            btnSave.ForeColor = Color.Blue;
-            btnSave.FlatAppearance.BorderColor = Color.Red;
-            btnSave.FlatAppearance.BorderSize = 2;
-        }
-
-        private void btnSave_MouseLeave(object sender, EventArgs e) {
-            btnSave.ForeColor = Color.Black;
-            btnSave.FlatAppearance.BorderColor = Color.Black;
-            btnSave.FlatAppearance.BorderSize = 2;
-        }
-
         private void btnClose_MouseEnter(object sender, EventArgs e) {
             btnClose.FlatAppearance.MouseOverBackColor = btnClose.BackColor;
             btnClose.ForeColor = Color.Blue;
@@ -86,7 +65,7 @@ namespace Session_16.Win {
         private void btnClose_MouseLeave(object sender, EventArgs e) {
             btnClose.ForeColor = Color.Black;
             btnClose.FlatAppearance.BorderColor = Color.Black;
-            btnSave.FlatAppearance.BorderSize = 2;
+            btnClose.FlatAppearance.BorderSize = 2;
         }
         //gridView1_ValidateRow Giannis
         private void gridView1_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
@@ -311,27 +290,6 @@ namespace Session_16.Win {
         }
 
         private void gridView1_RowCountChanged(object sender, EventArgs e) {
-            _carServiceCenter.UpdateWorkDays();
-        }
-
-        private Engineer FindEngineerWithID(Guid id) {
-            Engineer retEngineer = null;
-            foreach (Engineer engineer in _carServiceCenter.Engineers) {
-                if (engineer.ID == id) {
-                    retEngineer = engineer;
-                }
-            }
-            return retEngineer;
-        }
-
-        private Manager FindManagerWithID(Guid id) {
-            Manager retManager = null;
-            foreach (Manager manager in _carServiceCenter.Managers) {
-                if (manager.ID == id) {
-                    retManager = manager;
-                }
-            }
-            return retManager;
         }
 
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {

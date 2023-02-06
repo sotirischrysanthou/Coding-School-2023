@@ -43,7 +43,6 @@
             this.colCarRegistrationNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsCars = new System.Windows.Forms.BindingSource(this.components);
             this.bsService = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_Save = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -134,10 +133,6 @@
             this.labelCustomers.TabIndex = 1;
             this.labelCustomers.Text = "Customers";
             // 
-            // bsCustomers
-            // 
-            this.bsCustomers.CurrentChanged += new System.EventHandler(this.bsCustomers_CurrentChanged);
-            // 
             // labelControl1
             // 
             this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -173,7 +168,6 @@
             this.gridView2.GridControl = this.grdCars;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
-            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gridView2.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gridView2_RowDeleting);
             this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridView2_ValidateRow);
             this.gridView2.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridView2_RowUpdated);
@@ -209,32 +203,6 @@
             this.colCarRegistrationNumber.Visible = true;
             this.colCarRegistrationNumber.VisibleIndex = 2;
             // 
-            // bsCars
-            // 
-            this.bsCars.CurrentChanged += new System.EventHandler(this.bsCars_CurrentChanged);
-            // 
-            // bsService
-            // 
-            this.bsService.CurrentChanged += new System.EventHandler(this.bsService_CurrentChanged);
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btn_Save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_Save.FlatAppearance.BorderSize = 2;
-            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Save.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Save.Location = new System.Drawing.Point(534, 404);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(125, 40);
-            this.btn_Save.TabIndex = 4;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = false;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
-            this.btn_Save.MouseEnter += new System.EventHandler(this.btn_Save_MouseEnter);
-            this.btn_Save.MouseLeave += new System.EventHandler(this.btn_Save_MouseLeave);
-            // 
             // btn_Close
             // 
             this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -260,7 +228,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(804, 451);
             this.Controls.Add(this.btn_Close);
-            this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.grdCars);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelCustomers);
@@ -300,7 +267,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCarRegistrationNumber;
         private BindingSource bsCars;
         private BindingSource bsService;
-        private Button btn_Save;
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraGrid.Columns.GridColumn colCarID;

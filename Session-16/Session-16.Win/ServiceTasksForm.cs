@@ -19,12 +19,10 @@ using CarServiceCenterLib.Orm.Repositories;
 
 namespace Session_16.Win {
     public partial class ServiceTasksForm : Form {
-        private CarServiceCenter _carServiceCenter;
         private Serializer _serializer;
 
-        public ServiceTasksForm(CarServiceCenter carServiceCenter) {
+        public ServiceTasksForm() {
             InitializeComponent();
-            _carServiceCenter = carServiceCenter;
             _serializer = new Serializer();
         }
         private void ServiceTasksForm_Load_1(object sender, EventArgs e) {
@@ -43,26 +41,8 @@ namespace Session_16.Win {
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e) {
-            _serializer.SerializeToFile(_carServiceCenter, "CarServiceCenter.json");
-            DevExpress.XtraEditors.XtraMessageBox.Show("Saved!");
-        }
-
         private void btn_Close_Click(object sender, EventArgs e) {
             this.Close();
-        }
-
-        private void btnSave_MouseEnter(object sender, EventArgs e) {
-            btnSave.FlatAppearance.MouseOverBackColor = btnSave.BackColor;
-            btnSave.ForeColor = Color.Blue;
-            btnSave.FlatAppearance.BorderColor = Color.Red;
-            btnSave.FlatAppearance.BorderSize = 2;
-        }
-
-        private void btnSave_MouseLeave(object sender, EventArgs e) {
-            btnSave.ForeColor = Color.Black;
-            btnSave.FlatAppearance.BorderColor = Color.Black;
-            btnSave.FlatAppearance.BorderSize = 2;
         }
 
         private void btn_Close_MouseEnter(object sender, EventArgs e) {
@@ -176,16 +156,6 @@ namespace Session_16.Win {
                     return;
                 }
             }
-        }
-
-        private ServiceTask FindServiceTaskWithID(Guid id) {
-            ServiceTask retServiceTask = null;
-            foreach (ServiceTask serviceTask in _carServiceCenter.ServiceTasks) {
-                if (serviceTask.ID == id) {
-                    retServiceTask = serviceTask;
-                }
-            }
-            return retServiceTask;
         }
 
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {

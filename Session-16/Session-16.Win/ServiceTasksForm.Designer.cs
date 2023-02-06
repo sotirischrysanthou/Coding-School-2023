@@ -33,7 +33,6 @@
             this.colHours = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelServiceTask = new DevExpress.XtraEditors.LabelControl();
             this.bsServiceTasks = new System.Windows.Forms.BindingSource(this.components);
-            this.btnSave = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdServiceTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -116,24 +115,6 @@
             this.labelServiceTask.TabIndex = 2;
             this.labelServiceTask.Text = "Services";
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnSave.FlatAppearance.BorderSize = 2;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(408, 248);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(125, 40);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
-            this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
-            // 
             // btn_Close
             // 
             this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -159,7 +140,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(689, 295);
             this.Controls.Add(this.btn_Close);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelServiceTask);
             this.Controls.Add(this.grdServiceTasks);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -184,7 +164,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDescription;
         private DevExpress.XtraGrid.Columns.GridColumn colHours;
         private BindingSource bsServiceTasks;
-        private Button btnSave;
         private Button btn_Close;
         private DevExpress.XtraGrid.Columns.GridColumn colCode;
     }

@@ -37,8 +37,6 @@
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnPopulate = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
@@ -199,10 +197,10 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Algerian", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(62, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 25);
+            this.label3.Size = new System.Drawing.Size(77, 26);
             this.label3.TabIndex = 1;
             this.label3.Text = "Center";
             // 
@@ -210,10 +208,10 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Algerian", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(37, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 25);
+            this.label2.Size = new System.Drawing.Size(126, 26);
             this.label2.TabIndex = 0;
             this.label2.Text = "Car Service";
             // 
@@ -249,42 +247,6 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // btnLoad
-            // 
-            this.btnLoad.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btnLoad.FlatAppearance.BorderSize = 0;
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoad.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnLoad.Location = new System.Drawing.Point(640, 380);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(145, 45);
-            this.btnLoad.TabIndex = 13;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = false;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            this.btnLoad.MouseEnter += new System.EventHandler(this.btnLoad_MouseEnter);
-            this.btnLoad.MouseLeave += new System.EventHandler(this.btnLoad_MouseLeave);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(450, 380);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(145, 45);
-            this.btnSave.TabIndex = 12;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
-            this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
-            // 
             // btnPopulate
             // 
             this.btnPopulate.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -308,8 +270,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnLoad);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnPopulate);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
@@ -343,8 +303,6 @@
         private Label label1;
         private Button btnExit;
         private PictureBox pictureBox1;
-        private Button btnLoad;
-        private Button btnSave;
         private Button btnPopulate;
         private Label label3;
     }

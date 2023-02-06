@@ -1,4 +1,5 @@
-﻿using CarServiceCenterLib.Models;
+﻿using CarServiceCenterLib.Functions;
+using CarServiceCenterLib.Models;
 using CarServiceCenterLib.Orm.Repositories;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraBars;
@@ -18,23 +19,21 @@ using System.Windows.Forms;
 
 namespace Session_16.Win {
     public partial class MonthlyLedgerForm : Form {
-        private Serializer _serializer;
-        private CarServiceCenter _carServiceCenter;
 
-        public MonthlyLedgerForm(CarServiceCenter carServiceCenter) {
+        private ExpensesAndIncomesManagment _expensesAndIncomesManagment;
+
+        public MonthlyLedgerForm() {
             InitializeComponent();
-            _serializer = new Serializer();
-            _carServiceCenter = carServiceCenter;
+            _expensesAndIncomesManagment = new ExpensesAndIncomesManagment();
         }
 
         private void MonthlyLedgerForm_Load(object sender, EventArgs e) {
             SetControlProperties();
-            _serializer = new Serializer();
         }
 
         private void SetControlProperties() {
-            _serializer = new Serializer();
-            bsMonthlyLedger.DataSource = _carServiceCenter.Managers;
+            ManagerRepo managerRepo = new ManagerRepo();
+            bsMonthlyLedger.DataSource = managerRepo.GetAll().ToList();
             grdMonthlyLedger.DataSource = bsMonthlyLedger;
         }
         private void grdCustomers_Click(object sender, EventArgs e) {
@@ -42,20 +41,15 @@ namespace Session_16.Win {
         }
 
         private void btnCalculate_Click(object sender, EventArgs e) {
-            TransactionRepo transactionRepo = new TransactionRepo();
-            List<Transaction> transactions = transactionRepo.GetAll().ToList();
+
             List<MonthlyLedger> list = new List<MonthlyLedger>();
             MonthlyLedger monthlyLedger;
             int year = DateTime.Now.Year;
             for (int month = 1; month <= 12; month++) {
                 monthlyLedger = new MonthlyLedger(year, month);
-                monthlyLedger.Expenses += SalaryEngineersFrom(year, month);
-                monthlyLedger.Expenses += SalaryManagersFrom(year, month);
-                foreach (Transaction transaction in transactions) {
-                    if (transaction.Date.Year == year && transaction.Date.Month == month) {
-                        monthlyLedger.Incomes += transaction.TotalPrice;
-                    }
-                }
+                monthlyLedger.Expenses += _expensesAndIncomesManagment.SalaryEngineersFrom(year, month);
+                monthlyLedger.Expenses += _expensesAndIncomesManagment.SalaryManagersFrom(year, month);
+                monthlyLedger.Incomes = _expensesAndIncomesManagment.CalculateIncomes(year, month);
                 monthlyLedger.Total = monthlyLedger.Incomes - monthlyLedger.Expenses;
                 list.Add(monthlyLedger);
             }
@@ -76,28 +70,6 @@ namespace Session_16.Win {
             btnCalculate.ForeColor = Color.Black;
             btnCalculate.FlatAppearance.BorderColor = Color.Black;
             btnCalculate.FlatAppearance.BorderSize = 2;
-        }
-        private double SalaryEngineersFrom(int Year, int Month) {
-            double TotalSalary = 0;
-            EngineerRepo engineerRepo = new EngineerRepo();
-            List<Engineer> engineers = engineerRepo.GetAll().ToList();
-            foreach (Engineer engineer in engineers) {
-                if (((DateTime)engineer.StartDate).Year <= Year && ((DateTime)engineer.StartDate).Month <= Month) {
-                    TotalSalary += engineer.SalaryPerMonth;
-                }
-            }
-            return TotalSalary;
-        }
-        private double SalaryManagersFrom(int Year, int Month) {
-            double TotalSalary = 0;
-            ManagerRepo managerRepo = new ManagerRepo();
-            List<Manager> managers = managerRepo.GetAll().ToList();
-            foreach (Manager manager in managers) {
-                if (((DateTime)manager.StartDate).Year <= Year && ((DateTime)manager.StartDate).Month <= Month) {
-                    TotalSalary += manager.SalaryPerMonth;
-                }
-            }
-            return TotalSalary;
         }
     }
 
