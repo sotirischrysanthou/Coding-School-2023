@@ -38,8 +38,8 @@ namespace Session_16.Win {
             grdEngineers.DataSource = bsEngineers;
             bsManagers.DataSource = managerRepo.GetAll();//_carServiceCenter.Managers;
             grdManagers.DataSource = bsManagers;
-            SetLookUpEdit<Manager>(repManagerName, managerRepo.GetAll().ToList(), "Name", "ID");
-            SetLookUpEdit<Manager>(repManagerSurname, managerRepo.GetAll().ToList(), "Surname", "ID");
+            SetLookUpEdit<Manager>(repManagerName, _carServiceCenter.Managers, "Name", "ID");
+            SetLookUpEdit<Manager>(repManagerSurname, _carServiceCenter.Managers, "Surname", "ID");
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
