@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Session-22</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href=""> -->
+</head>
+
+<body>
+
+    <h1>Excercise 1: </h1>
+    <p>
+        <label for="name">String to be reversed</label>
+        <input type="text" id="inputReverse" placeholder="Enter a string">
+        <button id="reverseBtn">Reverse</button>
+        <br><br>
+        <label for="labelResult">Reverse</label>
+        <textarea id="outputReverse" type="text"></textarea>
+    </p>
+    <hr>
+    <h1>Excercise 2: </h1>
+
+    <h2>Palindrome Checker Deluxe</h2>
+    <p>
+        <label for="name">Enter a string to check:</label>
+        <input type="text" id="inputPalindrome">
+        <button id="palindromeBtn">Check</button>
+        <br><br>
+        <label for="labelResult">Check</label>
+        <textarea id="outputPalindrome" type="text"></textarea>
+    </p>
+    <hr>
+    <h1>Excercise 3: </h1>
+    <h1>Customer Details</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <br><br>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname">
+        <br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+        <br><br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <br><br>
+        <button type="button" id="addBtn">Add Customer</button>
+    </form>
+    <br><br>
+    <table id="customers">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody id="customersList"></tbody>
+    </table>
+    <br><br>
+    <div id="customerDetails">
+        <h2>Customer Details</h2>
+        <form>
+            <label for="selectedName">Name:</label>
+            <input type="text" id="selectedName" name="selectedName" disabled>
+            <br><br>
+            <label for="selectedSurname">Surname:</label>
+            <input type="text" id="selectedSurname" name="selectedSurname" disabled>
+            <br><br>
+            <label for="selectedAge">Age:</label>
+            <input type="number" id="selectedAge" name="selectedAge" disabled>
+            <br><br>
+            <label for="selectedGender">Gender:</label>
+            <input type="text" id="selectedGender" name="selectedGender" disabled>
+        </form>
+    </div>
+    <hr>
+    <h1>Excercise 4: </h1>
+    <label>
+        function multiply
+    </label>
+    <hr>
+    <h1>Excercise 5: </h1>
+    <hr>
+
+
+    <script src="Session-22.js" async defer></script>
+</body>
+
+</html>
