@@ -69,3 +69,23 @@ function addCustomer(customer) {
     customersList.appendChild(newLine);
 }
 
+
+var solveBtn = document.querySelector("#solveBtn");
+var firstNumber = document.querySelector("#A");
+var secondNumber = document.querySelector("#B");
+var result = document.querySelector("#result");
+
+solveBtn.addEventListener("click", () => {
+    result.textContent = multiply(firstNumber.value, secondNumber.value);
+})
+
+
+function multiply(a, b) {
+    let numberA = parseInt(a);
+    let numberB = parseInt(b);
+    if (isNaN(numberA) || isNaN(numberB)) {
+        return "Both parameters must be numbers.";
+    } else {
+        return numberA * numberB;
+    }
+}
