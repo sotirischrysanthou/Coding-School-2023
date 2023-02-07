@@ -81,11 +81,38 @@ solveBtn.addEventListener("click", () => {
 
 
 function multiply(a, b) {
-    let numberA = parseInt(a);
-    let numberB = parseInt(b);
-    if (isNaN(numberA) || isNaN(numberB)) {
+    if (isNaN(a) || isNaN(b)) {
         return "Both parameters must be numbers.";
     } else {
         return numberA * numberB;
+    }
+}
+
+var generateBtn = document.querySelector("#generateBtn");
+var inputEx5 = document.querySelector("#inputEx5");
+var generatedResult = document.querySelector("#generatedResult");
+
+generateBtn.addEventListener("click", () => {
+    var str = inputEx5.value;
+    generate(str, "");
+})
+
+function generate(str, number) {
+    if (str.length > 0) {
+
+        let index = str.length - 1;
+        if (isNaN(str[index])) {
+            if (number == "") {
+                number = "0";
+            }
+            
+            generatedResult.textContent = str + (parseInt(number)+1);
+        } else {
+
+            number = str[index] + number;
+
+            str = str.slice(0, -1);
+            generate(str, number);
+        }
     }
 }
