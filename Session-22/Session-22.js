@@ -99,18 +99,14 @@ generateBtn.addEventListener("click", () => {
 
 function generate(str, number) {
     if (str.length > 0) {
-
         let index = str.length - 1;
         if (isNaN(str[index])) {
             if (number == "") {
                 number = "0";
             }
-            
             generatedResult.textContent = str + (parseInt(number)+1);
         } else {
-
             number = str[index] + number;
-
             str = str.slice(0, -1);
             generate(str, number);
         }
