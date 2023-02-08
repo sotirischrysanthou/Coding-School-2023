@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarServiceCenterLib.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -110,19 +110,19 @@ namespace CarServiceCenterLib.Orm.Migrations
                         column: x => x.CarID,
                         principalTable: "Cars",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Transactions_Customers_CustomerID",
                         column: x => x.CustomerID,
                         principalTable: "Customers",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Transactions_Managers_ManagerID",
                         column: x => x.ManagerID,
                         principalTable: "Managers",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,7 +145,7 @@ namespace CarServiceCenterLib.Orm.Migrations
                         column: x => x.EngineerID,
                         principalTable: "Engineers",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TransactionLines_ServiceTasks_ServiceTaskID",
                         column: x => x.ServiceTaskID,
@@ -156,7 +156,8 @@ namespace CarServiceCenterLib.Orm.Migrations
                         name: "FK_TransactionLines_Transactions_TransactionID",
                         column: x => x.TransactionID,
                         principalTable: "Transactions",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarServiceCenterLib.Orm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230202131518_TransactionLineForegnKey1")]
-    partial class TransactionLineForegnKey1
+    [Migration("20230208103521_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -232,40 +232,48 @@ namespace CarServiceCenterLib.Orm.Migrations
 
             modelBuilder.Entity("CarServiceCenterLib.Models.Engineer", b =>
                 {
-                    b.HasOne("CarServiceCenterLib.Models.Manager", null)
+                    b.HasOne("CarServiceCenterLib.Models.Manager", "Manager")
                         .WithMany("Engineers")
                         .HasForeignKey("ManagerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("CarServiceCenterLib.Models.Transaction", b =>
                 {
-                    b.HasOne("CarServiceCenterLib.Models.Car", null)
+                    b.HasOne("CarServiceCenterLib.Models.Car", "Car")
                         .WithMany("Transactions")
                         .HasForeignKey("CarID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CarServiceCenterLib.Models.Customer", null)
+                    b.HasOne("CarServiceCenterLib.Models.Customer", "Customer")
                         .WithMany("Transactions")
                         .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CarServiceCenterLib.Models.Manager", null)
+                    b.HasOne("CarServiceCenterLib.Models.Manager", "Manager")
                         .WithMany("Transactions")
                         .HasForeignKey("ManagerID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("CarServiceCenterLib.Models.TransactionLine", b =>
                 {
-                    b.HasOne("CarServiceCenterLib.Models.Engineer", null)
+                    b.HasOne("CarServiceCenterLib.Models.Engineer", "Engineer")
                         .WithMany("TransactionLines")
                         .HasForeignKey("EngineerID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CarServiceCenterLib.Models.ServiceTask", null)
@@ -277,8 +285,10 @@ namespace CarServiceCenterLib.Orm.Migrations
                     b.HasOne("CarServiceCenterLib.Models.Transaction", "Transaction")
                         .WithMany("TransactionLines")
                         .HasForeignKey("TransactionID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Engineer");
 
                     b.Navigation("Transaction");
                 });

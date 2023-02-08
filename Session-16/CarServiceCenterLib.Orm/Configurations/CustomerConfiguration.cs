@@ -16,6 +16,12 @@ namespace CarServiceCenterLib.Orm.Configurations {
             builder.Property(customer => customer.Surname).HasMaxLength(50);
             builder.Property(customer => customer.Phone).HasMaxLength(10);
             builder.Property(customer => customer.TIN).HasMaxLength(9);
+
+            // Relations
+            //              Transactions
+            //builder.HasMany(customer => customer.Transactions)
+            //    .WithOne(transaction => transaction.Customer)
+            //    .HasForeignKey(transaction => transaction.CustomerID);
         }
     }
 }
