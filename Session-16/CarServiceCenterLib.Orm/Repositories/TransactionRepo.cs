@@ -19,7 +19,13 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(Guid id) {
             using var context = new AppDbContext();
-            var TransactionDb = context.Transactions.Where(transaction => transaction.ID == id).Include(transaction => transaction.TransactionLines).SingleOrDefault();
+            var TransactionDb = context.Transactions
+                .Where(transaction => transaction.ID == id)
+                //.Include(transaction => transaction.TransactionLines)
+                //.Include(transaction => transaction.Customer)
+                //.Include(transaction => transaction.Car)
+                //.Include(transaction => transaction.Manager)
+                .SingleOrDefault();
             if (TransactionDb is null)
                 return;
             context.Remove(TransactionDb);
@@ -34,10 +40,19 @@ namespace CarServiceCenterLib.Orm.Repositories {
                 && transaction.ManagerID == entity.ManagerID
                 && transaction.Date == entity.Date
                 && transaction.TotalPrice == entity.TotalPrice)
+                .Include(transaction => transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Car)
+                .Include(transaction => transaction.Manager)
                 .SingleOrDefault();
             if (TransactionDb is null) {
                 var Transaction1Db = context.Transactions
-                .Where(transaction => transaction.ID == entity.ID).SingleOrDefault();
+                .Where(transaction => transaction.ID == entity.ID)
+                .Include(transaction => transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Car)
+                .Include(transaction => transaction.Manager)
+                .SingleOrDefault();
                 if (Transaction1Db is null) { return false; } else {
                     return true;
                 }
@@ -46,17 +61,29 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public IList<Transaction> GetAll() {
             using var context = new AppDbContext();
-            return context.Transactions.Include(transaction => transaction.TransactionLines).ToList();
+            return context.Transactions
+                .Include(transaction => transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Car)
+                .Include(transaction => transaction.Manager)
+                .ToList();
         }
 
         public Transaction? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.Transactions.Where(transaction => transaction.ID == id).Include(transaction => transaction.TransactionLines).SingleOrDefault();
+            return context.Transactions.Where(transaction => transaction.ID == id)
+                .Include(transaction => transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Car)
+                .Include(transaction => transaction.Manager)
+                .SingleOrDefault();
         }
 
         public void Update(Guid id, Transaction entity) {
             using var context = new AppDbContext();
-            var TransactionDb = context.Transactions.Where(transaction => transaction.ID == id).Include(transaction => transaction.TransactionLines).SingleOrDefault();
+            var TransactionDb = context.Transactions
+                .Where(transaction => transaction.ID == id)
+                .SingleOrDefault();
             if (TransactionDb is null)
                 return;
             TransactionDb.Date = entity.Date;

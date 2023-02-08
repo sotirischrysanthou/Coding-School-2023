@@ -1,5 +1,6 @@
 ﻿using CarServiceCenterLib.Models;
 using CarServiceCenterLib.Orm.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,10 @@ namespace CarServiceCenterLib.Orm.Repositories {
         }
         public void Delete(Guid id) {
             using var context = new AppDbContext();
-            var CarDb = context.Cars.Where(car => car.ID == id).SingleOrDefault();
+            var CarDb = context.Cars
+                .Where(car => car.ID == id)
+                .Include(car => car.Transactions)
+                .SingleOrDefault();
             if (CarDb is null)
                 return;
             context.Remove(CarDb);
@@ -26,12 +30,17 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public IList<Car> GetAll() {
             using var context = new AppDbContext();
-            return context.Cars.ToList();
+            return context.Cars
+                .Include(car => car.Transactions)
+                .ToList();
 
         }
         public Car? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.Cars.Where(car => car.ID == id).SingleOrDefault(); ;
+            return context.Cars
+                .Where(car => car.ID == id)
+                .Include(car => car.Transactions)
+                .SingleOrDefault(); ;
 
         }
         public void Update(Guid id, Car entity) {
@@ -54,7 +63,9 @@ namespace CarServiceCenterLib.Orm.Repositories {
             ).SingleOrDefault();
             if (CarDb is null) {
                 var Car1Db = context.Cars
-                .Where(car => car.ID == entity.ID).SingleOrDefault();
+                .Where(car => car.ID == entity.ID)
+                .Include(car => car.Transactions)
+                .SingleOrDefault();
                 if (Car1Db is null) { return false; } else {
                     return true;
                 }
