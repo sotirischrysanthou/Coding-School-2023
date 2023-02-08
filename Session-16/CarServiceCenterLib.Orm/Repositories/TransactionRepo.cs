@@ -21,10 +21,10 @@ namespace CarServiceCenterLib.Orm.Repositories {
             using var context = new AppDbContext();
             var TransactionDb = context.Transactions
                 .Where(transaction => transaction.ID == id)
-                //.Include(transaction => transaction.TransactionLines)
-                //.Include(transaction => transaction.Customer)
-                //.Include(transaction => transaction.Car)
-                //.Include(transaction => transaction.Manager)
+                .Include(transaction => transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Car)
+                .Include(transaction => transaction.Manager)
                 .SingleOrDefault();
             if (TransactionDb is null)
                 return;
