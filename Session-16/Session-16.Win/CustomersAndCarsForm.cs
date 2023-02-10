@@ -61,14 +61,13 @@ namespace Session_16.Win {
         }
         private void gridView2_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
             CarRepo carRepo = new CarRepo();
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             GridColumn colBrand = view.Columns["Brand"];
             GridColumn colModel = view.Columns["Model"];
             GridColumn colRegNum = view.Columns["CarRegistrationNumber"];
-            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colCarID).ToString());
-            String brand = view.GetRowCellValue(e.RowHandle, colBrand) as String;
-            String model = view.GetRowCellValue(e.RowHandle, colModel) as String;
-            String regNum = view.GetRowCellValue(e.RowHandle, colRegNum) as String;
+            String? brand = view.GetRowCellValue(e.RowHandle, colBrand) as String;
+            String? model = view.GetRowCellValue(e.RowHandle, colModel) as String;
+            String? regNum = view.GetRowCellValue(e.RowHandle, colRegNum) as String;
             // Brand Cell
             if (brand == null) {
                 e.Valid = false;
@@ -105,9 +104,9 @@ namespace Session_16.Win {
         }
 
         private void gridView2_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
-            ColumnView view = sender as ColumnView;
+            ColumnView view = (ColumnView)sender;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
-            String cellVal = e.Value as String;
+            String cellVal = (String)e.Value;
             if (column.FieldName == "Brand") {
                 // colBrand changed
                 if (cellVal == null) {
@@ -145,16 +144,17 @@ namespace Session_16.Win {
 
         private void gridView1_ValidateRow(object sender, ValidateRowEventArgs e) {
             CustomerRepo customerRepo = new CustomerRepo();
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             GridColumn colName = view.Columns["Name"];
             GridColumn colSurname = view.Columns["Surname"];
             GridColumn colPhone = view.Columns["Phone"];
             GridColumn colTIN = view.Columns["TIN"];
-            Guid id = Guid.Parse(view.GetRowCellValue(e.RowHandle, colID).ToString());
-            String name = view.GetRowCellValue(e.RowHandle, colName) as String;
-            String surname = view.GetRowCellValue(e.RowHandle, colSurname) as String;
-            String phone = view.GetRowCellValue(e.RowHandle, colPhone) as String;
-            String tin = view.GetRowCellValue(e.RowHandle, colTIN) as String;
+            Guid id;
+            Guid.TryParse(view.GetRowCellValue(e.RowHandle, colID).ToString(), out id);
+            String name = (String)view.GetRowCellValue(e.RowHandle, colName);
+            String surname = (String)view.GetRowCellValue(e.RowHandle, colSurname);
+            String phone = (String)view.GetRowCellValue(e.RowHandle, colPhone);
+            String tin = (String)view.GetRowCellValue(e.RowHandle, colTIN);
             // Name Cell
             if (name == null) {
                 e.Valid = false;
@@ -202,9 +202,9 @@ namespace Session_16.Win {
         }
 
         private void gridView1_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
-            ColumnView view = sender as ColumnView;
+            ColumnView view = (ColumnView)sender;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
-            String cellVal = e.Value as String;
+            String cellVal = (String)e.Value;
             // colName changed
             if (column.FieldName == "Name") {
                 if (cellVal == null) {
@@ -257,29 +257,33 @@ namespace Session_16.Win {
             }
         }
         private void gridView1_RowUpdated(object sender, RowObjectEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             CustomerRepo customerRepo = new CustomerRepo();
-            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            Guid id;
+            Guid.TryParse(view.GetRowCellValue(e.RowHandle, colID).ToString(), out id);
             customerRepo.Update(id, (Customer)bsCustomers.Current);
         }
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             CustomerRepo customerRepo = new CustomerRepo();
-            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            Guid id;
+            Guid.TryParse(view.GetRowCellValue(e.RowHandle, colID).ToString(), out id);
             customerRepo.Delete(id);
         }
 
         private void gridView2_RowUpdated(object sender, RowObjectEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             CarRepo carRepo = new CarRepo();
-            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colCarID).ToString());
+            Guid id;
+            Guid.TryParse(view.GetRowCellValue(e.RowHandle, colID).ToString(), out id);
             carRepo.Update(id, (Car)bsCars.Current);
         }
 
         private void gridView2_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             CarRepo carRepo = new CarRepo();
-            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colCarID).ToString());
+            Guid id;
+            Guid.TryParse(view.GetRowCellValue(e.RowHandle, colID).ToString(), out id);
             carRepo.Delete(id);
         }
     }

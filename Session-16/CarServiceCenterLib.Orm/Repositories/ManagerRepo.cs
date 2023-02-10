@@ -1,5 +1,6 @@
 ﻿using CarServiceCenterLib.Models;
 using CarServiceCenterLib.Orm.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,11 @@ namespace CarServiceCenterLib.Orm.Repositories {
         }
         public void Delete(Guid id) {
             using var context = new AppDbContext();
-            var ManagerDb = context.Managers.Where(manager => manager.ID == id).SingleOrDefault();
+            var ManagerDb = context.Managers
+                .Where(manager => manager.ID == id)
+                .Include(manager => manager.Engineers)
+                .Include(manager => manager.Transactions)
+                .SingleOrDefault();
             if (ManagerDb is null)
                 return;
             context.Remove(ManagerDb);
@@ -31,12 +36,20 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public Manager? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.Managers.Where(manager => manager.ID == id).SingleOrDefault();
+            return context.Managers
+                .Where(manager => manager.ID == id)
+                .Include(manager => manager.Engineers)
+                .Include(manager => manager.Transactions)
+                .SingleOrDefault();
         }
 
         public void Update(Guid id, Manager entity) {
             using var context = new AppDbContext();
-            var ManagerDb = context.Managers.Where(manager => manager.ID == id).SingleOrDefault();
+            var ManagerDb = context.Managers
+                .Where(manager => manager.ID == id)
+                .Include(manager => manager.Engineers)
+                .Include(manager => manager.Transactions)
+                .SingleOrDefault();
             if (ManagerDb is null)
                 return;
             ManagerDb.Name = entity.Name;
@@ -49,12 +62,17 @@ namespace CarServiceCenterLib.Orm.Repositories {
             using var context = new AppDbContext();
             var ManagerDb = context.Managers
                 .Where(Manager => Manager.Name == entity.Name
-            && Manager.Surname == entity.Surname
-            && Manager.SalaryPerMonth == entity.SalaryPerMonth
-            ).SingleOrDefault();
+                && Manager.Surname == entity.Surname
+                && Manager.SalaryPerMonth == entity.SalaryPerMonth)
+                .Include(manager => manager.Engineers)
+                .Include(manager => manager.Transactions)
+                .SingleOrDefault();
             if (ManagerDb is null) {
                 var Manager1Db = context.Managers
-                .Where(manager => manager.ID == entity.ID).SingleOrDefault();
+                .Where(manager => manager.ID == entity.ID)
+                .Include(manager => manager.Engineers)
+                .Include(manager => manager.Transactions)
+                .SingleOrDefault();
                 if (Manager1Db is null) { return false; } else {
                     return true;
                 }

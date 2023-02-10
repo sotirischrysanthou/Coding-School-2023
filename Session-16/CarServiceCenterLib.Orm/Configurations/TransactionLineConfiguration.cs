@@ -18,7 +18,7 @@ namespace CarServiceCenterLib.Orm.Configurations {
             builder.HasOne(transactionLine => transactionLine.Transaction)
                 .WithMany(transaction => transaction.TransactionLines)
                 .HasForeignKey(transactionLine => transactionLine.TransactionID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientCascade);
             //              Engineer
             builder.HasOne(transactionLine => transactionLine.Engineer)
                 .WithMany(engineer => engineer.TransactionLines)
@@ -27,9 +27,9 @@ namespace CarServiceCenterLib.Orm.Configurations {
 
 
             //              ServiceTask
-            //builder.HasOne(transactionLine => transactionLine.ServiceTask)
-            //    .WithMany(serviceTask => serviceTask.TransactionLines)
-            //    .HasForeignKey(transactionLine => transactionLine.ServiceTaskID);
+            builder.HasOne(transactionLine => transactionLine.ServiceTask)
+                .WithMany(serviceTask => serviceTask.TransactionLines)
+                .HasForeignKey(transactionLine => transactionLine.ServiceTaskID);
 
 
         }

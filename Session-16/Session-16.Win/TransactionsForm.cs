@@ -2,13 +2,9 @@
 using CarServiceCenterLib.Functions;
 using CarServiceCenterLib.Models;
 using CarServiceCenterLib.Orm.Repositories;
-using DevExpress.Mvvm.Native;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraScheduler.Native;
-using SerializerLib;
-using System.Reflection.Emit;
 
 namespace Session_16.Win {
     public partial class TransactionsForm : Form {
@@ -28,7 +24,7 @@ namespace Session_16.Win {
             SetControlProperties();
         }
 
-        
+
 
         private void SetControlProperties() {
             TransactionRepo transactionRepo = new TransactionRepo();
@@ -67,7 +63,7 @@ namespace Session_16.Win {
         //--------------------------------------------------------------------------------------
         private void grvTransactions_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
             TransactionRepo transactionRepo = new TransactionRepo();
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             Guid id = (Guid)view.GetRowCellValue(view.FocusedRowHandle, colID);
             Guid customerID = (Guid)view.GetRowCellValue(e.RowHandle, colCustomerName);
             Guid managerID = (Guid)view.GetRowCellValue(e.RowHandle, colManagerName);
@@ -99,7 +95,7 @@ namespace Session_16.Win {
         }
 
         private void grvTransactions_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
             if (column.FieldName == "CarID") {
                 Guid id = (Guid)e.Value;
@@ -128,26 +124,26 @@ namespace Session_16.Win {
         }
 
         private void grvTransactions_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             TransactionRepo transactionRepo = new TransactionRepo();
             Transaction transaction = (Transaction)bsTransactions.Current;
             transactionRepo.Delete(transaction.ID);
         }
 
         private void grvTransactions_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             Transaction transaction = (Transaction)(bsTransactions.Current);
-                _workloadManagment.UpdateWorkDays();
-                labelWorkHours.Text = _workloadManagment.UpdateLabelWorkHour(transaction);
+            _workloadManagment.UpdateWorkDays();
+            labelWorkHours.Text = _workloadManagment.UpdateLabelWorkHour(transaction);
         }
         //--------------------------------------------------------------------------------------
         // ------------------------grvTransactionLines Events-----------------------------------
         //--------------------------------------------------------------------------------------
         private void grvTransactionLines_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             ServiceTaskRepo serviceTaskRepo = new ServiceTaskRepo();
             if (e.Column.Caption != "Sevice Task Description") return;
-            ServiceTask serviceTask = serviceTaskRepo.GetById((Guid)e.Value);
+            ServiceTask? serviceTask = serviceTaskRepo.GetById((Guid)e.Value);
             if (serviceTask != null) {
                 view.SetRowCellValue(e.RowHandle, "Hours", serviceTask.Hours);
                 view.SetRowCellValue(e.RowHandle, "PricePerHour", 44.5); // PRICE PER HOUR
@@ -169,16 +165,16 @@ namespace Session_16.Win {
         private void grvTransactionLines_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
             TransactionRepo transactionRepo = new TransactionRepo();
             TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             Guid id = (Guid)view.GetRowCellValue(view.FocusedRowHandle, colLineID);
             Guid serviceTaskID = (Guid)view.GetRowCellValue(e.RowHandle, colServiceTaskDescription);
             Guid engineerID = (Guid)view.GetRowCellValue(e.RowHandle, colEngineerName);
-            if (engineerID == Guid.Empty || engineerID.ToString() == "") {
+            if (engineerID == Guid.Empty || engineerID.ToString() == string.Empty) {
                 e.Valid = false;
                 view.SetColumnError(colEngineerName, "Insert Valid Engineer");
                 view.SetColumnError(colEngineerSurname, "Insert Valid Engineer");
             }
-            if (serviceTaskID == Guid.Empty || serviceTaskID.ToString() == "") {
+            if (serviceTaskID == Guid.Empty || serviceTaskID.ToString() == string.Empty) {
                 e.Valid = false;
                 view.SetColumnError(colServiceTaskDescription, "Insert Valid ServiceTask");
             }
@@ -196,7 +192,7 @@ namespace Session_16.Win {
         }
 
         private void grvTransactionLines_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
             Guid id = (Guid)e.Value;
             if (column.FieldName == "EngineerID") {
@@ -214,12 +210,12 @@ namespace Session_16.Win {
         }
 
         private void grvTransactionLines_InitNewRow(object sender, InitNewRowEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             ((TransactionLine)bsTransactionLines.Current).TransactionID = ((Transaction)bsTransactions.Current).ID;
             //view.SetRowCellValue(e.RowHandle, "TransactionID", ((Transaction)bsTransactions.Current).ID);
         }
         private void grvTransactionLines_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            GridView view = sender as GridView;
+            GridView view = (GridView)sender;
             TransactionLineRepo transactionLineRepo = new TransactionLineRepo();
             Transaction transaction = (Transaction)bsTransactions.Current;
             TransactionLine transactionLine = (TransactionLine)bsTransactionLines.Current;
@@ -251,6 +247,6 @@ namespace Session_16.Win {
             btn_Close.ForeColor = Color.Black;
             btn_Close.FlatAppearance.BorderColor = Color.Black;
             btn_Close.FlatAppearance.BorderSize = 2;
-        }              
+        }
     }
 }
