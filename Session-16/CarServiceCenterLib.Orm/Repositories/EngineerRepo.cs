@@ -19,7 +19,11 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(Guid id) {
             using var context = new AppDbContext();
-            var EngineerDb = context.Engineers.Where(engineer => engineer.ID == id).SingleOrDefault();
+            var EngineerDb = context.Engineers
+                .Where(engineer => engineer.ID == id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .SingleOrDefault();
             if (EngineerDb is null)
                 return;
             context.Remove(EngineerDb);
@@ -33,10 +37,15 @@ namespace CarServiceCenterLib.Orm.Repositories {
                 && engineer.Surname == entity.Surname
                 && engineer.SalaryPerMonth == entity.SalaryPerMonth
                 && engineer.StartDate == entity.StartDate)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null) {
                 var Engineer1Db = context.Engineers
-                .Where(engineer => engineer.ID == entity.ID).SingleOrDefault();
+                .Where(engineer => engineer.ID == entity.ID)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .SingleOrDefault();
                 if (Engineer1Db is null) {
                     return false;
                 } else return true;
@@ -50,13 +59,19 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public Engineer? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.Engineers.Where(engineer => engineer.ID == id).SingleOrDefault();
+            return context.Engineers
+                .Where(engineer => engineer.ID == id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .SingleOrDefault();
         }
 
         public void Update(Guid id, Engineer entity) {
             using var context = new AppDbContext();
             var EngineerDb = context.Engineers
                 .Where(engineer => engineer.ID == id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null) return;
             EngineerDb.Name = entity.Name;

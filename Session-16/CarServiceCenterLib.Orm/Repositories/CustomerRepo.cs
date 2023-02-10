@@ -19,7 +19,10 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(Guid id) {
             using var context = new AppDbContext();
-            var CustomerDb = context.Customers.Where(customer => customer.ID == id).SingleOrDefault();
+            var CustomerDb = context.Customers
+                .Where(customer => customer.ID == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
             if (CustomerDb is null)
                 return;
             context.Remove(CustomerDb);
@@ -33,10 +36,13 @@ namespace CarServiceCenterLib.Orm.Repositories {
                 && customer.Surname == entity.Surname
                 && customer.TIN == entity.TIN
                 && customer.Phone == entity.Phone)
+                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
             if (CustomerDb is null) {
                 var Customer1Db = context.Customers
-                .Where(customer => customer.ID == entity.ID).SingleOrDefault();
+                .Where(customer => customer.ID == entity.ID)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
                 if (Customer1Db is null) {
                     return false;
                 } else return true;
@@ -45,18 +51,24 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public IList<Customer> GetAll() {
             using var context = new AppDbContext();
-            return context.Customers.ToList();
+            return context.Customers
+                .Include(customer => customer.Transactions)
+                .ToList();
         }
 
         public Customer? GetById(Guid id) {
             using var context = new AppDbContext();
-            return context.Customers.Where(customer => customer.ID == id).SingleOrDefault();
+            return context.Customers
+                .Where(customer => customer.ID == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
         }
 
         public void Update(Guid id, Customer entity) {
             using var context = new AppDbContext();
             var CustomerDb = context.Customers
                 .Where(customer => customer.ID == id)
+                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
             if (CustomerDb is null) return;
             CustomerDb.Name = entity.Name;

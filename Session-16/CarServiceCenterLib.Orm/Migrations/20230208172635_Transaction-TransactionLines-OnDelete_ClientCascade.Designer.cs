@@ -4,6 +4,7 @@ using CarServiceCenterLib.Orm.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarServiceCenterLib.Orm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230208172635_Transaction-TransactionLines-OnDelete_ClientCascade")]
+    partial class TransactionTransactionLinesOnDeleteClientCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,7 +276,7 @@ namespace CarServiceCenterLib.Orm.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CarServiceCenterLib.Models.ServiceTask", "ServiceTask")
+                    b.HasOne("CarServiceCenterLib.Models.ServiceTask", null)
                         .WithMany("TransactionLines")
                         .HasForeignKey("ServiceTaskID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -286,8 +289,6 @@ namespace CarServiceCenterLib.Orm.Migrations
                         .IsRequired();
 
                     b.Navigation("Engineer");
-
-                    b.Navigation("ServiceTask");
 
                     b.Navigation("Transaction");
                 });

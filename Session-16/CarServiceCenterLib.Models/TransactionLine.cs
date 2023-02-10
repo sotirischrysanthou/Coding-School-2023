@@ -14,11 +14,11 @@ namespace CarServiceCenterLib.Models {
 
         // Relations
         public Guid TransactionID { get; set; }
-        public Transaction Transaction { get; set; }
+        public Transaction Transaction { get; set; } = null!;
         public Guid EngineerID { get; set; }
-        public Engineer Engineer { get; set; }
+        public Engineer Engineer { get; set; } = null!;
         public Guid ServiceTaskID { get; set; }
-        //public ServiceTask ServiceTask { get; set; }
+        public ServiceTask ServiceTask { get; set; } = null!;
 
         //Constrators
         public TransactionLine() {
