@@ -4,13 +4,13 @@
     {
         // Properties
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
+        public String Code { get; set; }
+        public String Description { get; set; }
         public decimal Hours { get; set; }
 
         
         // Constractors
-        public ServiceTask(string code, string description, decimal hours)
+        public ServiceTask(String code, String description, decimal hours)
         {
             Code = code;
             Description = description;

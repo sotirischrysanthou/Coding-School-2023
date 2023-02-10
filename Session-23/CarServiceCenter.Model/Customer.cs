@@ -4,13 +4,13 @@
     {
         // Properties
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int Phone { get; set; }
-        public string Tin { get; set; }
+        public String Name { get; set; }
+        public String Surname { get; set; }
+        public String Phone { get; set; }
+        public String Tin { get; set; }
 
         // Constractors
-        public Customer(string name, string surname, int phone, string tin)
+        public Customer(String name, String surname, String phone, String tin)
         {
             Name = name;
             Surname = surname;

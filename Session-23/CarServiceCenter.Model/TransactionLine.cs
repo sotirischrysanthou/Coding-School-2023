@@ -9,6 +9,14 @@
         public decimal Price { get; set; }
 
         // Constractors
+        public TransactionLine() {
+
+        }
+        public TransactionLine(decimal hours, decimal pricePerHour) {
+            Hours = hours;
+            PricePerHour = pricePerHour;
+            Price = pricePerHour * hours;
+        }
         public TransactionLine(decimal hours, decimal pricePerHour, decimal price)
         {
             Hours = hours;

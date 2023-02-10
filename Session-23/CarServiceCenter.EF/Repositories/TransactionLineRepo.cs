@@ -25,7 +25,7 @@ namespace CarServiceCenter.EF.Repositories {
                 .Include(transactionLine => transactionLine.ServiceTask)
                 .SingleOrDefault();
             if (TransactionLineDb is null)
-                return;
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
             context.Remove(TransactionLineDb);
             context.SaveChanges();
         }
@@ -75,7 +75,7 @@ namespace CarServiceCenter.EF.Repositories {
                 .Include(transactionLine => transactionLine.ServiceTask)
                 .SingleOrDefault();
             if (TransactionLineDb is null)
-                return;
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
             TransactionLineDb.Price = entity.Price;
             TransactionLineDb.PricePerHour = entity.PricePerHour;
             TransactionLineDb.Hours = entity.Hours;

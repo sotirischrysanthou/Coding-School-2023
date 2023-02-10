@@ -8,63 +8,66 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarServiceCenter.EF.Repositories {
-    public class CarRepo : IEntityRepo<Car> {
+    public class MockCarRepo : IEntityRepo<Car> {
+        // Properties
+        private readonly List<Car> _cars;
+
+        // Constructors
+        public MockCarRepo() {
+            _cars = new List<Car> {
+                new("Ford", "Focus", "ABC 1234"),
+                new("Toyota", "Yaris", "DEF 5678"),
+                new("Mazda", "Miata", "GHI 9101")
+            };
+        }
+
+
         public void Add(Car entity) {
-            using var context = new CarServiceCenterDbContext();
-            if (!EntityExists(entity)) {
-                context.Add(entity);
-                context.SaveChanges();
-            }
+            if (entity.Id != 0)
+                throw new ArgumentException("Given entity should not have Id set", nameof(entity));
+
+            var lastId = _cars.OrderBy(todo => todo.Id).Last().Id;
+            entity.Id = ++lastId;
+            _cars.Add(entity);
         }
         public void Delete(int id) {
-            using var context = new CarServiceCenterDbContext();
-            var CarDb = context.Cars
+            var CarDb = _cars
                 .Where(car => car.Id == id)
-                .Include(car => car.Transactions)
                 .SingleOrDefault();
             if (CarDb is null)
                 throw new KeyNotFoundException($"Given id '{id}' was not found");
-            context.Remove(CarDb);
-            context.SaveChanges();
+            _cars.Remove(CarDb);
         }
 
         public IList<Car> GetAll() {
-            using var context = new CarServiceCenterDbContext();
-            return context.Cars
-                .Include(car => car.Transactions)
-                .ToList();
-
+            return _cars;
         }
         public Car? GetById(int id) {
-            using var context = new CarServiceCenterDbContext();
-            return context.Cars
+            return _cars
                 .Where(car => car.Id == id)
-                .Include(car => car.Transactions)
                 .SingleOrDefault(); ;
 
         }
         public void Update(int id, Car entity) {
-            using var context = new CarServiceCenterDbContext();
-            var CarDb = context.Cars.Where(car => car.Id == id).SingleOrDefault();
+            var CarDb = _cars
+                .Where(car => car.Id == id)
+                .SingleOrDefault();
             if (CarDb is null)
                 throw new KeyNotFoundException($"Given id '{id}' was not found");
             CarDb.Brand = entity.Brand;
             CarDb.Model = entity.Model;
             CarDb.CarRegistrationNumber = entity.CarRegistrationNumber;
-            context.SaveChanges();
         }
         public bool EntityExists(Car entity) {
-            using var context = new CarServiceCenterDbContext();
-            var CarDb = context.Cars
+            var CarDb = _cars
                 .Where(car => car.Brand == entity.Brand
                 && car.Brand == entity.Brand
                 && car.Model == entity.Model
                 && car.CarRegistrationNumber == entity.CarRegistrationNumber
             ).SingleOrDefault();
             if (CarDb is null) {
-                var Car1Db = context.Cars
+                var Car1Db = _cars
                 .Where(car => car.Id == entity.Id)
-                .Include(car => car.Transactions)
                 .SingleOrDefault();
                 if (Car1Db is null) { return false; } else {
                     return true;

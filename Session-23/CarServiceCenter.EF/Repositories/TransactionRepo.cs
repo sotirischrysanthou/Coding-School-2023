@@ -27,7 +27,7 @@ namespace CarServiceCenter.EF.Repositories {
                 .Include(transaction => transaction.Manager)
                 .SingleOrDefault();
             if (TransactionDb is null)
-                return;
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
             context.Remove(TransactionDb);
             context.SaveChanges();
         }
@@ -85,7 +85,7 @@ namespace CarServiceCenter.EF.Repositories {
                 .Where(transaction => transaction.Id == id)
                 .SingleOrDefault();
             if (TransactionDb is null)
-                return;
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
             TransactionDb.Date = entity.Date;
             TransactionDb.CustomerId = entity.CustomerId;
             TransactionDb.CarId = entity.CarId;

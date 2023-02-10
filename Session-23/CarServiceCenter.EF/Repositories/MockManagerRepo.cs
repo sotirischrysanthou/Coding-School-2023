@@ -8,70 +8,64 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarServiceCenter.EF.Repositories {
-    public class ManagerRepo : IEntityRepo<Manager> {
+    public class MockManagerRepo : IEntityRepo<Manager> {
+        // Properties
+        private readonly List<Manager> _managers;
+
+        // Constructors
+        public MockManagerRepo() {
+            _managers = new List<Manager> {
+                new("Fotis", "Chrysoulas", 2000),
+                new("Thodoris", "Kapiris", 2100)
+            };
+        }
+
         public void Add(Manager entity) {
-            using var context = new CarServiceCenterDbContext();
-            if (!EntityExists(entity)) {
-                context.Add(entity);
-                context.SaveChanges();
-            }
+            if (entity.Id != 0)
+                throw new ArgumentException("Given entity should not have Id set", nameof(entity));
+
+            var lastId = _managers.OrderBy(todo => todo.Id).Last().Id;
+            entity.Id = ++lastId;
+            _managers.Add(entity);
         }
         public void Delete(int id) {
-            using var context = new CarServiceCenterDbContext();
-            var ManagerDb = context.Managers
+            var ManagerDb = _managers
                 .Where(manager => manager.Id == id)
-                .Include(manager => manager.Engineers)
-                .Include(manager => manager.Transactions)
                 .SingleOrDefault();
             if (ManagerDb is null)
-                throw new KeyNotFoundException($"Given id '{id}' was not found");
-            context.Remove(ManagerDb);
-            context.SaveChanges();
+                return;
+            _managers.Remove(ManagerDb);
         }
         public IList<Manager> GetAll() {
-            using var context = new CarServiceCenterDbContext();
-            return context.Managers.ToList();
+            return _managers;
 
         }
 
         public Manager? GetById(int id) {
-            using var context = new CarServiceCenterDbContext();
-            return context.Managers
+            return _managers
                 .Where(manager => manager.Id == id)
-                .Include(manager => manager.Engineers)
-                .Include(manager => manager.Transactions)
                 .SingleOrDefault();
         }
 
         public void Update(int id, Manager entity) {
-            using var context = new CarServiceCenterDbContext();
-            var ManagerDb = context.Managers
+            var ManagerDb = _managers
                 .Where(manager => manager.Id == id)
-                .Include(manager => manager.Engineers)
-                .Include(manager => manager.Transactions)
                 .SingleOrDefault();
             if (ManagerDb is null)
                 throw new KeyNotFoundException($"Given id '{id}' was not found");
             ManagerDb.Name = entity.Name;
             ManagerDb.Surname = entity.Surname;
             ManagerDb.SalaryPerMonth = entity.SalaryPerMonth;
-
-            context.SaveChanges();
         }
         public bool EntityExists(Manager entity) {
-            using var context = new CarServiceCenterDbContext();
-            var ManagerDb = context.Managers
+            var ManagerDb = _managers
                 .Where(Manager => Manager.Name == entity.Name
                 && Manager.Surname == entity.Surname
                 && Manager.SalaryPerMonth == entity.SalaryPerMonth)
-                .Include(manager => manager.Engineers)
-                .Include(manager => manager.Transactions)
                 .SingleOrDefault();
             if (ManagerDb is null) {
-                var Manager1Db = context.Managers
+                var Manager1Db = _managers
                 .Where(manager => manager.Id == entity.Id)
-                .Include(manager => manager.Engineers)
-                .Include(manager => manager.Transactions)
                 .SingleOrDefault();
                 if (Manager1Db is null) { return false; } else {
                     return true;

@@ -7,15 +7,6 @@
         public DateTime Date { get; set; }
         public decimal TotalPrice { get; set; }
 
-        // Constractors
-        public Transaction(decimal totalPrice)
-        {
-            Date = DateTime.Now;
-            TotalPrice = totalPrice;
-
-            TransactionLines = new List<TransactionLine>();
-        }
-
         // Relations
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
@@ -27,5 +18,34 @@
         public Car Car { get; set; } = null!;
 
         public List<TransactionLine> TransactionLines { get; set; }
+
+        // Constractors
+        public Transaction() {
+            Date = DateTime.Now;
+            TotalPrice = 0;
+
+            TransactionLines = new List<TransactionLine>();
+        }
+
+        public Transaction(decimal totalPrice)
+        {
+            Date = DateTime.Now;
+            TotalPrice = totalPrice;
+
+            TransactionLines = new List<TransactionLine>();
+        }
+
+        // Methods
+        public void AddTransactionLine(TransactionLine transactionLine) {
+            TransactionLines.Add(transactionLine);
+            UpdateTotalPrice();
+        }
+
+        public void UpdateTotalPrice() {
+            TotalPrice = 0;
+            foreach (TransactionLine transactionLine in TransactionLines) {
+                TotalPrice += transactionLine.Price;
+            }
+        }
     }
 }

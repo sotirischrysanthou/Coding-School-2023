@@ -8,43 +8,55 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarServiceCenter.EF.Repositories {
-    public class EngineerRepo : IEntityRepo<Engineer> {
+    public class MockEngineerRepo : IEntityRepo<Engineer> {
+        // Properties
+        private readonly List<Engineer> _engineers;
+        private readonly List<Manager> _managers;
+
+        // Constructors
+        public MockEngineerRepo() {
+            MockManagerRepo mockManagerRepo= new MockManagerRepo();
+            _managers = mockManagerRepo.GetAll().ToList();
+            _engineers = new List<Engineer> { 
+                new("Kostas", "Sofos", 1200) {
+                    Manager = _managers[0],
+                    ManagerId = _managers[0].Id
+                },
+                new("Stavros", "Kasidis", 1250){
+                    Manager = _managers[1],
+                    ManagerId = _managers[1].Id
+                }
+            };
+        }
+
         public void Add(Engineer entity) {
-            using var context = new CarServiceCenterDbContext();
-            if (!EntityExists(entity)) {
-                context.Add(entity);
-                context.SaveChanges();
-            }
+            if (entity.Id != 0)
+                throw new ArgumentException("Given entity should not have Id set", nameof(entity));
+
+            var lastId = _engineers.OrderBy(todo => todo.Id).Last().Id;
+            entity.Id = ++lastId;
+            _engineers.Add(entity);
         }
 
         public void Delete(int id) {
-            using var context = new CarServiceCenterDbContext();
-            var EngineerDb = context.Engineers
+            var EngineerDb = _engineers
                 .Where(engineer => engineer.Id == id)
-                .Include(engineer => engineer.TransactionLines)
-                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null)
                 throw new KeyNotFoundException($"Given id '{id}' was not found");
-            context.Remove(EngineerDb);
-            context.SaveChanges();
+            _engineers.Remove(EngineerDb);
         }
 
         public bool EntityExists(Engineer entity) {
-            using var context = new CarServiceCenterDbContext();
-            var EngineerDb = context.Engineers
+            var EngineerDb = _engineers
                 .Where(engineer => engineer.Name == entity.Name
                 && engineer.Surname == entity.Surname
                 && engineer.SalaryPerMonth == entity.SalaryPerMonth)
                 //&& engineer.StartDate == entity.StartDate)
-                .Include(engineer => engineer.TransactionLines)
-                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null) {
-                var Engineer1Db = context.Engineers
+                var Engineer1Db = _engineers
                 .Where(engineer => engineer.Id == entity.Id)
-                .Include(engineer => engineer.TransactionLines)
-                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
                 if (Engineer1Db is null) {
                     return false;
@@ -53,25 +65,18 @@ namespace CarServiceCenter.EF.Repositories {
         }
 
         public IList<Engineer> GetAll() {
-            using var context = new CarServiceCenterDbContext();
-            return context.Engineers.ToList();
+            return _engineers;
         }
 
         public Engineer? GetById(int id) {
-            using var context = new CarServiceCenterDbContext();
-            return context.Engineers
+            return _engineers
                 .Where(engineer => engineer.Id == id)
-                .Include(engineer => engineer.TransactionLines)
-                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
         }
 
         public void Update(int id, Engineer entity) {
-            using var context = new CarServiceCenterDbContext();
-            var EngineerDb = context.Engineers
+            var EngineerDb = _engineers
                 .Where(engineer => engineer.Id == id)
-                .Include(engineer => engineer.TransactionLines)
-                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null) throw new KeyNotFoundException($"Given id '{id}' was not found");
             EngineerDb.Name = entity.Name;
@@ -79,7 +84,6 @@ namespace CarServiceCenter.EF.Repositories {
             EngineerDb.ManagerId = entity.ManagerId;
             EngineerDb.SalaryPerMonth = entity.SalaryPerMonth;
             //EngineerDb.StartDate = entity.StartDate;
-            context.SaveChanges();
         }
     }
 }

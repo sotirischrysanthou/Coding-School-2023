@@ -4,12 +4,12 @@
     {
         // Properties
         public int Id { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public string CarRegistrationNumber { get; set; }
+        public String Brand { get; set; }
+        public String Model { get; set; }
+        public String CarRegistrationNumber { get; set; }
         
         // Constractors
-        public Car(string brand, string model, string carRegistrationNumber)
+        public Car(String brand, String model, String carRegistrationNumber)
         {
             Brand = brand;
             Model = model;

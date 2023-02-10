@@ -8,40 +8,47 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarServiceCenter.EF.Repositories {
-    public class CustomerRepo : IEntityRepo<Customer> {
+    public class MockCustomerRepo : IEntityRepo<Customer> {
+        // Properties
+        private readonly List<Customer> _customers;
+
+        // Constructors
+        public MockCustomerRepo() {
+            _customers = new List<Customer> {
+                new("Sotiris","Chrysanthou", "6911111111","123456789"),
+                new("Christos","Kontorias", "6922222222","987654321"),
+                new("Grigoris","Avgenikos", "6933333333", "321654987")
+            };
+        }
+
         public void Add(Customer entity) {
-            using var context = new CarServiceCenterDbContext();
-            if (!EntityExists(entity)) {
-                context.Add(entity);
-                context.SaveChanges();
-            }
+            if (entity.Id != 0)
+                throw new ArgumentException("Given entity should not have Id set", nameof(entity));
+
+            var lastId = _customers.OrderBy(todo => todo.Id).Last().Id;
+            entity.Id = ++lastId;
+            _customers.Add(entity);
         }
 
         public void Delete(int id) {
-            using var context = new CarServiceCenterDbContext();
-            var CustomerDb = context.Customers
+            var CustomerDb = _customers
                 .Where(customer => customer.Id == id)
-                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
             if (CustomerDb is null)
-                throw new KeyNotFoundException($"Given id '{id}' was not found");
-            context.Remove(CustomerDb);
-            context.SaveChanges();
+                return;
+            _customers.Remove(CustomerDb);
         }
 
         public bool EntityExists(Customer entity) {
-            using var context = new CarServiceCenterDbContext();
-            var CustomerDb = context.Customers
+            var CustomerDb = _customers
                 .Where(customer => customer.Name == entity.Name
                 && customer.Surname == entity.Surname
                 && customer.Tin == entity.Tin
                 && customer.Phone == entity.Phone)
-                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
             if (CustomerDb is null) {
-                var Customer1Db = context.Customers
+                var Customer1Db = _customers
                 .Where(customer => customer.Id == entity.Id)
-                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
                 if (Customer1Db is null) {
                     return false;
@@ -50,32 +57,25 @@ namespace CarServiceCenter.EF.Repositories {
         }
 
         public IList<Customer> GetAll() {
-            using var context = new CarServiceCenterDbContext();
-            return context.Customers
-                .Include(customer => customer.Transactions)
-                .ToList();
+            return _customers;
         }
 
         public Customer? GetById(int id) {
-            using var context = new CarServiceCenterDbContext();
-            return context.Customers
+            return _customers
                 .Where(customer => customer.Id == id)
-                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
         }
 
         public void Update(int id, Customer entity) {
-            using var context = new CarServiceCenterDbContext();
-            var CustomerDb = context.Customers
+            var CustomerDb = _customers
                 .Where(customer => customer.Id == id)
-                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
-            if (CustomerDb is null) throw new KeyNotFoundException($"Given id '{id}' was not found");
+            if (CustomerDb is null)
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
             CustomerDb.Name = entity.Name;
             CustomerDb.Surname = entity.Surname;
             CustomerDb.Phone = entity.Phone;
             CustomerDb.Tin = entity.Tin;
-            context.SaveChanges();
         }
     }
 }
