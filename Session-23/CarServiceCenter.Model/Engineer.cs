@@ -2,6 +2,13 @@
 {
     public class Engineer
     {
+        // Properties
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public int SalaryPerMonth { get; set; }
+
+        // Constractors
         public Engineer(string name, string surname, int salaryPerMonth)
         {
             Name = name;
@@ -10,11 +17,6 @@
 
             TransactionLines = new List<TransactionLine>();
         }
-
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int SalaryPerMonth { get; set; }
 
         // Relations
         public int ManagerId { get; set; }

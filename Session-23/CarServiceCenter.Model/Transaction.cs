@@ -2,6 +2,12 @@
 {
     public class Transaction
     {
+        // Properties
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public decimal TotalPrice { get; set; }
+
+        // Constractors
         public Transaction(decimal totalPrice)
         {
             Date = DateTime.Now;
@@ -9,10 +15,6 @@
 
             TransactionLines = new List<TransactionLine>();
         }
-
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public decimal TotalPrice { get; set; }
 
         // Relations
         public int CustomerId { get; set; }

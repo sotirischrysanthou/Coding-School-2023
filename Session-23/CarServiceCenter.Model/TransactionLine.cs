@@ -2,17 +2,19 @@
 {
     public class TransactionLine
     {
+        // Properties
+        public int Id { get; set; }
+        public decimal Hours { get; set; }
+        public decimal PricePerHour { get; set; }
+        public decimal Price { get; set; }
+
+        // Constractors
         public TransactionLine(decimal hours, decimal pricePerHour, decimal price)
         {
             Hours = hours;
             PricePerHour = pricePerHour;
             Price = price;
         }
-
-        public int Id { get; set; }
-        public decimal Hours { get; set; }
-        public decimal PricePerHour { get; set; }
-        public decimal Price { get; set; }
 
         // Relations
         public int TransactionId { get; set; }
