@@ -1,4 +1,4 @@
-namespace CarSeviceCenter.Web.Mvc.Models {
+namespace CarServiceCenter.Web.Mvc.Models {
     public class ErrorViewModel {
         public string? RequestId { get; set; }
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib.Orm.Repositories {
+namespace CarServiceCenter.EF.Repositories {
     public class CustomerRepo : IEntityRepo<Customer> {
         public void Add(Customer entity) {
             using var context = new CarServiceCenterDbContext();
@@ -19,7 +19,10 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(int id) {
             using var context = new CarServiceCenterDbContext();
-            var CustomerDb = context.Customers.Where(customer => customer.Id == id).SingleOrDefault();
+            var CustomerDb = context.Customers
+                .Where(customer => customer.Id == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
             if (CustomerDb is null)
                 return;
             context.Remove(CustomerDb);
@@ -31,12 +34,15 @@ namespace CarServiceCenterLib.Orm.Repositories {
             var CustomerDb = context.Customers
                 .Where(customer => customer.Name == entity.Name
                 && customer.Surname == entity.Surname
-                && customer.TIN == entity.TIN
+                && customer.Tin == entity.Tin
                 && customer.Phone == entity.Phone)
+                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
             if (CustomerDb is null) {
                 var Customer1Db = context.Customers
-                .Where(customer => customer.Id == entity.Id).SingleOrDefault();
+                .Where(customer => customer.Id == entity.Id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
                 if (Customer1Db is null) {
                     return false;
                 } else return true;
@@ -45,24 +51,30 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public IList<Customer> GetAll() {
             using var context = new CarServiceCenterDbContext();
-            return context.Customers.ToList();
+            return context.Customers
+                .Include(customer => customer.Transactions)
+                .ToList();
         }
 
         public Customer? GetById(int id) {
             using var context = new CarServiceCenterDbContext();
-            return context.Customers.Where(customer => customer.Id == id).SingleOrDefault();
+            return context.Customers
+                .Where(customer => customer.Id == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Customer entity) {
             using var context = new CarServiceCenterDbContext();
             var CustomerDb = context.Customers
                 .Where(customer => customer.Id == id)
+                .Include(customer => customer.Transactions)
                 .SingleOrDefault();
             if (CustomerDb is null) return;
             CustomerDb.Name = entity.Name;
             CustomerDb.Surname = entity.Surname;
             CustomerDb.Phone = entity.Phone;
-            CustomerDb.TIN = entity.TIN;
+            CustomerDb.Tin = entity.Tin;
             context.SaveChanges();
         }
     }

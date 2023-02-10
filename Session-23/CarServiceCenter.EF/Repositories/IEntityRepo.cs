@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib.Orm.Repositories {
+namespace CarServiceCenter.EF.Repositories {
     public interface IEntityRepo<TEntity>{
         IList<TEntity> GetAll();
         TEntity? GetById(int id);

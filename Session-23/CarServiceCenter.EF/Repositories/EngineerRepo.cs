@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib.Orm.Repositories {
+namespace CarServiceCenter.EF.Repositories {
     public class EngineerRepo : IEntityRepo<Engineer> {
         public void Add(Engineer entity) {
             using var context = new CarServiceCenterDbContext();
@@ -19,7 +19,11 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(int id) {
             using var context = new CarServiceCenterDbContext();
-            var EngineerDb = context.Engineers.Where(engineer => engineer.Id == id).SingleOrDefault();
+            var EngineerDb = context.Engineers
+                .Where(engineer => engineer.Id == id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .SingleOrDefault();
             if (EngineerDb is null)
                 return;
             context.Remove(EngineerDb);
@@ -31,12 +35,17 @@ namespace CarServiceCenterLib.Orm.Repositories {
             var EngineerDb = context.Engineers
                 .Where(engineer => engineer.Name == entity.Name
                 && engineer.Surname == entity.Surname
-                && engineer.SalaryPerMonth == entity.SalaryPerMonth
-                && engineer.StartDate == entity.StartDate)
+                && engineer.SalaryPerMonth == entity.SalaryPerMonth)
+                //&& engineer.StartDate == entity.StartDate)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null) {
                 var Engineer1Db = context.Engineers
-                .Where(engineer => engineer.Id == entity.Id).SingleOrDefault();
+                .Where(engineer => engineer.Id == entity.Id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .SingleOrDefault();
                 if (Engineer1Db is null) {
                     return false;
                 } else return true;
@@ -50,20 +59,26 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public Engineer? GetById(int id) {
             using var context = new CarServiceCenterDbContext();
-            return context.Engineers.Where(engineer => engineer.Id == id).SingleOrDefault();
+            return context.Engineers
+                .Where(engineer => engineer.Id == id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Engineer entity) {
             using var context = new CarServiceCenterDbContext();
             var EngineerDb = context.Engineers
                 .Where(engineer => engineer.Id == id)
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
                 .SingleOrDefault();
             if (EngineerDb is null) return;
             EngineerDb.Name = entity.Name;
             EngineerDb.Surname = entity.Surname;
             EngineerDb.ManagerId = entity.ManagerId;
             EngineerDb.SalaryPerMonth = entity.SalaryPerMonth;
-            EngineerDb.StartDate = entity.StartDate;
+            //EngineerDb.StartDate = entity.StartDate;
             context.SaveChanges();
         }
     }

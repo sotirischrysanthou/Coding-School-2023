@@ -1,8 +1,8 @@
-﻿using CarSeviceCenter.Web.Mvc.Models;
+﻿using CarServiceCenter.Web.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace CarSeviceCenter.Web.Mvc.Controllers {
+namespace CarServiceCenter.Web.Mvc.Controllers {
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
 

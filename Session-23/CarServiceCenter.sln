@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenter.Model", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenter.EF", "CarServiceCenter.EF\CarServiceCenter.EF.csproj", "{AE4AEC3C-9519-4489-979F-6399580F86B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSeviceCenter.Web.Mvc", "CarSeviceCenter.Web.Mvc\CarSeviceCenter.Web.Mvc.csproj", "{7867BC60-CA1F-40A1-8DC1-CA7E13BCDC85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarServiceCenter.Web.Mvc", "CarServiceCenter.Web.Mvc\CarServiceCenter.Web.Mvc.csproj", "{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{AE4AEC3C-9519-4489-979F-6399580F86B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE4AEC3C-9519-4489-979F-6399580F86B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE4AEC3C-9519-4489-979F-6399580F86B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7867BC60-CA1F-40A1-8DC1-CA7E13BCDC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7867BC60-CA1F-40A1-8DC1-CA7E13BCDC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7867BC60-CA1F-40A1-8DC1-CA7E13BCDC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7867BC60-CA1F-40A1-8DC1-CA7E13BCDC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

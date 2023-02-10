@@ -1,12 +1,13 @@
 ﻿using CarServiceCenter.Model;
 using CarServiceCenter.EF.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib.Orm.Repositories {
+namespace CarServiceCenter.EF.Repositories {
     public class ServiceTaskRepo : IEntityRepo<ServiceTask> {
         public void Add(ServiceTask entity) {
             using var context = new CarServiceCenterDbContext();
@@ -17,7 +18,10 @@ namespace CarServiceCenterLib.Orm.Repositories {
         }
         public void Delete(int id) {
             using var context = new CarServiceCenterDbContext();
-            var ServiceTaskDb = context.ServiceTasks.Where(serviceTask => serviceTask.Id == id).SingleOrDefault();
+            var ServiceTaskDb = context.ServiceTasks
+                .Where(serviceTask => serviceTask.Id == id)
+                .Include(serviceTask => serviceTask.TransactionLines)
+                .SingleOrDefault();
             if (ServiceTaskDb is null)
                 return;
             context.Remove(ServiceTaskDb);

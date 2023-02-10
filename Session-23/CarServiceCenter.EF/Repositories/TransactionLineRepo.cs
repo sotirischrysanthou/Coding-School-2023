@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarServiceCenterLib.Orm.Repositories {
+namespace CarServiceCenter.EF.Repositories {
     public class TransactionLineRepo : IEntityRepo<TransactionLine> {
         public void Add(TransactionLine entity) {
             using var context = new CarServiceCenterDbContext();
@@ -19,7 +19,11 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Delete(int id) {
             using var context = new CarServiceCenterDbContext();
-            var TransactionLineDb = context.TransactionLines.Where(transactionLine => transactionLine.Id == id).SingleOrDefault();
+            var TransactionLineDb = context.TransactionLines.Where(transactionLine => transactionLine.Id == id)
+                .Include(transactionLine => transactionLine.Transaction)
+                .Include(transactionLine => transactionLine.Engineer)
+                .Include(transactionLine => transactionLine.ServiceTask)
+                .SingleOrDefault();
             if (TransactionLineDb is null)
                 return;
             context.Remove(TransactionLineDb);
@@ -33,10 +37,16 @@ namespace CarServiceCenterLib.Orm.Repositories {
                 && transactionLine.TransactionId == entity.TransactionId
                 && transactionLine.Hours == entity.Hours
                 && transactionLine.EngineerId == entity.EngineerId)
+                .Include(transactionLine => transactionLine.Transaction)
+                .Include(transactionLine => transactionLine.Engineer)
+                .Include(transactionLine => transactionLine.ServiceTask)
                 .SingleOrDefault();
             if (TransactionLineDb is null) {
                 var TransactionLine1Db = context.TransactionLines
-                .Where(transactionLine => transactionLine.Id == entity.Id).SingleOrDefault();
+                    .Where(transactionLine => transactionLine.Id == entity.Id)
+                    .Include(transactionLine => transactionLine.Engineer)
+                    .Include(transactionLine => transactionLine.ServiceTask)
+                    .SingleOrDefault();
                 if (TransactionLine1Db is null) { return false; } else {
                     return true;
                 }
@@ -45,7 +55,11 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public IList<TransactionLine> GetAll() {
             using var context = new CarServiceCenterDbContext();
-            return context.TransactionLines.Include(transactionLine => transactionLine.Transaction).ToList();
+            return context.TransactionLines
+                .Include(transactionLine => transactionLine.Transaction)
+                .Include(transactionLine => transactionLine.Engineer)
+                .Include(transactionLine => transactionLine.ServiceTask)
+                .ToList();
         }
 
         public TransactionLine? GetById(int id) {
@@ -55,7 +69,11 @@ namespace CarServiceCenterLib.Orm.Repositories {
 
         public void Update(int id, TransactionLine entity) {
             using var context = new CarServiceCenterDbContext();
-            var TransactionLineDb = context.TransactionLines.Where(transactionLine => transactionLine.Id == id).SingleOrDefault();
+            var TransactionLineDb = context.TransactionLines.Where(transactionLine => transactionLine.Id == id)
+                .Include(transactionLine => transactionLine.Transaction)
+                .Include(transactionLine => transactionLine.Engineer)
+                .Include(transactionLine => transactionLine.ServiceTask)
+                .SingleOrDefault();
             if (TransactionLineDb is null)
                 return;
             TransactionLineDb.Price = entity.Price;
