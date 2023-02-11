@@ -66,7 +66,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, CustomerEditDto customer) {
             if (!ModelState.IsValid) {
-                return View();
+                return View(model: customer);
             }
             Customer? dbCustomer = _customerRepo.GetById(id);
             if (dbCustomer is null) {
