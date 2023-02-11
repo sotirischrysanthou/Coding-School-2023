@@ -63,9 +63,9 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
                 return NotFound();
             }
             var managers = _managerRepo.GetAll();
-            var selectManagersList = managers.Select(e => new SelectListItem {
-                Value = e.Id.ToString(),
-                Text = e.Name
+            var selectManagersList = managers.Select(m => new SelectListItem {
+                Value = m.Id.ToString(),
+                Text = m.Name + " " + m.Surname
             });
             ViewBag.Managers = selectManagersList;
             EngineerEditDto engineer = new EngineerEditDto {

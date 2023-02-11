@@ -1,0 +1,107 @@
+﻿@model CarServiceCenter.Model.Transaction
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detail</h1>
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Manager)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Manager.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.Brand)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        @foreach (var item in Model.TransactionLines){
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(modelItem => item.Hours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => item.PricePerHour)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => item.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => item.Transaction)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => item.ServiceTask)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => item.Engineer)
+                </th>
+                <th></th>
+            </tr>
+        }
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TransactionLines) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PricePerHour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transaction.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceTask.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Engineer.Name)
+                </td>
+                <td>
+                    <a asp-action="LineEdit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="LineDetails" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="LineDelete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
