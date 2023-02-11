@@ -15,9 +15,9 @@ namespace CarServiceCenter.EF.Repositories {
         // Constructors
         public MockCarRepo() {
             _cars = new List<Car> {
-                new("Ford", "Focus", "ABC 1234"),
-                new("Toyota", "Yaris", "DEF 5678"),
-                new("Mazda", "Miata", "GHI 9101")
+                new("Ford", "Focus", "ABC 1234"){ Id = 0 },
+                new("Toyota", "Yaris", "DEF 5678"){ Id = 1 },
+                new("Mazda", "Miata", "GHI 9101"){ Id = 2 }
             };
         }
 

@@ -19,7 +19,7 @@ namespace CarServiceCenter.EF.Configurations
             // Properties
             builder.Property(t => t.Name).HasMaxLength(50).IsRequired();
             builder.Property(t => t.Surname).HasMaxLength(100).IsRequired();
-            builder.Property(t => t.Phone).IsRequired();
+            builder.Property(t => t.Phone).HasMaxLength(10);
             builder.Property(t => t.Tin).HasMaxLength(30).IsRequired();
 
             // Relations

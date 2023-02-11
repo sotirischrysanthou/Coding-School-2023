@@ -21,37 +21,43 @@ namespace CarServiceCenter.EF.Repositories {
             _serviceTasks = mockServiceTaskRepo.GetAll().ToList();
             _engineers = mockEngineerRepo.GetAll().ToList();
             _transactionLines = new List<TransactionLine> {
-                new(3, 44.5m) {
+                new(1, 44.5m) {
+                    Id = 0,
                     ServiceTaskId = _serviceTasks[0].Id,
                     ServiceTask = _serviceTasks[0],
                     EngineerId = _engineers[0].Id,
                     Engineer = _engineers[0]
                 },
                 new(3,44.5m) {
+                    Id = 1,
                     ServiceTaskId = _serviceTasks[1].Id,
                     ServiceTask = _serviceTasks[1],
                     EngineerId = _engineers[1].Id,
                     Engineer = _engineers[1]
                 },
-                new(3,44.5m) {
+                new(4,44.5m) {
+                    Id = 2,
                     ServiceTaskId = _serviceTasks[2].Id,
                     ServiceTask = _serviceTasks[2],
                     EngineerId = _engineers[0].Id,
                     Engineer = _engineers[0]
                 },
-                new(3,44.5m) {
+                new(2,44.5m) {
+                    Id = 3,
                     ServiceTaskId = _serviceTasks[0].Id,
                     ServiceTask = _serviceTasks[0],
                     EngineerId = _engineers[1].Id,
                     Engineer = _engineers[1]
                 },
-                new(3,44.5m) {
+                new(5,44.5m) {
+                    Id = 4,
                     ServiceTaskId = _serviceTasks[1].Id,
                     ServiceTask = _serviceTasks[1],
                     EngineerId = _engineers[0].Id,
                     Engineer = _engineers[0]
                 },
-                new(3,44.5m) {
+                new(4,44.5m) {
+                    Id = 5,
                     ServiceTaskId = _serviceTasks[2].Id,
                     ServiceTask = _serviceTasks[2],
                     EngineerId = _engineers[1].Id,

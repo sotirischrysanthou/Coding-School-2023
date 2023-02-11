@@ -19,10 +19,12 @@ namespace CarServiceCenter.EF.Repositories {
             _managers = mockManagerRepo.GetAll().ToList();
             _engineers = new List<Engineer> { 
                 new("Kostas", "Sofos", 1200) {
+                    Id = 0,
                     Manager = _managers[0],
                     ManagerId = _managers[0].Id
                 },
                 new("Stavros", "Kasidis", 1250){
+                    Id = 0,
                     Manager = _managers[1],
                     ManagerId = _managers[1].Id
                 }

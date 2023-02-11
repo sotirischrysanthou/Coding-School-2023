@@ -15,7 +15,7 @@ namespace CarServiceCenter.EF.Repositories {
         private readonly List<Car> _cars;
         private readonly List<Customer> _customers;
         private readonly List<Manager> _managers;
-        
+
 
         // Constructors
         public MockTransactionRepo() {
@@ -24,11 +24,12 @@ namespace CarServiceCenter.EF.Repositories {
             MockCustomerRepo mockCustomerRepo = new MockCustomerRepo();
             MockManagerRepo mockManagerRepo = new MockManagerRepo();
             _transactionLines = mockTransactionLineRepo.GetAll().ToList();
-            _cars= mockCarRepo.GetAll().ToList();
+            _cars = mockCarRepo.GetAll().ToList();
             _customers = mockCustomerRepo.GetAll().ToList();
             _managers = mockManagerRepo.GetAll().ToList();
-            _transactions= new List<Transaction> {
+            _transactions = new List<Transaction> {
                 new(0){
+                    Id = 0,
                     TransactionLines =new List<TransactionLine> {_transactionLines[0], _transactionLines[1]},
                     CarId = _cars[0].Id,
                     Car = _cars[0],
@@ -39,6 +40,7 @@ namespace CarServiceCenter.EF.Repositories {
                     Date = new DateTime(year: 2022,month:12,day:1)
                 },
                 new(0){
+                    Id = 1,
                     TransactionLines =new List<TransactionLine> {_transactionLines[2], _transactionLines[3]},
                     CarId = _cars[1].Id,
                     Car = _cars[1],
@@ -49,6 +51,7 @@ namespace CarServiceCenter.EF.Repositories {
                     Date = new DateTime(year: 2023,month:1,day:12)
                 },
                 new(0){
+                    Id = 2,
                     TransactionLines =new List<TransactionLine> {_transactionLines[4], _transactionLines[5]},
                     CarId = _cars[2].Id,
                     Car = _cars[2],
@@ -59,9 +62,9 @@ namespace CarServiceCenter.EF.Repositories {
                     Date = new DateTime(year: 2023,month:2,day:3)
                 }
             };
-            foreach(Transaction transaction in _transactions) {
+            foreach (Transaction transaction in _transactions) {
                 transaction.UpdateTotalPrice();
-                foreach(TransactionLine transactionLine in transaction.TransactionLines) {
+                foreach (TransactionLine transactionLine in transaction.TransactionLines) {
                     transactionLine.TransactionId = transaction.Id;
                     transactionLine.Transaction = transaction;
                 }

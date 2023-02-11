@@ -14,9 +14,9 @@ namespace CarServiceCenter.EF.Repositories {
         // Constructors
         public MockServiceTaskRepo() {
             _serviceTasks= new List<ServiceTask> { 
-                new("1","Air Filter",3),
-                new("1","Oil Filter",3),
-                new("1","Petrol Filter",3),
+                new("1","Air Filter",3){ Id = 0 },
+                new("1","Oil Filter",3){ Id = 1 },
+                new("1","Petrol Filter",3) { Id = 2 },
             };
         }
 

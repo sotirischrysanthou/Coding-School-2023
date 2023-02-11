@@ -15,9 +15,9 @@ namespace CarServiceCenter.EF.Repositories {
         // Constructors
         public MockCustomerRepo() {
             _customers = new List<Customer> {
-                new("Sotiris","Chrysanthou", "6911111111","123456789"),
-                new("Christos","Kontorias", "6922222222","987654321"),
-                new("Grigoris","Avgenikos", "6933333333", "321654987")
+                new("Sotiris","Chrysanthou", "6911111111","123456789"){ Id = 0 },
+                new("Christos","Kontorias", "6922222222","987654321") { Id = 1 },
+                new("Grigoris","Avgenikos", "6933333333", "321654987") { Id = 2 }
             };
         }
 

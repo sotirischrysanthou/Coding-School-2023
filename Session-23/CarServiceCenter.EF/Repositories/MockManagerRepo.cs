@@ -15,8 +15,8 @@ namespace CarServiceCenter.EF.Repositories {
         // Constructors
         public MockManagerRepo() {
             _managers = new List<Manager> {
-                new("Fotis", "Chrysoulas", 2000),
-                new("Thodoris", "Kapiris", 2100)
+                new("Fotis", "Chrysoulas", 2000){ Id = 0 },
+                new("Thodoris", "Kapiris", 2100){ Id = 1 }
             };
         }
 
