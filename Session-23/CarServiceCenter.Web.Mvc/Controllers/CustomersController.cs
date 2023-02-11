@@ -68,7 +68,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
             if (!ModelState.IsValid) {
                 return View();
             }
-            Customer dbCustomer = _customerRepo.GetById(id);
+            Customer? dbCustomer = _customerRepo.GetById(id);
             if (dbCustomer is null) {
                 return NotFound();
             }
@@ -82,7 +82,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
 
         // GET: CustomersController/Delete/5
         public ActionResult Delete(int id) {
-            Customer customer = _customerRepo.GetById(id);
+            Customer? customer = _customerRepo.GetById(id);
             if (customer is null) {
                 return NotFound();
             }
@@ -96,7 +96,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
             if (!ModelState.IsValid) {
                 return View();
             }
-            Customer dbCustomer = _customerRepo.GetById(id);
+            Customer? dbCustomer = _customerRepo.GetById(id);
             if (dbCustomer is null) {
                 return NotFound();
             }

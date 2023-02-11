@@ -54,7 +54,10 @@ namespace CarServiceCenter.EF.Repositories {
 
         public IList<Engineer> GetAll() {
             using var context = new CarServiceCenterDbContext();
-            return context.Engineers.ToList();
+            return context.Engineers
+                .Include(engineer => engineer.TransactionLines)
+                .Include(engineer => engineer.Manager)
+                .ToList();
         }
 
         public Engineer? GetById(int id) {

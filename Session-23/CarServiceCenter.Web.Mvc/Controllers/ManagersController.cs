@@ -21,7 +21,10 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
 
         // GET: ManagersController/Details/5
         public ActionResult Details(int id) {
-            var manager = _managerRepo.GetById(id);
+            Manager? manager = _managerRepo.GetById(id);
+            if(manager is null) {
+                return NotFound();
+            }
             return View(manager);
         }
 
@@ -64,7 +67,10 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
             if (!ModelState.IsValid) {
                 return View();
             }
-            Manager dbManager = _managerRepo.GetById(id);
+            Manager? dbManager = _managerRepo.GetById(id);
+            if(dbManager is null) {
+                return NotFound();
+            }
             dbManager.Name = manager.Name;
             dbManager.Surname = manager.Surname;
             dbManager.SalaryPerMonth = manager.SalaryPerMonth;
@@ -74,7 +80,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
 
         // GET: ManagersController/Delete/5
         public ActionResult Delete(int id) {
-            Manager manager= _managerRepo.GetById(id);
+            Manager? manager= _managerRepo.GetById(id);
             if (manager is null) {
                 return NotFound();
             }
@@ -88,7 +94,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
             if (!ModelState.IsValid) {
                 return View();
             }
-            Manager dbManager = _managerRepo.GetById(id);
+            Manager? dbManager = _managerRepo.GetById(id);
             if (dbManager is null) {
                 return NotFound();
             }

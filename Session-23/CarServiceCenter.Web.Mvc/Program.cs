@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IEntityRepo<Car>, MockCarRepo>();
 builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
-builder.Services.AddScoped<IEntityRepo<Engineer>, MockEngineerRepo>();
+builder.Services.AddScoped<IEntityRepo<Engineer>, EngineerRepo>();
 builder.Services.AddScoped<IEntityRepo<Manager>, ManagerRepo>();
 builder.Services.AddScoped<IEntityRepo<ServiceTask>, MockServiceTaskRepo>();
 builder.Services.AddScoped<IEntityRepo<TransactionLine>, MockTransactionLineRepo>();

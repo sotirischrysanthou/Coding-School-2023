@@ -8,7 +8,14 @@
         public String Surname { get; set; }
         public int SalaryPerMonth { get; set; }
 
+        // Relations
+        public int ManagerId { get; set; }
+        public Manager Manager { get; set; } = null!;
+
+        public List<TransactionLine> TransactionLines { get; set; }
+
         // Constractors
+        public Engineer() { }
         public Engineer(String name, String surname, int salaryPerMonth)
         {
             Name = name;
@@ -17,11 +24,19 @@
 
             TransactionLines = new List<TransactionLine>();
         }
-
-        // Relations
+    }
+    public class EngineerCreateDto {
+        public string Name { get; set; } = null!;
+        public string Surname { get; set; } = null!;
+        public int SalaryPerMonth { get; set; }
         public int ManagerId { get; set; }
-        public Manager Manager { get; set; } = null!;
+    }
+    public class EngineerEditDto {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Surname { get; set; } = null!;
+        public int SalaryPerMonth { get; set; }
+        public int ManagerId { get; set; }
 
-        public List<TransactionLine> TransactionLines { get; set; }
     }
 }
