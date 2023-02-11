@@ -47,10 +47,17 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
 
         // GET: CustomersController/Edit/5
         public ActionResult Edit(int id) {
-            Customer? customer = _customerRepo.GetById(id);
-            if (customer is null) {
+            Customer? dbCustomer = _customerRepo.GetById(id);
+            if (dbCustomer is null) {
                 return NotFound();
             }
+            CustomerEditDto customer = new CustomerEditDto {
+                Id = dbCustomer.Id,
+                Name = dbCustomer.Name,
+                Surname = dbCustomer.Surname,
+                Phone = dbCustomer.Phone,
+                Tin = dbCustomer.Tin
+            };
             return View(model: customer);
         }
 
@@ -76,7 +83,10 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
         // GET: CustomersController/Delete/5
         public ActionResult Delete(int id) {
             Customer customer = _customerRepo.GetById(id);
-            return View(customer);
+            if (customer is null) {
+                return NotFound();
+            }
+            return View(model: customer);
         }
 
         // POST: CustomersController/Delete/5

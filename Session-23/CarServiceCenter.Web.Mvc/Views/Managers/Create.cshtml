@@ -1,18 +1,17 @@
-﻿@model CarServiceCenter.Model.CustomerEditDto
+﻿@model CarServiceCenter.Model.ManagerCreateDto
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>Customer</h4>
+<h4>Manager</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -24,17 +23,12 @@
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <label asp-for="SalaryPerMonth" class="control-label"></label>
+                <input asp-for="SalaryPerMonth" class="form-control" />
+                <span asp-validation-for="SalaryPerMonth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tin" class="control-label"></label>
-                <input asp-for="Tin" class="form-control" />
-                <span asp-validation-for="Tin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
