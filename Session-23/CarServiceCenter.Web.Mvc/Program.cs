@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IEntityRepo<Car>, MockCarRepo>();
+builder.Services.AddScoped<IEntityRepo<Car>, CarRepo>();
 builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
 builder.Services.AddScoped<IEntityRepo<Engineer>, EngineerRepo>();
 builder.Services.AddScoped<IEntityRepo<Manager>, ManagerRepo>();

@@ -4,8 +4,8 @@
     {
         // Properties
         public int Id { get; set; }
-        public String Name { get; set; }
-        public String Surname { get; set; }
+        public String Name { get; set; } = null!;
+        public String Surname { get; set; } = null!;
         public int SalaryPerMonth { get; set; }
 
         // Relations
@@ -15,7 +15,6 @@
         public List<TransactionLine> TransactionLines { get; set; }
 
         // Constractors
-        public Engineer() { }
         public Engineer(String name, String surname, int salaryPerMonth)
         {
             Name = name;

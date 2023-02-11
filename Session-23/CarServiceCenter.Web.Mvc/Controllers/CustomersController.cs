@@ -94,7 +94,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection) {
             if (!ModelState.IsValid) {
-                return View();
+                return RedirectToAction(actionName: "Delete", routeValues: id);
             }
             Customer? dbCustomer = _customerRepo.GetById(id);
             if (dbCustomer is null) {
