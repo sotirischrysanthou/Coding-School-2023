@@ -60,5 +60,6 @@
         public int CustomerId { get; set; }
         public int ManagerId { get; set; }
         public int CarId { get; set; }
+        public List<TransactionLine> TransactionLines { get; set; } = null!;
     }
 }

@@ -7,6 +7,8 @@
         public String Name { get; set; }
         public String Surname { get; set; }
         public int SalaryPerMonth { get; set; }
+        public DateTime StartDate { get; set; }
+
 
         // Constractors
         public Manager(String name, String surname, int salaryPerMonth)
@@ -28,13 +30,13 @@
         public string Name { get; set; } = null!;
         public string Surname { get; set; } = null!;
         public int SalaryPerMonth { get; set; }
-
+        public DateTime StartDate { get; set; }
     }
     public class ManagerEditDto {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Surname { get; set; } = null!;
         public int SalaryPerMonth { get; set; }
-
+        public DateTime StartDate { get; set; }
     }
 }

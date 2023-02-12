@@ -7,6 +7,7 @@
         public String Name { get; set; } = null!;
         public String Surname { get; set; } = null!;
         public int SalaryPerMonth { get; set; }
+        public DateTime StartDate { get; set; }
 
         // Relations
         public int ManagerId { get; set; }
@@ -29,6 +30,7 @@
         public string Surname { get; set; } = null!;
         public int SalaryPerMonth { get; set; }
         public int ManagerId { get; set; }
+        public DateTime StartDate { get; set; }
     }
     public class EngineerEditDto {
         public int Id { get; set; }
@@ -36,6 +38,7 @@
         public string Surname { get; set; } = null!;
         public int SalaryPerMonth { get; set; }
         public int ManagerId { get; set; }
+        public DateTime StartDate { get; set; }
 
     }
 }

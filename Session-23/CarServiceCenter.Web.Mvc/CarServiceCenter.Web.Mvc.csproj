@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarServiceCenter.EF\CarServiceCenter.EF.csproj" />
+    <ProjectReference Include="..\CarServiceCenter.Functions\CarServiceCenter.Functions.csproj" />
     <ProjectReference Include="..\CarServiceCenter.Model\CarServiceCenter.Model.csproj" />
   </ItemGroup>
 

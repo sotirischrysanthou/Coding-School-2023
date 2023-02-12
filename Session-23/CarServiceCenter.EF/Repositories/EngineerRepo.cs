@@ -81,6 +81,7 @@ namespace CarServiceCenter.EF.Repositories {
             EngineerDb.Surname = entity.Surname;
             EngineerDb.ManagerId = entity.ManagerId;
             EngineerDb.SalaryPerMonth = entity.SalaryPerMonth;
+            EngineerDb.StartDate = entity.StartDate;
             //EngineerDb.StartDate = entity.StartDate;
             context.SaveChanges();
         }

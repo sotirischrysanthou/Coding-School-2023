@@ -1,7 +1,5 @@
-﻿namespace CarServiceCenter.Model
-{
-    public class TransactionLine
-    {
+﻿namespace CarServiceCenter.Model {
+    public class TransactionLine {
         // Properties
         public int Id { get; set; }
         public decimal Hours { get; set; }
@@ -26,12 +24,24 @@
             PricePerHour = pricePerHour;
             Price = pricePerHour * hours;
         }
-        public TransactionLine(decimal hours, decimal pricePerHour, decimal price)
-        {
+        public TransactionLine(decimal hours, decimal pricePerHour, decimal price) {
             Hours = hours;
             PricePerHour = pricePerHour;
             Price = price;
         }
+    }
 
+    public class TransactionLineCreateDto {
+        public decimal PricePerHour { get; set; }
+        public int ServiceTaskId { get; set; }
+        public int EngineerId { get; set; }
+        public int TransactionId { get; set; }
+    }
+
+    public class TransactionLineEditDto {
+        public int Id { get; set; }
+        public decimal PricePerHour { get; set; }
+        public int ServiceTaskId { get; set; }
+        public int EngineerId { get; set; }
     }
 }

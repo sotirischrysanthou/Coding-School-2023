@@ -4,6 +4,7 @@ using CarServiceCenter.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarServiceCenter.EF.Migrations
 {
     [DbContext(typeof(CarServiceCenterDbContext))]
-    partial class CarServiceCenterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230212134237_TransactionLinePricePerHourPrecision")]
+    partial class TransactionLinePricePerHourPrecision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +105,6 @@ namespace CarServiceCenter.EF.Migrations
                     b.Property<int>("SalaryPerMonth")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -132,9 +132,6 @@ namespace CarServiceCenter.EF.Migrations
 
                     b.Property<int>("SalaryPerMonth")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -303,7 +300,7 @@ namespace CarServiceCenter.EF.Migrations
                     b.HasOne("CarServiceCenter.Model.Transaction", "Transaction")
                         .WithMany("TransactionLines")
                         .HasForeignKey("TransactionId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Engineer");

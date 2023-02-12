@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenter.Model", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenter.EF", "CarServiceCenter.EF\CarServiceCenter.EF.csproj", "{AE4AEC3C-9519-4489-979F-6399580F86B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarServiceCenter.Web.Mvc", "CarServiceCenter.Web.Mvc\CarServiceCenter.Web.Mvc.csproj", "{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarServiceCenter.Web.Mvc", "CarServiceCenter.Web.Mvc\CarServiceCenter.Web.Mvc.csproj", "{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarServiceCenter.Functions", "CarServiceCenter.Functions\CarServiceCenter.Functions.csproj", "{6586DECB-0449-4DD7-A4DB-C7CAEB32FC77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BAAF815-2BDB-4957-9CCE-718F8BE12ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6586DECB-0449-4DD7-A4DB-C7CAEB32FC77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6586DECB-0449-4DD7-A4DB-C7CAEB32FC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6586DECB-0449-4DD7-A4DB-C7CAEB32FC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6586DECB-0449-4DD7-A4DB-C7CAEB32FC77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

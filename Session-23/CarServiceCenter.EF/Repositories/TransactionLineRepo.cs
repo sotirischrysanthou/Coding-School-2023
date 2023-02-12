@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarServiceCenter.EF.Repositories {
-    public class TransactionLineRepo : IEntityRepo<TransactionLine> {
+    public class TransactionLineRepo : IEntityRepo<TransactionLine>, IEntityTransactionLineRepo {
         public void Add(TransactionLine entity) {
             using var context = new CarServiceCenterDbContext();
             if (!EntityExists(entity)) {
@@ -62,9 +62,22 @@ namespace CarServiceCenter.EF.Repositories {
                 .ToList();
         }
 
+        public IList<TransactionLine> GetAllWithTransactionID(int transactionId) {
+            using var context = new CarServiceCenterDbContext();
+            return context.TransactionLines.Where(t => t.TransactionId == transactionId)
+                .Include(t => t.Engineer)
+                .Include(t => t.ServiceTask)
+                .ToList() ;
+        }
+
         public TransactionLine? GetById(int id) {
             using var context = new CarServiceCenterDbContext();
-            return context.TransactionLines.Where(transactionLine => transactionLine.Id == id).SingleOrDefault();
+            return context.TransactionLines
+                .Where(transactionLine => transactionLine.Id == id)
+                .Include(transactionLine => transactionLine.Engineer)
+                .Include(transactionLine => transactionLine.ServiceTask)
+                .Include(transactionLine => transactionLine.Transaction)
+                .SingleOrDefault();
         }
 
         public void Update(int id, TransactionLine entity) {

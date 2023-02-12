@@ -1,0 +1,42 @@
+﻿@model CarServiceCenter.Model.TransactionLineEditDto
+
+@{
+    ViewData["Title"] = "EditLine";
+}
+
+<h1>EditLine</h1>
+
+<h4>TransactionLine</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditLine">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PricePerHour" />
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ServiceTaskId" class="control-label"></label>
+                <select asp-for="ServiceTaskId" class="form-control" asp-items="ViewBag.ServiceTasks"></select>
+                <span asp-validation-for="ServiceTaskId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineerId" class="control-label"></label>
+                <select asp-for="EngineerId" class="form-control" asp-items="ViewBag.Engineers"></select>
+                <span asp-validation-for="EngineerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

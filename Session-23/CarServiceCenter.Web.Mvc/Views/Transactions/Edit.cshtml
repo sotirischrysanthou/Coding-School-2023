@@ -13,6 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="TransactionLines" />
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />
@@ -38,6 +39,60 @@
             </div>
         </form>
     </div>
+    <h4>Transaction Lines</h4>
+    <p>
+        <a asp-action="CreateLine" asp-route-transactionId="@Model.Id">Create New</a>
+    </p>
+    <label class="control-label">Total Remaining Hours: </label>
+    <label class="control-label">@Model</label>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Service Task
+                </th>
+                <th>
+                    Engineer
+                </th>
+                <th>
+                    Hours
+                </th>
+                <th>
+                    PricePerHour
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TransactionLines) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceTask.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Engineer.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PricePerHour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="EditLine" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="DetailsLine" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="DeleteLine" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div>
@@ -45,5 +100,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

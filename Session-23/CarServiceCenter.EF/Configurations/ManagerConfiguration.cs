@@ -20,6 +20,7 @@ namespace CarServiceCenter.EF.Configurations
             builder.Property(t => t.Name).HasMaxLength(50).IsRequired();
             builder.Property(t => t.Surname).HasMaxLength(100).IsRequired();
             builder.Property(t => t.SalaryPerMonth).IsRequired();
+            builder.Property(t => t.StartDate).IsRequired();
 
             // Relations
         }

@@ -55,7 +55,7 @@ namespace CarServiceCenter.EF.Repositories {
             ManagerDb.Name = entity.Name;
             ManagerDb.Surname = entity.Surname;
             ManagerDb.SalaryPerMonth = entity.SalaryPerMonth;
-
+            ManagerDb.StartDate = entity.StartDate;
             context.SaveChanges();
         }
         public bool EntityExists(Manager entity) {

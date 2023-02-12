@@ -39,7 +39,10 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
                 Text = e.Name
             });
             ViewBag.Managers = selectManagersList;
-            return View();
+            EngineerCreateDto engineerCreateDto = new EngineerCreateDto() {
+                StartDate = DateTime.Now,
+            };
+            return View(model: engineerCreateDto);
         }
 
         // POST: EngineersController/Create
@@ -50,7 +53,8 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
                 return RedirectToAction("Create");
             }
             Engineer dbEngineer = new Engineer(engineer.Name, engineer.Surname, engineer.SalaryPerMonth) {
-                ManagerId = engineer.ManagerId
+                ManagerId = engineer.ManagerId,
+                StartDate = engineer.StartDate,
             };
             _engineerRepo.Add(dbEngineer);
             return RedirectToAction("Index");
@@ -72,7 +76,8 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
                 Id = dbEngineer.Id,
                 Name = dbEngineer.Name,
                 SalaryPerMonth = dbEngineer.SalaryPerMonth,
-                ManagerId = dbEngineer.ManagerId
+                ManagerId = dbEngineer.ManagerId,
+                StartDate = dbEngineer.StartDate,
             };
             return View(model: engineer);
         }
@@ -92,6 +97,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
             dbEngineer.Surname = engineer.Surname;
             dbEngineer.SalaryPerMonth = engineer.SalaryPerMonth;
             dbEngineer.ManagerId = engineer.ManagerId;
+            dbEngineer.StartDate = engineer.StartDate;
             _engineerRepo.Update(id, dbEngineer);
             return RedirectToAction(actionName: "Index");
         }

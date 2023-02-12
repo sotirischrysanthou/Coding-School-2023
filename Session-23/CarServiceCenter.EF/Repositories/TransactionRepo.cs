@@ -71,7 +71,8 @@ namespace CarServiceCenter.EF.Repositories {
 
         public Transaction? GetById(int id) {
             using var context = new CarServiceCenterDbContext();
-            return context.Transactions.Where(transaction => transaction.Id == id)
+            return context.Transactions
+                .Where(transaction => transaction.Id == id)
                 .Include(transaction => transaction.TransactionLines)
                 .Include(transaction => transaction.Customer)
                 .Include(transaction => transaction.Car)

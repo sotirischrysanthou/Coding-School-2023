@@ -18,14 +18,14 @@ namespace CarServiceCenter.EF.Configurations
 
             // Properties
             builder.Property(t => t.Hours).HasPrecision(3, 2).IsRequired();
-            builder.Property(t => t.PricePerHour).HasPrecision(3, 2).IsRequired();
+            builder.Property(t => t.PricePerHour).HasPrecision(4, 2).IsRequired();
             builder.Property(t => t.Price).HasPrecision(9, 2).IsRequired();
 
             // Relations
             builder.HasOne(t => t.Transaction)
                 .WithMany(t => t.TransactionLines)
                 .HasForeignKey(t => t.TransactionId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(t => t.ServiceTask)
                 .WithMany(t => t.TransactionLines)

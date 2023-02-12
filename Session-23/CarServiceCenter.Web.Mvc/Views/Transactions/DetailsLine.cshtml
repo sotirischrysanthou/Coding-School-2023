@@ -1,0 +1,54 @@
+﻿@model CarServiceCenter.Model.TransactionLine
+
+@{
+    ViewData["Title"] = "DetailsLine";
+}
+
+<h1>DetailsLine</h1>
+
+<div>
+    <h4>TransactionLine</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hours)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hours)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PricePerHour)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PricePerHour)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaction)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Transaction.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ServiceTask)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ServiceTask.Code) @Html.DisplayFor(model => model.ServiceTask.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Engineer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Engineer.Name) @Html.DisplayFor(model => model.Engineer.Surname)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditLine" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Details" asp-route-id="@Model?.Transaction.Id">Back to List</a>
+</div>
