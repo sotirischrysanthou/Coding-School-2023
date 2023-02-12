@@ -14,6 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="TransactionLines" />
+            <input type="hidden" asp-for="RemainingHours" />
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />
@@ -44,7 +45,7 @@
         <a asp-action="CreateLine" asp-route-transactionId="@Model.Id">Create New</a>
     </p>
     <label class="control-label">Total Remaining Hours: </label>
-    <label class="control-label">@Model</label>
+    <label class="control-label">@Model.RemainingHours</label>
     <table class="table">
         <thead>
             <tr>

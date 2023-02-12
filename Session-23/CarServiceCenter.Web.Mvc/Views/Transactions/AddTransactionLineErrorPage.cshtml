@@ -1,0 +1,11 @@
+﻿@model CarServiceCenter.Web.Mvc.Controllers.StringAndIdModel
+@{
+    ViewData["Title"] = "AddTransactionLineErrorPage";
+}
+
+<h1>Error!!!</h1>
+
+<label class="control-label">@Model.Message</label>
+
+<a asp-action="Edit" asp-route-id="@Model?.Id">Back to Edit</a> |
+

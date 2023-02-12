@@ -61,5 +61,6 @@
         public int ManagerId { get; set; }
         public int CarId { get; set; }
         public List<TransactionLine> TransactionLines { get; set; } = null!;
+        public String RemainingHours { get; set; } = string.Empty;
     }
 }

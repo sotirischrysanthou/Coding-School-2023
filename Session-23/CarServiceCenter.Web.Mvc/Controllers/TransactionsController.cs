@@ -133,6 +133,7 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
                 CarId = dbTransaction.CarId,
                 CustomerId = dbTransaction.CustomerId,
                 TransactionLines = transactionLineRepo.GetAllWithTransactionID(id).ToList(),
+                RemainingHours = _workloadManagment.UpdateLabelWorkHour(dbTransaction)
             };
             return View(model: transaction);
         }
@@ -235,10 +236,16 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
                 Price = 44.5m * hours,
                 TransactionId = transactionLine.TransactionId
             };
-            _transactionLineRepo.Add(dbTransactionLine);
+            String message = String.Empty;
+
             Transaction? transaction = _transactionRepo.GetById(dbTransactionLine.TransactionId);
-            if (transaction is not null) { 
-                transaction.UpdateTotalPrice();
+            if (_workloadManagment.AddTask(dbTransactionLine, transaction.Date, out message)) {
+                _transactionLineRepo.Add(dbTransactionLine);
+                if (transaction is not null) {
+                    transaction.UpdateTotalPrice();
+                }
+            } else {
+                return RedirectToAction(actionName: "AddTransactionLineErrorPage", routeValues: new { message = message, id =  transaction.Id});
             }
             return RedirectToAction(actionName: "Edit", routeValues: new { id = transactionLine.TransactionId });
         }
@@ -300,5 +307,19 @@ namespace CarServiceCenter.Web.Mvc.Controllers {
             }
             return RedirectToAction(actionName: "Edit", routeValues: new { id = dbTransactionLine.TransactionId });
         }
+
+        // GET: TransactionController/AddTransactionLineErrorPage
+        public ActionResult AddTransactionLineErrorPage(String message,int id) {
+            StringAndIdModel stringAndIdModel = new StringAndIdModel() {
+                Message = message,
+                Id = id
+            };
+            return View(model: stringAndIdModel);
+        }
+            
+    }
+    public class StringAndIdModel {
+        public String Message = String.Empty;
+        public int Id;
     }
 }
