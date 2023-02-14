@@ -3,41 +3,39 @@
 @using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>TodoEdit</h3>
+<h3>Employee Edit</h3>
 
 @if (Employee == null) {
-        <p>Loading ...</p>
+    <p>Loading ...</p>
 } else {
-        <div class="row">
-            <div class="col-md-6">
-                    <label class="form-label">Name</label>
-                    <input class="form-control" @bind="@Employee.Name" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Surname</label>
-                    <input class="form-control" @bind="@Employee.Surname" />
-            </div>
-            <div class="col-md-6">
-                     <label class="form-label">Salary Per Month</label>
-                     <input class="form-control" @bind="@Employee.SalaryPerMonth" />
-            </div>
-              <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input class="form-control" @bind="@Employee.Name" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Surname</label>
+            <input class="form-control" @bind="@Employee.Surname" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Salary Per Month</label>
+            <input class="form-control" @bind="@Employee.SalaryPerMonth" />
+        </div>
+        <div class="col-md-6">
             <label class="form-label">Employee Type</label>
             <select class="form-control" @bind="Employee.EmployeeType">
-                @foreach (var employeetype in Enum.GetValues<EmployeeType>())
-                {
-                <option value="@employeetype">@employeetype</option>
+                @foreach (var employeetype in Enum.GetValues<EmployeeType>()) {
+                    <option value="@employeetype">@employeetype</option>
                 }
             </select>
-                </div>
-            </div>
-        <div class="row mt-2">
-            <div class="col">
-                <button class="btn btn-success" @onclick="OnSave">Save</button>
-                <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
-            </div>
-
         </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        </div>
+    </div>
 }
 
 
@@ -50,11 +48,14 @@
             Employee = new();
         } else {
             Employee = await httpClient.GetFromJsonAsync<EmployeeEditDto>($"employee/{Id}");
+            if(Employee is null) {
+                //TODO: If employee is null
+            }
         }
     }
 
     private void OnCancel() {
-        navigationManager.NavigateTo("todolist");
+        navigationManager.NavigateTo("employeelist");
     }
 
     private async Task OnSave() {

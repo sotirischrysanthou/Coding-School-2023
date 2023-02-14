@@ -44,7 +44,12 @@
     }
 
     private async Task LoadItemsFromServer() {
-        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        if (tempCustomerList is not null) {
+            customerList = tempCustomerList;
+        } else {
+            // TODO: if tempCustomerList is null
+        }
     }
 
     private void CreateItem() {

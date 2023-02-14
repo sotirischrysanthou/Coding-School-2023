@@ -1,0 +1,73 @@
+﻿@page "/productlist/edit/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared.Product;
+@using CoffeeShop.Model.Enums;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3>Edit Product</h3>
+
+@if (Product == null) {
+    <p>Loading ...</p>
+} else {
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Code</label>
+            <input class="form-control" @bind="@Product.Code" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Description</label>
+            <input class="form-control" @bind="@Product.Description" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Cost</label>
+                <input class="form-control" @bind="@Product.Cost" />
+        </div>        
+        <div class="col-md-6">
+            <label class="form-label">Cost</label>
+            <input class="form-control" @bind="@Product.Price" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Product Category</label>
+            @*<input class="form-control" @bind="@Product.Price" />*@
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        </div>
+
+    </div>
+}
+
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    ProductEditDto? Product { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            Product = new();
+        } else {
+            Product = await httpClient.GetFromJsonAsync<ProductEditDto>($"product/{Id}");
+            if(Product is null) {
+                //TODO: if product is null
+            }
+        }
+    }
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("productlist");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("product", Product);
+        } else {
+            response = await httpClient.PutAsJsonAsync("product", Product);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("/productlist");
+    }
+}

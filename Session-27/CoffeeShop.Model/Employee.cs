@@ -10,7 +10,6 @@ namespace CoffeeShop.Model
             Surname = surname;
             SalaryPerMonth = salaryPerMonth;
             EmployeeType = employeeType;
-
             Transactions = new List<Transaction>();
         }
 

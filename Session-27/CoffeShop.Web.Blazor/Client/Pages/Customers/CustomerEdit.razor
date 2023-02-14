@@ -2,7 +2,7 @@
 @using CoffeShop.Web.Blazor.Shared.Customer;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>TodoEdit</h3>
+<h3>Customer Edit</h3>
 
 @if (Customer == null) {
         <p>Loading ...</p>
@@ -30,18 +30,21 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
-    CustomerEditDto Customer { get; set; }
+    CustomerEditDto? Customer { get; set; }
 
     protected override async Task OnInitializedAsync() {
         if (Id == null) {
             Customer = new();
         } else {
             Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"customer/{Id}");
+            if(Customer is null) {
+                //TODO: Handle if customer is null
+            }
         }
     }
 
     private void OnCancel() {
-        navigationManager.NavigateTo("todolist");
+        navigationManager.NavigateTo("customerList");
     }
 
     private async Task OnSave() {

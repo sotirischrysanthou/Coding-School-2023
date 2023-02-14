@@ -46,7 +46,12 @@
     }
 
     private async Task LoadItemsFromServer() {
-        productCategoryList = await httpClient.GetFromJsonAsync<List<ProductCategoryListDto>>("productCategory");
+        var tempProductCategoryList = await httpClient.GetFromJsonAsync<List<ProductCategoryListDto>>("productCategory");
+        if(tempProductCategoryList is not null) {
+            productCategoryList = tempProductCategoryList;
+        } else {
+            // Todo: if tempProductCategoryList is not null
+        }
     }
 
     private void CreateItem() {
