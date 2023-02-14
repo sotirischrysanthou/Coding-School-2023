@@ -4,7 +4,7 @@
 @page "/customerlist"
 @using CoffeShop.Web.Blazor.Shared;
 @using CoffeShop.Web.Blazor.Shared.Customer;
-<h3>CustomersList</h3>
+<h3>Customers</h3>
 
 @if (isLoading) {
     <p>Loading ...</p>
@@ -52,15 +52,15 @@
     }
 
     private void EditItem(CustomerListDto customer) {
-        navigationManager.NavigateTo($"CustomerList/edit/{customer.Id}");
+        navigationManager.NavigateTo($"customerlist/edit/{customer.Id}");
     }
 
     private async Task DeleteItem(CustomerListDto customer) {
-        //var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
-        //if (confirm) {
-        //    var response = await httpClient.DeleteAsync($"todo/{todo.Id}");
-        //    response.EnsureSuccessStatusCode();
-        //    await LoadItemsFromServer();
-        //}
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm) {
+            var response = await httpClient.DeleteAsync($"customer/{customer.Id}");
+            response.EnsureSuccessStatusCode();
+            await LoadItemsFromServer();
+        }
     }
 }

@@ -30,19 +30,26 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
             return selectCustomerList;
         }
 
-        // GET api/<CustomersController>/5
+        // GET: api/<CustomersController>
         [HttpGet("{id}")]
-        public String Get(int id) {
-            return "value";
+        public async Task<CustomerEditDto> GetById(int id) {
+            var result = _customerRepo.GetById(id);
+            return new CustomerEditDto {
+                Id = id,
+                Code = result.Code,
+                Description = result.Description,
+            };
         }
 
         // POST api/<CustomersController>
         [HttpPost]
-        public void Post([FromBody] String value) {
+        public async Task Post(CustomerEditDto customer) {
+            var newCustomer = new Customer(customer.Code, customer.Description);
+            _customerRepo.Add(newCustomer);
         }
 
         // PUT api/<CustomersController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task Put(CustomerEditDto customer) {
             var dbCustomer = _customerRepo.GetById(customer.Id);
             dbCustomer.Code = customer.Code;
@@ -52,7 +59,8 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id) {
+        public async Task Delete(int id) {
+            _customerRepo.Delete(id);
         }
     }
 }
