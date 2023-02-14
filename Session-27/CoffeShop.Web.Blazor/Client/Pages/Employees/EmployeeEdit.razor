@@ -1,0 +1,65 @@
+﻿@page "/employeelist/edit/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared.Employee;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3>TodoEdit</h3>
+
+@if (Employee == null) {
+        <p>Loading ...</p>
+} else {
+        <div class="row">
+            <div class="col-md-6">
+                    <label class="form-label">Name</label>
+                    <input class="form-control" @bind="@Employee.Name" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Surname</label>
+                    <input class="form-control" @bind="@Employee.Surname" />
+            </div>
+            <div class="col-md-6">
+                     <label class="form-label">SalaryPerMonth</label>
+                     <input class="form-control" @bind="@Employee.SalaryPerMonth" />
+            </div>
+            <div class="col-md-6">
+                    <label class="form-label">EmployeeType</label>
+                    <input class="form-control" @bind="@Employee.EmployeeType" />
+            </div>
+            </div>
+        <div class="row mt-2">
+            <div class="col">
+                <button class="btn btn-success" @onclick="OnSave">Save</button>
+                <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+            </div>
+
+        </div>
+}
+
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    EmployeeEditDto Employee { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            Employee = new();
+        } else {
+            Employee = await httpClient.GetFromJsonAsync<EmployeeEditDto>($"employee/{Id}");
+        }
+    }
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("todolist");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("employee", Employee);
+        } else {
+            response = await httpClient.PutAsJsonAsync("employee", Employee);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("/employeelist");
+    }
+}
