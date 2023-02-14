@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeShop.Model", "CoffeeS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeShop.EF", "CoffeeShop.EF\CoffeeShop.EF.csproj", "{F599B1D3-A5B7-47F2-ABE6-315070353647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeShop.Web.Blazor.Server", "CoffeShop.Web.Blazor\Server\CoffeShop.Web.Blazor.Server.csproj", "{63D73406-013C-4EFD-A772-AE12ADCE4716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeShop.Web.Blazor.Server", "CoffeShop.Web.Blazor\Server\CoffeShop.Web.Blazor.Server.csproj", "{63D73406-013C-4EFD-A772-AE12ADCE4716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeShop.Web.Blazor.Client", "CoffeShop.Web.Blazor\Client\CoffeShop.Web.Blazor.Client.csproj", "{C1128E78-5D01-4866-91BF-714FF5E6DDAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeShop.Web.Blazor.Client", "CoffeShop.Web.Blazor\Client\CoffeShop.Web.Blazor.Client.csproj", "{C1128E78-5D01-4866-91BF-714FF5E6DDAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeShop.Web.Blazor.Shared", "CoffeShop.Web.Blazor\Shared\CoffeShop.Web.Blazor.Shared.csproj", "{FCA4050B-D30D-4AEC-BAAA-DA0A9FD51D6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeShop.Web.Blazor.Shared", "CoffeShop.Web.Blazor\Shared\CoffeShop.Web.Blazor.Shared.csproj", "{FCA4050B-D30D-4AEC-BAAA-DA0A9FD51D6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

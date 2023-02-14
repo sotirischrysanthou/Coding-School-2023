@@ -1,0 +1,15 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@page "/CustomersList"
+<h3>CustomersList</h3>
+
+@if (isLoading) {
+    <p>Loading ...</p>
+} else {
+    
+}
+
+@code {
+    bool isLoading { get; set; } = true;
+}
