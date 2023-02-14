@@ -35,15 +35,19 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // GET: api/<ProductsController>
         [HttpGet("{id}")]
-        public async Task<ProductEditDto> GetById(int id) {
+        public async Task<ProductEditDto?> GetById(int id) {
             var result = _productRepo.GetById(id);
-            return new ProductEditDto {
-                Id = id,
-                Code = result.Code,
-                Description = result.Description,
-                Cost = result.Cost,
-                Price = result.Price,
-            };
+            if (result is null) {
+                return null;
+            } else {
+                return new ProductEditDto {
+                    Id = id,
+                    Code = result.Code,
+                    Description = result.Description,
+                    Cost = result.Cost,
+                    Price = result.Price,
+                };
+            }
         }
 
         // POST api/<ProductsController>

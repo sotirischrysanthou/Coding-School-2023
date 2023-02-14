@@ -3,7 +3,7 @@
 @using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>TodoEdit</h3>
+<h3>Edit Product</h3>
 
 @if (Product == null) {
     <p>Loading ...</p>
@@ -42,18 +42,21 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
-    ProductEditDto Product { get; set; }
+    ProductEditDto? Product { get; set; }
 
     protected override async Task OnInitializedAsync() {
         if (Id == null) {
             Product = new();
         } else {
             Product = await httpClient.GetFromJsonAsync<ProductEditDto>($"product/{Id}");
+            if(Product is null) {
+                //TODO: if product is null
+            }
         }
     }
 
     private void OnCancel() {
-        navigationManager.NavigateTo("todolist");
+        navigationManager.NavigateTo("productlist");
     }
 
     private async Task OnSave() {

@@ -33,8 +33,11 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // GET: api/<ProductCategorysController>
         [HttpGet("{id}")]
-        public async Task<ProductCategoryEditDto> GetById(int id) {
+        public async Task<ProductCategoryEditDto?> GetById(int id) {
             var result = _productCategoryRepo.GetById(id);
+            if (result is null) {
+                return null;
+            }
             return new ProductCategoryEditDto {
                 Id = id,
                 Code = result.Code,
@@ -54,6 +57,10 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         [HttpPut]
         public async Task Put(ProductCategoryEditDto productCategory) {
             var dbProductCategory = _productCategoryRepo.GetById(productCategory.Id);
+            if(dbProductCategory is null) {
+                // TODO: if dbProductCategory is null
+                return;
+            }
             dbProductCategory.Code = productCategory.Code;
             dbProductCategory.Description = productCategory.Description;
             dbProductCategory.ProductType = productCategory.ProductType;

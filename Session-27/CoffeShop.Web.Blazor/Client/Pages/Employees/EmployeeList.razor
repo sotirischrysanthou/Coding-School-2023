@@ -22,8 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var employee in employeeList)
-            {
+            @foreach (var employee in employeeList) {
                 <tr>
                     <td>@employee.Name</td>
                     <td>@employee.Surname</td>
@@ -49,20 +48,23 @@
     }
 
     private async Task LoadItemsFromServer() {
-        employeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+        if (tempEmployeeList is not null) {
+            employeeList = tempEmployeeList;
+        } else {
+            //TODO: if tempEmployeeList is null
+        }
     }
 
     private void CreateItem() {
         navigationManager.NavigateTo("employeeList/edit");
     }
 
-    private void EditItem(EmployeeListDto employee)
-    {
+    private void EditItem(EmployeeListDto employee) {
         navigationManager.NavigateTo($"employeeList/edit/{employee.Id}");
     }
 
-    private async Task DeleteItem(EmployeeListDto employee)
-    {
+    private async Task DeleteItem(EmployeeListDto employee) {
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
             var response = await httpClient.DeleteAsync($"employee/{employee.Id}");

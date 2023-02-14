@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace CoffeShop.Web.Blazor.Server.Controllers
-{
+namespace CoffeShop.Web.Blazor.Server.Controllers {
     [Route("[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase {
@@ -34,15 +33,19 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // GET: api/<EmployeeController>
         [HttpGet("{id}")]
-        public async Task<EmployeeEditDto> GetById(int id) {
+        public async Task<EmployeeEditDto?> GetById(int id) {
             var result = _employeeRepo.GetById(id);
-            return new EmployeeEditDto {
-                Id = id,
-                Name = result.Name,
-                Surname = result.Surname,
-                SalaryPerMonth = result.SalaryPerMonth,
-                EmployeeType = result.EmployeeType,
-            };
+            if (result == null) {
+                return null;
+            } else {
+                return new EmployeeEditDto {
+                    Id = id,
+                    Name = result.Name,
+                    Surname = result.Surname,
+                    SalaryPerMonth = result.SalaryPerMonth,
+                    EmployeeType = result.EmployeeType,
+                };
+            }
         }
 
         // POST api/<EmployeeController>
@@ -56,6 +59,10 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         [HttpPut]
         public async Task Put(EmployeeEditDto employee) {
             var dbEmployee = _employeeRepo.GetById(employee.Id);
+            if (dbEmployee == null) {
+                // TODO: if dbEmployee is null
+                return;
+            }
             dbEmployee.Name = employee.Name;
             dbEmployee.Surname = employee.Surname;
             dbEmployee.SalaryPerMonth = employee.SalaryPerMonth;
