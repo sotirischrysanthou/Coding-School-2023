@@ -1,11 +1,12 @@
 ﻿using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
-using CoffeShop.Web.Blazor.Shared;
+using CoffeShop.Web.Blazor.Shared.Customer;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace CoffeShop.Web.Blazor.Server.Controllers {
+namespace CoffeShop.Web.Blazor.Server.Controllers
+{
     [Route("[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase {
@@ -42,7 +43,11 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // PUT api/<CustomersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] String value) {
+        public async Task Put(CustomerEditDto customer) {
+            var dbCustomer = _customerRepo.GetById(customer.Id);
+            dbCustomer.Code = customer.Code;
+            dbCustomer.Description = customer.Description;
+            _customerRepo.Update(customer.Id, dbCustomer);
         }
 
         // DELETE api/<CustomersController>/5

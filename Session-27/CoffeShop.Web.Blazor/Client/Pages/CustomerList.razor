@@ -1,8 +1,9 @@
 ﻿@inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
-@page "/CustomersList"
+@page "/customerlist"
 @using CoffeShop.Web.Blazor.Shared;
+@using CoffeShop.Web.Blazor.Shared.Customer;
 <h3>CustomersList</h3>
 
 @if (isLoading) {
@@ -19,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in CustomerList) {
+            @foreach (var customer in customerList) {
                 <tr>
                     <td>@customer.Code</td>
                     <td>@customer.Description</td>
@@ -34,7 +35,7 @@
 }
 
 @code {
-    private List<CustomerListDto> CustomerList = new();
+    private List<CustomerListDto> customerList = new();
     bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync() {
@@ -43,15 +44,15 @@
     }
 
     private async Task LoadItemsFromServer() {
-        CustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
     }
 
     private void CreateItem() {
-        //navigationManager.NavigateTo("todolist/edit");
+        navigationManager.NavigateTo("customerList/edit");
     }
 
     private void EditItem(CustomerListDto customer) {
-        //navigationManager.NavigateTo($"todolist/edit/{todo.Id}");
+        navigationManager.NavigateTo($"CustomerList/edit/{customer.Id}");
     }
 
     private async Task DeleteItem(CustomerListDto customer) {
