@@ -1,5 +1,6 @@
 ﻿@page "/employeelist/edit/{Id:int?}"
 @using CoffeShop.Web.Blazor.Shared.Employee;
+@using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 <h3>TodoEdit</h3>
@@ -20,10 +21,15 @@
                      <label class="form-label">SalaryPerMonth</label>
                      <input class="form-control" @bind="@Employee.SalaryPerMonth" />
             </div>
-            <div class="col-md-6">
-                    <label class="form-label">EmployeeType</label>
-                    <input class="form-control" @bind="@Employee.EmployeeType" />
-            </div>
+              <div class="col-md-6">
+            <label class="form-label">Employee Type</label>
+            <select class="form-control" @bind="Employee.EmployeeType">
+                @foreach (var employeetype in Enum.GetValues<EmployeeType>())
+                {
+                <option value="@employeetype">@employeetype</option>
+                }
+            </select>
+                </div>
             </div>
         <div class="row mt-2">
             <div class="col">
@@ -63,3 +69,4 @@
         navigationManager.NavigateTo("/employeelist");
     }
 }
+
