@@ -1,6 +1,7 @@
 ﻿using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
 using CoffeShop.Web.Blazor.Shared.Customer;
+using CoffeShop.Web.Blazor.Shared.ProductCategory;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,9 +21,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // GET: api/<CustomersController>
         [HttpGet]
-        public async Task<IEnumerable<EmployeeListDto>> Get() {
+        public async Task<IEnumerable<ProductCategoryListDto>> Get() {
             var result = _customerRepo.GetAll();
-            var selectCustomerList= result.Select(customer => new EmployeeListDto {
+            var selectCustomerList= result.Select(customer => new ProductCategoryListDto {
                 Id = customer.Id,
                 Code = customer.Code,
                 Description = customer.Description,
@@ -32,9 +33,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // GET: api/<CustomersController>
         [HttpGet("{id}")]
-        public async Task<EmployeeEditDto> GetById(int id) {
+        public async Task<ProductCategoryEditDto> GetById(int id) {
             var result = _customerRepo.GetById(id);
-            return new EmployeeEditDto {
+            return new ProductCategoryEditDto {
                 Id = id,
                 Code = result.Code,
                 Description = result.Description,
@@ -43,14 +44,14 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // POST api/<CustomersController>
         [HttpPost]
-        public async Task Post(EmployeeEditDto customer) {
+        public async Task Post(ProductCategoryEditDto customer) {
             var newCustomer = new Customer(customer.Code, customer.Description);
             _customerRepo.Add(newCustomer);
         }
 
         // PUT api/<CustomersController>/5
         [HttpPut]
-        public async Task Put(EmployeeEditDto customer) {
+        public async Task Put(ProductCategoryEditDto customer) {
             var dbCustomer = _customerRepo.GetById(customer.Id);
             dbCustomer.Code = customer.Code;
             dbCustomer.Description = customer.Description;

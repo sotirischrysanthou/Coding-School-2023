@@ -1,22 +1,30 @@
-﻿@*@*@page "/productcategorylist/edit/{Id:int?}"
-@*@using CoffeShop.Web.Blazor.Shared.Customer;
+﻿@page "/productcategorylist/edit/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared.ProductCategory;
+@using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 <h3>TodoEdit</h3>
 
-@if (Customer == null) {
+@if (ProductCategory == null) {
             <p>Loading ...</p>
 } else {
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-label">Code</label>
-                    <input class="form-control" @bind="@Customer.Code" />
+                    <input class="form-control" @bind="@ProductCategory.Code" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Description</label>
-                    <input class="form-control" @bind="@Customer.Description" />
+                    <input class="form-control" @bind="@ProductCategory.Description" />
                 </div>
-
+                <div class="col-md-6">
+                    <label class="form-label">Product Type</label>
+                    <select class="form-control" @bind="ProductCategory.ProductType">
+                        @foreach (var enumValue in Enum.GetValues<ProductType>()) {
+                            <option value="@enumValue">@enumValue</option>
+                        }
+                </select>
+                </div>
             </div>
             <div class="row mt-2">
                 <div class="col">
@@ -30,13 +38,13 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
-    CustomerEditDto Customer { get; set; }
+    ProductCategoryEditDto ProductCategory { get; set; }
 
     protected override async Task OnInitializedAsync() {
         if (Id == null) {
-            Customer = new();
+            ProductCategory = new();
         } else {
-            Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"customer/{Id}");
+            ProductCategory = await httpClient.GetFromJsonAsync<ProductCategoryEditDto>($"productCategory/{Id}");
         }
     }
 
@@ -47,13 +55,12 @@
     private async Task OnSave() {
         HttpResponseMessage? response = null;
         if (Id == null) {
-            response = await httpClient.PostAsJsonAsync("customer", Customer);
+            response = await httpClient.PostAsJsonAsync("productCategory", ProductCategory);
         } else {
-            response = await httpClient.PutAsJsonAsync("customer", Customer);
+            response = await httpClient.PutAsJsonAsync("productCategory", ProductCategory);
         }
 
         response.EnsureSuccessStatusCode();
-        navigationManager.NavigateTo("/customerlist");
+        navigationManager.NavigateTo("/productCategorylist");
     }
 }
-*@*@*@

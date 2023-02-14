@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeShop.Web.Blazor.Shared.Customer
 {
-    public class EmployeeListDto
+    public class CustomerListDto
     {
         public int Id { get; set; }
         public string Code { get; set; } = null!;

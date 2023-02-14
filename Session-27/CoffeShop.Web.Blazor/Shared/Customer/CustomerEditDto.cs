@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CoffeShop.Web.Blazor.Shared.Customer {
-    public class EmployeeEditDto {
+    public class CustomerEditDto {
         public int Id { get; set; }
         public string Code { get; set; } = null!;
         public string Description { get; set; } = null!;
