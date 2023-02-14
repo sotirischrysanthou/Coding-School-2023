@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
-
+builder.Services.AddScoped<IEntityRepo<ProductCategory>, ProductCategoryRepo>();
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();

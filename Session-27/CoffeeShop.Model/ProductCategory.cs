@@ -13,7 +13,7 @@ namespace CoffeeShop.Model
             Products = new List<Product>();
         }
 
-        public int Id { get; set; }
+            public int Id { get; set; }
         public String Code { get; set; }
         public String Description { get; set; }
         public ProductType ProductType { get; set; }
