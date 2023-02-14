@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoffeeShop.EF.Context;
 using CoffeeShop.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.EF.Repositories
 {
@@ -30,7 +31,7 @@ namespace CoffeeShop.EF.Repositories
         public IList<Employee> GetAll()
         {
             using var context = new CoffeeShopDbContext();
-            return context.Employees.ToList();
+            return context.Employees.Include(transactions => transactions.Transactions).ToList();
         }
 
         public Employee? GetById(int id)
