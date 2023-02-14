@@ -17,8 +17,8 @@ namespace CoffeeShop.EF.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                    Code = table.Column<String>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<String>(type: "nvarchar(150)", maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +31,8 @@ namespace CoffeeShop.EF.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<String>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Surname = table.Column<String>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     SalaryPerMonth = table.Column<int>(type: "int", nullable: false),
                     EmployeeType = table.Column<int>(type: "int", nullable: false)
                 },
@@ -47,8 +47,8 @@ namespace CoffeeShop.EF.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Code = table.Column<String>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<String>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     ProductType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -91,8 +91,8 @@ namespace CoffeeShop.EF.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Code = table.Column<String>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<String>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(3,2)", precision: 3, scale: 2, nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(3,2)", precision: 3, scale: 2, nullable: false),
                     ProductCategoryId = table.Column<int>(type: "int", nullable: false)

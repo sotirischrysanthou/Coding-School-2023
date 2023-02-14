@@ -1,6 +1,10 @@
+using CoffeeShop.EF.Repositories;
+using CoffeeShop.Model;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
 
 // Add services to the container.
 

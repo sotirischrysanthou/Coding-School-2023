@@ -2,14 +2,64 @@
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
 @page "/CustomersList"
+@using CoffeShop.Web.Blazor.Shared;
 <h3>CustomersList</h3>
 
 @if (isLoading) {
     <p>Loading ...</p>
 } else {
-    
+    <button class="btn btn-primary" @onclick="CreateItem">Create</button>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in CustomerList) {
+                <tr>
+                    <td>@customer.Code</td>
+                    <td>@customer.Description</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="()=> EditItem(customer)">Edit</button>
+                        <button class="btn btn-danger" @onclick="()=> DeleteItem(customer)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {
+    private List<CustomerListDto> CustomerList = new();
     bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer() {
+        CustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+    }
+
+    private void CreateItem() {
+        //navigationManager.NavigateTo("todolist/edit");
+    }
+
+    private void EditItem(CustomerListDto customer) {
+        //navigationManager.NavigateTo($"todolist/edit/{todo.Id}");
+    }
+
+    private async Task DeleteItem(CustomerListDto customer) {
+        //var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        //if (confirm) {
+        //    var response = await httpClient.DeleteAsync($"todo/{todo.Id}");
+        //    response.EnsureSuccessStatusCode();
+        //    await LoadItemsFromServer();
+        //}
+    }
 }

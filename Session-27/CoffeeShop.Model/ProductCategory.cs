@@ -4,7 +4,7 @@ namespace CoffeeShop.Model
 {
     public class ProductCategory
     {
-        public ProductCategory(string code, string description, ProductType productType)
+        public ProductCategory(String code, String description, ProductType productType)
         {
             Code = code;
             Description = description;
@@ -14,8 +14,8 @@ namespace CoffeeShop.Model
         }
 
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
+        public String Code { get; set; }
+        public String Description { get; set; }
         public ProductType ProductType { get; set; }
 
         // Relations

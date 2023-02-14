@@ -33,19 +33,19 @@ namespace CoffeeShop.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
+                    b.Property<String>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Description")
+                    b.Property<String>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers", (String)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Model.Employee", b =>
@@ -59,7 +59,7 @@ namespace CoffeeShop.EF.Migrations
                     b.Property<int>("EmployeeType")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<String>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -67,14 +67,14 @@ namespace CoffeeShop.EF.Migrations
                     b.Property<int>("SalaryPerMonth")
                         .HasColumnType("int");
 
-                    b.Property<string>("Surname")
+                    b.Property<String>("Surname")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees", (String)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Model.Product", b =>
@@ -85,7 +85,7 @@ namespace CoffeeShop.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
+                    b.Property<String>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -94,7 +94,7 @@ namespace CoffeeShop.EF.Migrations
                         .HasPrecision(3, 2)
                         .HasColumnType("decimal(3,2)");
 
-                    b.Property<string>("Description")
+                    b.Property<String>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
@@ -110,7 +110,7 @@ namespace CoffeeShop.EF.Migrations
 
                     b.HasIndex("ProductCategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products", (String)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Model.ProductCategory", b =>
@@ -121,12 +121,12 @@ namespace CoffeeShop.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
+                    b.Property<String>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Description")
+                    b.Property<String>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
@@ -136,7 +136,7 @@ namespace CoffeeShop.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories", (string)null);
+                    b.ToTable("ProductCategories", (String)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Model.Transaction", b =>
@@ -169,7 +169,7 @@ namespace CoffeeShop.EF.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Transactions", (string)null);
+                    b.ToTable("Transactions", (String)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Model.TransactionLine", b =>
@@ -207,7 +207,7 @@ namespace CoffeeShop.EF.Migrations
 
                     b.HasIndex("TransactionId");
 
-                    b.ToTable("TransactionLines", (string)null);
+                    b.ToTable("TransactionLines", (String)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Model.Product", b =>

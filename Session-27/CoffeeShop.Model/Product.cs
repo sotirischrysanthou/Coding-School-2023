@@ -2,7 +2,7 @@
 {
     public class Product
     {
-        public Product(string code, string description, decimal price, decimal cost)
+        public Product(String code, String description, decimal price, decimal cost)
         {
             Code = code;
             Description = description;
@@ -13,8 +13,8 @@
         }
 
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
+        public String Code { get; set; }
+        public String Description { get; set; }
         public decimal Price { get; set; }
         public decimal Cost { get; set; }
 
