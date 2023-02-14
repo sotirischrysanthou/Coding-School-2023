@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace CoffeShop.Web.Blazor.Server.Controllers
-{
+namespace CoffeShop.Web.Blazor.Server.Controllers {
     [Route("[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase {
@@ -21,8 +20,8 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         // GET: api/<CustomersController>
         [HttpGet]
         public async Task<IEnumerable<CustomerListDto>> Get() {
-            var result = _customerRepo.GetAll();
-            var selectCustomerList= result.Select(customer => new CustomerListDto {
+            var result = await Task.Run(() => { return _customerRepo.GetAll(); });
+            var selectCustomerList = result.Select(customer => new CustomerListDto {
                 Id = customer.Id,
                 Code = customer.Code,
                 Description = customer.Description,
@@ -33,7 +32,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         // GET: api/<CustomersController>
         [HttpGet("{id}")]
         public async Task<CustomerEditDto?> GetById(int id) {
-            var result = _customerRepo.GetById(id);
+            var result = await Task.Run(() => { return _customerRepo.GetById(id); });
             if (result == null) {
                 return null;
             }
@@ -48,7 +47,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         [HttpPost]
         public async Task Post(CustomerEditDto customer) {
             var newCustomer = new Customer(customer.Code, customer.Description);
-            _customerRepo.Add(newCustomer);
+            await Task.Run(() => {
+                _customerRepo.Add(newCustomer);
+            });
         }
 
         // PUT api/<CustomersController>/5
@@ -67,7 +68,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id) {
-            _customerRepo.Delete(id);
+            await Task.Run(() => {
+                _customerRepo.Delete(id);
+            });
         }
     }
 }

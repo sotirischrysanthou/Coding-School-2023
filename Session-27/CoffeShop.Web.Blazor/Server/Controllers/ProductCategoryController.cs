@@ -21,7 +21,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         // GET: api/<ProductCategorysController>
         [HttpGet]
         public async Task<IEnumerable<ProductCategoryListDto>> Get() {
-            var result = _productCategoryRepo.GetAll();
+            var result = await Task.Run(() => { return _productCategoryRepo.GetAll(); });
             var selectProductCategoryList= result.Select(productCategory => new ProductCategoryListDto {
                 Id = productCategory.Id,
                 Code = productCategory.Code,
@@ -34,7 +34,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         // GET: api/<ProductCategorysController>
         [HttpGet("{id}")]
         public async Task<ProductCategoryEditDto?> GetById(int id) {
-            var result = _productCategoryRepo.GetById(id);
+            var result = await Task.Run(() => { return _productCategoryRepo.GetById(id); });
             if (result is null) {
                 return null;
             }
@@ -50,13 +50,13 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         [HttpPost]
         public async Task Post(ProductCategoryEditDto productCategory) {
             var newProductCategory = new ProductCategory(productCategory.Code, productCategory.Description, productCategory.ProductType);
-            _productCategoryRepo.Add(newProductCategory);
+            await Task.Run(() => { _productCategoryRepo.Add(newProductCategory); });
         }
 
         // PUT api/<ProductCategorysController>/5
         [HttpPut]
         public async Task Put(ProductCategoryEditDto productCategory) {
-            var dbProductCategory = _productCategoryRepo.GetById(productCategory.Id);
+            var dbProductCategory = await Task.Run(() => { return _productCategoryRepo.GetById(productCategory.Id); });
             if(dbProductCategory is null) {
                 // TODO: if dbProductCategory is null
                 return;
@@ -70,7 +70,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         // DELETE api/<ProductCategorysController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id) {
-            _productCategoryRepo.Delete(id);
+            await Task.Run(() => { _productCategoryRepo.Delete(id); });
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // GET: api/<ProductsController>
         [HttpGet]
         public async Task<IEnumerable<ProductListDto>> Get() {
-            var result = _productRepo.GetAll();
+            var result = await Task.Run(() => { return _productRepo.GetAll(); });
             var selectProductList = result.Select(product => new ProductListDto {
                 Id = product.Id,
                 Code = product.Code,
@@ -36,7 +36,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // GET: api/<ProductsController>
         [HttpGet("{id}")]
         public async Task<ProductEditDto?> GetById(int id) {
-            var result = _productRepo.GetById(id);
+            var result = await Task.Run(() => { return _productRepo.GetById(id); });
             if (result is null) {
                 return null;
             } else {
@@ -54,13 +54,17 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         [HttpPost]
         public async Task Post(ProductEditDto product) {
             var newProduct = new Product(product.Code, product.Description, product.Price, product.Cost);
-            _productRepo.Add(newProduct);
+            await Task.Run(() => { _productRepo.Add(newProduct); });
         }
 
         // PUT api/<ProductsController>/5
         [HttpPut]
         public async Task Put(ProductEditDto product) {
-            var dbProduct = _productRepo.GetById(product.Id);
+            var dbProduct = await Task.Run(() => { return _productRepo.GetById(product.Id); });
+            if (dbProduct is null) {
+                // Todo: if dbProduct is null
+                return;
+            }
             dbProduct.Code = product.Code;
             dbProduct.Description = product.Description;
             dbProduct.Cost = product.Cost;
@@ -71,7 +75,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id) {
-            _productRepo.Delete(id);
+            await Task.Run(() => { _productRepo.Delete(id); });
         }
     }
 }

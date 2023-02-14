@@ -20,7 +20,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // GET: api/<EmployeeController>
         [HttpGet]
         public async Task<IEnumerable<EmployeeListDto>> Get() {
-            var result = _employeeRepo.GetAll();
+            var result = await Task.Run(() => {
+                return _employeeRepo.GetAll();
+            });
             var selectEmployeeList = result.Select(employee => new EmployeeListDto {
                 Id = employee.Id,
                 Name = employee.Name,
@@ -34,7 +36,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // GET: api/<EmployeeController>
         [HttpGet("{id}")]
         public async Task<EmployeeEditDto?> GetById(int id) {
-            var result = _employeeRepo.GetById(id);
+            var result = await Task.Run(() => { return _employeeRepo.GetById(id); });
             if (result == null) {
                 return null;
             } else {
@@ -52,13 +54,15 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         [HttpPost]
         public async Task Post(EmployeeEditDto employee) {
             var newEmployee = new Employee(employee.Name, employee.Surname, employee.SalaryPerMonth, employee.EmployeeType);
-            _employeeRepo.Add(newEmployee);
+            await Task.Run(() => {
+                _employeeRepo.Add(newEmployee);
+            });
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut]
         public async Task Put(EmployeeEditDto employee) {
-            var dbEmployee = _employeeRepo.GetById(employee.Id);
+            var dbEmployee = await Task.Run(() => { return _employeeRepo.GetById(employee.Id); });
             if (dbEmployee == null) {
                 // TODO: if dbEmployee is null
                 return;
@@ -73,7 +77,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id) {
-            _employeeRepo.Delete(id);
+            await Task.Run(() => { _employeeRepo.Delete(id); });
         }
     }
 }
