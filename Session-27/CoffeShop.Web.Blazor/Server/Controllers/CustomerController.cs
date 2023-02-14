@@ -20,9 +20,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // GET: api/<CustomersController>
         [HttpGet]
-        public async Task<IEnumerable<CustomerListDto>> Get() {
+        public async Task<IEnumerable<EmployeeListDto>> Get() {
             var result = _customerRepo.GetAll();
-            var selectCustomerList= result.Select(customer => new CustomerListDto {
+            var selectCustomerList= result.Select(customer => new EmployeeListDto {
                 Id = customer.Id,
                 Code = customer.Code,
                 Description = customer.Description,
@@ -32,9 +32,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // GET: api/<CustomersController>
         [HttpGet("{id}")]
-        public async Task<CustomerEditDto> GetById(int id) {
+        public async Task<EmployeeEditDto> GetById(int id) {
             var result = _customerRepo.GetById(id);
-            return new CustomerEditDto {
+            return new EmployeeEditDto {
                 Id = id,
                 Code = result.Code,
                 Description = result.Description,
@@ -43,14 +43,14 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
 
         // POST api/<CustomersController>
         [HttpPost]
-        public async Task Post(CustomerEditDto customer) {
+        public async Task Post(EmployeeEditDto customer) {
             var newCustomer = new Customer(customer.Code, customer.Description);
             _customerRepo.Add(newCustomer);
         }
 
         // PUT api/<CustomersController>/5
         [HttpPut]
-        public async Task Put(CustomerEditDto customer) {
+        public async Task Put(EmployeeEditDto customer) {
             var dbCustomer = _customerRepo.GetById(customer.Id);
             dbCustomer.Code = customer.Code;
             dbCustomer.Description = customer.Description;

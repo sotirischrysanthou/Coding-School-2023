@@ -1,0 +1,73 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@page "/employeelist"
+@using CoffeShop.Web.Blazor.Shared;
+@using CoffeShop.Web.Blazor.Shared.Employee;
+<h3>Employees</h3>
+
+@if (isLoading) {
+    <p>Loading ...</p>
+} else {
+    <button class="btn btn-primary" @onclick="CreateItem">Create</button>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>SalaryPerMonth</th>
+                <th>EmployeeType</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employeeList)
+            {
+                <tr>
+                    <td>@employee.Name</td>
+                    <td>@employee.Surname</td>
+                    <td>@employee.SalaryPerMonth</td>
+                    <td>@employee.EmployeeType</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="()=> EditItem(employee)">Edit</button>
+                        <button class="btn btn-danger" @onclick="()=> DeleteItem(employee)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<EmployeeListDto> employeeList = new();
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer() {
+        employeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+    }
+
+    private void CreateItem() {
+        navigationManager.NavigateTo("employeeList/edit");
+    }
+
+    private void EditItem(EmployeeListDto employee)
+    {
+        navigationManager.NavigateTo($"employeeList/edit/{employee.Id}");
+    }
+
+    private async Task DeleteItem(EmployeeListDto employee)
+    {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm) {
+            var response = await httpClient.DeleteAsync($"employee/{employee.Id}");
+            response.EnsureSuccessStatusCode();
+            await LoadItemsFromServer();
+        }
+    }
+}

@@ -35,7 +35,7 @@
 }
 
 @code {
-    private List<CustomerListDto> customerList = new();
+    private List<EmployeeListDto> customerList = new();
     bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync() {
@@ -44,18 +44,18 @@
     }
 
     private async Task LoadItemsFromServer() {
-        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        customerList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("customer");
     }
 
     private void CreateItem() {
         navigationManager.NavigateTo("customerList/edit");
     }
 
-    private void EditItem(CustomerListDto customer) {
+    private void EditItem(EmployeeListDto customer) {
         navigationManager.NavigateTo($"customerlist/edit/{customer.Id}");
     }
 
-    private async Task DeleteItem(CustomerListDto customer) {
+    private async Task DeleteItem(EmployeeListDto customer) {
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
             var response = await httpClient.DeleteAsync($"customer/{customer.Id}");
