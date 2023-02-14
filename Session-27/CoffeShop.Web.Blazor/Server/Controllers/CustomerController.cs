@@ -55,7 +55,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // PUT api/<CustomersController>/5
         [HttpPut]
         public async Task Put(CustomerEditDto customer) {
-            var dbCustomer = _customerRepo.GetById(customer.Id);
+            var dbCustomer = await Task.Run(() => { return _customerRepo.GetById(customer.Id); });
             if (dbCustomer == null) {
                 // TODO if customer is null
                 return;
