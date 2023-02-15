@@ -84,7 +84,7 @@
         }
     }
 
-    private string GetEmployeeNameWithId(int employeeId) {
+    private String GetEmployeeNameWithId(int employeeId) {
         var employee = employeeList.Where(e => e.Id == employeeId).SingleOrDefault();
         if (employee is null) {
             //TODO: handle if customer is null
