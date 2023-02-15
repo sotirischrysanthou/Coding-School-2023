@@ -4,6 +4,7 @@
 @page "/productlist"
 @using CoffeShop.Web.Blazor.Shared
 @using CoffeShop.Web.Blazor.Shared.Product;
+@using CoffeShop.Web.Blazor.Shared.ProductCategory;
 <h3>Products</h3>
 
 @if (isLoading) {
@@ -30,7 +31,7 @@
                         <td>@product.Description</td>
                         <td>@product.Cost</td>
                         <td>@product.Price</td>
-                        <td>@product.ProductCategoryId</td>
+                        <td>@GetProductCategoryWithId(product.ProductCategoryId)</td>
                         <td>
                             <button class="btn btn-primary" @onclick="()=> EditItem(product)">Edit</button>
                             <button class="btn btn-danger" @onclick="()=> DeleteItem(product)">Delete</button>
@@ -43,6 +44,7 @@
 
 @code {
     private List<ProductListDto> productList = new();
+    private List<ProductCategoryListDto> productCategoryList = new();
     bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync() {
@@ -51,11 +53,19 @@
     }
 
     private async Task LoadItemsFromServer() {
+
         var tempProductList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
-        if(tempProductList is not null) {
+        if (tempProductList is not null) {
             productList = tempProductList;
         } else {
-            //TODO: handle if tempProductLis is null
+            // TODO: if tempCustomerList is null
+        }
+
+        var tempProductCategoryList = await httpClient.GetFromJsonAsync<List<ProductCategoryListDto>>("productcategory");
+        if (tempProductCategoryList is not null) {
+            productCategoryList = tempProductCategoryList;
+        } else {
+            // TODO: if tempCustomerList is null
         }
     }
 
@@ -73,6 +83,17 @@
             var response = await httpClient.DeleteAsync($"product/{product.Id}");
             response.EnsureSuccessStatusCode();
             await LoadItemsFromServer();
+        }
+    }
+
+
+    private String GetProductCategoryWithId(int productCategoryId) {
+        var productCategory = productCategoryList.Where(c => c.Id == productCategoryId).SingleOrDefault();
+        if (productCategory is null) {
+            //TODO: handle if customer is null
+            return "";
+        } else {
+            return productCategory.Description;
         }
     }
 }

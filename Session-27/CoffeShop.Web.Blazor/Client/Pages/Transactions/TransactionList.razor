@@ -22,6 +22,7 @@
                 <th>Payment Method</th>
                 <th>Customer</th>
                 <th>Employee</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -84,7 +85,7 @@
         }
     }
 
-    private string GetEmployeeNameWithId(int employeeId) {
+    private String GetEmployeeNameWithId(int employeeId) {
         var employee = employeeList.Where(e => e.Id == employeeId).SingleOrDefault();
         if (employee is null) {
             //TODO: handle if customer is null

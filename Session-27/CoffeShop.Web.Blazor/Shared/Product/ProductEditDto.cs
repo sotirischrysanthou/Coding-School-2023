@@ -16,8 +16,6 @@ namespace CoffeShop.Web.Blazor.Shared.Product {
 
         //RELATIONS
         public int ProductCategoryId { get; set; }
-        public CoffeeShop.Model.ProductCategory ProductCategory { get; set; } = null!;
-        //public List<TransactionLine> TransactionLines { get; set; }
 
     }
 }

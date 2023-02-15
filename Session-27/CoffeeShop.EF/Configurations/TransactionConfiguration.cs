@@ -18,7 +18,7 @@ namespace CoffeeShop.EF.Configurations
 
             // Properties
             builder.Property(t => t.Date).IsRequired();
-            builder.Property(t => t.TotalPrice).HasPrecision(9, 2).IsRequired();
+            builder.Property(t => t.TotalPrice).HasPrecision(10, 2).IsRequired();
             builder.Property(t => t.PaymentMethod).IsRequired();
 
             // Relations

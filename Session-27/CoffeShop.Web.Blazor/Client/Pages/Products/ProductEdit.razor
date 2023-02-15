@@ -27,14 +27,14 @@
             <label class="form-label">Price</label>
             <input class="form-control" @bind="@product.Price" />
         </div>
-        @*<div class="col-md-6">
-    <label class="form-label">Product Category</label>
-    <select class="form-control" @bind="product.ProductCategory">
-    @foreach (var productCategory in productCategoryList) {
-    <option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>
-    }
-    </select>
-    </div>*@
+        <div class="col-md-6">
+            <label class="form-label">Product Category</label>
+            <select class="form-control" @bind="product.ProductCategoryId">
+                @foreach (var productCategory in productCategoryList) {
+                    <option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>
+                }
+            </select>
+        </div>
     </div>
     <div class="row mt-2">
         <div class="col">
@@ -67,7 +67,6 @@
         if (tempProductCategoryList is not null) {
             productCategoryList = tempProductCategoryList;
         } else {
-            var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
             // Todo: if tempProductCategoryList is not null
         }
         isLoading = false;

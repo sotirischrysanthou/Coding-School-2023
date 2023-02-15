@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EncryptStringLib;
 
 namespace CarServiceCenterLib {
     public class Manager : Person {
@@ -11,8 +12,8 @@ namespace CarServiceCenterLib {
         public double SalaryPerMonth { get; set; }
         public List<Engineer> Engineers { get; set; }
         public DateTime? StartDate { get; set; }
-        public String Username { get; set; }
-        public String Password { get; set; }
+        private String _username { get; set; }
+        private String _password { get; set; }
 
         
 
@@ -30,7 +31,33 @@ namespace CarServiceCenterLib {
 
         public void AddEngineer( Engineer engineer ) {
             Engineers.Add(engineer);
-        } 
+        }
+        // TODO :
+        public bool LogIn(String userName, String password ) {
+            bool ret = false;
+            if (true) {
+                ret = true;
+            }
+            return ret;
+        }
+        //TODO: 
+        public void CreateProfile(String userName, String password) { 
+            _username = userName;
+            _password = password;
+        }
+
+        public bool LogIn(String userName, String password ) {
+            bool ret = false;
+            if (StringCipher.Decrypt(password, userName) == password) {
+                ret = true;
+            }
+            return ret;
+        }
+
+        public void CreateProfile(String userName, String password) { 
+            _username = userName;
+            _password = StringCipher.Encrypt(password, userName);
+        }
 
     }
 

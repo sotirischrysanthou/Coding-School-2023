@@ -19,8 +19,8 @@ namespace CoffeeShop.EF.Configurations
             // Properties
             builder.Property(t => t.Code).HasMaxLength(20).IsRequired();
             builder.Property(t => t.Description).HasMaxLength(150).IsRequired();
-            builder.Property(t => t.Price).HasPrecision(3, 2).IsRequired();
-            builder.Property(t => t.Cost).HasPrecision(3, 2).IsRequired();
+            builder.Property(t => t.Price).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.Cost).HasPrecision(10, 2).IsRequired();
 
             // Relations
             builder.HasOne(t => t.ProductCategory)
