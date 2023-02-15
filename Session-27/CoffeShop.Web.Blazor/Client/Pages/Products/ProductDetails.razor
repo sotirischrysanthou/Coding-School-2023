@@ -1,0 +1,81 @@
+﻿@page "/productlist/details/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared.Product;
+@using CoffeShop.Web.Blazor.Shared.ProductCategory;
+@using CoffeShop.Web.Blazor.Shared.Transaction;
+@using CoffeeShop.Model.Enums;
+@inject IJSRuntime jsRuntime
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3>Product Details</h3>
+
+@if (isLoading) {
+        <p>Loading ...</p>
+} else {
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Code</label>
+                <input class="form-control" disabled @bind="@product.Code" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Description</label>
+                <input class="form-control" disabled @bind="@product.Description" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Cost</label>
+                <input class="form-control" disabled @bind="@product.Cost" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Price</label>
+                <input class="form-control" disabled @bind="@product.Price" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Product Category</label>
+                <input class="form-control" disabled @bind="@product.ProductCategoryId" />
+                @*<option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>*@
+            </div>
+        </div>
+}
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    private ProductDetailsDto product { get; set; } = null!;
+    private List<ProductCategoryListDto> productCategoryList = new();
+    private List<TransactionListDto> transactionList = new();
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            product = new();
+        } else {
+            var tempProduct = await httpClient.GetFromJsonAsync<ProductDetailsDto>($"product/{Id}");
+            if (tempProduct is not null) {
+                product = tempProduct;
+            } else {
+                //TODO: if product is null
+            }
+        }
+        var tempProductCategoryList = await httpClient.GetFromJsonAsync<List<ProductCategoryListDto>>($"productCategory/details/{Id}");
+        if (tempProductCategoryList is not null) {
+            productCategoryList = tempProductCategoryList;
+        } else {
+            // Todo: if tempProductCategoryList is not null
+        }
+        isLoading = false;
+    }
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("productlist");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("product", product);
+        } else {
+            response = await httpClient.PutAsJsonAsync("product", product);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("/productlist");
+    }
+}

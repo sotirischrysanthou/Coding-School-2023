@@ -34,6 +34,7 @@
                         <td>@GetProductCategoryWithId(product.ProductCategoryId)</td>
                         <td>
                             <button class="btn btn-primary" @onclick="()=> EditItem(product)">Edit</button>
+                            <button class="btn btn-success" @onclick="()=> DetailsItem(product)">Details</button>
                             <button class="btn btn-danger" @onclick="()=> DeleteItem(product)">Delete</button>
                         </td>
                     </tr>
@@ -75,6 +76,10 @@
 
     private void EditItem(ProductListDto product) {
         navigationManager.NavigateTo($"productlist/edit/{product.Id}");
+    }
+
+    private void DetailsItem(ProductListDto product) {
+        navigationManager.NavigateTo($"productlist/details/{product.Id}");
     }
 
     private async Task DeleteItem(ProductListDto product) {
