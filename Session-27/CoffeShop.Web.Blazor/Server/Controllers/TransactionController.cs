@@ -20,7 +20,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // GET: api/<EmployeeController>
         [HttpGet]
         public async Task<IEnumerable<TransactionListDto>> Get() {
-            var result = _transactionRepo.GetAll();
+            var result = await Task.Run(() => { return _transactionRepo.GetAll(); });
             var selectTransactionList = result.Select(transaction => new TransactionListDto {
                 Id = transaction.Id,
                 Date = transaction.Date,
@@ -35,8 +35,12 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // GET: api/<EmployeeController>
         [HttpGet("{id}")]
-        public async Task<TransactionEditDto> GetById(int id) {
-            var result = _transactionRepo.GetById(id);
+        public async Task<TransactionEditDto?> GetById(int id) {
+            var result = await Task.Run(() => { return _transactionRepo.GetById(id); });
+            if(result is null) {
+                //Todo hlandle if result is null
+                return null;
+            }
             return new TransactionEditDto {
                 Id = id,
                 Date = result.Date,
@@ -55,13 +59,13 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                 CustomerId = transaction.CustomerId,
                 EmployeeId = transaction.EmployeeId,
             };
-            _transactionRepo.Add(newTransaction);
+            await Task.Run(() => { _transactionRepo.Add(newTransaction); });
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut]
         public async Task Put(TransactionEditDto transaction) {
-            var dbTransaction = _transactionRepo.GetById(transaction.Id);
+            var dbTransaction = await Task.Run(() => { return _transactionRepo.GetById(transaction.Id); });
             if(dbTransaction is null) {
                 //Todo: handle if dbTransaction is null
                 return;
@@ -78,7 +82,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id) {
-            _transactionRepo.Delete(id);
+            await Task.Run(() => { _transactionRepo.Delete(id); });
         }
 
     }

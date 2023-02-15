@@ -62,24 +62,40 @@ else {
 
 @code {
     [Parameter] public int? Id { get; set; }
-    TransactionEditDto Transaction { get; set; }
+    TransactionEditDto? Transaction { get; set; }
     private List<CustomerListDto> customerList = new();
     private List<EmployeeListDto> employeeList = new();
+    bool isLoading { get; set; } = true;
 
 
     protected override async Task OnInitializedAsync() {
-        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
-        employeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
-
+        var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        if(tempCustomerList is null) {
+            //Todo handle if customerList is null
+            return;
+        } else {
+            customerList = tempCustomerList;
+        }
+        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+        if (tempEmployeeList is null) {
+            //Todo handle if employeeList is null
+            return;
+        } else {
+            employeeList = tempEmployeeList;
+        }
         if (Id == null) {
             Transaction = new();
             Transaction.Date = DateTime.Now;
-
         }
         else {
             Transaction = await httpClient.GetFromJsonAsync<TransactionEditDto>($"transaction/{Id}");
+            if (Transaction is null) {
+                //Todo handle if Transaction is null
+                return;
+            }
             //TODO: selected
         }
+        isLoading = false;
     }
 
     private void OnCancel() {
