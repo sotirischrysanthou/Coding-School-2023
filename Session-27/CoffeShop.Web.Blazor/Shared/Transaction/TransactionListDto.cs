@@ -10,8 +10,8 @@ namespace CoffeShop.Web.Blazor.Shared.Transaction {
         public PaymentMethod PaymentMethod { get; set; }
 
         // Relations
-        public CoffeeShop.Model.Customer Customer { get; set; }
-        public CoffeeShop.Model.Employee Employee { get; set; }
+        public int CustomerId { get; set; }
+        public int EmployeeId { get; set; }
 
         //public List<TransactionLine> TransactionLines { get; set; } = null!;
     }

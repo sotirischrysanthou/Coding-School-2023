@@ -26,8 +26,8 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                 Date = transaction.Date,
                 TotalPrice = transaction.TotalPrice,
                 PaymentMethod = transaction.PaymentMethod,
-                Customer = transaction.Customer,
-                Employee = transaction.Employee,
+                CustomerId = transaction.CustomerId,
+                EmployeeId = transaction.EmployeeId,
                 //TransactionLines = transaction.TransactionLines,
             });
             return selectTransactionList;
@@ -62,6 +62,10 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         [HttpPut]
         public async Task Put(TransactionEditDto transaction) {
             var dbTransaction = _transactionRepo.GetById(transaction.Id);
+            if(dbTransaction is null) {
+                //Todo: handle if dbTransaction is null
+                return;
+            }
             dbTransaction.Date = transaction.Date;
             dbTransaction.TotalPrice = transaction.TotalPrice;
             dbTransaction.PaymentMethod = transaction.PaymentMethod;
