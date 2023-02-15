@@ -1,34 +1,40 @@
 ﻿@page "/productlist/edit/{Id:int?}"
 @using CoffeShop.Web.Blazor.Shared.Product;
+@using CoffeShop.Web.Blazor.Shared.ProductCategory;
 @using CoffeeShop.Model.Enums;
+@inject IJSRuntime jsRuntime
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 <h3>Edit Product</h3>
 
-@if (Product == null) {
+@if (isLoading) {
     <p>Loading ...</p>
 } else {
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Code</label>
-            <input class="form-control" @bind="@Product.Code" />
+            <input class="form-control" @bind="@product.Code" />
         </div>
         <div class="col-md-6">
             <label class="form-label">Description</label>
-            <input class="form-control" @bind="@Product.Description" />
+            <input class="form-control" @bind="@product.Description" />
         </div>
         <div class="col-md-6">
             <label class="form-label">Cost</label>
-                <input class="form-control" @bind="@Product.Cost" />
+                <input class="form-control" @bind="@product.Cost" />
         </div>        
         <div class="col-md-6">
-            <label class="form-label">Cost</label>
-            <input class="form-control" @bind="@Product.Price" />
+            <label class="form-label">Price</label>
+            <input class="form-control" @bind="@product.Price" />
         </div>
-        <div class="col-md-6">
+        @*<div class="col-md-6">
             <label class="form-label">Product Category</label>
-            @*<input class="form-control" @bind="@Product.Price" />*@
-        </div>
+            <select class="form-control" @bind="product.ProductCategory">
+                @foreach (var productCategory in productCategoryList) {
+                    <option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>
+                }
+            </select>
+        </div>*@
     </div>
     <div class="row mt-2">
         <div class="col">
@@ -42,17 +48,27 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
-    ProductEditDto? Product { get; set; }
+    private ProductEditDto? product { get; set; }
+    private List<ProductCategoryListDto> productCategoryList = new();
+    bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync() {
         if (Id == null) {
-            Product = new();
+            product = new();
         } else {
-            Product = await httpClient.GetFromJsonAsync<ProductEditDto>($"product/{Id}");
-            if(Product is null) {
+            product = await httpClient.GetFromJsonAsync<ProductEditDto>($"product/{Id}");
+            if(product is null) {
                 //TODO: if product is null
             }
         }
+        var tempProductCategoryList = await httpClient.GetFromJsonAsync<List<ProductCategoryListDto>>("productCategory");
+        if (tempProductCategoryList is not null) {
+            productCategoryList = tempProductCategoryList;
+        } else {
+            var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+            // Todo: if tempProductCategoryList is not null
+        }
+        isLoading = false;
     }
 
     private void OnCancel() {
@@ -62,9 +78,9 @@
     private async Task OnSave() {
         HttpResponseMessage? response = null;
         if (Id == null) {
-            response = await httpClient.PostAsJsonAsync("product", Product);
+            response = await httpClient.PostAsJsonAsync("product", product);
         } else {
-            response = await httpClient.PutAsJsonAsync("product", Product);
+            response = await httpClient.PutAsJsonAsync("product", product);
         }
 
         response.EnsureSuccessStatusCode();

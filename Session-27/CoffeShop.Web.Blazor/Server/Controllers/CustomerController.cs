@@ -36,11 +36,12 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             if (result == null) {
                 return null;
             }
-            return new CustomerEditDto {
+            CustomerEditDto customer = new CustomerEditDto {
                 Id = id,
                 Code = result.Code,
                 Description = result.Description,
             };
+            return customer;
         }
 
         // POST api/<CustomersController>

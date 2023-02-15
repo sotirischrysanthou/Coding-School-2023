@@ -7,24 +7,24 @@
 @inject NavigationManager navigationManager
 <h3>Transaction Edit</h3>
 
-@if (Transaction == null) {
+@if (transaction == null) {
     <p>Loading ...</p>
 }
 else {
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Date</label>
-            <input class="form-control" @bind="@Transaction.Date" />
+            <input class="form-control" @bind="@transaction.Date" />
         </div>
         <div class="col-md-6">
             <label class="form-label">Total Price</label>
-            <input class="form-control" @bind="@Transaction.TotalPrice" disabled />
+            <input class="form-control" @bind="@transaction.TotalPrice" disabled />
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Payment Method</label>
-            <select class="form-control" @bind="Transaction.PaymentMethod">
+            <select class="form-control" @bind="transaction.PaymentMethod">
                 @foreach (var paymentMethod in Enum.GetValues<PaymentMethod>()) {
                     <option value="@paymentMethod">@paymentMethod</option>
                 }
@@ -32,7 +32,7 @@ else {
         </div>
         <div class="col-md-6">
             <label class="form-label">Customer</label>
-            <select class="form-control" @bind="Transaction.CustomerId">
+            <select class="form-control" @bind="transaction.CustomerId">
                 @foreach (var customer in customerList) {
                     <option value="@customer.Id">@customer.Code - @customer.Description</option>
                 }
@@ -42,7 +42,7 @@ else {
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Employee</label>
-            <select class="form-control" @bind="Transaction.EmployeeId">
+            <select class="form-control" @bind="transaction.EmployeeId">
                 @foreach (var employee in employeeList) {
                     <option value="@employee.Id">@employee.Name - @employee.Surname</option>
                 }
@@ -62,7 +62,7 @@ else {
 
 @code {
     [Parameter] public int? Id { get; set; }
-    TransactionEditDto? Transaction { get; set; }
+    private TransactionEditDto? transaction { get; set; }
     private List<CustomerListDto> customerList = new();
     private List<EmployeeListDto> employeeList = new();
     bool isLoading { get; set; } = true;
@@ -84,12 +84,12 @@ else {
             employeeList = tempEmployeeList;
         }
         if (Id == null) {
-            Transaction = new();
-            Transaction.Date = DateTime.Now;
+            transaction = new();
+            transaction.Date = DateTime.Now;
         }
         else {
-            Transaction = await httpClient.GetFromJsonAsync<TransactionEditDto>($"transaction/{Id}");
-            if (Transaction is null) {
+            transaction = await httpClient.GetFromJsonAsync<TransactionEditDto>($"transaction/{Id}");
+            if (transaction is null) {
                 //Todo handle if Transaction is null
                 return;
             }
@@ -105,10 +105,10 @@ else {
     private async Task OnSave() {
         HttpResponseMessage? response = null;
         if (Id == null) {
-            response = await httpClient.PostAsJsonAsync("transaction", Transaction);
+            response = await httpClient.PostAsJsonAsync("transaction", transaction);
         }
         else {
-            response = await httpClient.PutAsJsonAsync("transaction", Transaction);
+            response = await httpClient.PutAsJsonAsync("transaction", transaction);
         }
 
         response.EnsureSuccessStatusCode();

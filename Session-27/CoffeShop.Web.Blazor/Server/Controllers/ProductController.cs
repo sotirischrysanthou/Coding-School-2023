@@ -19,8 +19,11 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public async Task<IEnumerable<ProductListDto>> Get() {
+        public async Task<IEnumerable<ProductListDto>?> Get() {
             var result = await Task.Run(() => { return _productRepo.GetAll(); });
+            if(result is null) {
+                return null;
+            }
             var selectProductList = result.Select(product => new ProductListDto {
                 Id = product.Id,
                 Code = product.Code,
