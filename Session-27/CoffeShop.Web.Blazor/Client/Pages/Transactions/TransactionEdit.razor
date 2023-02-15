@@ -1,9 +1,5 @@
 ﻿@page "/transactionlist/edit/{Id:int?}"
-@using CoffeShop.Web.Blazor.Shared.Customer;
-@using CoffeShop.Web.Blazor.Shared.Employee;
-@using CoffeShop.Web.Blazor.Shared.Product;
-@using CoffeShop.Web.Blazor.Shared.Transaction;
-@using CoffeShop.Web.Blazor.Shared.TransactionLine;
+@using CoffeShop.Web.Blazor.Shared;
 @using CoffeeShop.Model.Enums;
 @using CoffeeShop.Model;
 @inject HttpClient httpClient
@@ -64,7 +60,7 @@ else {
     <h3>Transaction Lines</h3>
     <button class="btn btn-success" @onclick="AddLine">Add Line</button>
     <div id="transactionLinesContainer" class="container-fluid">
-        @foreach (var transactionLine in Transaction.TransactionLines) {
+        @foreach (var transactionLine in transaction.TransactionLines) {
             <div class="row">
                 <div class="col-md-3">
                     <label class="form-label">Product</label>
@@ -105,7 +101,7 @@ else {
 @code {
     [Parameter] public int? Id { get; set; }
 
-    private TransactionEditDto? Transaction { get; set; }
+    private TransactionEditDto? transaction { get; set; }
     private List<CustomerListDto> customerList = new();
     private List<EmployeeListDto> employeeList = new();
     private List<ProductListDto> productList = new();
@@ -163,11 +159,11 @@ else {
     }
 
     private void AddLine() {
-        Transaction.TransactionLines.Add(new TransactionLineEditDto());
+        transaction.TransactionLines.Add(new TransactionLineEditDto());
     }
 
     private void RemoveLine(TransactionLineEditDto transactionLine) {
-        Transaction.TransactionLines.Remove(transactionLine);
+        transaction.TransactionLines.Remove(transactionLine);
 
     }
 }

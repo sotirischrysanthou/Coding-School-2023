@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeShop.Web.Blazor.Shared.Product {
+namespace CoffeShop.Web.Blazor.Shared {
     public class ProductDetailsDto {
 
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace CoffeShop.Web.Blazor.Shared.Product {
 
         //RELATIONS
         public int ProductCategoryId { get; set; }
-        public List<TransactionLine> TransactionLines { get; set; } = new();
+        public List<TransactionLineListDto> TransactionLines { get; set; } = new();
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
-using CoffeShop.Web.Blazor.Shared.ProductCategory;
+using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

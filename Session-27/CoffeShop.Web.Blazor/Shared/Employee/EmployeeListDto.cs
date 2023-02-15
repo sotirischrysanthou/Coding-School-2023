@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeShop.Web.Blazor.Shared.Employee
+namespace CoffeShop.Web.Blazor.Shared
 {
     public class EmployeeListDto
     {

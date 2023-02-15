@@ -1,6 +1,6 @@
 ﻿using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
-using CoffeShop.Web.Blazor.Shared.Product;
+using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -68,8 +68,12 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                     Cost = result.Cost,
                     Price = result.Price,
                     ProductCategoryId = result.ProductCategoryId,
-                    TransactionLines = result.TransactionLines,
-                    //ProductCategory = result.ProductCategory,
+                    TransactionLines = result.TransactionLines.Select(transactionLine => new TransactionLineListDto {
+                        Quantity = transactionLine.Quantity,
+                        Discount = transactionLine.Discount,
+                        Price = transactionLine.Price,
+                        TotalPrice = transactionLine.TotalPrice,
+                    }).ToList()
                 };
             }
         }

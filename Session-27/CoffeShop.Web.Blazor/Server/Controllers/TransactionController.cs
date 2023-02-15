@@ -1,8 +1,6 @@
 ﻿using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
-using CoffeShop.Web.Blazor.Shared.Employee;
-using CoffeShop.Web.Blazor.Shared.Transaction;
-using CoffeShop.Web.Blazor.Shared.TransactionLine;
+using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

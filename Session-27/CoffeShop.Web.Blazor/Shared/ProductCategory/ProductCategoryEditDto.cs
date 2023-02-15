@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeShop.Web.Blazor.Shared.ProductCategory {
+namespace CoffeShop.Web.Blazor.Shared {
     public class ProductCategoryEditDto {
 
         public int Id { get; set; }

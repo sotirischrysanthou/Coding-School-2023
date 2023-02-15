@@ -2,7 +2,7 @@
 using CoffeeShop.Model;
 
 
-namespace CoffeShop.Web.Blazor.Shared.Transaction {
+namespace CoffeShop.Web.Blazor.Shared {
     public class TransactionListDto {
         public int Id { get; set; }
         public DateTime Date { get; set; }
