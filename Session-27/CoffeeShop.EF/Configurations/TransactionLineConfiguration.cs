@@ -18,9 +18,9 @@ namespace CoffeeShop.EF.Configurations
 
             // Properties
             builder.Property(t => t.Quantity).IsRequired();
-            builder.Property(t => t.Discount).HasPrecision(3, 2).IsRequired();
-            builder.Property(t => t.Price).HasPrecision(3, 2).IsRequired();
-            builder.Property(t => t.TotalPrice).HasPrecision(9, 2).IsRequired();
+            builder.Property(t => t.Discount).HasPrecision(4, 2).IsRequired();
+            builder.Property(t => t.Price).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.TotalPrice).HasPrecision(10, 2).IsRequired();
 
             // Relations
             builder.HasOne(t => t.Transaction)

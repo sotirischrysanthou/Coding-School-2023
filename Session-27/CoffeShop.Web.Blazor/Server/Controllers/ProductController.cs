@@ -56,7 +56,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // POST api/<ProductsController>
         [HttpPost]
         public async Task Post(ProductEditDto product) {
-            var newProduct = new Product(product.Code, product.Description, product.Price, product.Cost);
+            var newProduct = new Product(product.Code, product.Description, product.Price, product.Cost) {
+                ProductCategoryId = product.ProductCategoryId,
+            };
             await Task.Run(() => { _productRepo.Add(newProduct); });
         }
 
