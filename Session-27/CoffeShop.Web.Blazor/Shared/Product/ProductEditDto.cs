@@ -14,9 +14,9 @@ namespace CoffeShop.Web.Blazor.Shared.Product {
         public decimal Price { get; set; } 
         public decimal Cost { get; set; }
 
-        //RELATIONS??????
-        //public int ProductCategoryId { get; set; }
-        //public ProductCategory ProductCategory { get; set; } = null!;
+        //RELATIONS
+        public int ProductCategoryId { get; set; }
+        public CoffeeShop.Model.ProductCategory ProductCategory { get; set; } = null!;
         //public List<TransactionLine> TransactionLines { get; set; }
 
     }

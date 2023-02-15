@@ -27,8 +27,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                 Description = product.Description,
                 Cost = product.Cost,
                 Price = product.Price,
-
-
+                ProductCategoryId = product.ProductCategoryId
             });
             return selectProductList;
         }
@@ -46,6 +45,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                     Description = result.Description,
                     Cost = result.Cost,
                     Price = result.Price,
+                    ProductCategoryId = result.ProductCategoryId
                 };
             }
         }
@@ -69,6 +69,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             dbProduct.Description = product.Description;
             dbProduct.Cost = product.Cost;
             dbProduct.Price = product.Price;
+            dbProduct.ProductCategoryId = product.ProductCategoryId;
             _productRepo.Update(product.Id, dbProduct);
         }
 
