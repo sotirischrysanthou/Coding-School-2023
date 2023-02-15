@@ -27,7 +27,9 @@ namespace CoffeeShop.EF.Repositories {
         public IList<Product> GetAll() {
             using var context = new CoffeeShopDbContext();
             return context.Products
-                .Include(product => product.TransactionLines).ToList();
+                .Include(product => product.TransactionLines)
+                .Include(product => product.ProductCategory)
+                .ToList();
         }
 
         public Product? GetById(int id) {

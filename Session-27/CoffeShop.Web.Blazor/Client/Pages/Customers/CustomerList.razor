@@ -25,6 +25,7 @@
                     <td>@customer.Description</td>
                     <td>
                         <button class="btn btn-primary" @onclick="()=> EditItem(customer)">Edit</button>
+                        <button class="btn btn-secondary" @onclick="()=> DetailItem(customer)">Details</button>
                         <button class="btn btn-danger" @onclick="()=> DeleteItem(customer)">Delete</button>
                     </td>
                 </tr>
@@ -66,5 +67,10 @@
             response.EnsureSuccessStatusCode();
             await LoadItemsFromServer();
         }
+    }
+
+    private void DetailItem(CustomerListDto customer)
+    {
+        navigationManager.NavigateTo($"customerList/details/{customer.Id}");
     }
 }
