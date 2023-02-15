@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoffeShop.Web.Blazor.Shared.Employee
 {
-    internal class EmployeeDetals
+    internal class EmployeeDetails
     {
         public int Id { get; set; }
         public String Name { get; set; } = null!;

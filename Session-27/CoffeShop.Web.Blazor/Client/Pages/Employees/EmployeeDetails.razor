@@ -53,6 +53,26 @@
         }
     }
 
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    if (Id == null)
+    //    {
+    //        Employee = new();
+    //    }
+    //    else
+    //    {
+    //        var tempemployee = await httpClient.GetFromJsonAsync<EmployeeDetailsDto>($"details/{Id}");
+    //        if (tempemployee is not null)
+    //        {
+    //            Employee = tempemployee;
+    //        }
+    //        else
+    //        {
+    //            //TODO: If employee is null
+    //        }
+    //    }
+    //}
+
     private void OnCancel() {
         navigationManager.NavigateTo("employeelist");
     }
