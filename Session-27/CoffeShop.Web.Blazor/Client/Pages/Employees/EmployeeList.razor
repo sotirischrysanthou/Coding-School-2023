@@ -30,6 +30,7 @@
                     <td>@employee.EmployeeType</td>
                     <td>
                         <button class="btn btn-primary" @onclick="()=> EditItem(employee)">Edit</button>
+                        <button class="btn btn-secondary" @onclick="()=> DetailItem(employee)">Details</button>
                         <button class="btn btn-danger" @onclick="()=> DeleteItem(employee)">Delete</button>
                     </td>
                 </tr>
@@ -71,5 +72,10 @@
             response.EnsureSuccessStatusCode();
             await LoadItemsFromServer();
         }
+    }
+
+    private void DetailItem(EmployeeListDto employee)
+    {
+        navigationManager.NavigateTo($"employeeList/details/{employee.Id}");
     }
 }
