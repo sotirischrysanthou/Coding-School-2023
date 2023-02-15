@@ -100,6 +100,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             dbProduct.Cost = product.Cost;
             dbProduct.Price = product.Price;
             dbProduct.ProductCategoryId = product.ProductCategoryId;
+            dbProduct.ProductCategory = null!;
             _productRepo.Update(product.Id, dbProduct);
         }
 

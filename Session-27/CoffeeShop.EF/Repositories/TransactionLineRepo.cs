@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeShop.EF.Repositories
 {
-    public class TranscationLineRepo : IEntityRepo<TransactionLine>
+    public class TransactionLineRepo : IEntityRepo<TransactionLine>
     {
         public void Add(TransactionLine entity)
         {

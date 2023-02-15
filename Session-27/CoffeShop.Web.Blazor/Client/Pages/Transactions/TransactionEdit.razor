@@ -2,6 +2,7 @@
 @using CoffeShop.Web.Blazor.Shared;
 @using CoffeeShop.Model.Enums;
 @using CoffeeShop.Model;
+@using CoffeeShop.EF.Repositories;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 <h3>Transaction Edit</h3>
@@ -164,7 +165,6 @@ else {
 
     private void RemoveLine(TransactionLineEditDto transactionLine) {
         transaction.TransactionLines.Remove(transactionLine);
-
     }
 }
 
