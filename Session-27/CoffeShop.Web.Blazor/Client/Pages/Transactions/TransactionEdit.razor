@@ -1,0 +1,104 @@
+﻿@page "/transactionlist/edit/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared.Customer;
+@using CoffeShop.Web.Blazor.Shared.Employee;
+@using CoffeShop.Web.Blazor.Shared.Transaction;
+@using CoffeeShop.Model.Enums;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3>Transaction Edit</h3>
+
+@if (Transaction == null) {
+    <p>Loading ...</p>
+}
+else {
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Date</label>
+            <input class="form-control" @bind="@Transaction.Date" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Total Price</label>
+            <input class="form-control" @bind="@Transaction.TotalPrice" disabled />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Payment Method</label>
+            <select class="form-control" @bind="Transaction.PaymentMethod">
+                @foreach (var paymentMethod in Enum.GetValues<PaymentMethod>()) {
+                    <option value="@paymentMethod">@paymentMethod</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Customer</label>
+            <select class="form-control" @bind="Transaction.CustomerId">
+                @foreach (var customer in customerList) {
+                    <option value="@customer.Id">@customer.Code - @customer.Description</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Employee</label>
+            <select class="form-control" @bind="Transaction.EmployeeId">
+                @foreach (var employee in employeeList) {
+                    <option value="@employee.Id">@employee.Name - @employee.Surname</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        </div>
+
+    </div>
+}
+
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    TransactionEditDto Transaction { get; set; }
+    private List<CustomerListDto> customerList = new();
+    private List<EmployeeListDto> employeeList = new();
+
+
+    protected override async Task OnInitializedAsync() {
+        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        employeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+
+        if (Id == null) {
+            Transaction = new();
+            Transaction.Date = DateTime.Now;
+
+        }
+        else {
+            Transaction = await httpClient.GetFromJsonAsync<TransactionEditDto>($"transaction/{Id}");
+            //TODO: selected
+        }
+    }
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("transactionlist");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("transaction", Transaction);
+        }
+        else {
+            response = await httpClient.PutAsJsonAsync("transaction", Transaction);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("transactionlist");
+    }
+
+
+}
+
