@@ -33,9 +33,7 @@ namespace CoffeeShop.EF.Repositories
             using var context = new CoffeeShopDbContext();
 
              var transactions = context.Transactions
-                .Include(customer => customer.Customer)
-                .Include(employee => employee.Employee)
-                .Include(transactionlines => transactionlines.TransactionLines).ToList();
+                .Include(Transaction => Transaction.TransactionLines).ToList();
 
             return transactions;
         }
@@ -43,7 +41,8 @@ namespace CoffeeShop.EF.Repositories
         public Transaction? GetById(int id)
         {
             using var context = new CoffeeShopDbContext();
-            return context.Transactions.Where(transaction => transaction.Id == id).SingleOrDefault();
+            return context.Transactions.Where(transaction => transaction.Id == id)
+                .Include(Transaction => Transaction.TransactionLines).SingleOrDefault();
         }
 
         public void Update(int id, Transaction entity)

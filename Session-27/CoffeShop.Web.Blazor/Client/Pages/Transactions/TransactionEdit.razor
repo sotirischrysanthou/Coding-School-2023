@@ -1,8 +1,11 @@
 ﻿@page "/transactionlist/edit/{Id:int?}"
 @using CoffeShop.Web.Blazor.Shared.Customer;
 @using CoffeShop.Web.Blazor.Shared.Employee;
+@using CoffeShop.Web.Blazor.Shared.Product;
 @using CoffeShop.Web.Blazor.Shared.Transaction;
+@using CoffeShop.Web.Blazor.Shared.TransactionLine;
 @using CoffeeShop.Model.Enums;
+@using CoffeeShop.Model;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 <h3>Transaction Edit</h3>
@@ -57,16 +60,57 @@ else {
         </div>
 
     </div>
+    <br /><br />
+    <h3>Transaction Lines</h3>
+    <button class="btn btn-success" @onclick="AddLine">Add Line</button>
+    <div id="transactionLinesContainer" class="container-fluid">
+        @foreach (var transactionLine in Transaction.TransactionLines) {
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Product</label>
+                    <select class="form-control" @bind="@transactionLine.ProductId">
+                        @foreach (var product in productList) {
+                            <option value="@product.Id">@product.Code - @product.Description</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Quantity</label>
+                    <input class="form-control" @bind="@transactionLine.Quantity" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Price</label>
+                    <input class="form-control" @bind="@transactionLine.Price" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Discount</label>
+                    <input class="form-control" @bind="@transactionLine.Discount" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Total Price</label>
+                    <input class="form-control" @bind="@transactionLine.TotalPrice" />
+                </div>
+                <input class="form-control" @bind="@transactionLine.TransactionId" hidden/>
+                <div class="col-md-1">
+                    <button class="btn btn-danger" @onclick="()=>RemoveLine(transactionLine)">X</button>
+                </div>
+            </div>
+        }
+    </div>
 }
+
+
 
 
 @code {
     [Parameter] public int? Id { get; set; }
-    TransactionEditDto? Transaction { get; set; }
+
+    private TransactionEditDto? Transaction { get; set; }
     private List<CustomerListDto> customerList = new();
     private List<EmployeeListDto> employeeList = new();
-    bool isLoading { get; set; } = true;
+    private List<ProductListDto> productList = new();
 
+    private bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync() {
         var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
@@ -94,6 +138,9 @@ else {
                 return;
             }
             //TODO: selected
+
+            productList = await httpClient.GetFromJsonAsync <List<ProductListDto>>("product");
+
         }
         isLoading = false;
     }
@@ -115,6 +162,12 @@ else {
         navigationManager.NavigateTo("transactionlist");
     }
 
+    private void AddLine() {
+        Transaction.TransactionLines.Add(new TransactionLineEditDto());
+    }
 
+    private void RemoveLine(TransactionLineEditDto transactionLine) {
+        Transaction.TransactionLines.Remove(transactionLine);
+    }
 }
 

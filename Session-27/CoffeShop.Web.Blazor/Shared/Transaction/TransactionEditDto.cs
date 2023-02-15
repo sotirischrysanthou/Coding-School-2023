@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoffeShop.Web.Blazor.Shared.TransactionLine;
 
 namespace CoffeShop.Web.Blazor.Shared.Transaction {
     public class TransactionEditDto {
@@ -16,6 +17,6 @@ namespace CoffeShop.Web.Blazor.Shared.Transaction {
         // Relations
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
-        //public List<TransactionLine> TransactionLines { get; set; } = null!;
+        public List<TransactionLineEditDto> TransactionLines { get; set; } = null!;
     }
 }
