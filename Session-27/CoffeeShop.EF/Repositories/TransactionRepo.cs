@@ -31,8 +31,13 @@ namespace CoffeeShop.EF.Repositories
         public IList<Transaction> GetAll()
         {
             using var context = new CoffeeShopDbContext();
-            return context.Transactions.Include(customer => customer.Customer).Include(employee => employee.Employee).
-                Include(transactionlines => transactionlines.TransactionLines).ToList();
+
+             var transactions = context.Transactions
+                .Include(customer => customer.Customer)
+                .Include(employee => employee.Employee)
+                .Include(transactionlines => transactionlines.TransactionLines).ToList();
+
+            return transactions;
         }
 
         public Transaction? GetById(int id)
