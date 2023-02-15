@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CoffeeShop.EF\CoffeeShop.EF.csproj" />
     <ProjectReference Include="..\Shared\CoffeShop.Web.Blazor.Shared.csproj" />
   </ItemGroup>
 
