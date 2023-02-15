@@ -1,0 +1,92 @@
+﻿@page "/employeelist/details/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared.Employee;
+@using CoffeeShop.Model.Enums;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3>Employee Details</h3>
+
+@if (Employee == null) {
+    <p>Loading ...</p>
+} else {
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input class="form-control" @bind="@Employee.Name" disabled />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Surname</label>
+            <input class="form-control" @bind="@Employee.Surname" disabled />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Salary Per Month</label>
+            <input class="form-control" @bind="@Employee.SalaryPerMonth" disabled />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Employee Type</label>
+            <select class="form-control" @bind="Employee.EmployeeType" disabled>
+                @foreach (var employeetype in Enum.GetValues<EmployeeType>()) {
+                    <option value="@employeetype">@employeetype</option>
+                }
+            </select>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <button class="btn btn-danger" @onclick="OnCancel">Back</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    EmployeeEditDto? Employee { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            Employee = new();
+        } else {
+            Employee = await httpClient.GetFromJsonAsync<EmployeeEditDto>($"employee/{Id}");
+            if(Employee is null) {
+                //TODO: If employee is null
+            }
+        }
+    }
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    if (Id == null)
+    //    {
+    //        Employee = new();
+    //    }
+    //    else
+    //    {
+    //        var tempemployee = await httpClient.GetFromJsonAsync<EmployeeDetailsDto>($"details/{Id}");
+    //        if (tempemployee is not null)
+    //        {
+    //            Employee = tempemployee;
+    //        }
+    //        else
+    //        {
+    //            //TODO: If employee is null
+    //        }
+    //    }
+    //}
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("employeelist");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("employee", Employee);
+        } else {
+            response = await httpClient.PutAsJsonAsync("employee", Employee);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("/employeelist");
+    }
+}
+
