@@ -30,16 +30,19 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label">Product Category</label>
-                <input class="form-control" disabled @bind="@product.ProductCategoryId" />
-                @*<option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>*@
+                <input class="form-control" disabled @bind="@productCategory.Description" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Product Category Type</label>
+                <input class="form-control" disabled @bind="@productCategory.ProductType" />
             </div>
         </div>
 }
 
 @code {
     [Parameter] public int? Id { get; set; }
-    private ProductDetailsDto product { get; set; } = null!;
-    private List<ProductCategoryListDto> productCategoryList = new();
+    private ProductDetailsDto product = null!;
+    private ProductCategoryEditDto? productCategory;
     private List<TransactionListDto> transactionList = new();
     bool isLoading { get; set; } = true;
 
@@ -47,35 +50,45 @@
         if (Id == null) {
             product = new();
         } else {
-            var tempProduct = await httpClient.GetFromJsonAsync<ProductDetailsDto>($"product/{Id}");
+            var tempProduct = await httpClient.GetFromJsonAsync<ProductDetailsDto>($"/details/{Id}");
             if (tempProduct is not null) {
                 product = tempProduct;
             } else {
                 //TODO: if product is null
             }
         }
-        var tempProductCategoryList = await httpClient.GetFromJsonAsync<List<ProductCategoryListDto>>($"productCategory/details/{Id}");
-        if (tempProductCategoryList is not null) {
-            productCategoryList = tempProductCategoryList;
-        } else {
-            // Todo: if tempProductCategoryList is not null
+
+        productCategory = await httpClient.GetFromJsonAsync<ProductCategoryEditDto>($"productCategory/{product.ProductCategoryId}");
+        if (productCategory is null) {
+            // TODO: if ProductCategory is null
         }
         isLoading = false;
+
+
+
+
+
+
+
+
+
+
+
     }
 
-    private void OnCancel() {
-        navigationManager.NavigateTo("productlist");
-    }
+    //private void OnCancel() {
+    //    navigationManager.NavigateTo("productlist");
+    //}
 
-    private async Task OnSave() {
-        HttpResponseMessage? response = null;
-        if (Id == null) {
-            response = await httpClient.PostAsJsonAsync("product", product);
-        } else {
-            response = await httpClient.PutAsJsonAsync("product", product);
-        }
+    //private async Task OnSave() {
+    //    HttpResponseMessage? response = null;
+    //    if (Id == null) {
+    //        response = await httpClient.PostAsJsonAsync("product", product);
+    //    } else {
+    //        response = await httpClient.PutAsJsonAsync("product", product);
+    //    }
 
-        response.EnsureSuccessStatusCode();
-        navigationManager.NavigateTo("/productlist");
-    }
+    //    response.EnsureSuccessStatusCode();
+    //    navigationManager.NavigateTo("/productlist");
+    //}
 }

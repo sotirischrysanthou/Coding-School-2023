@@ -16,7 +16,6 @@ namespace CoffeShop.Web.Blazor.Shared.Product {
 
         //RELATIONS
         public int ProductCategoryId { get; set; }
-
         public List<TransactionLine> TransactionLines { get; set; } = new();
 
     }
