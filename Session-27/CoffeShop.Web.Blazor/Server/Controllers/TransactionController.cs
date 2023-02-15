@@ -2,6 +2,7 @@
 using CoffeeShop.Model;
 using CoffeShop.Web.Blazor.Shared.Employee;
 using CoffeShop.Web.Blazor.Shared.Transaction;
+using CoffeShop.Web.Blazor.Shared.TransactionLine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,14 +42,27 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                 //Todo hlandle if result is null
                 return null;
             }
-            return new TransactionEditDto {
+
+
+            var transaction =  new TransactionEditDto {
                 Id = id,
                 Date = result.Date,
                 TotalPrice = result.TotalPrice,
                 PaymentMethod = result.PaymentMethod,
                 CustomerId = result.CustomerId,
                 EmployeeId = result.EmployeeId,
+                TransactionLines = result.TransactionLines.Select(transactionLine => new TransactionLineEditDto {
+                    Id = transactionLine.Id,
+                    Quantity = transactionLine.Quantity,
+                    Discount = transactionLine.Discount,
+                    Price = transactionLine.Price,
+                    TotalPrice = transactionLine.TotalPrice,
+                    TransactionId = transactionLine.TransactionId,
+                    ProductId = transactionLine.ProductId,
+                }).ToList()
             };
+
+            return transaction;
         }
 
         // POST api/<EmployeeController>
@@ -75,6 +89,11 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             dbTransaction.PaymentMethod = transaction.PaymentMethod;
             dbTransaction.CustomerId = transaction.CustomerId;
             dbTransaction.EmployeeId = transaction.EmployeeId;
+            dbTransaction.TransactionLines = transaction.TransactionLines.Select(transactionLine => new TransactionLine(transactionLine.Quantity, transactionLine.Discount, transactionLine.Price, transactionLine.TotalPrice) {
+                ProductId = transactionLine.ProductId,
+                TransactionId = transactionLine.TransactionId,
+                Id = transactionLine.Id
+            }).ToList();
 
             _transactionRepo.Update(transaction.Id, dbTransaction);
         }

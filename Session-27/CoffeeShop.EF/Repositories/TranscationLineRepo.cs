@@ -31,7 +31,7 @@ namespace CoffeeShop.EF.Repositories
         public IList<TransactionLine> GetAll()
         {
             using var context = new CoffeeShopDbContext();
-            return context.TransactionLines.Include(transaction => transaction.Transaction).Include(product => product.Product).ToList();
+            return context.TransactionLines.Include(product => product.Product).ToList();
         }
 
         public TransactionLine? GetById(int id)
@@ -50,10 +50,10 @@ namespace CoffeeShop.EF.Repositories
             dbCoffeShop.Discount = entity.Discount;
             dbCoffeShop.Price = entity.Price;
             dbCoffeShop.TotalPrice = entity.TotalPrice;
-            dbCoffeShop.TransactionId= entity.TransactionId;
-            dbCoffeShop.Transaction= entity.Transaction;   
-            dbCoffeShop.ProductId= entity.ProductId;
-            dbCoffeShop.Product= entity.Product;
+            dbCoffeShop.TransactionId = entity.TransactionId;
+            dbCoffeShop.Transaction = entity.Transaction;   
+            dbCoffeShop.ProductId = entity.ProductId;
+            dbCoffeShop.Product = entity.Product;
 
             context.SaveChanges();
         }
