@@ -27,7 +27,7 @@
                     <td>@productCategory.ProductType</td>
                     <td>
                         <button class="btn btn-primary" @onclick="()=> EditItem(productCategory)">Edit</button>
-                        <button class="btn btn-secondary" @onclick="()=> EditItem(productCategory)">Details</button>
+                        <button class="btn btn-secondary" @onclick="()=> DetailsItem(productCategory)">Details</button>
                         <button class="btn btn-danger" @onclick="()=> DeleteItem(productCategory)">Delete</button>
                     </td>
                 </tr>
@@ -60,6 +60,10 @@
 
     private void EditItem(ProductCategoryListDto productCategory) {
         navigationManager.NavigateTo($"productCategorylist/edit/{productCategory.Id}");
+    }
+
+    private void DetailsItem(ProductCategoryListDto productCategory) {
+        navigationManager.NavigateTo($"productCategorylist/details/{productCategory.Id}");
     }
 
     private async Task DeleteItem(ProductCategoryListDto productCategory) {

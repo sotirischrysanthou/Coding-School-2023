@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace CoffeShop.Web.Blazor.Server.Controllers
-{
+namespace CoffeShop.Web.Blazor.Server.Controllers {
     [Route("[controller]")]
     [ApiController]
     public class ProductCategoryController : ControllerBase {
@@ -22,7 +21,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductCategoryListDto>> Get() {
             var result = await Task.Run(() => { return _productCategoryRepo.GetAll(); });
-            var selectProductCategoryList= result.Select(productCategory => new ProductCategoryListDto {
+            var selectProductCategoryList = result.Select(productCategory => new ProductCategoryListDto {
                 Id = productCategory.Id,
                 Code = productCategory.Code,
                 Description = productCategory.Description,
@@ -46,6 +45,30 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
             };
         }
 
+        // GET: api/<ProductsController>
+        [Route("/productcategorylist/details/{id}")]
+        [HttpGet]
+        public async Task<ProductCategoryDetailsDto?> GetDetailsById(int id) {
+            var result = await Task.Run(() => { return _productCategoryRepo.GetById(id); });
+            if (result is null) {
+                return null;
+            } else {
+                return new ProductCategoryDetailsDto {
+                    Id = id,
+                    Code = result.Code,
+                    Description = result.Description,
+                    ProductType = result.ProductType,
+                    Products = result.Products.Select(products => new ProductListDto {
+                        Code = products.Code,
+                        Description = products.Description,
+                        Cost = products.Cost,
+                        Price = products.Price,
+                    }).ToList()
+                };
+            }
+        }
+
+
         // POST api/<ProductCategorysController>
         [HttpPost]
         public async Task Post(ProductCategoryEditDto productCategory) {
@@ -57,7 +80,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers
         [HttpPut]
         public async Task Put(ProductCategoryEditDto productCategory) {
             var dbProductCategory = await Task.Run(() => { return _productCategoryRepo.GetById(productCategory.Id); });
-            if(dbProductCategory is null) {
+            if (dbProductCategory is null) {
                 // TODO: if dbProductCategory is null
                 return;
             }
