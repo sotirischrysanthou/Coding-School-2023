@@ -33,7 +33,9 @@ namespace CoffeeShop.EF.Repositories {
         public Product? GetById(int id) {
             using var context = new CoffeeShopDbContext();
             return context.Products.Where(customer => customer.Id == id)
-                .Include(product => product.TransactionLines).SingleOrDefault();
+                .Include(product => product.TransactionLines)
+                .Include(product => product.ProductCategory)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Product entity) {

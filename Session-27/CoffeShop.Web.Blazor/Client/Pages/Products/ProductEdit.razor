@@ -21,8 +21,8 @@
         </div>
         <div class="col-md-6">
             <label class="form-label">Cost</label>
-                <input class="form-control" @bind="@product.Cost" />
-        </div>        
+            <input class="form-control" @bind="@product.Cost" />
+        </div>
         <div class="col-md-6">
             <label class="form-label">Price</label>
             <input class="form-control" @bind="@product.Price" />
@@ -48,7 +48,7 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
-    private ProductEditDto? product { get; set; }
+    private ProductEditDto product { get; set; } = null!;
     private List<ProductCategoryListDto> productCategoryList = new();
     bool isLoading { get; set; } = true;
 
@@ -56,8 +56,10 @@
         if (Id == null) {
             product = new();
         } else {
-            product = await httpClient.GetFromJsonAsync<ProductEditDto>($"product/{Id}");
-            if(product is null) {
+            var tempProduct = await httpClient.GetFromJsonAsync<ProductEditDto>($"product/{Id}");
+            if (tempProduct is not null) {
+                product = tempProduct;
+            } else {
                 //TODO: if product is null
             }
         }
