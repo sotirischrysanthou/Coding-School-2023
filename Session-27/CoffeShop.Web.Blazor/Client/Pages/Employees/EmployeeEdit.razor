@@ -19,11 +19,11 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label">Surname</label>
-                <input class="form-control" @bind="@Employee.Surname" />
+                    <InputText class="form-control" @bind-Value="@Employee.Surname" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Salary Per Month</label>
-                <input class="form-control" @bind="@Employee.SalaryPerMonth" />
+                <InputNumber class="form-control" @bind-Value="@Employee.SalaryPerMonth" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Employee Type</label>
@@ -33,12 +33,11 @@
                     }
                 </InputSelect>
             </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col">
-                <button class="btn btn-success" @onclick="OnSave">Save</button>
-                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" IsSubmit="true">Back</BootstrapButton>
-                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+            <div class="row mt-2">
+                <div class="col">
+                    <BootstrapButton ButtonType = "BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                    <BootstrapButton ButtonType = "BootstrapButtonType.Danger" OnClick="OnCancel">Back</BootstrapButton>
+                </div>
             </div>
         </div>
     </EditForm>

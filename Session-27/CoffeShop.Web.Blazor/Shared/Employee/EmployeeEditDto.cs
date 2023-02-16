@@ -7,8 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CoffeShop.Web.Blazor.Shared {
-    public class EmployeeEditDto
-    {
+    public class EmployeeEditDto {
         public int Id { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "Type less than 50 characters")]
@@ -23,6 +22,8 @@ namespace CoffeShop.Web.Blazor.Shared {
         public int SalaryPerMonth { get; set; }
 
         [Required]
-        public EmployeeType EmployeeType { get; set; } 
+        [Range(1, 4, ErrorMessage = "You must choose a category!")]
+        public EmployeeType EmployeeType { get; set; }
+
     }
 }
