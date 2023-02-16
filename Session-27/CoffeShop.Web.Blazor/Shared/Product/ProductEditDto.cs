@@ -27,6 +27,8 @@ namespace CoffeShop.Web.Blazor.Shared {
         public decimal Cost { get; set; }
 
         //RELATIONS
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "You must choose a category!")]
         public int ProductCategoryId { get; set; }
 
     }

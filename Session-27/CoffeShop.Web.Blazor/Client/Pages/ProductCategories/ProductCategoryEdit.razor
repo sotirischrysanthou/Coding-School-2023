@@ -8,31 +8,35 @@
 @if (ProductCategory == null) {
             <p>Loading ...</p>
 } else {
+        <EditForm Model="ProductCategory" OnValidSubmit="OnSave">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-label">Code</label>
-                    <input class="form-control" @bind="@ProductCategory.Code" />
+                    <InputText class="form-control" @bind-Value="@ProductCategory.Code" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Description</label>
-                    <input class="form-control" @bind="@ProductCategory.Description" />
+                    <InputText class="form-control" @bind-Value="@ProductCategory.Description" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Product Type</label>
-                    <select class="form-control" @bind="ProductCategory.ProductType">
+                        <InputSelect class="form-control" @bind-Value="ProductCategory.ProductType">
                         @foreach (var enumValue in Enum.GetValues<ProductType>()) {
                             <option value="@enumValue">@enumValue</option>
                         }
-                </select>
+                </InputSelect>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="col">
-                    <button class="btn btn-success" @onclick="OnSave">Save</button>
+                    <BootstrapButton ButtonType = "BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
                     <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
                 </div>
 
             </div>
+        </EditForm>
 }
 
 

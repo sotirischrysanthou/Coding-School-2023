@@ -22,7 +22,7 @@ namespace CoffeShop.Web.Blazor.Shared {
         public int SalaryPerMonth { get; set; }
 
         [Required]
-        [Range(1, 4, ErrorMessage = "You must choose a category!")]
+        [Range(1, 4, ErrorMessage = "You must choose a type!")]
         public EmployeeType EmployeeType { get; set; }
 
     }
