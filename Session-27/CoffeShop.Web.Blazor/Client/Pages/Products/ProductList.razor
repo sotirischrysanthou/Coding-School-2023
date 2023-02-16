@@ -8,7 +8,7 @@
 @if (isLoading) {
             <p>Loading ...</p>
 } else {
-            <button class="btn btn-primary" @onclick="CreateItem">Create</button>
+            <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
 
             <table class="table table-striped table-hover">
                 <thead>
@@ -31,9 +31,9 @@
                         <td>@product.Price</td>
                         <td>@GetProductCategoryWithId(product.ProductCategoryId)</td>
                         <td>
-                            <button class="btn btn-primary" @onclick="()=> EditItem(product)">Edit</button>
-                            <button class="btn btn-secondary" @onclick="()=> DetailsItem(product)">Details</button>
-                            <button class="btn btn-danger" @onclick="()=> DeleteItem(product)">Delete</button>
+                        <BootstrapButton ButtonType = "BootstrapButtonType.Warning" OnClick="()=> EditItem(product)">Edit</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(product)">Details</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(product)">Delete</BootstrapButton>
                         </td>
                     </tr>
                 }
@@ -76,7 +76,7 @@
         navigationManager.NavigateTo($"productlist/edit/{product.Id}");
     }
 
-    private void DetailsItem(ProductListDto product) {
+    private void DetailItem(ProductListDto product) {
         navigationManager.NavigateTo($"productlist/details/{product.Id}");
     }
 
