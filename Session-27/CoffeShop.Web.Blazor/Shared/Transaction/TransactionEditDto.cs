@@ -27,15 +27,15 @@ namespace CoffeShop.Web.Blazor.Shared {
         // Relations
 
         [Required]
-        [Range(1, 2, ErrorMessage = "You must choose a Customer!")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must choose a Customer!")]
         public int CustomerId { get; set; }
 
         [Required]
-        [Range(1, 2, ErrorMessage = "You must choose an Employee!")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must choose an Employee!")]
         public int EmployeeId { get; set; }
 
 
-        [Range(1, int.MaxValue, ErrorMessage = "You must choose a category!")]
+
         public List<TransactionLineEditDto> TransactionLines { get; set; } = new();
     }
 }
