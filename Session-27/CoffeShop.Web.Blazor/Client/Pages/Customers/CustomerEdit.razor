@@ -2,10 +2,16 @@
 @using CoffeShop.Web.Blazor.Shared;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>Customer Edit</h3>
+
+@if (Id is null) {
+    <h3>Create Customer</h3>
+} else {
+
+    <h3>Customer Edit</h3>
+}
 
 @if (Customer == null) {
-        <p>Loading ...</p>
+    <p>Loading ...</p>
 } else {
     <EditForm Model="Customer" OnValidSubmit="OnSave">
     <DataAnnotationsValidator />
@@ -40,7 +46,7 @@
             Customer = new();
         } else {
             Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"customer/{Id}");
-            if(Customer is null) {
+            if (Customer is null) {
                 //TODO: Handle if customer is null
             }
         }

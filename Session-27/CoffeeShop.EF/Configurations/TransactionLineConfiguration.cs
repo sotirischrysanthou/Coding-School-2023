@@ -26,7 +26,7 @@ namespace CoffeeShop.EF.Configurations
             builder.HasOne(t => t.Transaction)
                 .WithMany(t => t.TransactionLines)
                 .HasForeignKey(t => t.TransactionId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(t => t.Product)
                 .WithMany(t => t.TransactionLines)

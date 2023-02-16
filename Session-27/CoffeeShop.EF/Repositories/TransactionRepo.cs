@@ -7,19 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeShop.EF.Repositories
-{
-    public class TransactionRepo : IEntityRepo<Transaction>
-    {
-        public void Add(Transaction entity)
-        {
+namespace CoffeeShop.EF.Repositories {
+    public class TransactionRepo : IEntityRepo<Transaction> {
+        public void Add(Transaction entity) {
             using var context = new CoffeeShopDbContext();
             context.Add(entity);
             context.SaveChanges();
         }
 
-        public void Delete(int id)
-        {
+        public void Delete(int id) {
             using var context = new CoffeeShopDbContext();
             var dbCoffeShop = context.Transactions.Where(transaction => transaction.Id == id).SingleOrDefault();
             if (dbCoffeShop is null)
@@ -28,27 +24,32 @@ namespace CoffeeShop.EF.Repositories
             context.SaveChanges();
         }
 
-        public IList<Transaction> GetAll()
-        {
+        public IList<Transaction> GetAll() {
             using var context = new CoffeeShopDbContext();
 
-             var transactions = context.Transactions
-                .Include(Transaction => Transaction.TransactionLines).ToList();
+            var transactions = context.Transactions
+               .Include(Transaction => Transaction.TransactionLines)
+               .Include(transaction => transaction.Customer)
+               .Include(transaction => transaction.Employee)
+               .ToList();
 
             return transactions;
         }
 
-        public Transaction? GetById(int id)
-        {
+        public Transaction? GetById(int id) {
             using var context = new CoffeeShopDbContext();
-            return context.Transactions.Where(transaction => transaction.Id == id)
-                .Include(Transaction => Transaction.TransactionLines).SingleOrDefault();
+            return context.Transactions
+                .Where(transaction => transaction.Id == id)
+                .Include(Transaction => Transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Employee)
+                .SingleOrDefault();
         }
 
-        public void Update(int id, Transaction entity)
-        {
+        public void Update(int id, Transaction entity) {
             using var context = new CoffeeShopDbContext();
-            var dbCoffeShop = context.Transactions.Where(transaction => transaction.Id == id).SingleOrDefault();
+            var dbCoffeShop = context.Transactions.Where(transaction => transaction.Id == id)
+                .Include(Transaction => Transaction.TransactionLines).SingleOrDefault();
             if (dbCoffeShop is null)
                 return;
             dbCoffeShop.Date = entity.Date;

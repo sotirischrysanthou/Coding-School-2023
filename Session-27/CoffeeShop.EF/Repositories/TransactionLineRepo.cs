@@ -37,7 +37,10 @@ namespace CoffeeShop.EF.Repositories
         public TransactionLine? GetById(int id)
         {
             using var context = new CoffeeShopDbContext();
-            return context.TransactionLines.Where(transactionline => transactionline.Id == id).SingleOrDefault();
+            return context.TransactionLines
+                .Where(transactionline => transactionline.Id == id)
+                .Include(transactionLine => transactionLine.Product)
+                .SingleOrDefault();
         }
 
         public void Update(int id, TransactionLine entity)
