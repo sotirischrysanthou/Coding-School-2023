@@ -1,14 +1,14 @@
 ﻿using CoffeeShop.Model.Enums;
-using CoffeeShop.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoffeShop.Web.Blazor.Shared;
 
-namespace CoffeShop.Web.Blazor.Shared {
-    public class TransactionEditDto {
+namespace CoffeShop.Web.Blazor.Shared
+{
+    public class TransactionDetailsDto
+    {
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal TotalPrice { get; set; }
@@ -20,3 +20,4 @@ namespace CoffeShop.Web.Blazor.Shared {
         public List<TransactionLineEditDto> TransactionLines { get; set; } = new();
     }
 }
+

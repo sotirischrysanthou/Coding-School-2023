@@ -1,4 +1,4 @@
-﻿@page "/transactionlist/edit/{Id:int?}"
+@page "/transactionlist/edit/{Id:int?}"
 @using CoffeShop.Web.Blazor.Shared;
 @using CoffeeShop.Model.Enums;
 @using CoffeeShop.Model;
@@ -185,16 +185,28 @@ else {
 
 
     protected override async Task OnInitializedAsync() {
-        customerList = await getCustomers();
-        employeeList = await getEmployees();
-        productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
+        var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        if (tempCustomerList is null) {
+            //Todo handle if customerList is null
 
+            return;
+        } else {
+            customerList = tempCustomerList;
+        }
+        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+        if (tempEmployeeList is null) {
+            //Todo handle if employeeList is null
+
+            return;
+        } else {
+            employeeList = tempEmployeeList;
+        }
+        productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
         if (Id == null) {
             transaction = new();
             transaction.TransactionLines = new List<TransactionLineEditDto>();
             transaction.Date = DateTime.Now;
-        }
-        else {
+        } else {
             transaction = await httpClient.GetFromJsonAsync<TransactionEditDto>($"transaction/{Id}");
             if (transaction is null) {
                 //Todo handle if Transaction is null
@@ -219,8 +231,7 @@ else {
         HttpResponseMessage? response = null;
         if (Id == null) {
             response = await httpClient.PostAsJsonAsync("transaction", transaction);
-        }
-        else {
+        } else {
             response = await httpClient.PutAsJsonAsync("transaction", transaction);
         }
 

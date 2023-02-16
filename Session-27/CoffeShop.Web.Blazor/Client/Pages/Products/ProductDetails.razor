@@ -1,4 +1,4 @@
-﻿@page "/productlist/details/{Id:int?}"
+@page "/productlist/details/{Id:int?}"
 @using CoffeShop.Web.Blazor.Shared;
 @using CoffeeShop.Model.Enums;
 @inject IJSRuntime jsRuntime
@@ -65,6 +65,11 @@
             </table>
         </div>
     }
+    <div class="row mt-2">
+        <div class="col">
+                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+        </div>
+    </div>
 }
 
 @code {
@@ -77,7 +82,7 @@
         if (Id == null) {
             product = new();
         } else {
-            var tempProduct = await httpClient.GetFromJsonAsync<ProductDetailsDto>($"/details/{Id}");
+            var tempProduct = await httpClient.GetFromJsonAsync<ProductDetailsDto>($"productlist/details/{Id}");
             if (tempProduct is not null) {
                 product = tempProduct;
             } else {
@@ -90,32 +95,8 @@
             // TODO: if ProductCategory is null
         }
         isLoading = false;
-
-
-
-
-
-
-
-
-
-
-
     }
-
-    //private void OnCancel() {
-    //    navigationManager.NavigateTo("productlist");
-    //}
-
-    //private async Task OnSave() {
-    //    HttpResponseMessage? response = null;
-    //    if (Id == null) {
-    //        response = await httpClient.PostAsJsonAsync("product", product);
-    //    } else {
-    //        response = await httpClient.PutAsJsonAsync("product", product);
-    //    }
-
-    //    response.EnsureSuccessStatusCode();
-    //    navigationManager.NavigateTo("/productlist");
-    //}
+    private void OnCancel() {
+        navigationManager.NavigateTo("productlist");
+    }
 }

@@ -54,7 +54,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         }
 
         // GET: api/<ProductsController>
-        [Route("/details/{id}")]
+        [Route("/productlist/details/{id}")]
         [HttpGet]
         public async Task<ProductDetailsDto?> GetDetailsById(int id)    {
             var result = await Task.Run(() => { return _productRepo.GetById(id); });

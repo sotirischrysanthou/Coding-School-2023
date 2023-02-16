@@ -1,0 +1,91 @@
+﻿@page "/productcategorylist/details/{Id:int?}"
+@using CoffeShop.Web.Blazor.Shared;
+@using CoffeeShop.Model.Enums;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+<h3>Product Category</h3>
+
+@if (isLoading) {
+        <p>Loading ...</p>
+} else {
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Code</label>
+                <input class="form-control" disabled @bind="@productCategory.Code" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Description</label>
+                    <input class="form-control" disabled @bind="@productCategory.Description" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Product Category</label>
+                <input class="form-control" disabled @bind="@productCategory.Description" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Product Category Type</label>
+                <input class="form-control" disabled @bind="@productCategory.ProductType" />
+            </div>
+        </div>
+    @if (productCategory.Products.Count() > 0) {
+
+        <div class="row mt-5">
+            <h4 class="col-xs-6">
+                Products of this Category:
+            </h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Cost</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var product in productCategory.Products) {
+                <tr>
+                    <td>@product.Code</td>
+                    <td>@product.Description</td>
+                    <td>@product.Cost</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    }
+    <div class="row mt-2">
+        <div class="col">
+                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    private ProductCategoryDetailsDto productCategory = null!;
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            productCategory = new();
+        } else {
+            var tempProductCategory = await httpClient.GetFromJsonAsync<ProductCategoryDetailsDto>($"/productcategorylist/details/{Id}");
+            if (tempProductCategory is not null) {
+                productCategory = tempProductCategory;
+            } else {
+                var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Cannot load product category!");
+                //TODO: if product is null
+            }
+        }
+        isLoading = false;
+    }
+    private void OnCancel() {
+        navigationManager.NavigateTo("productcategorylist");
+    }
+
+}

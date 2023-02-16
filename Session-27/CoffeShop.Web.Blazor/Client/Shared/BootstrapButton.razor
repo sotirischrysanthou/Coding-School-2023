@@ -1,0 +1,26 @@
+﻿<button class="btn @bootstrapClass" @onclick="OnClick" type="@buttonType">@ChildContent</button>
+
+
+@code {
+    [Parameter] public BootstrapButtonType ButtonType { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public bool IsSubmit { get; set; }
+
+    string bootstrapClass => ButtonType switch {
+
+        BootstrapButtonType.Primary => "btn-primary",
+        BootstrapButtonType.Secondary => "btn-secondary",
+        BootstrapButtonType.Success => "btn-success",
+        BootstrapButtonType.Danger => "btn-danger",
+        BootstrapButtonType.Info => "btn-info",
+        BootstrapButtonType.Warning => "btn-warning",
+        BootstrapButtonType.Light => "btn-light",
+        BootstrapButtonType.Dark => "btn-dark",
+        BootstrapButtonType.Link => "btn-link",
+        _ => "btn-secondary"
+    };
+
+    string buttonType => IsSubmit ? "submit" : "button";
+}
+
