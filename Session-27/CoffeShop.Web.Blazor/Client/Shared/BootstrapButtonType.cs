@@ -4,6 +4,10 @@
         Secondary,
         Success,
         Warning,
-        Danger
+        Danger,
+        Info,
+        Light,
+        Dark,
+        Link
     }
 }
