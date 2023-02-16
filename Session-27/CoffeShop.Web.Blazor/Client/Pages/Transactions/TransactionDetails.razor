@@ -27,32 +27,23 @@ else
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Payment Method</label>
-            <select class="form-control" disabled @bind="transaction.PaymentMethod">
-                @foreach (var paymentMethod in Enum.GetValues<PaymentMethod>())
-                {
-                    <option value="@paymentMethod">@paymentMethod</option>
-                }
+            <select class="form-control" disabled>
+                <option selected>@transaction.PaymentMethod</option>
             </select>
         </div>
         <div class="col-md-6">
             <label class="form-label">Customer</label>
-            <select class="form-control" disabled @bind="transaction.CustomerId">
-                @foreach (var customer in customerList)
-                {
-                    <option value="@customer.Id">@customer.Code - @customer.Description</option>
-                }
+            <select class="form-control" disabled>
+                <option selected>@transaction.Customer.Code - @transaction.Customer.Description</option>
             </select>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Employee</label>
-            <select class="form-control" disabled @bind="transaction.EmployeeId">
-                @foreach (var employee in employeeList)
-                {
-                    <option value="@employee.Id">@employee.Name - @employee.Surname</option>
-                }
-                </select>
+            <select class="form-control" disabled>
+                <option selected>@transaction.Employee.Name @transaction.Employee.Surname</option>
+            </select>
         </div>
     </div>
 
@@ -65,11 +56,8 @@ else
             <div class="row">
                 <div class="col-md-3">
                     <label class="form-label">Product</label>
-                    <select class="form-control" disabled @bind="@transactionLine.ProductId">
-                        @foreach (var product in productList)
-                        {
-                            <option value="@product.Id">@product.Code - @product.Description</option>
-                        }
+                    <select class="form-control" disabled>
+                        <option selected>@transactionLine.Product </option>
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -100,37 +88,37 @@ else
 @code {
     [Parameter] public int? Id { get; set; }
     private TransactionDetailsDto? transaction { get; set; }
-    private List<CustomerListDto> customerList = new();
-    private List<EmployeeListDto> employeeList = new();
-    private List<ProductListDto> productList = new();
+    //private List<CustomerListDto> customerList = new();
+    //private List<EmployeeListDto> employeeList = new();
+    //private List<ProductListDto> productList = new();
 
     private bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
-        var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
-        if (tempCustomerList is null)
-        {
-            //Todo handle if customerList is null
+        //var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        //if (tempCustomerList is null)
+        //{
+        //    Todo handle if customerList is null
 
-            return;
-        }
-        else
-        {
-            customerList = tempCustomerList;
-        }
-        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
-        if (tempEmployeeList is null)
-        {
-            //Todo handle if employeeList is null
+        //    return;
+        //}
+        //else
+        //{
+        //    customerList = tempCustomerList;
+        //}
+        //var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+        //if (tempEmployeeList is null)
+        //{
+        //    Todo handle if employeeList is null
 
-            return;
-        }
-        else
-        {
-            employeeList = tempEmployeeList;
-        }
-        productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
+        //    return;
+        //}
+        //else
+        //{
+        //    employeeList = tempEmployeeList;
+        //}
+        //productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
         if (Id == null)
         {
             transaction = new();
@@ -138,7 +126,7 @@ else
         }
         else
         {
-            transaction = await httpClient.GetFromJsonAsync<TransactionDetailsDto>($"transaction/{Id}");
+            transaction = await httpClient.GetFromJsonAsync<TransactionDetailsDto>($"transactionlist/details/{Id}");
             if (transaction is null)
             {
                 //Todo handle if Transaction is null
