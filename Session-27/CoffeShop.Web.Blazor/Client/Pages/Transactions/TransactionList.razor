@@ -9,8 +9,7 @@
 @if (isLoading) {
     <p>Loading ...</p>
 } else {
-    <button class="btn btn-primary" @onclick="CreateItem">Create</button>
-
+         <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -39,8 +38,9 @@
                     <td>@GetCustomerDescriptionWithId(transaction.CustomerId)</td>
                     <td>@GetEmployeeNameWithId(transaction.EmployeeId)</td>
                     <td>
-                        <button class="btn btn-primary" @onclick="()=> EditItem(transaction)">Edit</button>
-                        <button class="btn btn-danger" @onclick="()=> DeleteItem(transaction)">Delete</button>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(transaction)">Edit</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(transaction)">Details</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(transaction)">Delete</BootstrapButton>
                     </td>
                 </tr>
             }
@@ -119,5 +119,10 @@
                 await jsRuntime.InvokeVoidAsync("alert",error);
             }
         }
+    }
+
+    private void DetailItem(TransactionListDto transaction)
+    {
+        navigationManager.NavigateTo($"transactionlist/details/{transaction.Id}");
     }
 }
