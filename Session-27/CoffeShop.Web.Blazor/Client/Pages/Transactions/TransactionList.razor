@@ -1,4 +1,4 @@
-@inject HttpClient httpClient
+﻿@inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
 @page "/transactionlist"
@@ -115,10 +115,8 @@
             if (response.IsSuccessStatusCode) {
                 await LoadItemsFromServer();
             } else {
-
                 var error = await response.Content.ReadAsStringAsync();
                 await jsRuntime.InvokeVoidAsync("alert",error);
-
             }
         }
     }
