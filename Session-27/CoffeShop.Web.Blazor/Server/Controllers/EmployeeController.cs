@@ -60,7 +60,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             if (result is null) {
                 return null;
             } else {
-                return new EmployeeDetailsDto  {
+                return new EmployeeDetailsDto {
                     Id = id,
                     Name = result.Name,
                     Surname = result.Surname,
@@ -78,7 +78,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
         // POST api/<EmployeeController>
         [HttpPost]
         public async Task<int> Post(EmployeeEditDto employee) {
-            
+
             var newEmployee = new Employee(employee.Name, employee.Surname, employee.SalaryPerMonth, employee.EmployeeType);
             if (ValidateAddEmployee(newEmployee.EmployeeType)) {
                 await Task.Run(() => {
@@ -138,7 +138,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             var employees = _employeeRepo.GetAll();
             if (dbEmployee == null) {
                 ret = false;
-            } else {
+            } else if (type != dbEmployee.EmployeeType) {
                 var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
                 var baristas = employees.Where(e => e.EmployeeType == EmployeeType.Barista);
                 var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);

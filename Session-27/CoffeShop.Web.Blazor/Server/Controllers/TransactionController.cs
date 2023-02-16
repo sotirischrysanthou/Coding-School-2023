@@ -103,9 +103,9 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             try {
                 await Task.Run(() => { _transactionRepo.Delete(id); });
                 return Ok();
-            }catch(DbUpdateException ex) {
+            }catch(DbUpdateException) {
                 return BadRequest($"Could not delete this transaction because it has transactionLines");
-            }catch(KeyNotFoundException ex) {
+            }catch(KeyNotFoundException) {
                 return BadRequest($"Transaction not found");
             }
 
