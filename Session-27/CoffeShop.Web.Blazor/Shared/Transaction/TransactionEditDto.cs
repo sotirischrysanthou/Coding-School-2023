@@ -17,6 +17,6 @@ namespace CoffeShop.Web.Blazor.Shared {
         // Relations
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
-        public List<TransactionLineEditDto> TransactionLines { get; set; } = null!;
+        public List<TransactionLineEditDto> TransactionLines { get; set; } = new();
     }
 }

@@ -1,4 +1,4 @@
-﻿@inject HttpClient httpClient
+@inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
 @page "/transactionlist"
@@ -28,14 +28,14 @@
                     <td>@transaction.Date</td>
                     <td>@transaction.TotalPrice</td>
                     <td>@transaction.PaymentMethod</td>
-@*                    @if (@transaction.PaymentMethod = CoffeeShop.Model.Enums.PaymentMethod.CreditCard)
-                    {
-                     <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="PaymentMethod">
-                            <span class="oi oi-cart" aria-hidden="true"></span> PaymentMethod
-                        </NavLink>
-                     </div>
-                    }*@
+                    @*                    @if (@transaction.PaymentMethod = CoffeeShop.Model.Enums.PaymentMethod.CreditCard)
+            {
+            <div class="nav-item px-3">
+            <NavLink class="nav-link" href="PaymentMethod">
+            <span class="oi oi-cart" aria-hidden="true"></span> PaymentMethod
+            </NavLink>
+            </div>
+            }*@
                     <td>@GetCustomerDescriptionWithId(transaction.CustomerId)</td>
                     <td>@GetEmployeeNameWithId(transaction.EmployeeId)</td>
                     <td>
@@ -112,8 +112,14 @@
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
             var response = await httpClient.DeleteAsync($"transaction/{transaction.Id}");
-            response.EnsureSuccessStatusCode();
-            await LoadItemsFromServer();
+            if (response.IsSuccessStatusCode) {
+                await LoadItemsFromServer();
+            } else {
+
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert",error);
+
+            }
         }
     }
 }

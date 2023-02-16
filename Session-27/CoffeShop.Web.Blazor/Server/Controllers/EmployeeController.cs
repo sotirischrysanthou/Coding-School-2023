@@ -12,6 +12,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
     public class EmployeeController : ControllerBase {
         // Properties
         private readonly IEntityRepo<Employee> _employeeRepo;
+        public int errorCode = 0;
 
         // Constructors
         public EmployeeController(IEntityRepo<Employee> employeeRepo) {
@@ -53,15 +54,16 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public async Task<bool> Post(EmployeeEditDto employee) {
+        public async Task<int> Post(EmployeeEditDto employee) {
+            
             var newEmployee = new Employee(employee.Name, employee.Surname, employee.SalaryPerMonth, employee.EmployeeType);
             if (ValidateAddEmployee(newEmployee.EmployeeType)) {
                 await Task.Run(() => {
                     _employeeRepo.Add(newEmployee);
                 });
-                return true;
+                errorCode = 0;
             }
-            return false;
+            return errorCode;
         }
         private bool ValidateAddEmployee(EmployeeType type) {
             bool ret = true;
@@ -72,15 +74,19 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             var waiters = employees.Where(e => e.EmployeeType == EmployeeType.Waiter);
             if (type == EmployeeType.Cashier && cashiers.Count() == 2) {
                 ret = false;
+                errorCode = 101;
             }
             if (type == EmployeeType.Barista && baristas.Count() == 2) {
                 ret = false;
+                errorCode = 102;
             }
             if (type == EmployeeType.Manager && managers.Count() == 1) {
                 ret = false;
+                errorCode = 103;
             }
             if (type == EmployeeType.Waiter && waiters.Count() == 3) {
                 ret = false;
+                errorCode = 104;
             }
             return ret;
         }

@@ -1,16 +1,16 @@
-﻿@page "/transactionlist/edit/{Id:int?}"
+@page "/transactionlist/edit/{Id:int?}"
 @using CoffeShop.Web.Blazor.Shared;
 @using CoffeeShop.Model.Enums;
 @using CoffeeShop.Model;
 @using CoffeeShop.EF.Repositories;
 @inject HttpClient httpClient
+@inject IJSRuntime jsRuntime
 @inject NavigationManager navigationManager
 <h3>Transaction Edit</h3>
 
 @if (transaction == null) {
     <p>Loading ...</p>
-}
-else {
+} else {
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">Date</label>
@@ -18,9 +18,7 @@ else {
         </div>
         <div class="col-md-6">
             <label class="form-label">Total Price</label>
-            <input class="form-control" @bind="@transaction.TotalPrice" 
-            
-            />
+            <input class="form-control" @bind="@transaction.TotalPrice" />
         </div>
     </div>
     <div class="row">
@@ -59,7 +57,8 @@ else {
         </div>
 
     </div>
-    <br /><br />
+    <br />
+    <br />
     <h3>Transaction Lines</h3>
     <button class="btn btn-success" @onclick="AddLine">Add Line</button>
     <div id="transactionLinesContainer" class="container-fluid">
@@ -89,7 +88,7 @@ else {
                     <label class="form-label">Total Price</label>
                     <input class="form-control" @bind="@transactionLine.TotalPrice" />
                 </div>
-                <input class="form-control" @bind="@transactionLine.TransactionId" hidden/>
+                <input class="form-control" @bind="@transactionLine.TransactionId" hidden />
                 <div class="col-md-1">
                     <button class="btn btn-danger" @onclick="()=>RemoveLine(transactionLine)">X</button>
                 </div>
@@ -113,8 +112,9 @@ else {
 
     protected override async Task OnInitializedAsync() {
         var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
-        if(tempCustomerList is null) {
+        if (tempCustomerList is null) {
             //Todo handle if customerList is null
+
             return;
         } else {
             customerList = tempCustomerList;
@@ -122,15 +122,16 @@ else {
         var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
         if (tempEmployeeList is null) {
             //Todo handle if employeeList is null
+
             return;
         } else {
             employeeList = tempEmployeeList;
         }
+        productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
         if (Id == null) {
             transaction = new();
             transaction.Date = DateTime.Now;
-        }
-        else {
+        } else {
             transaction = await httpClient.GetFromJsonAsync<TransactionEditDto>($"transaction/{Id}");
             if (transaction is null) {
                 //Todo handle if Transaction is null
@@ -138,7 +139,6 @@ else {
             }
             //TODO: selected
 
-            productList = await httpClient.GetFromJsonAsync <List<ProductListDto>>("product");
 
         }
         isLoading = false;
@@ -152,8 +152,7 @@ else {
         HttpResponseMessage? response = null;
         if (Id == null) {
             response = await httpClient.PostAsJsonAsync("transaction", transaction);
-        }
-        else {
+        } else {
             response = await httpClient.PutAsJsonAsync("transaction", transaction);
         }
 
