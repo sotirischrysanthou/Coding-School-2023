@@ -2,29 +2,35 @@
 @using CoffeShop.Web.Blazor.Shared;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>Customer Edit</h3>
+
+@if (Id is null) {
+    <h3>Create Customer</h3>
+} else {
+
+    <h3>Customer Edit</h3>
+}
 
 @if (Customer == null) {
-        <p>Loading ...</p>
+    <p>Loading ...</p>
 } else {
-        <div class="row">
-            <div class="col-md-6">
-                <label class="form-label">Code</label>
-                <input class="form-control" @bind="@Customer.Code" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Description</label>
-                <input class="form-control" @bind="@Customer.Description" />
-            </div>
-
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Code</label>
+            <input class="form-control" @bind="@Customer.Code" />
         </div>
-        <div class="row mt-2">
-            <div class="col">
-                <button class="btn btn-success" @onclick="OnSave">Save</button>
-                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
-            </div>
-
+        <div class="col-md-6">
+            <label class="form-label">Description</label>
+            <input class="form-control" @bind="@Customer.Description" />
         </div>
+
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <BootstrapButton ButtonType="BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+        </div>
+
+    </div>
 }
 
 
@@ -37,7 +43,7 @@
             Customer = new();
         } else {
             Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"customer/{Id}");
-            if(Customer is null) {
+            if (Customer is null) {
                 //TODO: Handle if customer is null
             }
         }
