@@ -35,22 +35,17 @@ else {
                 </div>
             </div>*@
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label class="form-label">Customer</label>
-                </div>
-                <div class="col-md-8">
                     <select class="form-control" @bind="transaction.CustomerId">
                         @foreach (var customer in customerList) {
                             <option value="@customer.Id">@customer.Code - @customer.Description</option>
                         }
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+            
+                <div class="col-md-6">
                     <label class="form-label">Employee</label>
-                </div>
-                <div class="col-md-8">
                     <select class="form-control" @bind="transaction.EmployeeId">
                         @foreach (var employee in employeeList) {
                             <option value="@employee.Id">@employee.Name - @employee.Surname</option>
@@ -58,7 +53,6 @@ else {
                     </select>
                 </div>
             </div>
-
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-3 flex-md-column d-flex justify-content-center">
