@@ -9,39 +9,43 @@
 @if (isLoading) {
     <p>Loading ...</p>
 } else {
-    <div class="row">
-        <div class="col-md-6">
-            <label class="form-label">Code</label>
-            <input class="form-control" @bind="@product.Code" />
+    <EditForm Model="product" OnValidSubmit="OnSave">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Code</label>
+                <InputText class="form-control" @bind-Value="@product.Code" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Description</label>
+                <InputText class="form-control" @bind-Value="@product.Description" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Cost</label>
+                <InputNumber class="form-control" @bind-Value="@product.Cost" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Price</label>
+                <InputNumber class="form-control" @bind-Value="@product.Price" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Product Category</label>
+                <InputSelect class="form-control" @bind-Value="product.ProductCategoryId">
+                    @foreach (var productCategory in productCategoryList) {
+                        <option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>
+                    }
+                </InputSelect>
+            </div>
         </div>
-        <div class="col-md-6">
-            <label class="form-label">Description</label>
-            <input class="form-control" @bind="@product.Description" />
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Cost</label>
-            <input class="form-control" @bind="@product.Cost" />
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Price</label>
-            <input class="form-control" @bind="@product.Price" />
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Product Category</label>
-            <select class="form-control" @bind="product.ProductCategoryId">
-                @foreach (var productCategory in productCategoryList) {
-                    <option value="@productCategory.Id">@productCategory.Code - @productCategory.Description</option>
-                }
-            </select>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col">
-            <button class="btn btn-success" @onclick="OnSave">Save</button>
+        <div class="row mt-2">
+            <div class="col">
+                <BootstrapButton ButtonType = "BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
                 <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
-        </div>
+            </div>
 
-    </div>
+        </div>
+    </EditForm>
 }
 
 
