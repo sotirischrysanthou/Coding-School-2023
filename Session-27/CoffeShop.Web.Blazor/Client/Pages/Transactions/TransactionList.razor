@@ -109,7 +109,7 @@
     }
 
     private async Task DeleteItem(TransactionListDto transaction) {
-        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Transaction. This task will delete all dependend transactionLines. Are you sure?");
         if (confirm) {
             var response = await httpClient.DeleteAsync($"transaction/{transaction.Id}");
             if (response.IsSuccessStatusCode) {
