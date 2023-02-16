@@ -21,7 +21,7 @@ else {
     </div>
     <br />
     <div class="row">
-        <div class="col-md-6 flex-md-column d-flex justify-content-between">
+        <div class="col-md-6 flex-md-column d-flex justify-content-around">
             <div class="row">
                 <div class="col-md-4">
                     <label class="form-label">Payment Method</label>
@@ -83,10 +83,18 @@ else {
                     </tr>
                     <tr>
                         <td>
+                            Subtotal:
+                        </td>
+                        <td>
+                            @preDiscountTotalPrice &euro;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             Discount:
                         </td>
                         <td>
-                            @totalDiscount
+                            @totalDiscount &euro;
                         </td>
                     </tr>
                     <tr>
@@ -94,7 +102,7 @@ else {
                             Total:
                         </td>
                         <td>
-                            @transaction.TotalPrice
+                            @transaction.TotalPrice &euro;
                             <input class="form-control" @bind="@transaction.TotalPrice" hidden />
                         </td>
                     </tr>
@@ -115,9 +123,9 @@ else {
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
-                <th>Price</th>
-                <th>Discount</th>
-                <th>Total Price</th>
+                <th>Price(&euro;)</th>
+                <th>Discount(%)</th>
+                <th>Total Price(&euro;)</th>
                 <th></th>
             </tr>
         </thead>
@@ -125,20 +133,20 @@ else {
             @foreach (var transactionLine in transaction.TransactionLines) {
                 <tr>
                     <td>
-                        <select class="form-control" @bind="@transactionLine.ProductId" @bind:after="() => udpateProduct(transactionLine)">
+                        <select class="form-control" @bind="@transactionLine.ProductId" @bind:after="() => OnProductSelect(transactionLine)">
                             @foreach (var product in productList) {
                                 <option value="@product.Id">@product.Code - @product.Description</option>
                             }
                         </select>
                     </td>
                     <td>
-                        <input class="form-control" @bind=@transactionLine.Quantity @bind:after="() => udpateProduct(transactionLine)">
+                        <input class="form-control" @bind=@transactionLine.Quantity @bind:after="() => OnLineQuantityChange(transactionLine)">
                     </td>
                     <td>
                         <input class="form-control" @bind=@transactionLine.Price disabled>
                     </td>
                     <td>
-                        <input class="form-control" @bind=@transactionLine.Discount disabled>
+                        <input class="form-control" @bind=@transactionLine.Discount @bind:after="() => OnDiscountChange(transactionLine)" disabled>
                     </td>
                     <td>
                         <input class="form-control" @bind=@transactionLine.TotalPrice disabled>
@@ -171,6 +179,7 @@ else {
     private bool isLoading { get; set; } = true;
     private decimal totalQuantity { get; set; }
     private decimal totalDiscount { get; set; }
+    private decimal preDiscountTotalPrice { get; set; }
 
 
 
@@ -192,6 +201,9 @@ else {
             }
             //TODO: selected
         }
+        await UpdateTotalQuantity();
+        await UpdatePreDiscountTotalPrice();
+        await UpdateTransactionTotalPrice();
 
         isLoading = false;
     }
@@ -240,28 +252,94 @@ else {
         transaction.TransactionLines.Add(new TransactionLineEditDto());
     }
 
-    private void RemoveLine(TransactionLineEditDto transactionLine) {
+    async Task RemoveLine(TransactionLineEditDto transactionLine) {
         transaction.TransactionLines.Remove(transactionLine);
+        await UpdateTotalQuantity();
+        await UpdatePreDiscountTotalPrice();
+        await UpdateTransactionTotalPrice();
     }
 
-    //private void EditItem(TransactionLineEditDto transactionLine) {
-    //    navigationManager.NavigateTo($"transactionline/edit/{transactionLine.Id}");
-    //}
 
-    //private async Task DeleteItem(TransactionLineEditDto transactionLine) {
-    //    var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
-    //    if (confirm) {
-    //        var response = await httpClient.DeleteAsync($"transactionline/{transactionLine.Id}");
-    //        response.EnsureSuccessStatusCode();
-    //        //await LoadItemsFromServer();
-    //    }
-    //}
-
-    async Task udpateProduct(TransactionLineEditDto transactionLine) {
+    async Task OnProductSelect(TransactionLineEditDto transactionLine) {
         var product = productList.Find(product => product.Id == transactionLine.ProductId);
         transactionLine.Price = product.Price;
-        transactionLine.TotalPrice = transactionLine.Price * transactionLine.Quantity * (1-(transactionLine.Discount / 100));
+        await UpdateLineTotalPrice(transactionLine);
+        await UpdatePreDiscountTotalPrice();
+        await UpdateTransactionTotalPrice();
     }
-    
+
+    async Task OnLineQuantityChange(TransactionLineEditDto transactionLine) {
+        await UpdateLineTotalPrice(transactionLine);
+        await UpdatePreDiscountTotalPrice();
+        await UpdateTransactionTotalPrice();
+        await UpdateTotalQuantity();
+    }
+
+    async Task OnDiscountChange(TransactionLineEditDto transactionLine) {
+        await UpdateLineTotalPrice(transactionLine);
+        await UpdateTransactionTotalPrice();
+    }
+
+    async Task UpdateLineTotalPrice(TransactionLineEditDto transactionLine) {
+        transactionLine.TotalPrice = transactionLine.Price * transactionLine.Quantity * (1 - (transactionLine.Discount / 100));
+        transactionLine.TotalPrice = Math.Round(transactionLine.TotalPrice, 2);
+    }
+
+    async Task UpdateTotalQuantity() {
+        totalQuantity = 0;
+        foreach (var transactionLine in transaction.TransactionLines) {
+            totalQuantity += transactionLine.Quantity;
+        }
+    }
+
+    async Task UpdateTransactionTotalPrice() {
+        transaction.TotalPrice = 0;
+        foreach (var transactionLine in transaction.TransactionLines) {
+            transaction.TotalPrice += transactionLine.TotalPrice;
+        }
+        transaction.TotalPrice = Math.Round(transaction.TotalPrice, 2);
+    }
+
+    async Task UpdatePreDiscountTotalPrice() {
+        preDiscountTotalPrice = 0;
+        foreach (var transactionLine in transaction.TransactionLines) {
+            preDiscountTotalPrice += transactionLine.Quantity * transactionLine.Price;
+        }
+        preDiscountTotalPrice = Math.Round(preDiscountTotalPrice,2);
+
+        if (await DiscountEligible()) {
+            await ApplyDiscount();
+        }
+        else {
+            await RemoveDiscount();
+        }
+        totalDiscount = Math.Round(totalDiscount, 2);
+    }
+
+    async Task<bool> DiscountEligible() {
+        if (preDiscountTotalPrice > 10) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    async Task ApplyDiscount() {
+        totalDiscount = 0;
+        foreach (var transactionLine in transaction.TransactionLines) {
+            transactionLine.Discount = 15;
+            totalDiscount += transactionLine.Price * transactionLine.Quantity * (transactionLine.Discount / 100);
+            await UpdateLineTotalPrice(transactionLine);
+        }
+    }
+
+    async Task RemoveDiscount() {
+        totalDiscount = 0;
+        foreach (var transactionLine in transaction.TransactionLines) {
+            transactionLine.Discount = 0;
+            await UpdateLineTotalPrice(transactionLine);
+        } 
+    }
 }
 
