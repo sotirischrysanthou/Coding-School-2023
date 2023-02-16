@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CoffeShop.Web.Blazor.Shared {
     public class Validator : IValidator{
-        public MinMax ManagersLimits { get; set; }
-        public MinMax CashiersLimits { get; set; }
-        public MinMax BaristasLimits { get; set; }
-        public MinMax WaitersLimits { get; set; }
-        public MinMax CustomersLimits { get; set; }
+        public readonly MinMax ManagersLimits;
+        public readonly MinMax CashiersLimits;
+        public readonly MinMax BaristasLimits;
+        public readonly MinMax WaitersLimits;
+        public readonly MinMax CustomersLimits;
 
         public Validator() {
             ManagersLimits = new MinMax() { Min = 1, Max = 1 };
