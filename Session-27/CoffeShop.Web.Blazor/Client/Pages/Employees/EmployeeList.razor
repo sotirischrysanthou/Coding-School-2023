@@ -8,7 +8,7 @@
 @if (isLoading) {
     <p>Loading ...</p>
 } else {
-    <BootstrapButton ButtonType = "BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
+    <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
 
     <table class="table table-striped table-hover">
         <thead>
@@ -28,9 +28,9 @@
                     <td>@employee.SalaryPerMonth</td>
                     <td>@employee.EmployeeType</td>
                     <td>
-                        <BootstrapButton ButtonType = "BootstrapButtonType.Warning" OnClick="()=> EditItem(employee)">Edit</BootstrapButton>
-                        <BootstrapButton ButtonType = "BootstrapButtonType.Primary" OnClick="()=> DetailItem(employee)">Details</BootstrapButton>
-                        <BootstrapButton ButtonType = "BootstrapButtonType.Danger" OnClick="()=> DeleteItem(employee)">Delete</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(employee)">Edit</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(employee)">Details</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(employee)">Delete</BootstrapButton>
                     </td>
                 </tr>
             }
@@ -68,13 +68,18 @@
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
             var response = await httpClient.DeleteAsync($"employee/{employee.Id}");
-            response.EnsureSuccessStatusCode();
-            await LoadItemsFromServer();
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadItemsFromServer();
+            }
+            else { 
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
         }
     }
 
-    private void DetailItem(EmployeeListDto employee)
-    {
+    private void DetailItem(EmployeeListDto employee) {
         navigationManager.NavigateTo($"employeeList/details/{employee.Id}");
     }
 }

@@ -7,6 +7,13 @@
 
     <main>
         <div class="top-row px-4">
+@*            <select @onchnage="ChangingTheme" style="margin-left: 1rem"> 
+                @foreach (var theme in themes)
+                {
+                        <option selected="@IsSelectedTheme(theme)" value="@theme"> @theme </option>
+                }
+
+        </select>*@
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
 
@@ -15,3 +22,30 @@
         </article>
     </main>
 </div>
+
+
+@*@code {
+    private string selectedTheme = "Light";
+    private List<string> themes = new List<string> { "Light", "Dark" };
+    private string GetCssClass()
+    {
+        if (selectedTheme == "Light")
+        {
+            return String.Empty;
+        }
+        else
+        {
+            return "dark-mode";
+        }
+    }
+
+    private bool IsSelectedTheme(string theme)
+    {
+        return theme == selectedTheme;
+    }
+
+    private void ChangingTheme(ChangeEventArgs e)
+    {
+        selectedTheme = e.Value.ToString();
+    }
+}*@

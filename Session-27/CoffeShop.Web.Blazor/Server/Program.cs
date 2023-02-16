@@ -1,6 +1,9 @@
 using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
+using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.ResponseCompression;
+using System.ComponentModel.DataAnnotations;
+using Validator = CoffeShop.Web.Blazor.Shared.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,8 @@ builder.Services.AddScoped<IEntityRepo<Employee>, EmployeeRepo>();
 builder.Services.AddScoped<IEntityRepo<Product>, ProductRepo>();
 builder.Services.AddScoped<IEntityRepo<ProductCategory>, ProductCategoryRepo>();
 builder.Services.AddScoped<IEntityRepo<Transaction>, TransactionRepo>();
-builder.Services.AddScoped<IEntityRepo<TransactionLine>, TransactionLineRepo>();
+builder.Services.AddScoped<IValidator,Validator>();
+
 
 // Add services to the container.
 
