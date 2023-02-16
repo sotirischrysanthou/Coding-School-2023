@@ -18,7 +18,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             _transactionRepo = transactionRepo;
         }
 
-        // GET: api/<EmployeeController>
+        // GET: api/<TransactionController>
         [HttpGet]
         public async Task<IEnumerable<TransactionListDto>> Get() {
             var result = await Task.Run(() => { return _transactionRepo.GetAll(); });
@@ -34,7 +34,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             return selectTransactionList;
         }
 
-        // GET: api/<EmployeeController>
+        // GET: api/<TransactionController>
         [HttpGet("{id}")]
         public async Task<TransactionEditDto?> GetById(int id) {
             var result = await Task.Run(() => { return _transactionRepo.GetById(id); });
@@ -65,7 +65,41 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             return transaction;
         }
 
-        // POST api/<EmployeeController>
+        // GET: api/<TransactionController>
+        [Route("/transactionlist/details/{id}")]
+        [HttpGet]
+        public async Task<TransactionDetailsDto?> GetDetailsById(int id)
+        {
+            var result = await Task.Run(() => { return _transactionRepo.GetById(id); });
+            if (result is null)
+            {
+                return null;
+            }
+            else
+            {
+                return new TransactionDetailsDto
+                {
+                    Id = id,
+                    Date = result.Date,
+                    TotalPrice = result.TotalPrice,
+                    PaymentMethod = result.PaymentMethod,
+                    CustomerId = result.CustomerId,
+                    EmployeeId = result.EmployeeId,
+                    TransactionLines = result.TransactionLines.Select(transactionLine => new TransactionLineEditDto
+                    {
+                        Id = transactionLine.Id,
+                        Quantity = transactionLine.Quantity,
+                        Discount = transactionLine.Discount,
+                        Price = transactionLine.Price,
+                        TotalPrice = transactionLine.TotalPrice,
+                        TransactionId = transactionLine.TransactionId,
+                        ProductId = transactionLine.ProductId,
+                    }).ToList()
+                };
+            }
+        }
+
+        // POST api/<TransactionController>
         [HttpPost]
         public async Task Post(TransactionEditDto transaction) {
             var newTransaction = new Transaction(transaction.TotalPrice, transaction.PaymentMethod) {
@@ -103,7 +137,7 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             _transactionRepo.Update(transaction.Id, dbTransaction);
         }
 
-        // DELETE api/<EmployeeController>/5
+        // DELETE api/<TransactionController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id) {
             try {
