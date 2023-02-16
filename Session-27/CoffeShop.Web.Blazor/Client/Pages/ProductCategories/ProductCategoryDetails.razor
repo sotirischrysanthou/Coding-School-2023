@@ -78,7 +78,7 @@
             if (tempProductCategory is not null) {
                 productCategory = tempProductCategory;
             } else {
-                var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+                var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Cannot load product category!");
                 //TODO: if product is null
             }
         }
