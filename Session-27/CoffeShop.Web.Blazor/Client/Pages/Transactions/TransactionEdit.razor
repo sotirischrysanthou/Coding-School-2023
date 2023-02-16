@@ -125,23 +125,27 @@ else {
             @foreach (var transactionLine in transaction.TransactionLines) {
                 <tr>
                     <td>
-                        @transactionLine.ProductId
+                        <select class="form-control" @bind="@transactionLine.ProductId" @bind:after="() => udpateProduct(transactionLine)">
+                            @foreach (var product in productList) {
+                                <option value="@product.Id">@product.Code - @product.Description</option>
+                            }
+                        </select>
                     </td>
                     <td>
-                        @transactionLine.Quantity
+                        <input class="form-control" @bind=@transactionLine.Quantity @bind:after="() => udpateProduct(transactionLine)">
                     </td>
                     <td>
-                       @transactionLine.Price
+                        <input class="form-control" @bind=@transactionLine.Price disabled>
                     </td>
                     <td>
-                        @transactionLine.Discount
+                        <input class="form-control" @bind=@transactionLine.Discount disabled>
                     </td>
                     <td>
-                        @transactionLine.TotalPrice
+                        <input class="form-control" @bind=@transactionLine.TotalPrice disabled>
                     </td>
                     <td>
-                        <button class="btn btn-primary" @onclick="()=> EditItem(transactionLine)">Edit</button>
-                        <button class="btn btn-danger" @onclick="()=> DeleteItem(transactionLine)">Delete</button>
+                        @*<button class="btn btn-primary" @onclick="()=> EditItem(transactionLine)">Edit</button>*@
+                        <button class="btn btn-danger" @onclick="()=> RemoveLine(transactionLine)">Delete</button>
                     </td>
                     <input class="form-control" @bind="@transactionLine.TransactionId" hidden />
                 </tr>
@@ -192,7 +196,7 @@ else {
         isLoading = false;
     }
 
-    
+
 
     private void OnCancel() {
         navigationManager.NavigateTo("transactionlist");
@@ -233,24 +237,30 @@ else {
     }
 
     private void AddLine() {
-        //transaction.TransactionLines.Add(new TransactionLineEditDto());
+        transaction.TransactionLines.Add(new TransactionLineEditDto());
     }
 
     private void RemoveLine(TransactionLineEditDto transactionLine) {
-        //transaction.TransactionLines.Remove(transactionLine);
+        transaction.TransactionLines.Remove(transactionLine);
     }
 
-    private void EditItem(TransactionLineEditDto transactionLine) {
-        navigationManager.NavigateTo($"transactionline/edit/{transactionLine.Id}");
-    }
+    //private void EditItem(TransactionLineEditDto transactionLine) {
+    //    navigationManager.NavigateTo($"transactionline/edit/{transactionLine.Id}");
+    //}
 
-    private async Task DeleteItem(TransactionLineEditDto transactionLine) {
-        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
-        if (confirm) {
-            var response = await httpClient.DeleteAsync($"transactionline/{transactionLine.Id}");
-            response.EnsureSuccessStatusCode();
-            //await LoadItemsFromServer();
-        }
+    //private async Task DeleteItem(TransactionLineEditDto transactionLine) {
+    //    var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+    //    if (confirm) {
+    //        var response = await httpClient.DeleteAsync($"transactionline/{transactionLine.Id}");
+    //        response.EnsureSuccessStatusCode();
+    //        //await LoadItemsFromServer();
+    //    }
+    //}
+
+    async Task udpateProduct(TransactionLineEditDto transactionLine) {
+        var product = productList.Find(product => product.Id == transactionLine.ProductId);
+        transactionLine.Price = product.Price;
+        transactionLine.TotalPrice = transactionLine.Price * transactionLine.Quantity * (1-(transactionLine.Discount / 100));
     }
     
 }
