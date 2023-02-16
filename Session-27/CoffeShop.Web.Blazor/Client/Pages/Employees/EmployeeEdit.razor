@@ -3,6 +3,7 @@
 @using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
 <h3>Employee Edit</h3>
 
 @if (Employee == null) {
@@ -14,12 +15,12 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="form-label">Name</label>
-                    @*<input class="form-control" @bind="@Employee.Name" />*@
-                    <InputText class="form-control" @bind-Value="@Employee.Name" />
+                @*<input class="form-control" @bind="@Employee.Name" />*@
+                <InputText class="form-control" @bind-Value="@Employee.Name" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Surname</label>
-                    <InputText class="form-control" @bind-Value="@Employee.Surname" />
+                <InputText class="form-control" @bind-Value="@Employee.Surname" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Salary Per Month</label>
@@ -35,8 +36,8 @@
             </div>
             <div class="row mt-2">
                 <div class="col">
-                    <BootstrapButton ButtonType = "BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
-                    <BootstrapButton ButtonType = "BootstrapButtonType.Danger" OnClick="OnCancel">Back</BootstrapButton>
+                    <BootstrapButton ButtonType="BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                    <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="OnCancel">Back</BootstrapButton>
                 </div>
             </div>
         </div>
@@ -53,7 +54,7 @@
             Employee = new();
         } else {
             Employee = await httpClient.GetFromJsonAsync<EmployeeEditDto>($"employee/{Id}");
-            if(Employee is null) {
+            if (Employee is null) {
                 //TODO: If employee is null
             }
         }
@@ -67,11 +68,21 @@
         HttpResponseMessage? response = null;
         if (Id == null) {
             response = await httpClient.PostAsJsonAsync("employee", Employee);
+            if (response.IsSuccessStatusCode) {
+                navigationManager.NavigateTo("/employeelist");
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
         } else {
             response = await httpClient.PutAsJsonAsync("employee", Employee);
+            if (response.IsSuccessStatusCode) {
+                navigationManager.NavigateTo("/employeelist");
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
         }
-        response.EnsureSuccessStatusCode();
-        navigationManager.NavigateTo("/employeelist");
     }
 }
 

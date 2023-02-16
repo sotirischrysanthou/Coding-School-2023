@@ -3,6 +3,8 @@ using CoffeeShop.Model;
 using CoffeeShop.Model.Enums;
 using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,11 +14,13 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
     public class EmployeeController : ControllerBase {
         // Properties
         private readonly IEntityRepo<Employee> _employeeRepo;
-        public int errorCode = 0;
+        private readonly IValidator _validator;
+        public String errorMessage = String.Empty;
 
         // Constructors
-        public EmployeeController(IEntityRepo<Employee> employeeRepo) {
+        public EmployeeController(IEntityRepo<Employee> employeeRepo, IValidator validator) {
             _employeeRepo = employeeRepo;
+            _validator = validator;
         }
 
         // GET: api/<EmployeeController>
@@ -77,124 +81,59 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public async Task<int> Post(EmployeeEditDto employee) {
+        public async Task<ActionResult> Post(EmployeeEditDto employee) {
 
             var newEmployee = new Employee(employee.Name, employee.Surname, employee.SalaryPerMonth, employee.EmployeeType);
-            if (ValidateAddEmployee(newEmployee.EmployeeType)) {
-                await Task.Run(() => {
-                    _employeeRepo.Add(newEmployee);
-                });
-                errorCode = 0;
+            var employees = _employeeRepo.GetAll().ToList();
+            if (_validator.ValidateAddEmployee(newEmployee.EmployeeType, employees, out errorMessage)) {
+                try {
+                    await Task.Run(() => { _employeeRepo.Add(newEmployee);});
+                }catch(DbException ex) {
+                    return BadRequest(ex.Message);
+                }
+                return Ok();
             }
-            return errorCode;
-        }
-        private bool ValidateAddEmployee(EmployeeType type) {
-            bool ret = true;
-            var employees = _employeeRepo.GetAll();
-            var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
-            var baristas = employees.Where(e => e.EmployeeType == EmployeeType.Barista);
-            var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
-            var waiters = employees.Where(e => e.EmployeeType == EmployeeType.Waiter);
-            if (type == EmployeeType.Cashier && cashiers.Count() == 2) {
-                ret = false;
-                errorCode = 101;
-            }
-            if (type == EmployeeType.Barista && baristas.Count() == 2) {
-                ret = false;
-                errorCode = 102;
-            }
-            if (type == EmployeeType.Manager && managers.Count() == 1) {
-                ret = false;
-                errorCode = 103;
-            }
-            if (type == EmployeeType.Waiter && waiters.Count() == 3) {
-                ret = false;
-                errorCode = 104;
-            }
-            return ret;
+            return BadRequest(errorMessage);
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut]
-        public async Task<bool> Put(EmployeeEditDto employee) {
+        public async Task<ActionResult> Put(EmployeeEditDto employee) {
             var dbEmployee = await Task.Run(() => { return _employeeRepo.GetById(employee.Id); });
             if (dbEmployee == null) {
                 // TODO: if dbEmployee is null
-                return false;
-            } else if (ValidateUpdateEmployee(employee.EmployeeType, dbEmployee)) {
+                return BadRequest($"Employee not found");
+            } else if (_validator.ValidateUpdateEmployee(employee.EmployeeType, dbEmployee, _employeeRepo.GetAll().ToList(), out errorMessage)) {
                 dbEmployee.Name = employee.Name;
                 dbEmployee.Surname = employee.Surname;
                 dbEmployee.SalaryPerMonth = employee.SalaryPerMonth;
                 dbEmployee.EmployeeType = employee.EmployeeType;
-                _employeeRepo.Update(employee.Id, dbEmployee);
-                return true;
+                try {
+                    _employeeRepo.Update(employee.Id, dbEmployee);
+                } catch (DbUpdateException ex) {
+                    return BadRequest(ex.Message);
+                }
+                return Ok();
             } else {
-                return false;
+                return BadRequest(errorMessage);
             }
-        }
-
-        private bool ValidateUpdateEmployee(EmployeeType type, Employee dbEmployee) {
-            bool ret = true;
-            var employees = _employeeRepo.GetAll();
-            if (dbEmployee == null) {
-                ret = false;
-            } else if (type != dbEmployee.EmployeeType) {
-                var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
-                var baristas = employees.Where(e => e.EmployeeType == EmployeeType.Barista);
-                var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
-                var waiters = employees.Where(e => e.EmployeeType == EmployeeType.Waiter);
-                if (type == EmployeeType.Cashier && cashiers.Count() == 2) {
-                    ret = false;
-                }
-                if (type == EmployeeType.Barista && baristas.Count() == 2) {
-                    ret = false;
-                }
-                if (type == EmployeeType.Manager && managers.Count() == 1) {
-                    ret = false;
-                }
-                if (type == EmployeeType.Waiter && waiters.Count() == 3) {
-                    ret = false;
-                }
-            }
-            return ret;
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public async Task<bool> Delete(int id) {
-            if (ValidateDeleteEmployee(id)) {
-                await Task.Run(() => { _employeeRepo.Delete(id); });
-                return true;
+        public async Task<ActionResult> Delete(int id) {
+            var employees = _employeeRepo.GetAll().ToList();
+            if (_validator.ValidateDeleteEmployee(employees.Where(e => e.Id == id).Single().EmployeeType, employees, out errorMessage)) {
+                try {
+                    await Task.Run(() => { _employeeRepo.Delete(id); });
+                } catch (DbUpdateException) {
+                    return BadRequest($"Could not delete this employee because it has transactions");
+                } catch (KeyNotFoundException) {
+                    return BadRequest($"Employee not found");
+                }
+                return Ok();
             }
-            return false;
-        }
-
-        private bool ValidateDeleteEmployee(int id) {
-            bool ret = true;
-            var employees = _employeeRepo.GetAll();
-            var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
-            var baristas = employees.Where(e => e.EmployeeType == EmployeeType.Barista);
-            var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
-            var waiters = employees.Where(e => e.EmployeeType == EmployeeType.Waiter);
-            var employee = _employeeRepo.GetById(id);
-            if (employee == null) {
-                ret = false;
-            } else {
-                EmployeeType type = employee.EmployeeType;
-                if (type == EmployeeType.Cashier && cashiers.Count() == 1) {
-                    ret = false;
-                }
-                if (type == EmployeeType.Barista && baristas.Count() == 1) {
-                    ret = false;
-                }
-                if (type == EmployeeType.Manager && managers.Count() == 1) {
-                    ret = false;
-                }
-                if (type == EmployeeType.Waiter && waiters.Count() == 1) {
-                    ret = false;
-                }
-            }
-            return ret;
+            return BadRequest(errorMessage);
         }
     }
 }
