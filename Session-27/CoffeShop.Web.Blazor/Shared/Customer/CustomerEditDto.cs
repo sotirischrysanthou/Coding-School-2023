@@ -10,7 +10,7 @@ namespace CoffeShop.Web.Blazor.Shared {
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(3, ErrorMessage = "Type less than 3 characters")]
+        [MaxLength(20, ErrorMessage = "Type less than 20 characters")]
         public string Code { get; set; } = null!;
 
         [Required]

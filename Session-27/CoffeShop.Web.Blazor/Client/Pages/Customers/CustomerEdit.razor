@@ -13,24 +13,27 @@
 @if (Customer == null) {
     <p>Loading ...</p>
 } else {
-    <div class="row">
-        <div class="col-md-6">
-            <label class="form-label">Code</label>
-            <input class="form-control" @bind="@Customer.Code" />
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Description</label>
-            <input class="form-control" @bind="@Customer.Description" />
-        </div>
+    <EditForm Model="Customer" OnValidSubmit="OnSave">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Code</label>
+                <InputText class="form-control" @bind-Value="@Customer.Code" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Description</label>
+                <InputText class="form-control" @bind-Value="@Customer.Description" />
+            </div>
 
-    </div>
-    <div class="row mt-2">
-        <div class="col">
-            <button class="btn btn-success" @onclick="OnSave">Save</button>
-            <BootstrapButton ButtonType="BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
         </div>
-
-    </div>
+        <div class="row mt-2">
+            <div class="col">
+                <BootstrapButton ButtonType = "BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+            </div>
+        </div>
+    </EditForm>
 }
 
 
