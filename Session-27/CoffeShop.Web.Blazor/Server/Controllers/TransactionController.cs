@@ -2,6 +2,7 @@
 using CoffeeShop.Model;
 using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Web.Blazor.Server.Controllers {
@@ -70,11 +71,16 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                 Date = transaction.Date,
                 CustomerId = transaction.CustomerId,
                 EmployeeId = transaction.EmployeeId,
+                TransactionLines = transaction.TransactionLines.Select(transactionLine => new TransactionLine(transactionLine.Quantity, transactionLine.Discount, transactionLine.Price, transactionLine.TotalPrice) {
+                    Id = transactionLine.Id,
+                    TransactionId = transactionLine.TransactionId,
+                    ProductId = transactionLine.ProductId,
+                }).ToList()
             };
             await Task.Run(() => { _transactionRepo.Add(newTransaction); });
         }
 
-        // PUT api/<EmployeeController>/5
+        // PUT api/<TransactionController>/5
         [HttpPut]
         public async Task Put(TransactionEditDto transaction) {
             var dbTransaction = await Task.Run(() => { return _transactionRepo.GetById(transaction.Id); });

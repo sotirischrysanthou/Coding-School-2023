@@ -5,97 +5,153 @@
 @using CoffeeShop.EF.Repositories;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>Transaction Edit</h3>
+@inject IJSRuntime jsRuntime
+<h3>Transaction</h3>
 
 @if (transaction == null) {
     <p>Loading ...</p>
 }
 else {
-    <div class="row">
-        <div class="col-md-6">
-            <label class="form-label">Date</label>
-            <input class="form-control" @bind="@transaction.Date" />
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Total Price</label>
-            <input class="form-control" @bind="@transaction.TotalPrice" 
-            
-            />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label class="form-label">Payment Method</label>
-            <select class="form-control" @bind="transaction.PaymentMethod">
-                @foreach (var paymentMethod in Enum.GetValues<PaymentMethod>()) {
-                    <option value="@paymentMethod">@paymentMethod</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Customer</label>
-            <select class="form-control" @bind="transaction.CustomerId">
-                @foreach (var customer in customerList) {
-                    <option value="@customer.Id">@customer.Code - @customer.Description</option>
-                }
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label class="form-label">Employee</label>
-            <select class="form-control" @bind="transaction.EmployeeId">
-                @foreach (var employee in employeeList) {
-                    <option value="@employee.Id">@employee.Name - @employee.Surname</option>
-                }
-            </select>
-        </div>
-    </div>
-
+    <br />
     <div class="row mt-2">
         <div class="col">
-            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <button class="btn btn-success" @onclick="OnSave">Complete</button>
             <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
         </div>
-
     </div>
-    <br /><br />
-    <h3>Transaction Lines</h3>
-    <button class="btn btn-success" @onclick="AddLine">Add Line</button>
-    <div id="transactionLinesContainer" class="container-fluid">
-        @foreach (var transactionLine in transaction.TransactionLines) {
+    <br />
+    <div class="row">
+        <div class="col-md-6 flex-md-column d-flex justify-content-between">
             <div class="row">
-                <div class="col-md-3">
-                    <label class="form-label">Product</label>
-                    <select class="form-control" @bind="@transactionLine.ProductId">
-                        @foreach (var product in productList) {
-                            <option value="@product.Id">@product.Code - @product.Description</option>
+                <div class="col-md-4">
+                    <label class="form-label">Payment Method</label>
+                </div>
+                <div class="col-md-8">
+                    <select class="form-control" @bind="transaction.PaymentMethod">
+                        @foreach (var paymentMethod in Enum.GetValues<PaymentMethod>()) {
+                            <option value="@paymentMethod">@paymentMethod</option>
                         }
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <label class="form-label">Quantity</label>
-                    <input class="form-control" @bind="@transactionLine.Quantity" />
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Customer</label>
                 </div>
-                <div class="col-md-2">
-                    <label class="form-label">Price</label>
-                    <input class="form-control" @bind="@transactionLine.Price" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label">Discount</label>
-                    <input class="form-control" @bind="@transactionLine.Discount" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label">Total Price</label>
-                    <input class="form-control" @bind="@transactionLine.TotalPrice" />
-                </div>
-                <input class="form-control" @bind="@transactionLine.TransactionId" hidden/>
-                <div class="col-md-1">
-                    <button class="btn btn-danger" @onclick="()=>RemoveLine(transactionLine)">X</button>
+                <div class="col-md-8">
+                    <select class="form-control" @bind="transaction.CustomerId">
+                        @foreach (var customer in customerList) {
+                            <option value="@customer.Id">@customer.Code - @customer.Description</option>
+                        }
+                    </select>
                 </div>
             </div>
-        }
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Employee</label>
+                </div>
+                <div class="col-md-8">
+                    <select class="form-control" @bind="transaction.EmployeeId">
+                        @foreach (var employee in employeeList) {
+                            <option value="@employee.Id">@employee.Name - @employee.Surname</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <table id="TransactionLegendTable" class="table table-primary">
+                <tbody>
+                    <tr>
+                        <td>
+                            Date:
+                        </td>
+                        <td>
+                            @transaction.Date
+                            <input class="form-control" @bind="@transaction.Date" hidden />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Quantity:
+                        </td>
+                        <td>
+                            @totalQuantity
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Discount:
+                        </td>
+                        <td>
+                            @totalDiscount
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total:
+                        </td>
+                        <td>
+                            @transaction.TotalPrice
+                            <input class="form-control" @bind="@transaction.TotalPrice" hidden />
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    
+    <br /><br />
+    <h3>Transaction Lines</h3>
+    <br />
+    <button class="btn btn-success" @onclick="AddLine">Add Line</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Total Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transactionLine in transaction.TransactionLines) {
+                <tr>
+                    <td>
+                        @transactionLine.ProductId
+                    </td>
+                    <td>
+                        @transactionLine.Quantity
+                    </td>
+                    <td>
+                       @transactionLine.Price
+                    </td>
+                    <td>
+                        @transactionLine.Discount
+                    </td>
+                    <td>
+                        @transactionLine.TotalPrice
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="()=> EditItem(transactionLine)">Edit</button>
+                        <button class="btn btn-danger" @onclick="()=> DeleteItem(transactionLine)">Delete</button>
+                    </td>
+                    <input class="form-control" @bind="@transactionLine.TransactionId" hidden />
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+
+    
 }
 
 
@@ -108,26 +164,20 @@ else {
     private List<CustomerListDto> customerList = new();
     private List<EmployeeListDto> employeeList = new();
     private List<ProductListDto> productList = new();
-
     private bool isLoading { get; set; } = true;
+    private decimal totalQuantity { get; set; }
+    private decimal totalDiscount { get; set; }
+
+
 
     protected override async Task OnInitializedAsync() {
-        var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
-        if(tempCustomerList is null) {
-            //Todo handle if customerList is null
-            return;
-        } else {
-            customerList = tempCustomerList;
-        }
-        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
-        if (tempEmployeeList is null) {
-            //Todo handle if employeeList is null
-            return;
-        } else {
-            employeeList = tempEmployeeList;
-        }
+        customerList = await getCustomers();
+        employeeList = await getEmployees();
+        productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
+
         if (Id == null) {
             transaction = new();
+            transaction.TransactionLines = new List<TransactionLineEditDto>();
             transaction.Date = DateTime.Now;
         }
         else {
@@ -137,12 +187,12 @@ else {
                 return;
             }
             //TODO: selected
-
-            productList = await httpClient.GetFromJsonAsync <List<ProductListDto>>("product");
-
         }
+
         isLoading = false;
     }
+
+    
 
     private void OnCancel() {
         navigationManager.NavigateTo("transactionlist");
@@ -161,12 +211,47 @@ else {
         navigationManager.NavigateTo("transactionlist");
     }
 
+    private async Task<List<CustomerListDto>> getCustomers() {
+        var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
+        if(tempCustomerList is null) {
+            //Todo handle if customerList is null
+            return new List<CustomerListDto>();
+        } else {
+            return tempCustomerList;
+        }
+    }
+
+    private async Task<List<EmployeeListDto>> getEmployees() {
+        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
+        if (tempEmployeeList is null) {
+            //Todo handle if employeeList is null
+            return new List<EmployeeListDto>();
+        }
+        else {
+            return tempEmployeeList;
+        }
+    }
+
     private void AddLine() {
-        transaction.TransactionLines.Add(new TransactionLineEditDto());
+        //transaction.TransactionLines.Add(new TransactionLineEditDto());
     }
 
     private void RemoveLine(TransactionLineEditDto transactionLine) {
-        transaction.TransactionLines.Remove(transactionLine);
+        //transaction.TransactionLines.Remove(transactionLine);
     }
+
+    private void EditItem(TransactionLineEditDto transactionLine) {
+        navigationManager.NavigateTo($"transactionline/edit/{transactionLine.Id}");
+    }
+
+    private async Task DeleteItem(TransactionLineEditDto transactionLine) {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm) {
+            var response = await httpClient.DeleteAsync($"transactionline/{transactionLine.Id}");
+            response.EnsureSuccessStatusCode();
+            //await LoadItemsFromServer();
+        }
+    }
+    
 }
 

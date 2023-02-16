@@ -48,7 +48,8 @@ namespace CoffeeShop.EF.Repositories
         public void Update(int id, Transaction entity)
         {
             using var context = new CoffeeShopDbContext();
-            var dbCoffeShop = context.Transactions.Where(transaction => transaction.Id == id).SingleOrDefault();
+            var dbCoffeShop = context.Transactions.Where(transaction => transaction.Id == id)
+                .Include(Transaction => Transaction.TransactionLines).SingleOrDefault();
             if (dbCoffeShop is null)
                 return;
             dbCoffeShop.Date = entity.Date;
