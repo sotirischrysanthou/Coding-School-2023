@@ -1,0 +1,58 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@page "/monthlyledger"
+@using CoffeShop.Web.Blazor.Shared;
+<h3>Monthly Ledgers</h3>
+
+@if (isLoading) {
+        <p>Loading ...</p>
+} else {
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Income</th>
+                    <th>Expenses</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var monthlyLedger in MonthlyLedgers) {
+                <tr>
+                    <td>@monthlyLedger.Year</td>
+                    <td>@monthlyLedger.Month</td>
+                    <td>@monthlyLedger.Income</td>
+                    <td>@monthlyLedger.Expenses</td>
+                    <th>@monthlyLedger.Total</th>
+                </tr>
+            }
+            </tbody>
+        </table>
+}
+
+@code {
+    private List<MonthlyLedgerDto> MonthlyLedgers = new();
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer() {
+        var tempMonthlyLedgers = await httpClient.GetFromJsonAsync<List<MonthlyLedgerDto>>("monthlyledger");
+        if (tempMonthlyLedgers is not null) {
+            MonthlyLedgers = tempMonthlyLedgers;
+        } else {
+            // TODO: if tempCustomerList is null
+        }
+    }
+
+
+
+
+
+}
