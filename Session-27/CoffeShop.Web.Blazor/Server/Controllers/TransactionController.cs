@@ -102,14 +102,6 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                         TotalPrice = transactionLine.TotalPrice,
                         TransactionId = transactionLine.TransactionId,
                         ProductId = transactionLine.ProductId,
-                        //Product = new ProductListDto {
-                        //    Id = transactionLine.ProductId,
-                        //    Price = transactionLine.Product.Price,
-                        //    Cost = transactionLine.Product.Cost,
-                        //    Description = transactionLine.Product.Description,
-                        //    Code = transactionLine.Product.Code,
-                        //    ProductCategoryId = transactionLine.Product.ProductCategoryId
-                        //}
                     }).ToList()
                 };
                 foreach (var transactionLine in transaction.TransactionLines) {
@@ -156,11 +148,17 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             dbTransaction.PaymentMethod = transaction.PaymentMethod;
             dbTransaction.CustomerId = transaction.CustomerId;
             dbTransaction.EmployeeId = transaction.EmployeeId;
-            dbTransaction.TransactionLines = transaction.TransactionLines.Select(transactionLine => new TransactionLine(transactionLine.Quantity, transactionLine.Discount, transactionLine.Price, transactionLine.TotalPrice) {
-                ProductId = transactionLine.ProductId,
-                TransactionId = transactionLine.TransactionId,
-                Id = transactionLine.Id
-            }).ToList();
+            dbTransaction.TransactionLines = transaction.TransactionLines
+                .Select(transactionLine => new TransactionLine(
+                    transactionLine.Quantity,
+                    transactionLine.Discount,
+                    transactionLine.Price,
+                    transactionLine.TotalPrice) {
+                        ProductId = transactionLine.ProductId,
+                        TransactionId = transactionLine.TransactionId,
+                        Id = transactionLine.Id
+                    }
+                ).ToList();
 
             _transactionRepo.Update(transaction.Id, dbTransaction);
         }
@@ -171,9 +169,11 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             try {
                 await Task.Run(() => { _transactionRepo.Delete(id); });
                 return Ok();
-            } catch (DbUpdateException) {
+            }
+            catch (DbUpdateException) {
                 return BadRequest($"Could not delete this transaction because it has transactionLines");
-            } catch (KeyNotFoundException) {
+            }
+            catch (KeyNotFoundException) {
                 return BadRequest($"Transaction not found");
             }
 

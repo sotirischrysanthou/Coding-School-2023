@@ -88,37 +88,12 @@ else
 @code {
     [Parameter] public int? Id { get; set; }
     private TransactionDetailsDto? transaction { get; set; }
-    //private List<CustomerListDto> customerList = new();
-    //private List<EmployeeListDto> employeeList = new();
-    //private List<ProductListDto> productList = new();
 
     private bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
-        //var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
-        //if (tempCustomerList is null)
-        //{
-        //    Todo handle if customerList is null
 
-        //    return;
-        //}
-        //else
-        //{
-        //    customerList = tempCustomerList;
-        //}
-        //var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("employee");
-        //if (tempEmployeeList is null)
-        //{
-        //    Todo handle if employeeList is null
-
-        //    return;
-        //}
-        //else
-        //{
-        //    employeeList = tempEmployeeList;
-        //}
-        //productList = await httpClient.GetFromJsonAsync<List<ProductListDto>>("product");
         if (Id == null)
         {
             transaction = new();

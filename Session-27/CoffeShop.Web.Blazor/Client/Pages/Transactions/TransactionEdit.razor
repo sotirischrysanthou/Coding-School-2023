@@ -13,27 +13,10 @@
 }
 else {
     <br />
-    @*<div class="row mt-2">
-        <div class="col">
-            <button class="btn btn-success" @onclick="OnSave">Complete</button>
-            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
-        </div>
-    </div>*@
     <br />
     <div class="row">
         <div class="col-md-5 flex-md-column d-flex justify-content-around">
-            @*<div class="row">
-                <div class="col-md-4">
-                    <label class="form-label">Payment Method</label>
-                </div>
-                <div class="col-md-8">
-                    <select class="form-control" @bind="transaction.PaymentMethod" disabled=@disabledValue>
-                        @foreach (var paymentMethod in Enum.GetValues<PaymentMethod>()) {
-                            <option value="@paymentMethod">@paymentMethod</option>
-                        }
-                    </select>
-                </div>
-            </div>*@
+
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-label">Customer</label>
@@ -105,11 +88,14 @@ else {
             </table>
         </div>
         <div class="col-md-2 flex-md-column d-flex justify-content-between payment-col">
-            <button class="btn btn-primary btn-payment" @onclick="OnCash">Cash</button>
-            <button class="btn btn-primary btn-payment" @onclick="OnCard">Card</button>
+                <button class="@cardButtonClass" @onclick="OnCash" @onclick:preventDefault> Cash </button>
+                <button class="@cashButtonClass" @onclick="OnCard" @onclick:preventDefault> Card </button>
         </div>
         <div class="col-md-1 flex-md-row d-flex justify-content-start payment-col">
             <button class="btn btn-danger btn-cancel-transaction" @onclick="OnCancel">Cancel</button>
+        </div>
+        <div class="col-md-1 flex-md-row d-flex justify-content-start payment-col">
+            <button class="btn btn-success btn-cancel-transaction" @onclick="OnSave">Save</button>
         </div>
     </div>
 
@@ -134,40 +120,33 @@ else {
             @foreach (var transactionLine in transaction.TransactionLines) {
                 <tr>
                     <td>
-                        <select class="form-control" @bind="@transactionLine.ProductId" @bind:after="() => OnProductSelect(transactionLine)">
+                        <InputSelect class="form-control" @bind-Value="@transactionLine.ProductId" @bind-Value:after="() => OnProductSelect(transactionLine)">
                             @foreach (var product in productList) {
                                 <option value="@product.Id">@product.Code - @product.Description</option>
                             }
-                        </select>
+                        </InputSelect>
+                    </td>
+                   <td>
+                         <InputNumber class="form-control" @bind-Value=@transactionLine.Quantity @bind-Value:after="() => OnLineQuantityChange(transactionLine)"/>
                     </td>
                     <td>
-                        <input class="form-control" @bind=@transactionLine.Quantity @bind:after="() => OnLineQuantityChange(transactionLine)">
+                        <InputNumber class="form-control" @bind-Value=@transactionLine.Price disabled/>
                     </td>
                     <td>
-                        <input class="form-control" @bind=@transactionLine.Price disabled>
+                        <InputNumber class="form-control" @bind-Value=@transactionLine.Discount @bind-Value:after="() => OnDiscountChange(transactionLine)" disabled/>
                     </td>
                     <td>
-                        <input class="form-control" @bind=@transactionLine.Discount @bind:after="() => OnDiscountChange(transactionLine)" disabled>
+                    <InputNumber class="form-control" @bind-Value=@transactionLine.TotalPrice disabled/>
                     </td>
                     <td>
-                        <input class="form-control" @bind=@transactionLine.TotalPrice disabled>
-                    </td>
-                    <td>
-                        @*<button class="btn btn-primary" @onclick="()=> EditItem(transactionLine)">Edit</button>*@
-                        <button class="btn btn-danger" @onclick="()=> RemoveLine(transactionLine)">Delete</button>
+                     <BootstrapButton ButtonType = "BootstrapButtonType.Danger" OnClick="()=> RemoveLine(transactionLine)">X</BootstrapButton>
                     </td>
                     <input class="form-control" @bind="@transactionLine.TransactionId" hidden />
                 </tr>
             }
         </tbody>
-
-
     </table>
-
-    
 }
-
-
 
 
 @code {
@@ -182,6 +161,9 @@ else {
     private decimal totalDiscount { get; set; }
     private decimal preDiscountTotalPrice { get; set; }
     private bool disabledValue { get; set; } = true;
+    private bool isCashButtonClicked = false;
+    private string cardButtonClass = "btn btn-secondary btn-payment";
+    private string cashButtonClass = "btn btn-secondary btn-payment";
 
 
     protected override async Task OnInitializedAsync() {
@@ -217,11 +199,8 @@ else {
         await UpdateTotalQuantity();
         await UpdatePreDiscountTotalPrice();
         await UpdateTransactionTotalPrice();
-
         isLoading = false;
     }
-
-
 
     private void OnCancel() {
         navigationManager.NavigateTo("transactionlist");
@@ -229,6 +208,14 @@ else {
 
     private async Task OnSave() {
         HttpResponseMessage? response = null;
+
+        foreach(var transactionLine in transaction.TransactionLines) {
+            if (transactionLine.ProductId == 0 || transactionLine.Quantity < 1) {
+                await jsRuntime.InvokeVoidAsync("alert","Please fill all inputs with valid data!");
+                return;
+            }
+        }
+
         if (Id == null) {
             response = await httpClient.PostAsJsonAsync("transaction", transaction);
         } else {
@@ -355,17 +342,26 @@ else {
     }
 
     async Task OnCash() {
+        isCashButtonClicked = true;
+        cardButtonClass = "btn btn-success btn-payment";
+        cashButtonClass = "btn btn-secondary btn-payment";
+
         transaction.PaymentMethod = PaymentMethod.Cash;
-        await OnSave();
+        //await OnSave();
     }
 
     async Task OnCard() {
         if (CardEligible()){
+            isCashButtonClicked = false;
+            cardButtonClass = "btn btn-secondary btn-payment";
+            cashButtonClass = "btn btn-success btn-payment";
             transaction.PaymentMethod = PaymentMethod.CreditCard;
-            await OnSave();
+            //await OnSave();
         }
         else {
             var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "This transaction must be paid by cash. Do you want to proceed?");
+            cardButtonClass = "btn btn-secondary btn-payment";
+            cashButtonClass = "btn btn-secondary btn-payment";
             if (confirm) {
                 await OnCash();
             }
