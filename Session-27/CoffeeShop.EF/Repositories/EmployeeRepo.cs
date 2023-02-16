@@ -37,7 +37,9 @@ namespace CoffeeShop.EF.Repositories
         public Employee? GetById(int id)
         {
             using var context = new CoffeeShopDbContext();
-            return context.Employees.Where(employee => employee.Id == id).SingleOrDefault();
+            return context.Employees.Where(employee => employee.Id == id)
+                .Include(transactions => transactions.Transactions)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Employee entity)

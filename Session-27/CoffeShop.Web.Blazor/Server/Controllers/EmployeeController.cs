@@ -50,6 +50,29 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             }
         }
 
+        // GET: api/<ProductsController>
+        [Route("/employeelist/details/{id}")]
+        [HttpGet]
+        public async Task<EmployeeDetailsDto?> GetDetailsById(int id) {
+            var result = await Task.Run(() => { return _employeeRepo.GetById(id); });
+            if (result is null) {
+                return null;
+            } else {
+                return new EmployeeDetailsDto  {
+                    Id = id,
+                    Name = result.Name,
+                    Surname = result.Surname,
+                    SalaryPerMonth = result.SalaryPerMonth,
+                    EmployeeType = result.EmployeeType,
+                    Transactions = result.Transactions.Select(products => new TransactionListDto {
+                        Date = products.Date,
+                        TotalPrice = products.TotalPrice,
+                        PaymentMethod = products.PaymentMethod,
+                    }).ToList()
+                };
+            }
+        }
+
         // POST api/<EmployeeController>
         [HttpPost]
         public async Task Post(EmployeeEditDto employee) {
