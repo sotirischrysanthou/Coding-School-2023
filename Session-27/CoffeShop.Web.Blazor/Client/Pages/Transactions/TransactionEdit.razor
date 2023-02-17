@@ -13,90 +13,134 @@
 }
 else {
     <br />
-    <br />
-    <div class="row">
-        <div class="col-md-5 flex-md-column d-flex justify-content-around">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="form-label">Customer</label>
-                    <select class="form-control" @bind="transaction.CustomerId">
-                        @foreach (var customer in customerList) {
-                            <option value="@customer.Id">@customer.Code - @customer.Description</option>
-                        }
-                    </select>
-                </div>
-            
-                <div class="col-md-6">
-                    <label class="form-label">Employee</label>
-                    <select class="form-control" @bind="transaction.EmployeeId">
-                        @foreach (var employee in employeeList) {
-                            <option value="@employee.Id">@employee.Name - @employee.Surname</option>
-                        }
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3 flex-md-column d-flex justify-content-center">
-            <table id="TransactionLegendTable" class="table table-primary table-transactionLegend">
-                <tbody>
-                    <tr>
-                        <td>
-                            Date:
-                        </td>
-                        <td>
-                            @transaction.Date
-                            <input class="form-control" @bind="@transaction.Date" hidden />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Quantity:
-                        </td>
-                        <td>
-                            @totalQuantity
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Subtotal:
-                        </td>
-                        <td>
-                            @preDiscountTotalPrice &euro;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Discount:
-                        </td>
-                        <td>
-                            @totalDiscount &euro;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Total:
-                        </td>
-                        <td>
-                            @transaction.TotalPrice &euro;
-                            <input class="form-control" @bind="@transaction.TotalPrice" hidden />
-                        </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2 flex-md-column d-flex justify-content-between payment-col">
-                <button class="@cardButtonClass" @onclick="OnCash" @onclick:preventDefault> Cash </button>
-                <button class="@cashButtonClass" @onclick="OnCard" @onclick:preventDefault> Card </button>
-        </div>
-        <div class="col-md-1 flex-md-row d-flex justify-content-start payment-col">
-            <button class="btn btn-danger btn-cancel-transaction" @onclick="OnCancel">Cancel</button>
-        </div>
+   
+    @if(Id != null) {
         <div class="col-md-1 flex-md-row d-flex justify-content-start payment-col">
             <button class="btn btn-success btn-cancel-transaction" @onclick="OnSave">Save</button>
+            <button class="btn btn-danger btn-cancel-transaction" @onclick="OnCancel">Cancel</button>
         </div>
+        <br />
+    }
+    <div class="row">
+        @if (Id == null) {
+            <div class="col-md-5 flex-md-column d-flex justify-content-around">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Customer</label>
+                        <select class="form-control" @bind="transaction.CustomerId">
+                            @foreach (var customer in customerList) {
+                                <option value="@customer.Id">@customer.Code - @customer.Description</option>
+                            }
+                        </select>
+                    </div>
+            
+                    <div class="col-md-6">
+                        <label class="form-label">Employee</label>
+                        <select class="form-control" @bind="transaction.EmployeeId">
+                            @foreach (var employee in employeeList) {
+                                <option value="@employee.Id">@employee.Name - @employee.Surname</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-1"></div>
+            <div class="col-md-3 flex-md-column d-flex justify-content-center">
+                <table id="TransactionLegendTable" class="table table-primary table-transactionLegend">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Date:
+                            </td>
+                            <td>
+                                @transaction.Date
+                                <input class="form-control" @bind="@transaction.Date" hidden />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Quantity:
+                            </td>
+                            <td>
+                                @totalQuantity
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Subtotal:
+                            </td>
+                            <td>
+                                @preDiscountTotalPrice &euro;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Discount:
+                            </td>
+                            <td>
+                                @totalDiscount &euro;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total:
+                            </td>
+                            <td>
+                                @transaction.TotalPrice &euro;
+                                <input class="form-control" @bind="@transaction.TotalPrice" hidden />
+                            </td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        
+
+            <div class="col-md-2 flex-md-column d-flex justify-content-between payment-col">
+                    <button class="@cardButtonClass" @onclick="OnCash" @onclick:preventDefault> Cash </button>
+                    <button class="@cashButtonClass" @onclick="OnCard" @onclick:preventDefault> Card </button>
+            </div>
+            <div class="col-md-1 flex-md-row d-flex justify-content-start payment-col">
+                <button class="btn btn-danger btn-cancel-transaction" @onclick="OnCancel">Cancel</button>
+            </div>
+            
+        }
+        else{
+            <div class="col-md-2">
+                <label class="form-label">Date</label>
+                <input class="form-control" @bind="@transaction.Date" disabled />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Customer</label>
+                <select class="form-control" @bind="transaction.CustomerId">
+                    @foreach (var customer in customerList) {
+                        <option value="@customer.Id">@customer.Code - @customer.Description</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Employee</label>
+                <select class="form-control" @bind="transaction.EmployeeId">
+                    @foreach (var employee in employeeList) {
+                        <option value="@employee.Id">@employee.Name - @employee.Surname</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Total Price</label>
+                <input class="form-control" @bind="@transaction.TotalPrice" disabled/>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Payment Method</label>
+                <select class="form-control" @bind="transaction.PaymentMethod">
+                    @foreach (var method in Enum.GetValues<PaymentMethod>()) {
+                        <option value="@method">@method</option>
+                    }
+                </select>
+            </div>
+        }
     </div>
 
     
@@ -160,10 +204,10 @@ else {
     private decimal totalQuantity { get; set; }
     private decimal totalDiscount { get; set; }
     private decimal preDiscountTotalPrice { get; set; }
-    private bool disabledValue { get; set; } = true;
-    private bool isCashButtonClicked = false;
-    private string cardButtonClass = "btn btn-secondary btn-payment";
-    private string cashButtonClass = "btn btn-secondary btn-payment";
+    //private bool disabledValue { get; set; } = true;
+    //private bool isCashButtonClicked = false;
+    private string cardButtonClass = "btn btn-primary btn-payment";
+    private string cashButtonClass = "btn btn-primary btn-payment";
 
 
     protected override async Task OnInitializedAsync() {
@@ -342,26 +386,26 @@ else {
     }
 
     async Task OnCash() {
-        isCashButtonClicked = true;
-        cardButtonClass = "btn btn-success btn-payment";
-        cashButtonClass = "btn btn-secondary btn-payment";
+        //isCashButtonClicked = true;
+        //cardButtonClass = "btn btn-success btn-payment";
+        //cashButtonClass = "btn btn-secondary btn-payment";
 
         transaction.PaymentMethod = PaymentMethod.Cash;
-        //await OnSave();
+        await OnSave();
     }
 
     async Task OnCard() {
         if (CardEligible()){
-            isCashButtonClicked = false;
-            cardButtonClass = "btn btn-secondary btn-payment";
-            cashButtonClass = "btn btn-success btn-payment";
+            //isCashButtonClicked = false;
+            //cardButtonClass = "btn btn-secondary btn-payment";
+            //cashButtonClass = "btn btn-success btn-payment";
             transaction.PaymentMethod = PaymentMethod.CreditCard;
-            //await OnSave();
+            await OnSave();
         }
         else {
             var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "This transaction must be paid by cash. Do you want to proceed?");
-            cardButtonClass = "btn btn-secondary btn-payment";
-            cashButtonClass = "btn btn-secondary btn-payment";
+            //cardButtonClass = "btn btn-secondary btn-payment";
+            //cashButtonClass = "btn btn-secondary btn-payment";
             if (confirm) {
                 await OnCash();
             }
