@@ -266,7 +266,7 @@ else {
             await jsRuntime.InvokeVoidAsync("alert", "Please add a transaction line!");
             return;
         }
-        if(!isCardButtonClicked || !isCashButtonClicked) {
+        if(!isCardButtonClicked && !isCashButtonClicked) {
             await jsRuntime.InvokeVoidAsync("alert", "Please choose payment method!");
             return;
         }
