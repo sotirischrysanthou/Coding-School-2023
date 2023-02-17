@@ -4,10 +4,12 @@
 @inject IJSRuntime jsRuntime
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>Edit Product</h3>
+<PageTitle>Coffee Shop</PageTitle>
+<h3>Product Edit</h3>
 
 @if (isLoading) {
-    <p>Loading ...</p>
+        <div class="spinner-border text-secondary" role="status">
+    </div>
 } else {
     <EditForm Model="product" OnValidSubmit="OnSave">
     <DataAnnotationsValidator />

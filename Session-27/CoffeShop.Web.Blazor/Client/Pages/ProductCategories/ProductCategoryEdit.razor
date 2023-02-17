@@ -3,10 +3,12 @@
 @using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
+<PageTitle>Coffee Shop</PageTitle>
 <h3>Product Category Edit</h3>
 
 @if (ProductCategory == null) {
-            <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+    </div>
 } else {
         <EditForm Model="ProductCategory" OnValidSubmit="OnSave">
         <DataAnnotationsValidator />

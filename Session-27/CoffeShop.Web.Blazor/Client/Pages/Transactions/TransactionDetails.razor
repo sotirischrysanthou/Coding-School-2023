@@ -6,11 +6,13 @@
 @inject HttpClient httpClient
 @inject IJSRuntime jsRuntime
 @inject NavigationManager navigationManager
+<PageTitle>Coffee Shop</PageTitle>
 <h3>Transaction Details</h3>
 
 @if (transaction == null)
 {
-    <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+    </div>
 }
 else
 {

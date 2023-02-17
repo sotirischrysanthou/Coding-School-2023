@@ -5,11 +5,13 @@
 @using CoffeeShop.EF.Repositories;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
+<PageTitle>Coffee Shop</PageTitle>
 @inject IJSRuntime jsRuntime
-<h3>Transaction</h3>
+<h3>Transaction Edit</h3>
 
 @if (transaction == null) {
-    <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+    </div>
 }
 else {
     <br />

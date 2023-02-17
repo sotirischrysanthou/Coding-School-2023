@@ -3,6 +3,7 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
+<PageTitle>Coffee Shop</PageTitle>
 
 
 @if (Id is null) {
@@ -13,7 +14,8 @@
 }
 
 @if (Customer == null) {
-    <p>Loading ...</p>
+       <div class="spinner-border text-secondary" role="status">
+    </div>
 } else {
     <EditForm Model="Customer" OnValidSubmit="OnSave">
         <DataAnnotationsValidator />
