@@ -266,8 +266,12 @@ else {
             await jsRuntime.InvokeVoidAsync("alert", "Please add a transaction line!");
             return;
         }
-        if(!isCardButtonClicked && !isCashButtonClicked) {
+        if(transaction.PaymentMethod == 0) {
             await jsRuntime.InvokeVoidAsync("alert", "Please choose payment method!");
+            return;
+        }
+        if (!CardEligible() && transaction.PaymentMethod== PaymentMethod.CreditCard) {
+            await jsRuntime.InvokeVoidAsync("alert", "Please choose cash method!");
             return;
         }
         foreach(var transactionLine in transaction.TransactionLines) {
