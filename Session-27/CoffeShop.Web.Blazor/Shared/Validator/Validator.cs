@@ -1,4 +1,5 @@
-﻿using CoffeeShop.Model;
+﻿using CoffeeShop.EF.Repositories;
+using CoffeeShop.Model;
 using CoffeeShop.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,15 @@ namespace CoffeShop.Web.Blazor.Shared {
         public readonly MinMax BaristasLimits;
         public readonly MinMax WaitersLimits;
         public readonly MinMax CustomersLimits;
-
+        private IEntityRepo<Product> _productRepo;
+        
         public Validator() {
             ManagersLimits = new MinMax() { Min = 1, Max = 1 };
             CashiersLimits = new MinMax() { Min = 1, Max = 2 };
             BaristasLimits = new MinMax() { Min = 1, Max = 2 };
             WaitersLimits = new MinMax() { Min = 1, Max = 3 };
             CustomersLimits = new MinMax() { Min = 1, Max = 1 };
+
         }
         public bool ValidateAddEmployee(EmployeeType type, List<Employee> employees, out String errorMessage) {
             errorMessage = "Succeed ";
@@ -123,9 +126,58 @@ namespace CoffeShop.Web.Blazor.Shared {
             return true;
         }
 
-        public bool ValidateTransaction(Transaction transaction, out string errorMessage) {
+        public bool ValidateTransaction(Transaction transaction, List<Product> products, out string errorMessage) {
+            decimal transactionPreDiscountTotalPrice = 0;
+            string transactionErrorMessage = "CAUGHT RED HANDED!!!! (for presentation purpose)";
+            foreach (var transLine in transaction.TransactionLines) {
+                var product = products.Find(product => product.Id == transLine.ProductId);
+
+                if(transLine.Price != product.Price) {
+                    errorMessage = transactionErrorMessage;
+                    return false;
+                }
+
+                transactionPreDiscountTotalPrice += transLine.Quantity * transLine.Price;
+            }
+
+            if (transactionPreDiscountTotalPrice > 10) {
+                if(transaction.TotalPrice != transactionPreDiscountTotalPrice * (1 - 0.15M) ){
+                    errorMessage = transactionErrorMessage;
+                    return false;
+                }
+
+                foreach (var transLine in transaction.TransactionLines) {
+                    if (transLine.Discount != 15) {
+                        errorMessage = transactionErrorMessage;
+                        return false;
+                    }
+                    if (transLine.TotalPrice != transLine.Quantity * transLine.Price * (1-0.15M)) {
+                        errorMessage = transactionErrorMessage;
+                        return false;
+                    }
+                }
+            }
+            else {
+                if (transaction.TotalPrice != transactionPreDiscountTotalPrice) {
+                    errorMessage = transactionErrorMessage;
+                    return false;
+                }
+
+                foreach (var transLine in transaction.TransactionLines) {
+                    if (transLine.Discount != 0) {
+                        errorMessage = transactionErrorMessage;
+                        return false;
+                    }
+                    if (transLine.TotalPrice != transLine.Quantity * transLine.Price ) {
+                        errorMessage = transactionErrorMessage;
+                        return false;
+                    }
+                }
+            }
+            
             errorMessage = "Succeed";
-            throw new NotImplementedException();
+            return true;
+            //throw new NotImplementedException();
         }
     }
 

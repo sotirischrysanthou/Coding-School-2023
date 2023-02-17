@@ -1,23 +1,26 @@
 ﻿using CoffeeShop.EF.Repositories;
 using CoffeeShop.Model;
 using CoffeShop.Web.Blazor.Shared;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 
 namespace CoffeShop.Web.Blazor.Server.Controllers {
     [Route("[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase {
+
         // Properties
         private readonly IEntityRepo<Transaction> _transactionRepo;
         private readonly IEntityRepo<Product> _productRepo;
+        private readonly IValidator _validator;
+        public String errorMessage = String.Empty;
 
         // Constructors
-        public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Product> productRepo) {
+        public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Product> productRepo, IValidator validator) {
             _transactionRepo = transactionRepo;
             _productRepo = productRepo;
+            _validator = validator;
         }
 
         // GET: api/<TransactionController>
@@ -74,7 +77,8 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             var result = await Task.Run(() => { return _transactionRepo.GetById(id); });
             if (result is null) {
                 return null;
-            } else {
+            }
+            else {
                 TransactionDetailsDto transaction = new TransactionDetailsDto {
                     Id = id,
                     Date = result.Date,
@@ -121,7 +125,8 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // POST api/<TransactionController>
         [HttpPost]
-        public async Task Post(TransactionEditDto transaction) {
+        public async Task<ActionResult> Post(TransactionEditDto transaction) {
+            var products = _productRepo.GetAll().ToList();
             var newTransaction = new Transaction(transaction.TotalPrice, transaction.PaymentMethod) {
                 Date = transaction.Date,
                 CustomerId = transaction.CustomerId,
@@ -132,17 +137,29 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                     ProductId = transactionLine.ProductId,
                 }).ToList()
             };
-            await Task.Run(() => { _transactionRepo.Add(newTransaction); });
+
+            if (_validator.ValidateTransaction(newTransaction, products, out errorMessage)) {
+                try {
+                    await Task.Run(() => { _transactionRepo.Add(newTransaction); });
+                }
+                catch (DbException ex) {
+                    return BadRequest(ex.Message);
+                }
+                return Ok();
+            }
+            return BadRequest(errorMessage);
+
         }
 
         // PUT api/<TransactionController>/5
         [HttpPut]
-        public async Task Put(TransactionEditDto transaction) {
+        public async Task<ActionResult> Put(TransactionEditDto transaction) {
+            var products = _productRepo.GetAll().ToList();
             var dbTransaction = await Task.Run(() => { return _transactionRepo.GetById(transaction.Id); });
-            if (dbTransaction is null) {
+            //if (dbTransaction is null) {
                 //Todo: handle if dbTransaction is null
-                return;
-            }
+            //    return;
+            //}
             dbTransaction.Date = transaction.Date;
             dbTransaction.TotalPrice = transaction.TotalPrice;
             dbTransaction.PaymentMethod = transaction.PaymentMethod;
@@ -154,13 +171,24 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
                     transactionLine.Discount,
                     transactionLine.Price,
                     transactionLine.TotalPrice) {
-                        ProductId = transactionLine.ProductId,
-                        TransactionId = transactionLine.TransactionId,
-                        Id = transactionLine.Id
-                    }
+                    ProductId = transactionLine.ProductId,
+                    TransactionId = transactionLine.TransactionId,
+                    Id = transactionLine.Id
+                }
                 ).ToList();
 
-            _transactionRepo.Update(transaction.Id, dbTransaction);
+            if (_validator.ValidateTransaction(dbTransaction, products, out errorMessage)) {
+                try {
+                    await Task.Run(() => { _transactionRepo.Update(transaction.Id, dbTransaction); });
+                }
+                catch (DbException ex) {
+                    return BadRequest(ex.Message);
+                }
+                return Ok();
+            }
+            return BadRequest(errorMessage);
+
+            
         }
 
         // DELETE api/<TransactionController>/5

@@ -3,10 +3,15 @@
 @inject IJSRuntime jsRuntime
 @page "/customerlist"
 @using CoffeShop.Web.Blazor.Shared;
+
+<PageTitle>Customers</PageTitle>
+
 <h3>Customers</h3>
 
 @if (isLoading) {
-    <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only"></span>
+    </div>
 } else {
             <BootstrapButton ButtonType = "BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
 

@@ -4,7 +4,7 @@
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
 
-
+<PageTitle>Customer Edit</PageTitle>
 @if (Id is null) {
     <h3>Create Customer</h3>
 } else {
@@ -13,7 +13,10 @@
 }
 
 @if (Customer == null) {
-    <p>Loading ...</p>
+<div class="spinner-border text-secondary" role="status">
+    <span class="sr-only"></span>
+</div>
+   
 } else {
     <EditForm Model="Customer" OnValidSubmit="OnSave">
         <DataAnnotationsValidator />

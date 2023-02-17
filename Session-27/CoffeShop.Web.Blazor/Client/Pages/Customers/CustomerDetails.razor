@@ -2,10 +2,13 @@
 @using CoffeShop.Web.Blazor.Shared;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<h3>Customer Details</h3>
+<PageTitle>Customer Details</PageTitle>
 
+<h3>Customer Details</h3>
 @if (Customer == null) {
-        <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only"></span>
+    </div>
 } else {
         <div class="row">
             <div class="col-md-6">

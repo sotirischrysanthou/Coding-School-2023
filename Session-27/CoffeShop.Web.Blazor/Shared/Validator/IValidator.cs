@@ -13,6 +13,6 @@ namespace CoffeShop.Web.Blazor.Shared {
         bool ValidateUpdateEmployee(EmployeeType NewType, Employee dbEmployee, List<Employee> employees, out String errorMessage);
         bool ValidateAddCustomer(List<Customer> customers, out String errorMessage);
         bool ValidateDeleteCustomer(List<Customer> customers, out String errorMessage);
-        bool ValidateTransaction(Transaction transaction, out String errorMessage);
+        bool ValidateTransaction(Transaction transaction, List<Product> products, out String errorMessage);
     }
 }

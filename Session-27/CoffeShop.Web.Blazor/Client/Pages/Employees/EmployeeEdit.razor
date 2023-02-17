@@ -4,10 +4,23 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
-<h3>Employee Edit</h3>
+
+
+
+@if (Id == null) {
+    <h3>Create Employee</h3>
+    <PageTitle>Create Employee</PageTitle>
+}
+else {
+    <h3>Edit Employee</h3>
+    <PageTitle>Edit Employee</PageTitle>
+}
+
 
 @if (Employee == null) {
-    <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 } else {
     <EditForm Model="Employee" OnValidSubmit="OnSave">
         <DataAnnotationsValidator />

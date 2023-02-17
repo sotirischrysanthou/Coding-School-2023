@@ -6,6 +6,7 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
+
 <h3>Transaction</h3>
 
 @if (transaction == null) {
@@ -211,6 +212,8 @@ else {
 
 
     protected override async Task OnInitializedAsync() {
+        
+
         var tempCustomerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("customer");
         if (tempCustomerList is null) {
             //Todo handle if customerList is null
@@ -265,9 +268,14 @@ else {
         } else {
             response = await httpClient.PutAsJsonAsync("transaction", transaction);
         }
+        if (response.IsSuccessStatusCode) {
+            navigationManager.NavigateTo("transactionlist");
+        }
+        else {
+            var error = await response.Content.ReadAsStringAsync();
+            await jsRuntime.InvokeVoidAsync("alert", error);
+        }
 
-        response.EnsureSuccessStatusCode();
-        navigationManager.NavigateTo("transactionlist");
     }
 
     private async Task<List<CustomerListDto>> getCustomers() {
