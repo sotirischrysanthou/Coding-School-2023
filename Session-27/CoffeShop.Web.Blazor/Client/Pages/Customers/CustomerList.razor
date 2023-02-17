@@ -8,7 +8,7 @@
 @if (isLoading) {
     <p>Loading ...</p>
 } else {
-            <BootstrapButton ButtonType = "BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
+    <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
 
     <table class="table table-striped table-hover">
         <thead>
@@ -24,9 +24,9 @@
                     <td>@customer.Code</td>
                     <td>@customer.Description</td>
                     <td>
-                        <BootstrapButton ButtonType = "BootstrapButtonType.Warning" OnClick="()=> EditItem(customer)">Edit</BootstrapButton>
-                        <BootstrapButton ButtonType = "BootstrapButtonType.Primary" OnClick="()=> DetailItem(customer)">Details</BootstrapButton>
-                        <BootstrapButton ButtonType = "BootstrapButtonType.Danger" OnClick="()=> DeleteItem(customer)">Delete</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(customer)">Edit</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(customer)">Details</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(customer)">Delete</BootstrapButton>
                     </td>
                 </tr>
             }
@@ -64,13 +64,16 @@
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
             var response = await httpClient.DeleteAsync($"customer/{customer.Id}");
-            response.EnsureSuccessStatusCode();
-            await LoadItemsFromServer();
+            if (response.IsSuccessStatusCode) {
+                await LoadItemsFromServer();
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
         }
     }
 
-    private void DetailItem(CustomerListDto customer)
-    {
+    private void DetailItem(CustomerListDto customer) {
         navigationManager.NavigateTo($"customerList/details/{customer.Id}");
     }
 }

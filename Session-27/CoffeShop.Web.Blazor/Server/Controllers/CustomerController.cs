@@ -80,10 +80,17 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id) {
-            await Task.Run(() => {
-                _customerRepo.Delete(id);
-            });
+        public async Task<ActionResult> Delete(int id) {
+            if (_validator.ValidateDeleteCustomer(_customerRepo.GetAll().ToList(), out _errorMessage)) {
+                try {
+                    await Task.Run(() => { _customerRepo.Delete(id); });
+                } catch (DbException) {
+                    return BadRequest("The customer cannot be deleted because they are in Transactions");
+                }
+                return Ok();
+            } else {
+                return BadRequest(_errorMessage);
+            }
         }
     }
 }
