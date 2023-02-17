@@ -6,20 +6,23 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
-@*            <select @onchnage="ChangingTheme" style="margin-left: 1rem"> 
+
+        @*<div class="top-row px-4">
+            <select @onchnage="ChangingTheme" style="margin-left: 1rem"> 
                 @foreach (var theme in themes)
                 {
                         <option selected="@IsSelectedTheme(theme)" value="@theme"> @theme </option>
                 }
 
-        </select>*@
+        </select>
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+        </div>*@
 
-        <article class="content px-4">
-            @Body
-        </article>
+        <div class="container-fluid main-subcontainer">
+            <article class="content px-4">
+                @Body
+            </article>
+        </div>
     </main>
 </div>
 

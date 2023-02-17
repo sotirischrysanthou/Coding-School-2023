@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     background-color: lightgray;
+    
 }
 /*h1 {
     text-align:center;
@@ -14,10 +15,22 @@ body {
 }
 main {
     flex: 1;
+    background-image: url(background.JPG);
+    padding: 25px 25px 25px 25px;
+}
+
+
+.main-subcontainer {
+    height: 100%;
+    border-radius: 30px;
+    padding: 5px 15px 15px 15px;
+    overflow: auto;
+    opacity:0.9;
+    background-color:white;
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, rgb(113, 76, 29) 0%, #200d00 70%);
 }
 
 .top-row {
