@@ -210,7 +210,8 @@ else {
     private decimal totalDiscount { get; set; }
     private decimal preDiscountTotalPrice { get; set; }
     //private bool disabledValue { get; set; } = true;
-    //private bool isCashButtonClicked = false;
+    private bool isCashButtonClicked = false;
+    private bool isCardButtonClicked = false;
     private string cardButtonClass = "btn btn-secondary btn-payment";
     private string cashButtonClass = "btn btn-secondary btn-payment";
 
@@ -257,8 +258,20 @@ else {
 
     private async Task OnSave() {
         HttpResponseMessage? response = null;
+        if (transaction.CustomerId == 0 || transaction.EmployeeId == 0) {
+            await jsRuntime.InvokeVoidAsync("alert", "Please fill all inputs with valid data!");
+            return;
+        }
+        if (transaction.TransactionLines.Count == 0) {
+            await jsRuntime.InvokeVoidAsync("alert", "Please add a transaction line!");
+            return;
+        }
+        if(!isCardButtonClicked || !isCashButtonClicked) {
+            await jsRuntime.InvokeVoidAsync("alert", "Please choose payment method!");
+            return;
+        }
         foreach(var transactionLine in transaction.TransactionLines) {
-            if (transactionLine.ProductId == 0 || transactionLine.Quantity < 1 || transaction.CustomerId == 0 || transaction.EmployeeId == 0 ||transaction.TransactionLines.Count == 0) {
+            if (transactionLine.ProductId == 0 || transactionLine.Quantity < 1) {
                 await jsRuntime.InvokeVoidAsync("alert","Please fill all inputs with valid data!");
                 return;
             }
@@ -390,7 +403,8 @@ else {
     }
 
     async Task OnCash() {
-        //isCashButtonClicked = true;
+        isCashButtonClicked = true;
+        isCardButtonClicked = false;
         cardButtonClass = "btn btn-success btn-payment";
         cashButtonClass = "btn btn-secondary btn-payment";
 
@@ -400,19 +414,22 @@ else {
 
     async Task OnCard() {
         if (CardEligible()){
-            //isCashButtonClicked = false;
+            isCardButtonClicked = true;
+            isCashButtonClicked = false;
             cardButtonClass = "btn btn-secondary btn-payment";
             cashButtonClass = "btn btn-success btn-payment";
             transaction.PaymentMethod = PaymentMethod.CreditCard;
             //await OnSave();
         }
         else {
-            var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "This transaction must be paid by cash. Do you want to proceed?");
+            await jsRuntime.InvokeVoidAsync("alert", "This transaction must be paid by cash");
             cardButtonClass = "btn btn-secondary btn-payment";
             cashButtonClass = "btn btn-secondary btn-payment";
-            if (confirm) {
-                await OnCash();
-            }
+            isCardButtonClicked = false;
+            isCashButtonClicked = false;
+            //if (confirm) {
+            //    await OnCash();
+            //}
         }
     }
 
