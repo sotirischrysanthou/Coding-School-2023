@@ -113,7 +113,7 @@ div.main {
 }
 
     .loading-progress circle {
-        fill: none;
+        fill: mediumpurple;
         stroke: #e0e0e0;
         stroke-width: 0.6rem;
         transform-origin: 50% 50%;

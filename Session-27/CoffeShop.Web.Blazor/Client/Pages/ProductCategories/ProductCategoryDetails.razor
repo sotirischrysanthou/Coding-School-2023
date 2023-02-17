@@ -4,10 +4,12 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
+<PageTitle>Coffee Shop</PageTitle>
 <h3>Product Category</h3>
 
 @if (isLoading) {
-        <p>Loading ...</p>
+           <div class="spinner-border text-secondary" role="status">
+    </div>
 } else {
         <div class="row">
             <div class="col-md-3">

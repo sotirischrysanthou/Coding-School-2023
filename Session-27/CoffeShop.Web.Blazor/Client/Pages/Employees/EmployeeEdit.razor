@@ -3,11 +3,13 @@
 @using CoffeeShop.Model.Enums;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
+<PageTitle>Coffee Shop</PageTitle>
 @inject IJSRuntime jsRuntime
 <h3>Employee Edit</h3>
 
 @if (Employee == null) {
-    <p>Loading ...</p>
+    <div class="spinner-border text-secondary" role="status">
+    </div>
 } else {
     <EditForm Model="Employee" OnValidSubmit="OnSave">
         <DataAnnotationsValidator />
