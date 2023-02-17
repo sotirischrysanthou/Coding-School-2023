@@ -1,9 +1,15 @@
 ﻿@page "/"
-
+@using CoffeShop.Web.Blazor.Shared; 
 <PageTitle>Index</PageTitle>
 
 <body>
-    <h1>Coffe Shop </h1>
-   
+    <h1>Coffee Shop </h1>
+    <p>"Our store has a capacity of up to @(validator.WaitersLimits.Max) waiters, @(validator.BaristasLimits.Max) baristas,
+          @(validator.CashiersLimits.Max) cashiers and only @(validator.ManagersLimits.Max) manager."
+     </p>
 </body>
 
+
+@code {
+    private Validator validator = new Validator();
+}

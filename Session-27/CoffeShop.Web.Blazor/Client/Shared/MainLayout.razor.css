@@ -3,16 +3,8 @@
     display: flex;
     flex-direction: column;
     background-color: lightgray;
-    
 }
-/*h1 {
-    text-align:center;
-}*/
 
-body {
-    width: 500px;
-    text-align: center;
-}
 main {
     flex: 1;
     background-image: url(background.JPG);
@@ -28,6 +20,13 @@ main {
     opacity:0.9;
     background-color:white;
 }
+
+body {
+    width: 500px;
+    text-align: center;
+    background-color: white;
+}
+
 
 .sidebar {
     background-image: linear-gradient(180deg, rgb(113, 76, 29) 0%, #200d00 70%);
@@ -56,6 +55,7 @@ main {
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
