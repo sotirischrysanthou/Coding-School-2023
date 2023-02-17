@@ -41,7 +41,7 @@
     }
 
 .nav-item ::deep a.active {
-    background-color: mediumpurple;
+    background-color: saddlebrown;
     color: white;
 }
 
