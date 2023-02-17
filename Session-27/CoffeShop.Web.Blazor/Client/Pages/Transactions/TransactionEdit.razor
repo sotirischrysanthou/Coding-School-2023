@@ -7,7 +7,15 @@
 @inject NavigationManager navigationManager
 <PageTitle>Coffee Shop</PageTitle>
 @inject IJSRuntime jsRuntime
-<h3>Transaction Edit</h3>
+@if (Id is null)
+{
+    <h3>Create Transaction</h3>
+}
+else
+{
+
+    <h3>Transaction Edit</h3>
+}
 
 @if (transaction == null) {
     <div class="spinner-border text-secondary" role="status">

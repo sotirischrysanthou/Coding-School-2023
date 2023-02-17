@@ -5,7 +5,15 @@
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
 <PageTitle>Coffee Shop</PageTitle>
-<h3>Product Category</h3>
+@if (Id is null)
+{
+    <h3>Create Product Category</h3>
+}
+else
+{
+
+    <h3>Product Category Details</h3>
+}
 
 @if (isLoading) {
            <div class="spinner-border text-secondary" role="status">

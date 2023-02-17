@@ -3,7 +3,15 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 <PageTitle>Coffee Shop</PageTitle>
-<h3>Customer Details</h3>
+@if (Id is null)
+{
+    <h3>Create Customer</h3>
+}
+else
+{
+
+    <h3>Customer Details</h3>
+}
 
 @if (Customer == null) {
     <div class="spinner-border text-secondary" role="status">
