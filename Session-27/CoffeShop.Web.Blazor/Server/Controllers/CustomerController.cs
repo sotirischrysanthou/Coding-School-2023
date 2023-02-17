@@ -2,6 +2,7 @@
 using CoffeeShop.Model;
 using CoffeShop.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.Common;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,10 +12,14 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
     public class CustomerController : ControllerBase {
         // Properties
         private readonly IEntityRepo<Customer> _customerRepo;
+        private readonly IValidator _validator;
+        private String _errorMessage;
 
         // Constructors
-        public CustomerController(IEntityRepo<Customer> cutomerRepo) {
+        public CustomerController(IEntityRepo<Customer> cutomerRepo, IValidator validator) {
             _customerRepo = cutomerRepo;
+            _validator = validator;
+            _errorMessage = String.Empty;
         }
 
         // GET: api/<CustomersController>
@@ -46,11 +51,18 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
 
         // POST api/<CustomersController>
         [HttpPost]
-        public async Task Post(CustomerEditDto customer) {
+        public async Task<ActionResult> Post(CustomerEditDto customer) {
             var newCustomer = new Customer(customer.Code, customer.Description);
-            await Task.Run(() => {
-                _customerRepo.Add(newCustomer);
-            });
+            if (_validator.ValidateAddCustomer(_customerRepo.GetAll().ToList(), out _errorMessage)) {
+                try {
+                    await Task.Run(() => { _customerRepo.Add(newCustomer); });
+                    return Ok();
+                } catch (DbException ex) {
+                    return BadRequest(ex.Message);
+                }
+            } else {
+                return BadRequest(_errorMessage);
+            }
         }
 
         // PUT api/<CustomersController>/5

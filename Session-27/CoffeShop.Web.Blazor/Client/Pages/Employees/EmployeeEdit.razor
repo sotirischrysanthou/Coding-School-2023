@@ -68,20 +68,14 @@
         HttpResponseMessage? response = null;
         if (Id == null) {
             response = await httpClient.PostAsJsonAsync("employee", Employee);
-            if (response.IsSuccessStatusCode) {
-                navigationManager.NavigateTo("/employeelist");
-            } else {
-                var error = await response.Content.ReadAsStringAsync();
-                await jsRuntime.InvokeVoidAsync("alert", error);
-            }
         } else {
             response = await httpClient.PutAsJsonAsync("employee", Employee);
-            if (response.IsSuccessStatusCode) {
-                navigationManager.NavigateTo("/employeelist");
-            } else {
-                var error = await response.Content.ReadAsStringAsync();
-                await jsRuntime.InvokeVoidAsync("alert", error);
-            }
+        }
+        if (response.IsSuccessStatusCode) {
+            navigationManager.NavigateTo("/employeelist");
+        } else {
+            var error = await response.Content.ReadAsStringAsync();
+            await jsRuntime.InvokeVoidAsync("alert", error);
         }
     }
 }

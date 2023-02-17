@@ -176,8 +176,6 @@ namespace CoffeShop.Web.Blazor.Server.Controllers {
             catch (KeyNotFoundException) {
                 return BadRequest($"Transaction not found");
             }
-
         }
-
     }
 }

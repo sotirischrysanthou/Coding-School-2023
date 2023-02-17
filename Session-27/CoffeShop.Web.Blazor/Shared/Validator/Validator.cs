@@ -22,7 +22,7 @@ namespace CoffeShop.Web.Blazor.Shared {
             CustomersLimits = new MinMax() { Min = 1, Max = 1 };
         }
         public bool ValidateAddEmployee(EmployeeType type, List<Employee> employees, out String errorMessage) {
-            errorMessage = "successful ";
+            errorMessage = "Succeed ";
             bool ret = true;
             var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
             var baristas = employees.Where(e => e.EmployeeType == EmployeeType.Barista);
@@ -48,7 +48,7 @@ namespace CoffeShop.Web.Blazor.Shared {
         }
 
         public bool ValidateUpdateEmployee(EmployeeType NewType, Employee dbEmployee, List<Employee> employees, out String errorMessage) {
-            errorMessage = "successful ";
+            errorMessage = "Succeed ";
             bool ret = true;
             if (dbEmployee == null) {
                 ret = false;
@@ -79,7 +79,7 @@ namespace CoffeShop.Web.Blazor.Shared {
 
         public bool ValidateDeleteEmployee(EmployeeType type, List<Employee> employees, out String errorMessage) {
             bool ret = true;
-            errorMessage = "successful ";
+            errorMessage = "Succeed ";
             var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
             var baristas = employees.Where(e => e.EmployeeType == EmployeeType.Barista);
             var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
@@ -103,6 +103,29 @@ namespace CoffeShop.Web.Blazor.Shared {
             }
 
             return ret;
+        }
+
+        public bool ValidateAddCustomer(List<Customer> customers, out string errorMessage) {
+            if(customers.Count >= CustomersLimits.Max) {
+                errorMessage = $"You have already {CustomersLimits.Max} Customers. Max number of Customers is {CustomersLimits.Max}";
+                return false;
+            }
+            errorMessage = "Succeed";
+            return true;
+        }
+
+        public bool ValidateDeleteCustomer(List<Customer> customers, out string errorMessage) {
+            errorMessage = "Succeed";
+            if (customers.Count <= CustomersLimits.Min) {
+                errorMessage = $"You have only {CustomersLimits.Min} Customers. Min number of Customers is {CustomersLimits.Min}";
+                return false;
+            }
+            return true;
+        }
+
+        public bool ValidateTransaction(Transaction transaction, out string errorMessage) {
+            errorMessage = "Succeed";
+            throw new NotImplementedException();
         }
     }
 
