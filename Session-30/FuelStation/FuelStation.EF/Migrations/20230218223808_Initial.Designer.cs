@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FuelStation.EF.Migrations
 {
     [DbContext(typeof(FuelStationDbContext))]
-    [Migration("20230218221024_initial")]
-    partial class initial
+    [Migration("20230218223808_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,8 +34,8 @@ namespace FuelStation.EF.Migrations
 
                     b.Property<string>("CardNumber")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("CardNumber");
 
                     b.Property<string>("Name")
@@ -52,10 +52,10 @@ namespace FuelStation.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CardNumber")
-                        .IsUnique();
-
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_CardNumber_StartsWith_A", "CardNumber LIKE 'A%'");
+                        });
                 });
 
             modelBuilder.Entity("FuelStation.Model.Employee", b =>

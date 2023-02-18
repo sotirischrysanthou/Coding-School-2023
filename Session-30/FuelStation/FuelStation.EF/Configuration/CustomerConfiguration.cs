@@ -24,9 +24,13 @@ namespace FuelStation.EF.Configuration {
             builder.Property(c => c.Surname).HasColumnName("Surname").IsRequired().HasMaxLength(50);
             builder.Property(c => c.CardNumber).HasColumnName("CardNumber").IsRequired().HasMaxLength(10);
 
-            // Set unique constraint on CardNumber starting with "A"
-            builder.HasIndex(c => c.CardNumber)
-                .IsUnique();
+            // Set the maximum length of the CardNumber column to 20
+            builder.Property(c => c.CardNumber)
+                .HasMaxLength(20);
+
+            // Add a check constraint to the CardNumber column to ensure that it starts with the letter 'A'
+            String checkConstraint = "CardNumber LIKE 'A%'";
+            builder.ToTable(t => t.HasCheckConstraint("CK_CardNumber_StartsWith_A", checkConstraint));
 
             //// Set navigation properties
             //builder.HasMany(c => c.Transactions)

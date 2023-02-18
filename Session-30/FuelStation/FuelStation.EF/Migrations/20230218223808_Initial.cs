@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FuelStation.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,13 +16,14 @@ namespace FuelStation.EF.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CardNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    CardNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.ID);
+                    table.CheckConstraint("CK_CardNumber_StartsWith_A", "CardNumber LIKE 'A%'");
                 });
 
             migrationBuilder.CreateTable(
@@ -116,12 +117,6 @@ namespace FuelStation.EF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Customers_CardNumber",
-                table: "Customers",
-                column: "CardNumber",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_Code",
