@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EncryptStringLib;
+
 
 namespace CarServiceCenterLib {
     public class Manager : Person {
@@ -46,18 +46,18 @@ namespace CarServiceCenterLib {
             _password = password;
         }
 
-        public bool LogIn(String userName, String password ) {
-            bool ret = false;
-            if (StringCipher.Decrypt(password, userName) == password) {
-                ret = true;
-            }
-            return ret;
-        }
+        //public bool LogIn(String userName, String password ) {
+        //    bool ret = false;
+        //    if (StringCipher.Decrypt(password, userName) == password) {
+        //        ret = true;
+        //    }
+        //    return ret;
+        //}
 
-        public void CreateProfile(String userName, String password) { 
-            _username = userName;
-            _password = StringCipher.Encrypt(password, userName);
-        }
+        //public void CreateProfile(String userName, String password) { 
+        //    _username = userName;
+        //    _password = StringCipher.Encrypt(password, userName);
+        //}
 
     }
 
