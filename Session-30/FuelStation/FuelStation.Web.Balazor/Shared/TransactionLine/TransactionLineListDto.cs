@@ -1,16 +1,15 @@
-﻿using System;
+﻿using FuelStation.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
-using System.Xml.Linq;
 
-namespace FuelStation.Model {
-    public class TransactionLine {
+namespace FuelStation.Web.Balazor.Shared {
+    public class TransactionLineListDto {
         // Properties
-        public Guid Id { get; set; }
+        [Required] public Guid Id { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]
@@ -39,28 +38,23 @@ namespace FuelStation.Model {
         [Display(Name = "Total Value")]
         [DataType(DataType.Currency)]
         public decimal TotalValue { get; set; }
-        
+
         // Relations
-        [Required]
-        public Guid TransactionId { get; set; }
+        public ItemListDto Item { get; set; } = null!;
 
-        public Transaction Transaction { get; set; } = null!;
-        
-        [Required]
-        public Guid ItemId { get; set; }
+        // Constructors
+        public TransactionLineListDto() {
 
-        public Item Item { get; set; } = null!;
-
-        // Constructor
-        public TransactionLine(int quantity, decimal netValue, decimal discountPercent, decimal discountValue, decimal totalValue, Guid transactionId, Guid itemId) {
-            Id = Guid.NewGuid();
-            Quantity= quantity;
-            NetValue= netValue;
-            DiscountPercent= discountPercent;
-            DiscountValue= discountValue;
-            TotalValue= totalValue;
-            TransactionId= transactionId;
-            ItemId= itemId;
+        }
+        public TransactionLineListDto(TransactionLine transactionLine) {
+            Id = transactionLine.Id;
+            Quantity = transactionLine.Quantity;
+            DiscountPercent = transactionLine.DiscountPercent;
+            Item = new ItemListDto(transactionLine.Item);
+            ItemPrice = transactionLine.ItemPrice;
+            NetValue = transactionLine.NetValue;
+            DiscountValue = transactionLine.DiscountValue;
+            TotalValue = transactionLine.TotalValue;
         }
     }
 }

@@ -29,7 +29,9 @@ namespace FuelStation.EF.Repository {
 
         public async Task<IList<Customer>> GetAll() {
             using var context = new FuelStationDbContext();
-            return await context.Customers.Include(c => c.Transactions).ToListAsync(); 
+            return await context.Customers
+                .Include(c => c.Transactions).ThenInclude(t => t.Employee)
+                .ToListAsync(); 
         }
 
         public async Task<Customer?> GetById(Guid id) {

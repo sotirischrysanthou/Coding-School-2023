@@ -1,6 +1,9 @@
+using FuelStation.EF.Repository;
+using FuelStation.Model;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IEntityRepo<Customer>,CustomerRepo>();
 
 // Add services to the container.
 

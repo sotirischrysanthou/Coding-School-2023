@@ -20,8 +20,8 @@ namespace FuelStation.EF.Configuration {
 
             // Set properties
             builder.Property(c => c.Id).HasColumnName("ID").IsRequired();
-            builder.Property(c => c.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-            builder.Property(c => c.Surname).HasColumnName("Surname").IsRequired().HasMaxLength(50);
+            builder.Property(c => c.Name).HasColumnName("Name").IsRequired().HasMaxLength(20);
+            builder.Property(c => c.Surname).HasColumnName("Surname").IsRequired().HasMaxLength(20);
             builder.Property(c => c.CardNumber).HasColumnName("CardNumber").IsRequired().HasMaxLength(10);
 
             // Set the maximum length of the CardNumber column to 20

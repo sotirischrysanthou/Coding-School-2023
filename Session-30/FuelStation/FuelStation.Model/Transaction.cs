@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FuelStation.Model {
     public class Transaction {
         // Properties
-        public Guid Id { get; set; }
+        [Required]public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Date")]
