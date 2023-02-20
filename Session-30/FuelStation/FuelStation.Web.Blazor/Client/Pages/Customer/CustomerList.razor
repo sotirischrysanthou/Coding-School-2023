@@ -1,0 +1,81 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+
+@page "/customerList"
+
+<h3>Customers</h3>
+
+@if (isLoading) {
+    <div class="spinner-border text-secondary" role="status"></div>
+}else {
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>CardNumber</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers) {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>@customer.Surname</td>
+                    <td>@customer.CardNumber</td>
+                    <td>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(customer)">Edit</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(customer)">Details</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(customer)">Delete</BootstrapButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private bool isLoading = true;
+    List<CustomerListDto> customers = new();
+
+    protected override async Task OnInitializedAsync() {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer() {
+        var customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("api/customer");
+        if(customerList is not null) {
+            customers = customerList;
+        } else {
+            await jsRuntime.InvokeVoidAsync("alert", "could not find the customer list");
+            navigationManager.NavigateTo("");
+        }
+    }
+
+    private void CreateItem() {
+        navigationManager.NavigateTo("customerList/edit");
+    }
+
+    private void EditItem(CustomerListDto customer) {
+        navigationManager.NavigateTo($"customerlist/edit/{customer.Id}");
+    }
+
+    private async Task DeleteItem(CustomerListDto customer) {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm) {
+            var response = await httpClient.DeleteAsync($"api/customer/{customer.Id}");
+            if (response.IsSuccessStatusCode) {
+                await LoadItemsFromServer();
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
+        }
+    }
+
+    private void DetailItem(CustomerListDto customer) {
+        navigationManager.NavigateTo($"customerList/details/{customer.Id}");
+    }
+}
