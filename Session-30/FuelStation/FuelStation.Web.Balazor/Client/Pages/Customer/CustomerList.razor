@@ -54,4 +54,29 @@
             navigationManager.NavigateTo("");
         }
     }
+
+    private void CreateItem() {
+        navigationManager.NavigateTo("customerList/edit");
+    }
+
+    private void EditItem(CustomerListDto customer) {
+        navigationManager.NavigateTo($"customerlist/edit/{customer.Id}");
+    }
+
+    private async Task DeleteItem(CustomerListDto customer) {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm) {
+            var response = await httpClient.DeleteAsync($"customer/{customer.Id}");
+            if (response.IsSuccessStatusCode) {
+                await LoadItemsFromServer();
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
+        }
+    }
+
+    private void DetailItem(CustomerListDto customer) {
+        navigationManager.NavigateTo($"customerList/details/{customer.Id}");
+    }
 }
