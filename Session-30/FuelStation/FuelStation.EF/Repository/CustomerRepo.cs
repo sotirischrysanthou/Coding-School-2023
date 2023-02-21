@@ -31,6 +31,7 @@ namespace FuelStation.EF.Repository {
             using var context = new FuelStationDbContext();
             return await context.Customers
                 .Include(c => c.Transactions).ThenInclude(t => t.Employee)
+                .Include(c => c.Transactions).ThenInclude(t => t.TransactionLines)
                 .ToListAsync(); 
         }
 
@@ -38,7 +39,8 @@ namespace FuelStation.EF.Repository {
             using var context = new FuelStationDbContext();
             return await context.Customers
                 .Where(c => c.Id == id)
-                .Include(c => c.Transactions)
+                .Include(c => c.Transactions).ThenInclude(t => t.Employee)
+                .Include(c => c.Transactions).ThenInclude(t => t.TransactionLines)
                 .SingleOrDefaultAsync();
         }
 

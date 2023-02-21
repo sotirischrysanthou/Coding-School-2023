@@ -53,7 +53,7 @@
         if (Id == null) {
             Customer = new();
         } else {
-            Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"api/customer/{Id}");
+            Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"api/customer/edit/{Id}");
             if (Customer is null) {
                 //TODO: Handle if customer is null
             }
@@ -67,9 +67,9 @@
     private async Task OnSave() {
         HttpResponseMessage? response = null;
         if (Id == null) {
-            response = await httpClient.PostAsJsonAsync("customer", Customer);
+            response = await httpClient.PostAsJsonAsync("api/customer", Customer);
         } else {
-            response = await httpClient.PutAsJsonAsync("customer", Customer);
+            response = await httpClient.PutAsJsonAsync("api/customer", Customer);
         }
         if (response.IsSuccessStatusCode) {
             navigationManager.NavigateTo("/customerlist");

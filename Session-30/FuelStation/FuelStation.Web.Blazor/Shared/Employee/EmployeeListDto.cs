@@ -25,9 +25,6 @@ namespace FuelStation.Web.Blazor.Shared {
         [DataType(DataType.Date)]
         public DateTime HireDateStart { get; set; }
 
-        [Display(Name = "Hire Date (End)")]
-        [DataType(DataType.Date)]
-        public DateTime? HireDateEnd { get; set; }
 
         [Required]
         [Display(Name = "Salary Per Month")]
@@ -38,8 +35,14 @@ namespace FuelStation.Web.Blazor.Shared {
         [Display(Name = "Employee Type")]
         public EmployeeType EmployeeType { get; set; }
 
+        [Display(Name = "Hire Date (End)")]
+        [DataType(DataType.Date)]
+        public DateTime? HireDateEnd { get; set; }
 
         // Constructors
+        public EmployeeListDto() {
+
+        }
         public EmployeeListDto(Employee employee) { 
             Id = employee.Id;
             Name = employee.Name;

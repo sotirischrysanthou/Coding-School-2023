@@ -2,7 +2,9 @@
 using FuelStation.Model;
 using FuelStation.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Data.Common;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -32,7 +34,8 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         }
 
         // GET api/<CustomerController>/5
-        [HttpGet("{id}")]
+        [Route("/api/customer/edit/{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<CustomerEditDto?> GetById(Guid id) {
             try {
                 var result = await _cutomerRepo.GetById(id);
@@ -47,6 +50,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         }
 
         // GET api/<CustomerController>/5
+        [Route("/api/customer/details/{id:guid}")]
         [HttpGet("{id:guid}")]
         public async Task<CustomerDetailsDto?> GetByIdDetails(Guid id) {
             try {

@@ -28,10 +28,12 @@ namespace FuelStation.Web.Blazor.Shared {
 
         // Relations
         public EmployeeListDto Employee { get; set; } = null!;
-
         public CustomerListDto Customer { get; set; } = null!;
 
         // Constructors
+        public TransactionListDto() {
+
+        }
         public TransactionListDto(Transaction transaction) {
             Id = transaction.Id;
             Date = transaction.Date;
