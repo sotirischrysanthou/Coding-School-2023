@@ -26,11 +26,11 @@ namespace FuelStation.EF.Configuration {
                 .HasConversion<string>()
                 .IsRequired();
 
-            //// Set navigation properties
-            //builder.HasMany(e => e.Transactions)
-            //       .WithOne(t => t.Employee)
-            //       .HasForeignKey(t => t.EmployeeID)
-            //       .OnDelete(DeleteBehavior.Restrict);
+            // Set navigation properties
+            builder.HasOne(e => e.Account)
+                   .WithOne(a => a.Employee)
+                   .HasForeignKey<Employee>(e => e.AccountId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

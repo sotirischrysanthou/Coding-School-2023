@@ -1,6 +1,7 @@
 ﻿using FuelStation.EF.Repository;
 using FuelStation.Model;
 using FuelStation.Web.Blazor.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Data.Common;
@@ -23,6 +24,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // GET: api/<CustomerController>
         [HttpGet]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<IEnumerable<CustomerListDto>?> Get() {
             try {
                 var result = await _cutomerRepo.GetAll();
@@ -36,6 +38,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         // GET api/<CustomerController>/5
         [Route("/api/customer/edit/{id:guid}")]
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<CustomerEditDto?> GetById(Guid id) {
             try {
                 var result = await _cutomerRepo.GetById(id);
@@ -52,6 +55,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         // GET api/<CustomerController>/5
         [Route("/api/customer/details/{id:guid}")]
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<CustomerDetailsDto?> GetByIdDetails(Guid id) {
             try {
                 var result = await _cutomerRepo.GetById(id);
@@ -67,6 +71,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // POST api/<CustomerController>
         [HttpPost]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Post(CustomerEditDto customer) {
             try {
                 var newCustomer = new Customer(customer.Name,
@@ -81,6 +86,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // PUT api/<CustomerController>/5
         [HttpPut]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Put(CustomerEditDto customer) {
             try {
                 var dbCustomer = await _cutomerRepo.GetById(customer.Id);
@@ -99,6 +105,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Delete(Guid id) {
             try {
                 await _cutomerRepo.Delete(id);
