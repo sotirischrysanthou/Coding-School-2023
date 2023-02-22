@@ -1,9 +1,16 @@
-﻿@page "/"
+﻿@inject IJSRuntime jsRuntime
+
+@page "/"
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<AuthorizeView>
+    <Authorized>
+        <h1>Hello, @context.User.Identity.Name</h1>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Please Login</h1>
+    </NotAuthorized>
+</AuthorizeView>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />

@@ -13,7 +13,7 @@ namespace FuelStation.Authorization {
         public override async Task<AuthenticationState> GetAuthenticationStateAsync() {
             var response = await httpClient.GetAsync("api/auth/status");
             if (response.IsSuccessStatusCode) {
-                var result = await response.Content.ReadFromJsonAsync<AuthenticationResult>();
+                var result = await response.Content.ReadFromJsonAsync<UserAccountService>();
                 var identity = new ClaimsIdentity(result.Claims, "Bearer");
                 var user = new ClaimsPrincipal(identity);
                 return new AuthenticationState(user);

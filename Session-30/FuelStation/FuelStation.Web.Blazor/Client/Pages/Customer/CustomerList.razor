@@ -1,6 +1,10 @@
-﻿@inject HttpClient httpClient
+﻿@using System.Net.Http.Headers;
+@using uelStation.Web.Blazor.Client.Extensions;
+@inject HttpClient httpClient
 @inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
 @inject IJSRuntime jsRuntime
+@attribute [Authorize(Roles = "Manager,Cashier")]
 
 @page "/customerList"
 
@@ -40,8 +44,15 @@
     List<CustomerListDto> customers = new();
 
     protected override async Task OnInitializedAsync() {
-        await LoadItemsFromServer();
-        isLoading = false;
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        var token = await customAuthStateProvider.GetToken();
+        if (!String.IsNullOrWhiteSpace(token)) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            await LoadItemsFromServer();
+            isLoading = false;
+        } else {
+            navigationManager.NavigateTo("/login", true);
+        }
     }
 
     private async Task LoadItemsFromServer() {

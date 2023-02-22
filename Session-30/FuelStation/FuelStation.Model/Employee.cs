@@ -30,15 +30,16 @@ namespace FuelStation.Model {
 
         // Relations
         public List<Transaction> Transactions { get; set; } = null!;
-        public Account Account { get; set; }
+        public Guid AccountId { get; set; }
+        public Account Account { get; set; } = null!;
 
         // Constructors
-        public Employee(string name, string surname, DateTime hireDateStart, decimal salaryPerMonth, EmployeeType employeeType, Account account) : base(name, surname) {
+        public Employee(string name, string surname, DateTime hireDateStart, decimal salaryPerMonth, EmployeeType employeeType, Guid accountId) : base(name, surname) {
             HireDateStart = hireDateStart;
             HireDateEnd = null;
             SalaryPerMonth = salaryPerMonth;
             EmployeeType = employeeType;
-            Account = account;
+            AccountId = accountId;
         }
     }
 }

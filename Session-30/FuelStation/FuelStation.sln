@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Web.Blazor.Clie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Web.Blazor.Shared", "FuelStation.Web.Blazor\Shared\FuelStation.Web.Blazor.Shared.csproj", "{976D62D9-7920-4C50-B33C-CBD9ACA2DC61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.Authorization", "FuelStation.Authorization\FuelStation.Authorization.csproj", "{FACDA952-EDEB-4351-8D85-7FCCC7238481}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{976D62D9-7920-4C50-B33C-CBD9ACA2DC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{976D62D9-7920-4C50-B33C-CBD9ACA2DC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{976D62D9-7920-4C50-B33C-CBD9ACA2DC61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FACDA952-EDEB-4351-8D85-7FCCC7238481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FACDA952-EDEB-4351-8D85-7FCCC7238481}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FACDA952-EDEB-4351-8D85-7FCCC7238481}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FACDA952-EDEB-4351-8D85-7FCCC7238481}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
