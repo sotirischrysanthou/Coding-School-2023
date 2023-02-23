@@ -4,11 +4,11 @@
 @inject NavigationManager navigationManager
 @inject AuthenticationStateProvider authStateProvider
 @inject IJSRuntime jsRuntime
-@attribute [Authorize(Roles = "Manager,Cashier")]
+@attribute [Authorize(Roles = "Manager,Staff")]
+<PageTitle>Fuel Station</PageTitle>
+@page "/itemList"
 
-@page "/customerList"
-
-<h3>Customers</h3>
+<h3>Items</h3>
 
 @if (isLoading) {
     <div class="spinner-border text-secondary" role="status"></div>
@@ -17,22 +17,26 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>CardNumber</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Item Type</th>
+                <th>Price</th>
+                <th>Cost</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in customers) {
+            @foreach (var item in items) {
                 <tr>
-                    <td>@customer.Name</td>
-                    <td>@customer.Surname</td>
-                    <td>@customer.CardNumber</td>
+                    <td>@item.Code</td>
+                    <td>@item.Description</td>
+                    <td>@item.ItemType.ToString()</td>
+                    <td>@item.Price</td>
+                    <td>@item.Cost</td>
                     <td>
-                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(customer)">Edit</BootstrapButton>
-                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(customer)">Details</BootstrapButton>
-                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(customer)">Delete</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(item)">Edit</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(item)">Details</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(item)">Delete</BootstrapButton>
                     </td>
                 </tr>
             }
@@ -42,7 +46,7 @@
 
 @code {
     private bool isLoading = true;
-    List<CustomerListDto> customers = new();
+    List<ItemListDto> items = new();
 
     protected override async Task OnInitializedAsync() {
         var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
@@ -57,27 +61,27 @@
     }
 
     private async Task LoadItemsFromServer() {
-        var customerList = await httpClient.GetFromJsonAsync<List<CustomerListDto>>("api/customer");
-        if(customerList is not null) {
-            customers = customerList;
+        var itemList = await httpClient.GetFromJsonAsync<List<ItemListDto>>("api/item");
+        if(itemList is not null) {
+            items = itemList;
         } else {
-            await jsRuntime.InvokeVoidAsync("alert", "could not find the customer list");
+            await jsRuntime.InvokeVoidAsync("alert", "could not find the item list");
             navigationManager.NavigateTo("");
         }
     }
 
     private void CreateItem() {
-        navigationManager.NavigateTo("customerList/edit");
+        navigationManager.NavigateTo("itemList/edit");
     }
 
-    private void EditItem(CustomerListDto customer) {
-        navigationManager.NavigateTo($"customerlist/edit/{customer.Id}");
+    private void EditItem(ItemListDto item) {
+        navigationManager.NavigateTo($"itemlist/edit/{item.Id}");
     }
 
-    private async Task DeleteItem(CustomerListDto customer) {
+    private async Task DeleteItem(ItemListDto item) {
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
-            var response = await httpClient.DeleteAsync($"api/customer/{customer.Id}");
+            var response = await httpClient.DeleteAsync($"api/item/{item.Id}");
             if (response.IsSuccessStatusCode) {
                 await LoadItemsFromServer();
             } else {
@@ -87,7 +91,7 @@
         }
     }
 
-    private void DetailItem(CustomerListDto customer) {
-        navigationManager.NavigateTo($"customerList/details/{customer.Id}");
+    private void DetailItem(ItemListDto item) {
+        navigationManager.NavigateTo($"itemList/details/{item.Id}");
     }
 }

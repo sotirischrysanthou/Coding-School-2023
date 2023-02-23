@@ -50,6 +50,7 @@ namespace FuelStation.EF.Repository {
             }
             dbItem.Description = entity.Description;
             dbItem.Price = entity.Price;
+            dbItem.ItemType = entity.ItemType;
             dbItem.Cost = entity.Cost;
             dbItem.Code = entity.Code;
             await context.SaveChangesAsync();

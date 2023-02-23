@@ -1,3 +1,4 @@
+using CoffeShop.Web.Blazor.Shared;
 using FuelStation.Authorization;
 using FuelStation.EF.Repository;
 using FuelStation.Model;
@@ -14,7 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IEntityRepo<Account>, AccountRepo>();
 builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
+builder.Services.AddScoped<IEntityRepo<Item>, ItemRepo>();
 builder.Services.AddScoped<IEntityRepo<Employee>, EmployeeRepo>();
+builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddAuthentication(o => {

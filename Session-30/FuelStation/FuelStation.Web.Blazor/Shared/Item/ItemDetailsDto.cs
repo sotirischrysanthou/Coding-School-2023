@@ -1,5 +1,5 @@
-﻿using FuelStation.Model;
-using FuelStation.Model.Enums;
+﻿using FuelStation.Model.Enums;
+using FuelStation.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FuelStation.Web.Blazor.Shared {
-    public class ItemListDto {
+    public class ItemDetailsDto {
         // Properties
         public Guid Id { get; set; }
 
@@ -32,17 +32,21 @@ namespace FuelStation.Web.Blazor.Shared {
         [DataType(DataType.Currency)]
         public decimal Cost { get; set; }
 
+        // Relations
+        public List<TransactionLineDetailsDto> TransactionLines { get; set; } = null!;
+
         // Constructors
-        public ItemListDto() {
+        public ItemDetailsDto() {
 
         }
-        public ItemListDto(Item item) {
+        public ItemDetailsDto(Item item) {
             Id = item.Id;
             Code = item.Code;
             Description = item.Description;
             ItemType = item.ItemType;
             Price = item.Price;
             Cost = item.Cost;
+            TransactionLines = item.TransactionLines.Select(t => new TransactionLineDetailsDto(t)).ToList();
         }
     }
 }

@@ -1,0 +1,109 @@
+﻿@page "/itemlist/details/{Id:guid?}"
+@using FuelStation.Web.Blazor.Shared;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@attribute [Authorize(Roles = "Manager,Staff")]
+<PageTitle>Fuel Station</PageTitle>
+<h3>Item Details</h3>
+
+@if (Item == null) {
+    <div class="spinner-border text-secondary" role="status">
+    </div>
+} else {
+    <div class="row">
+        <div class="col-md-4">
+            <label class="form-label">Code</label>
+            <input class="form-control" @bind="@Item.Code" disabled />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Description</label>
+            <input class="form-control" @bind="@Item.Description" disabled />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Item Type</label>
+            <input class="form-control" @bind="@Item.ItemType" disabled />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Item Type</label>
+            <input class="form-control" @bind="@Item.ItemType" disabled />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Price</label>
+            <input class="form-control" @bind="@Item.Price" disabled />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Cost</label>
+            <input class="form-control" @bind="@Item.Cost" disabled />
+        </div>
+        @if (Item.TransactionLines.Count() > 0) {
+            <div class="row mt-5">
+                <h4 class="col-xs-6">
+                    Customer's Transactions:
+                </h4>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Payment Method</th>
+                            <th>Total Value</th>
+                            <th>Employee</th>
+                            <th>Customer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var transactionLine in Item.TransactionLines) {
+                            <tr>
+                                <td>@transactionLine.Transaction.Date</td>
+                                <td>@transactionLine.Transaction.PaymentMethod</td>
+                                <td>@transactionLine.Transaction.TotalValue</td>
+                                <td>@transactionLine.Transaction.Employee.Name @transactionLine.Transaction.Employee.Surname</td>
+                                <td>@transactionLine.Transaction.Employee.Name @transactionLine.Transaction.Employee.Surname</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="col">
+                <BootstrapButton ButtonType="BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    ItemDetailsDto? Item { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            Item = new();
+        } else {
+            Item = await httpClient.GetFromJsonAsync<ItemDetailsDto>($"api/item/details/{Id}");
+            if (Item is null) {
+                //TODO: Handle if customer is null
+            }
+        }
+    }
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("itemList");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("api/item", Item);
+        } else {
+            response = await httpClient.PutAsJsonAsync("api/item", Item);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("/itemlist");
+    }
+}

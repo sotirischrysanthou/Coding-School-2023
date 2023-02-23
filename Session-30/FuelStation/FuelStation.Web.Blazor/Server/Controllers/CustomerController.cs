@@ -1,4 +1,5 @@
-﻿using FuelStation.EF.Repository;
+﻿using CoffeShop.Web.Blazor.Shared;
+using FuelStation.EF.Repository;
 using FuelStation.Model;
 using FuelStation.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Authorization;
@@ -16,10 +17,14 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
     public class CustomerController : ControllerBase {
         // Properties
         private readonly IEntityRepo<Customer> _cutomerRepo;
+        private readonly IValidator _validator;
+        private String _errorMessage;
 
         // Constructors
-        public CustomerController(IEntityRepo<Customer> customerRepo) {
+        public CustomerController(IEntityRepo<Customer> customerRepo, IValidator validator) {
             _cutomerRepo = customerRepo;
+            _validator = validator;
+            _errorMessage = String.Empty;
         }
 
         // GET: api/<CustomerController>
@@ -74,11 +79,16 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Post(CustomerEditDto customer) {
             try {
-                var newCustomer = new Customer(customer.Name,
-                                               customer.Surname,
-                                               customer.CardNumber);
-                await _cutomerRepo.Add(newCustomer);
-                return Ok();
+                var customers = await _cutomerRepo.GetAll();
+                if (_validator.ValidateAddCustomer(customers.ToList(), out _errorMessage)) {
+                    var newCustomer = new Customer(customer.Name,
+                                                   customer.Surname,
+                                                   customer.CardNumber);
+                    await _cutomerRepo.Add(newCustomer);
+                    return Ok();
+                } else {
+                    return BadRequest(_errorMessage);
+                }
             } catch (DbException ex) {
                 return BadRequest(ex.Message);
             }
@@ -89,27 +99,37 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Put(CustomerEditDto customer) {
             try {
-                var dbCustomer = await _cutomerRepo.GetById(customer.Id);
+                var customers = await _cutomerRepo.GetAll();
+                var dbCustomer = customers.Where(c => c.Id == customer.Id).SingleOrDefault();
                 if (dbCustomer == null) {
                     return BadRequest($"Customer with ID: {customer.Id} not found!");
                 }
-                dbCustomer.Name = customer.Name;
-                dbCustomer.Surname = customer.Surname;
-                dbCustomer.CardNumber = customer.CardNumber;
-                await _cutomerRepo.Update(dbCustomer.Id, dbCustomer);
-                return Ok();
+                if (_validator.ValidateUpdateCustomer(customers.ToList(), dbCustomer, customer, out _errorMessage)) {
+                    dbCustomer.Name = customer.Name;
+                    dbCustomer.Surname = customer.Surname;
+                    dbCustomer.CardNumber = customer.CardNumber;
+                    await _cutomerRepo.Update(dbCustomer.Id, dbCustomer);
+                    return Ok();
+                } else {
+                    return BadRequest(_errorMessage);
+                }
             } catch (DbException) {
                 return BadRequest($"Customer with ID: {customer.Id} not found");
             }
         }
 
         // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Delete(Guid id) {
             try {
-                await _cutomerRepo.Delete(id);
-                return Ok();
+                var customers = await _cutomerRepo.GetAll();
+                if (_validator.ValidateDeleteCustomer(customers.ToList(), out _errorMessage)) {
+                    await _cutomerRepo.Delete(id);
+                    return Ok();
+                } else {
+                    return BadRequest(_errorMessage);
+                }
             } catch (DbException) {
                 return BadRequest($"Could not delete Customer because it has Transactions");
             }

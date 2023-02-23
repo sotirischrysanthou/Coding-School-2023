@@ -1,0 +1,95 @@
+﻿@page "/itemlist/edit/{Id:guid?}"
+@using FuelStation.Model.Enums;
+@using FuelStation.Web.Blazor.Shared;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@attribute [Authorize(Roles = "Manager,Staff")]
+<PageTitle>Fuel Station</PageTitle>
+
+
+@if (Id is null) {
+    <h3>Create Item</h3>
+} else {
+
+    <h3>Item Edit</h3>
+}
+
+@if (Item == null) {
+    <div class="spinner-border text-secondary" role="status">
+    </div>
+} else {
+    <EditForm Model="Item" OnValidSubmit="OnSave">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Code</label>
+                <InputText class="form-control" @bind-Value="@Item.Code" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Description</label>
+                <InputText class="form-control" @bind-Value="@Item.Description" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Item Type</label>
+                <InputSelect class="form-control" @bind-Value="Item.ItemType">
+                    @foreach (var employeetype in Enum.GetValues<ItemType>()) {
+                        <option value="@employeetype">@employeetype</option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Price</label>
+                <InputNumber class="form-control" @bind-Value="@Item.Price" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Cost</label>
+                <InputNumber class="form-control" @bind-Value="@Item.Cost" />
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <BootstrapButton ButtonType="BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                <BootstrapButton ButtonType="BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+            </div>
+        </div>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    ItemEditDto? Item { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            Item = new();
+        } else {
+            Item = await httpClient.GetFromJsonAsync<ItemEditDto>($"api/item/edit/{Id}");
+            if (Item is null) {
+                //TODO: Handle if item is null
+            }
+        }
+    }
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("itemList");
+    }
+
+    private async Task OnSave() {
+        HttpResponseMessage? response = null;
+        if (Id == null) {
+            response = await httpClient.PostAsJsonAsync("api/item", Item);
+        } else {
+            response = await httpClient.PutAsJsonAsync("api/item", Item);
+        }
+        if (response.IsSuccessStatusCode) {
+            navigationManager.NavigateTo("/itemlist");
+        } else {
+            var error = await response.Content.ReadAsStringAsync();
+            await jsRuntime.InvokeVoidAsync("alert", error);
+        }
+    }
+}

@@ -35,11 +35,15 @@ namespace FuelStation.Web.Blazor.Shared {
         public List<TransactionLineListDto> TransactionLines { get; set; } = null!;
 
         // Constructors
+        public TransactionDetailsDto() {
+
+        }
         public TransactionDetailsDto(Transaction transaction) {
             Id = transaction.Id;
             Date = transaction.Date;
             PaymentMethod = transaction.PaymentMethod;
             TotalValue = transaction.TotalValue;
+            TransactionLines = transaction.TransactionLines.Select(t => new TransactionLineListDto(t)).ToList();
         }
     }
 }

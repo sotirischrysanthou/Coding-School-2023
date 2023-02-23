@@ -3,7 +3,7 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
-<PageTitle>Coffee Shop</PageTitle>
+<PageTitle>Fuel Station</PageTitle>
 
 
 @if (Id is null) {
@@ -22,15 +22,15 @@
         <ValidationSummary />
         <div class="row">
             <div class="col-md-4">
-                <label class="form-label">Code</label>
+                <label class="form-label">Name</label>
                 <InputText class="form-control" @bind-Value="@Customer.Name" />
             </div>
             <div class="col-md-4">
-                <label class="form-label">Description</label>
+                <label class="form-label">Surname</label>
                 <InputText class="form-control" @bind-Value="@Customer.Surname" />
             </div>
             <div class="col-md-4">
-                <label class="form-label">Description</label>
+                <label class="form-label">Card Number</label>
                 <InputText class="form-control" @bind-Value="@Customer.CardNumber" />
             </div>
 

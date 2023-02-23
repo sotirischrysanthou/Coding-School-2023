@@ -13,18 +13,18 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
     [ApiController]
     public class LoginController : ControllerBase {
         // Properties
-        private UserAccountService _userAccountService;
+        private UserAccountService _userAccount;
 
         // Constructors
-        public LoginController(UserAccountService userAccountService) {
-            _userAccountService = userAccountService;
+        public LoginController(UserAccountService userAccount) {
+            _userAccount = userAccount;
         }
 
         
         [HttpPost]
         [AllowAnonymous]
         public ActionResult<UserSession> Login([FromBody] LoginRequest loginRequest) {
-            var jwtAuthenticationManager = new JwtAuthenticationManager(_userAccountService);
+            var jwtAuthenticationManager = new JwtAuthenticationManager(_userAccount);
             var userSession = jwtAuthenticationManager.GenarateJwtToken(loginRequest.Username, loginRequest.Password);
             if(userSession is null) { 
                 return Unauthorized();

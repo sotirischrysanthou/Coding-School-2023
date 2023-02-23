@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FuelStation.Web.Blazor.Shared {
-    public class ItemListDto {
+    public class ItemEditDto {
         // Properties
         public Guid Id { get; set; }
 
@@ -33,10 +33,10 @@ namespace FuelStation.Web.Blazor.Shared {
         public decimal Cost { get; set; }
 
         // Constructors
-        public ItemListDto() {
+        public ItemEditDto() {
 
         }
-        public ItemListDto(Item item) {
+        public ItemEditDto(Item item) {
             Id = item.Id;
             Code = item.Code;
             Description = item.Description;
