@@ -20,7 +20,7 @@ namespace FuelStation.EF.Repository {
             var dbCustomer = context.Customers
                 .Where(c => c.Id == id)
                 .SingleOrDefault();
-            if(dbCustomer == null) {
+            if (dbCustomer == null) {
                 throw new Exception($"Customer with id: {id} not found");
             }
             context.Remove(dbCustomer);
@@ -32,7 +32,8 @@ namespace FuelStation.EF.Repository {
             return await context.Customers
                 .Include(c => c.Transactions).ThenInclude(t => t.Employee)
                 .Include(c => c.Transactions).ThenInclude(t => t.TransactionLines)
-                .ToListAsync(); 
+                .OrderBy(c => c.CardNumber)
+                .ToListAsync();
         }
 
         public async Task<Customer?> GetById(Guid id) {

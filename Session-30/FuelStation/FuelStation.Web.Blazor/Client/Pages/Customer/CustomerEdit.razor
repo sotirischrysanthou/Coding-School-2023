@@ -29,11 +29,12 @@
                 <label class="form-label">Surname</label>
                 <InputText class="form-control" @bind-Value="@Customer.Surname" />
             </div>
-            <div class="col-md-4">
-                <label class="form-label">Card Number</label>
-                <InputText class="form-control" @bind-Value="@Customer.CardNumber" />
-            </div>
-
+            @if (Id is not null) {
+                <div class="col-md-4">
+                    <label class="form-label">Card Number</label>
+                    <InputText class="form-control" @bind-Value="@Customer.CardNumber" disabled/>
+                </div>
+            }
         </div>
         <div class="row mt-2">
             <div class="col">
@@ -52,6 +53,7 @@
     protected override async Task OnInitializedAsync() {
         if (Id == null) {
             Customer = new();
+            Customer.CardNumber = "A0";
         } else {
             Customer = await httpClient.GetFromJsonAsync<CustomerEditDto>($"api/customer/edit/{Id}");
             if (Customer is null) {
@@ -72,6 +74,8 @@
             response = await httpClient.PutAsJsonAsync("api/customer", Customer);
         }
         if (response.IsSuccessStatusCode) {
+            var cardNumber = await response.Content.ReadAsStringAsync();
+            await jsRuntime.InvokeVoidAsync("alert",$"Customer {Customer.Name} {Customer.Surname} has registered with card number {cardNumber}");
             navigationManager.NavigateTo("/customerlist");
         } else {
             var error = await response.Content.ReadAsStringAsync();

@@ -30,13 +30,13 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         // GET: api/<CustomerController>
         [HttpGet]
         [Authorize(Roles = "Manager,Cashier")]
-        public async Task<IEnumerable<CustomerListDto>?> Get() {
+        public async Task<ActionResult<IEnumerable<CustomerListDto>?>> Get() {
             try {
                 var result = await _cutomerRepo.GetAll();
                 var selectCustomerList = result.Select(c => new CustomerListDto(c)).ToList();
-                return selectCustomerList;
+                return Ok(selectCustomerList);
             } catch (DbException) {
-                return null;
+                return NotFound("Customer list was not found. Please contact support");
             }
         }
 
@@ -44,16 +44,16 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Route("/api/customer/edit/{id:guid}")]
         [HttpGet("{id:guid}")]
         [Authorize(Roles = "Manager,Cashier")]
-        public async Task<CustomerEditDto?> GetById(Guid id) {
+        public async Task<ActionResult<CustomerEditDto?>> GetById(Guid id) {
             try {
                 var result = await _cutomerRepo.GetById(id);
                 if (result == null) {
-                    return null;
+                    return NotFound("The requested Customer was not found. Please contact support");
                 }
                 CustomerEditDto customer = new CustomerEditDto(result);
-                return customer;
+                return Ok(customer);
             } catch (DbException) {
-                return null;
+                return NotFound("The requested Customer was not found. Please contact support");
             }
         }
 
@@ -61,31 +61,32 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Route("/api/customer/details/{id:guid}")]
         [HttpGet("{id:guid}")]
         [Authorize(Roles = "Manager,Cashier")]
-        public async Task<CustomerDetailsDto?> GetByIdDetails(Guid id) {
+        public async Task<ActionResult<CustomerDetailsDto?>> GetByIdDetails(Guid id) {
             try {
                 var result = await _cutomerRepo.GetById(id);
                 if (result == null) {
-                    return null;
+                    return NotFound("The requested Customer was not found. Please contact support");
                 }
                 CustomerDetailsDto customer = new CustomerDetailsDto(result);
-                return customer;
+                return Ok(customer);
             } catch (DbException) {
-                return null;
+                return NotFound("The requested Customer was not found. Please contact support");
             }
         }
 
         // POST api/<CustomerController>
         [HttpPost]
         [Authorize(Roles = "Manager,Cashier")]
-        public async Task<ActionResult> Post(CustomerEditDto customer) {
+        public async Task<ActionResult<String>> Post(CustomerEditDto customer) {
             try {
                 var customers = await _cutomerRepo.GetAll();
-                if (_validator.ValidateAddCustomer(customers.ToList(), out _errorMessage)) {
+                String newCardNumber = String.Empty;
+                if (_validator.ValidateAddCustomer(customers.ToList(), customer, out newCardNumber, out _errorMessage)) {
                     var newCustomer = new Customer(customer.Name,
                                                    customer.Surname,
-                                                   customer.CardNumber);
+                                                   newCardNumber);
                     await _cutomerRepo.Add(newCustomer);
-                    return Ok();
+                    return Ok(newCardNumber);
                 } else {
                     return BadRequest(_errorMessage);
                 }

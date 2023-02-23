@@ -76,7 +76,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         public async Task<ActionResult> Post([FromBody] ItemEditDto item) {
             try {
                 var items = await _itemRepo.GetAll();
-                if (_validator.ValidateAddItem(items.ToList(), out _errorMessage)) {
+                if (_validator.ValidateAddItem(items.ToList(), item, out _errorMessage)) {
                     var newItem = new Item(item.Code,
                                                item.Description,
                                                item.ItemType,
@@ -103,8 +103,8 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
                     return BadRequest($"item with ID: {item.Id} not found!");
                 }
                 if (_validator.ValidateUpdateItem(items.ToList(), dbItem, item, out _errorMessage)) {
-                    dbItem.Code = dbItem.Code;
-                    dbItem.Description = dbItem.Description;
+                    dbItem.Code = item.Code;
+                    dbItem.Description = item.Description;
                     dbItem.ItemType = item.ItemType;
                     dbItem.Price = item.Price;
                     dbItem.Cost = item.Cost;
