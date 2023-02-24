@@ -12,6 +12,8 @@ namespace FuelStation.Web.Blazor.Shared {
         bool ValidateAddEmployee(EmployeeEditDto employee, List<Employee> employees, out String errorMessage);
         bool ValidateUpdateEmployee(EmployeeEditDto employee, Employee dbEmployee, List<Employee> employees, out String errorMessage);
         bool ValidateDeleteEmployee(EmployeeType type, List<Employee> employees, out String errorMessage);
+        bool ValidateAddOrUpdadteAccount(AccountDto newAccount, List<Account> accounts, out String errorMessage);
+        bool ValidateDeleteAccount(out String errorMessage);
         bool ValidateAddCustomer(List<Customer> customers, CustomerEditDto newCustomer, out String cardNumber, out String errorMessage);
         bool ValidateUpdateCustomer(CustomerEditDto newCustomer, out String errorMessage);
         bool ValidateDeleteCustomer(Customer customer, out String errorMessage);

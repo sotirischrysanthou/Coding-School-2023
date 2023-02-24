@@ -33,7 +33,7 @@ builder.Services.AddAuthentication(o => {
         ValidateAudience = false
     };
 });
-builder.Services.AddSingleton<UserAccountService>();
+builder.Services.AddScoped<UserAccountService>();
 
 
 var app = builder.Build();

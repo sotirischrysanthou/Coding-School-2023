@@ -54,6 +54,7 @@ namespace FuelStation.Web.Blazor.Shared {
             HireDateEnd = employee.HireDateEnd;
             SalaryPerMonth = employee.SalaryPerMonth;
             EmployeeType = employee.EmployeeType;
+            Transactions = (employee.Transactions.Select(t => new TransactionListDto(t))).ToList();
         }
     }
 }

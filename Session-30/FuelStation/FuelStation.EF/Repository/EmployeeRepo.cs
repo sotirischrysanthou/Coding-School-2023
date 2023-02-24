@@ -39,7 +39,7 @@ namespace FuelStation.EF.Repository {
             using var context = new FuelStationDbContext();
             return await context.Employees
                                 .Where(e => e.Id == id)
-                                .Include(e => e.Transactions)
+                                .Include(e => e.Transactions).ThenInclude(t=>t.Customer)
                                 .Include(e => e.Account)
                                 .SingleOrDefaultAsync();
         }
@@ -55,6 +55,7 @@ namespace FuelStation.EF.Repository {
             dbEmployee.Name = entity.Name;
             dbEmployee.Surname = entity.Surname;
             dbEmployee.SalaryPerMonth = entity.SalaryPerMonth;
+            dbEmployee.EmployeeType = entity.EmployeeType;
             dbEmployee.HireDateStart = entity.HireDateStart;
             dbEmployee.HireDateEnd = entity.HireDateEnd;
             await context.SaveChangesAsync();

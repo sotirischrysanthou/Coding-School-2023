@@ -40,7 +40,7 @@ namespace FuelStation.Web.Blazor.Shared {
         public DateTime? HireDateEnd { get; set; }
 
         // Relations
-        public AccountDto Account { get; set; } = null!;
+        public AccountDto Account { get; set; } = new();
 
         // Constructors
         public EmployeeEditDto() {
@@ -54,6 +54,7 @@ namespace FuelStation.Web.Blazor.Shared {
             HireDateEnd = employee.HireDateEnd;
             SalaryPerMonth = employee.SalaryPerMonth;
             EmployeeType = employee.EmployeeType;
+            Account = new AccountDto(employee.Account);
         }
     }
 }

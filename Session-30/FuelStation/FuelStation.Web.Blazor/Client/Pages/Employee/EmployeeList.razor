@@ -89,7 +89,14 @@ else {
     private async Task DeleteItem(EmployeeListDto employee) {
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm) {
-            var response = await httpClient.DeleteAsync($"employee/{employee.Id}");
+            var dbEmployee = await httpClient.GetFromJsonAsync<EmployeeEditDto>($"api/employee/edit/{employee.Id}");
+            //var response = await httpClient.DeleteAsync($"api/account/{dbEmployee.Account.Id}");
+            //if (!response.IsSuccessStatusCode) {
+            //    var error = await response.Content.ReadAsStringAsync();
+            //    await jsRuntime.InvokeVoidAsync("alert", error);
+            //    return;
+            //}
+            var response = await httpClient.DeleteAsync($"api/employee/{employee.Id}");
             if (response.IsSuccessStatusCode) {
                 await LoadItemsFromServer();
             }

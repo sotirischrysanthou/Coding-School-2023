@@ -4,6 +4,7 @@ using FuelStation.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FuelStation.EF.Migrations
 {
     [DbContext(typeof(FuelStationDbContext))]
-    partial class FuelStationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230224161745_AccountAndEmployeeToCascade")]
+    partial class AccountAndEmployeeToCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +41,8 @@ namespace FuelStation.EF.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Password");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
                         .HasColumnName("Role");
 
                     b.Property<string>("Username")

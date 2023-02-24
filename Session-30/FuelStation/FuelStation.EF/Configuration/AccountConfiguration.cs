@@ -20,13 +20,12 @@ namespace FuelStation.EF.Configuration {
             builder.Property(a => a.Id).HasColumnName("ID").IsRequired();
             builder.Property(a => a.Username).HasColumnName("Userame").IsRequired().HasMaxLength(20);
             builder.Property(c => c.Password).HasColumnName("Password").IsRequired().HasMaxLength(20);
-            builder.Property(c => c.Role).HasColumnName("Role").IsRequired();
+            builder.Property(c => c.Role).HasColumnName("Role").IsRequired().HasConversion<string>();
 
             // Set navigation properties
             builder.HasOne(a => a.Employee)
                 .WithOne(e => e.Account)
-                .HasForeignKey<Account>(a => a.EmployeeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey<Account>(a => a.EmployeeId);
         }
     }
 }

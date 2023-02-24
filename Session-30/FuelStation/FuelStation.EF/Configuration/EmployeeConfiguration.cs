@@ -29,8 +29,7 @@ namespace FuelStation.EF.Configuration {
             // Set navigation properties
             builder.HasOne(e => e.Account)
                    .WithOne(a => a.Employee)
-                   .HasForeignKey<Employee>(e => e.AccountId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .HasForeignKey<Employee>(e => e.AccountId);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace FuelStation.Web.Blazor.Shared {
         }
 
         public AccountDto(Account account) {
-            Id = Guid.NewGuid();
+            Id = account.Id;
             Username = account.Username;
             Password = account.Password;
             Role = account.Role;

@@ -88,13 +88,16 @@ else {
         HttpResponseMessage? response = null;
         if (Id == null) {
             response = await httpClient.PostAsJsonAsync("api/customer", Customer);
+            if (response.IsSuccessStatusCode)
+            {
+                var cardNumber = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", $"Customer {Customer.Name} {Customer.Surname} has registered with card number {cardNumber}");
+            }
         }
         else {
             response = await httpClient.PutAsJsonAsync("api/customer", Customer);
         }
         if (response.IsSuccessStatusCode) {
-            var cardNumber = await response.Content.ReadAsStringAsync();
-            await jsRuntime.InvokeVoidAsync("alert", $"Customer {Customer.Name} {Customer.Surname} has registered with card number {cardNumber}");
             navigationManager.NavigateTo("/customerlist");
         }
         else {

@@ -19,24 +19,24 @@ else {
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label class="form-label">Name</label>
                 @*<input class="form-control" @bind="@Employee.Name" />*@
                 <InputText class="form-control" @bind-Value="@Employee.Name" />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label class="form-label">Surname</label>
                 <InputText class="form-control" @bind-Value="@Employee.Surname" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Hire date start</label>
-                <InputNumber class="form-control" @bind-Value="@Employee.HireDateStart" />
+                <InputDate class="form-control" @bind-Value="@Employee.HireDateStart" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Hire date end</label>
-                <InputNumber class="form-control" @bind-Value="@Employee.HireDateEnd" />
+                <InputDate class="form-control" @bind-Value="@Employee.HireDateEnd" />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label class="form-label">Salary Per Month</label>
                 <InputNumber class="form-control" @bind-Value="@Employee.SalaryPerMonth" />
             </div>
@@ -50,11 +50,11 @@ else {
             </div>
             <div class="col-md-6">
                 <label class="form-label">Username</label>
-                <InputNumber class="form-control" @bind-Value="@Employee.Account.Username" />
+                <InputText class="form-control" @bind-Value="@Employee.Account.Username" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Password</label>
-                <InputNumber class="form-control" @bind-Value="@Employee.Account.Password" />
+                <InputText class="form-control" @bind-Value="@Employee.Account.Password" />
             </div>
             <div class="row mt-2">
                 <div class="col">
@@ -78,7 +78,7 @@ else {
         if (!String.IsNullOrWhiteSpace(token)) {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
             if (Id == null) {
-                Employee = new();
+                Employee = new() { HireDateStart = DateTime.Today };
             }
             else {
                 Employee = await httpClient.GetFromJsonAsync<EmployeeEditDto>($"api/employee/edit/{Id}");
@@ -100,10 +100,36 @@ else {
     private async Task OnSave() {
         HttpResponseMessage? response = null;
         if (Id == null) {
-            response = await httpClient.PostAsJsonAsync("employee", Employee);
+            if (Employee is not null) {
+                Employee.Account.Id = Guid.NewGuid();
+                Employee.Account.Role = Employee.EmployeeType;
+                Employee.Account.Employee = new EmployeeListDto() {
+                        Id = Guid.NewGuid(),
+                        Name = Employee.Name,
+                        Surname = Employee.Surname,
+                        HireDateStart = Employee.HireDateStart,
+                        HireDateEnd = null,
+                        EmployeeType = Employee.EmployeeType,
+                        SalaryPerMonth = Employee.SalaryPerMonth
+                    };
+                response = await httpClient.PostAsJsonAsync("api/employee", Employee);
+                if (response.IsSuccessStatusCode) {
+                    var employeeIdStr = await response.Content.ReadAsStringAsync();
+                    Guid EmployeeId = Guid.Parse(employeeIdStr);
+                    Employee.Account.EmployeeId = EmployeeId;
+                }
+                response = await httpClient.PostAsJsonAsync("api/account", Employee.Account);
+            }
+            else {
+                response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+            }
         }
         else {
-            response = await httpClient.PutAsJsonAsync("employee", Employee);
+            if (Employee is not null) {
+                Employee.Account.Role = Employee.EmployeeType;
+                response = await httpClient.PutAsJsonAsync("api/account", Employee.Account);
+            }
+            response = await httpClient.PutAsJsonAsync("api/employee", Employee);
         }
         if (response.IsSuccessStatusCode) {
             navigationManager.NavigateTo("/employeelist");

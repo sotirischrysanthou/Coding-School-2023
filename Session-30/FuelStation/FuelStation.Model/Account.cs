@@ -23,11 +23,12 @@ namespace FuelStation.Model {
 
         }
 
-        public Account(String username, String password, Guid employeeId) {
-            Id = Guid.NewGuid();
+        public Account(Guid id,String username, String password, EmployeeType role, Guid employeeId) {
+            Id = id;
             Username = username;
             Password = password;
             EmployeeId = employeeId;
+            Role = role;
         }
     }
 }

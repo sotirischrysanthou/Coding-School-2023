@@ -60,6 +60,24 @@ namespace FuelStation.Web.Blazor.Shared {
             return ret;
         }
 
+        public bool ValidateAddOrUpdadteAccount(AccountDto newAccount, List<Account> accounts, out String errorMessage) {
+            bool ret = true;
+            errorMessage = "Succeed ";
+            foreach (Account account in accounts) {
+                if(account.Id != newAccount.Id && account.Username == newAccount.Username) { 
+                    ret =false;
+                    errorMessage = $"Username {account.Username} is already exist";
+                }
+            }
+            return ret;
+        }
+
+        public bool ValidateDeleteAccount(out String errorMessage) {
+            bool ret = true;
+            errorMessage = "Succeed ";
+            return ret;
+        }
+
         public bool ValidateAddCustomer(List<Customer> customers, CustomerEditDto newCustomer, out String cardNumber, out String errorMessage) {
             bool ret = ValidateNameAndSurname(newCustomer.Name, newCustomer.Surname, out errorMessage);
             cardNumber = String.Empty;

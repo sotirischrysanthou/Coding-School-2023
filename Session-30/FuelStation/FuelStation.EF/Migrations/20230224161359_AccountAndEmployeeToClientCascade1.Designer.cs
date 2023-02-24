@@ -4,6 +4,7 @@ using FuelStation.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FuelStation.EF.Migrations
 {
     [DbContext(typeof(FuelStationDbContext))]
-    partial class FuelStationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230224161359_AccountAndEmployeeToClientCascade1")]
+    partial class AccountAndEmployeeToClientCascade1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +41,8 @@ namespace FuelStation.EF.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Password");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
                         .HasColumnName("Role");
 
                     b.Property<string>("Username")
@@ -50,9 +52,6 @@ namespace FuelStation.EF.Migrations
                         .HasColumnName("Userame");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
 
                     b.ToTable("Accounts", (string)null);
                 });
@@ -131,6 +130,9 @@ namespace FuelStation.EF.Migrations
                         .HasColumnName("Surname");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId")
+                        .IsUnique();
 
                     b.ToTable("Employees", (string)null);
                 });
@@ -262,15 +264,15 @@ namespace FuelStation.EF.Migrations
                     b.ToTable("TransactionLines", (string)null);
                 });
 
-            modelBuilder.Entity("FuelStation.Model.Account", b =>
+            modelBuilder.Entity("FuelStation.Model.Employee", b =>
                 {
-                    b.HasOne("FuelStation.Model.Employee", "Employee")
-                        .WithOne("Account")
-                        .HasForeignKey("FuelStation.Model.Account", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("FuelStation.Model.Account", "Account")
+                        .WithOne("Employee")
+                        .HasForeignKey("FuelStation.Model.Employee", "AccountId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("FuelStation.Model.Transaction", b =>
@@ -311,6 +313,12 @@ namespace FuelStation.EF.Migrations
                     b.Navigation("Transaction");
                 });
 
+            modelBuilder.Entity("FuelStation.Model.Account", b =>
+                {
+                    b.Navigation("Employee")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FuelStation.Model.Customer", b =>
                 {
                     b.Navigation("Transactions");
@@ -318,9 +326,6 @@ namespace FuelStation.EF.Migrations
 
             modelBuilder.Entity("FuelStation.Model.Employee", b =>
                 {
-                    b.Navigation("Account")
-                        .IsRequired();
-
                     b.Navigation("Transactions");
                 });
 
