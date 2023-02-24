@@ -1,7 +1,6 @@
-﻿using CoffeShop.Web.Blazor.Shared;
+﻿using FuelStation.Web.Blazor.Shared;
 using FuelStation.EF.Repository;
 using FuelStation.Model;
-using FuelStation.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Common;
@@ -123,8 +122,11 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Authorize(Roles = "Manager,Staff")]
         public async Task<ActionResult> Delete(Guid id) {
             try {
-                var Items = await _itemRepo.GetAll();
-                if (_validator.ValidateDeleteItem(Items.ToList(), out _errorMessage)) {
+                var item = await _itemRepo.GetById(id);
+                if (item == null) {
+                    return NotFound($"item with ID: {id} not found");
+                }
+                if (_validator.ValidateDeleteItem(item, out _errorMessage)) {
                     await _itemRepo.Delete(id);
                     return Ok();
                 } else {

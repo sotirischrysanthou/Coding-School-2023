@@ -1,4 +1,5 @@
-﻿using FuelStation.Model;
+﻿using FuelStation.EF.Repository;
+using FuelStation.Model;
 using FuelStation.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -25,8 +26,12 @@ namespace FuelStation.Authorization {
             HttpClient httpClient = new HttpClient() {
                 BaseAddress = baseUrl
             };
-            var accounts = await httpClient.GetFromJsonAsync<List<Account>>("api/account/");
-            return accounts;
+            AccountRepo accountRepo = new AccountRepo();
+            var accounts = await accountRepo.GetAll();
+            foreach(Account account in accounts) {
+                account.Employee.Account = null!;
+            }
+            return accounts.ToList();
         }
 
         public Account? GetUserAccountByUsername(string username) {

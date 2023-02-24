@@ -1,4 +1,4 @@
-using CoffeShop.Web.Blazor.Shared;
+using FuelStation.Web.Blazor.Shared;
 using FuelStation.Authorization;
 using FuelStation.EF.Repository;
 using FuelStation.Model;

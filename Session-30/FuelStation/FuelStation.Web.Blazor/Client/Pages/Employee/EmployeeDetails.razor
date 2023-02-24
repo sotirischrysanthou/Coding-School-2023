@@ -1,0 +1,99 @@
+﻿@page "/employeelist/details/{Id:guid?}"
+@using System.Net.Http.Headers;
+@using FuelStation.Model.Enums;
+@using uelStation.Web.Blazor.Client.Extensions;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
+@inject IJSRuntime jsRuntime
+@attribute [Authorize(Roles = "Manager")]
+<PageTitle>Fuel Station</PageTitle>
+<h3>Employee Details</h3>
+
+@if (Employee == null) {
+    <div class="spinner-border text-secondary" role="status">
+    </div>
+} else {
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input class="form-control" @bind="@Employee.Name" disabled />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Surname</label>
+            <input class="form-control" @bind="@Employee.Surname" disabled />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Salary Per Month</label>
+            <input class="form-control" @bind="@Employee.SalaryPerMonth" disabled />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Employee Type</label>
+            <select class="form-control" @bind="Employee.EmployeeType" disabled>
+                @foreach (var employeetype in Enum.GetValues<EmployeeType>()) {
+                    <option value="@employeetype">@employeetype</option>
+                }
+            </select>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <BootstrapButton ButtonType = "BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+            </div>
+        </div>
+    </div>
+    @if (Employee.Transactions.Count() > 0) {
+        <div class="row mt-5">
+            <h4 class="col-xs-6">
+                Employee's Transactions:
+            </h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Payment Method</th>
+                        <th>Total Value</th>
+                        <th>Employee</th>
+                        <th>Customer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Employee.Transactions) {
+                        <tr>
+                            <td>@transaction.Date</td>
+                            <td>@transaction.PaymentMethod</td>
+                            <td>@transaction.TotalValue</td>
+                            <td>@transaction.Employee.Name @transaction.Employee.Surname</td>
+                            <td>@transaction.Employee.Name @transaction.Employee.Surname</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    private EmployeeDetailsDto? Employee = null!;
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        if (Id == null) {
+            Employee = new();
+        } else {
+            Employee = await httpClient.GetFromJsonAsync<EmployeeDetailsDto>($"api/employee/details/{Id}");
+            if(Employee is null) {
+                //TODO: If employee is null
+            }
+
+        }
+        isLoading = false;
+    }
+
+
+    private void OnCancel() {
+        navigationManager.NavigateTo("employeelist");
+    }
+}
+

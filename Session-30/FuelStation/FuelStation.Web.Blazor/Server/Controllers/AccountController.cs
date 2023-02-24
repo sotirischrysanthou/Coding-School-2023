@@ -2,6 +2,7 @@
 using FuelStation.EF.Repository;
 using FuelStation.Model;
 using FuelStation.Web.Blazor.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Common;
@@ -20,6 +21,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // GET: api/<AccountController>
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public async Task<IEnumerable<AccountDto>?> Get() {
             try {
                 var result = await _accountRepo.GetAll();

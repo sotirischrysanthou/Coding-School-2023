@@ -1,7 +1,6 @@
-﻿using CoffeShop.Web.Blazor.Shared;
+﻿using FuelStation.Web.Blazor.Shared;
 using FuelStation.EF.Repository;
 using FuelStation.Model;
-using FuelStation.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -100,15 +99,14 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Put(CustomerEditDto customer) {
             try {
-                var customers = await _cutomerRepo.GetAll();
-                var dbCustomer = customers.Where(c => c.Id == customer.Id).SingleOrDefault();
-                if (dbCustomer == null) {
-                    return BadRequest($"Customer with ID: {customer.Id} not found!");
-                }
-                if (_validator.ValidateUpdateCustomer(customers.ToList(), dbCustomer, customer, out _errorMessage)) {
+                if (_validator.ValidateUpdateCustomer(customer, out _errorMessage)) {
+                    var dbCustomer = await _cutomerRepo.GetById(customer.Id);
+                    if (dbCustomer == null) {
+                        return BadRequest($"Customer with ID: {customer.Id} not found!");
+                    }
                     dbCustomer.Name = customer.Name;
                     dbCustomer.Surname = customer.Surname;
-                    dbCustomer.CardNumber = customer.CardNumber;
+                    //dbCustomer.CardNumber = customer.CardNumber;
                     await _cutomerRepo.Update(dbCustomer.Id, dbCustomer);
                     return Ok();
                 } else {
@@ -124,8 +122,11 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Delete(Guid id) {
             try {
-                var customers = await _cutomerRepo.GetAll();
-                if (_validator.ValidateDeleteCustomer(customers.ToList(), out _errorMessage)) {
+                var customer = await _cutomerRepo.GetById(id);
+                if(customer is null) {
+                    return NotFound("Customer not Found");
+                }
+                if (_validator.ValidateDeleteCustomer(customer, out _errorMessage)) {
                     await _cutomerRepo.Delete(id);
                     return Ok();
                 } else {

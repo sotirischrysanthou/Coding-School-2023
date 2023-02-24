@@ -14,9 +14,6 @@ namespace FuelStation.Model {
         [StringLength(20, MinimumLength = 1, ErrorMessage = "CardNumber must be between 1 and 20 characters.")]
         public String CardNumber { get; set; }
 
-        // Relations
-        public List<Transaction> Transactions { get; set; } = null!;
-
         // Constractors
         public Customer(String name, String surname, String cardNumber) : base(name, surname) {
             CardNumber = cardNumber;

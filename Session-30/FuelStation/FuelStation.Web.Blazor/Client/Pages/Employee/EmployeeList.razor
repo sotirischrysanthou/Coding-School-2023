@@ -1,0 +1,106 @@
+﻿@using FuelStation.Web.Blazor.Shared;
+@using System.Net.Http.Headers;
+@using uelStation.Web.Blazor.Client.Extensions;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
+@inject IJSRuntime jsRuntime
+@attribute [Authorize(Roles = "Manager")]
+
+@page "/employeelist"
+<PageTitle>Coffee Shop</PageTitle>
+
+<h3>Employees</h3>
+
+@if (isLoading) {
+    <div class="spinner-border text-secondary" role="status">
+    </div>
+}
+else {
+    <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="CreateItem">Create</BootstrapButton>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Salary Per Month</th>
+                <th>Employee Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employeeList) {
+                if (employee.HireDateEnd is null) {
+
+                    <tr>
+                        <td>@employee.Name</td>
+                        <td>@employee.Surname</td>
+                        <td>@employee.HireDateStart</td>
+                        <td>@employee.SalaryPerMonth</td>
+                        <td>@employee.EmployeeType</td>
+                        <td>
+                            <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> EditItem(employee)">Edit</BootstrapButton>
+                            <BootstrapButton ButtonType="BootstrapButtonType.Primary" OnClick="()=> DetailItem(employee)">Details</BootstrapButton>
+                            <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteItem(employee)">Delete</BootstrapButton>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<EmployeeListDto> employeeList = new();
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync() {
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        var token = await customAuthStateProvider.GetToken();
+        if (!String.IsNullOrWhiteSpace(token)) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            await LoadItemsFromServer();
+            isLoading = false;
+        }
+        else {
+            navigationManager.NavigateTo("/login", true);
+        }
+    }
+
+    private async Task LoadItemsFromServer() {
+        var tempEmployeeList = await httpClient.GetFromJsonAsync<List<EmployeeListDto>>("api/employee");
+        if (tempEmployeeList is not null) {
+            employeeList = tempEmployeeList;
+        }
+        else {
+            //TODO: if tempEmployeeList is null
+        }
+    }
+
+    private void CreateItem() {
+        navigationManager.NavigateTo("employeeList/edit");
+    }
+
+    private void EditItem(EmployeeListDto employee) {
+        navigationManager.NavigateTo($"employeeList/edit/{employee.Id}");
+    }
+
+    private async Task DeleteItem(EmployeeListDto employee) {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm) {
+            var response = await httpClient.DeleteAsync($"employee/{employee.Id}");
+            if (response.IsSuccessStatusCode) {
+                await LoadItemsFromServer();
+            }
+            else {
+                var error = await response.Content.ReadAsStringAsync();
+                await jsRuntime.InvokeVoidAsync("alert", error);
+            }
+        }
+    }
+
+    private void DetailItem(EmployeeListDto employee) {
+        navigationManager.NavigateTo($"employeeList/details/{employee.Id}");
+    }
+}

@@ -29,22 +29,27 @@ namespace FuelStation.EF.Repository {
 
         public async Task<IList<Employee>> GetAll() {
             using var context = new FuelStationDbContext();
-            return await context.Employees.Include(e => e.Transactions).ToListAsync();
+            return await context.Employees
+                                .Include(e => e.Transactions)
+                                .Include(e => e.Account)
+                                .ToListAsync();
         }
 
         public async Task<Employee?> GetById(Guid id) {
             using var context = new FuelStationDbContext();
             return await context.Employees
-                .Where(e => e.Id == id)
-                .Include(e => e.Transactions)
-                .SingleOrDefaultAsync();
+                                .Where(e => e.Id == id)
+                                .Include(e => e.Transactions)
+                                .Include(e => e.Account)
+                                .SingleOrDefaultAsync();
         }
 
         public async Task Update(Guid id, Employee entity) {
             using var context = new FuelStationDbContext();
             var dbEmployee = await context.Employees
-                .Where(e => e.Id == id)
-                .SingleOrDefaultAsync();
+                                          .Where(e => e.Id == id)
+                                          .Include(e => e.Account)
+                                          .SingleOrDefaultAsync();
             if (dbEmployee is null)
                 throw new Exception($"Employee with id: {id} not found");
             dbEmployee.Name = entity.Name;

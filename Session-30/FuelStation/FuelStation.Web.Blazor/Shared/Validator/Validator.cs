@@ -3,11 +3,12 @@ using FuelStation.Model.Enums;
 using FuelStation.Web.Blazor.Shared;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeShop.Web.Blazor.Shared {
+namespace FuelStation.Web.Blazor.Shared {
     public class Validator : IValidator {
         public readonly MinMax ManagersLimits;
         public readonly MinMax CashiersLimits;
@@ -20,51 +21,22 @@ namespace CoffeShop.Web.Blazor.Shared {
             StaffLimits = new MinMax() { Min = 1, Max = 10 };
             NameLimits = new MinMax() { Min = 1, Max = 20 };
         }
-        public bool ValidateAddEmployee(EmployeeType type, List<Employee> employees, out String errorMessage) {
-            errorMessage = "Succeed ";
-            bool ret = true;
-            var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
-            var staff = employees.Where(e => e.EmployeeType == EmployeeType.Staff);
-            var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
-            if (type == EmployeeType.Manager && managers.Count() == ManagersLimits.Max) {
-                ret = false;
-                errorMessage = $"You have already {ManagersLimits.Max} Managers. Max number of managers is {ManagersLimits.Max}";
-            }
-            if (type == EmployeeType.Cashier && cashiers.Count() >= CashiersLimits.Max) {
-                ret = false;
-                errorMessage = $"You have already {CashiersLimits.Max} Cashiers. Max number of Cashiers is {CashiersLimits.Max}";
-            }
-            if (type == EmployeeType.Staff && staff.Count() >= StaffLimits.Max) {
-                ret = false;
-                errorMessage = $"You have already {StaffLimits.Max} Staff. Max number of Staff is {StaffLimits.Max}";
-            }
-            return ret;
+        public bool ValidateAddEmployee(EmployeeEditDto employee, List<Employee> employees, out String errorMessage) {
+            if (!ValidateNameAndSurname(employee.Name, employee.Surname, out errorMessage)) return false;
+            if (!ValidateAddEmployeeByEmployeeType(employee.EmployeeType,employees, out errorMessage)) return false;
+            return true;
         }
 
-        public bool ValidateUpdateEmployee(EmployeeType NewType, Employee dbEmployee, List<Employee> employees, out String errorMessage) {
-            errorMessage = "Succeed ";
-            bool ret = true;
-            if (dbEmployee == null) {
-                ret = false;
-            } else if (NewType != dbEmployee.EmployeeType) {
-                var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
-                var staff = employees.Where(e => e.EmployeeType == EmployeeType.Staff);
-                var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
-                if (NewType == EmployeeType.Manager && managers.Count() >= ManagersLimits.Max) {
-                    errorMessage = $"You have already {ManagersLimits.Max} Managers. Max number of managers is {ManagersLimits.Max}";
-                    ret = false;
-                }
-                if (NewType == EmployeeType.Cashier && cashiers.Count() >= CashiersLimits.Max) {
-                    errorMessage = $"You have already {CashiersLimits.Max} cashiers. Max number of cashiers is {CashiersLimits.Max}";
-                    ret = false;
-                }
-                if (NewType == EmployeeType.Staff && staff.Count() >= StaffLimits.Max) {
-                    errorMessage = $"You have already {StaffLimits.Max} Staff. Max number of Staff is {StaffLimits.Max}";
-                    ret = false;
-                }
+        public bool ValidateUpdateEmployee(EmployeeEditDto employee, Employee dbEmployee, List<Employee> employees, out String errorMessage) {
+            if (!ValidateNameAndSurname(employee.Name, employee.Surname, out errorMessage)) return false;
+            EmployeeType newType = employee.EmployeeType;
+            if (newType != dbEmployee.EmployeeType) {
+                if(!ValidateAddEmployeeByEmployeeType(newType, employees, out errorMessage)) return false;
             }
-            return ret;
+            return true;
         }
+
+        //private bool ValidateAddOrUpdateAccount()
 
         public bool ValidateDeleteEmployee(EmployeeType type, List<Employee> employees, out String errorMessage) {
             bool ret = true;
@@ -88,19 +60,52 @@ namespace CoffeShop.Web.Blazor.Shared {
             return ret;
         }
 
-        public bool ValidateAddCustomer(List<Customer> customers, CustomerEditDto newCustomer, out String cardNumber, out string errorMessage) {
-            errorMessage = "Succeed";
+        public bool ValidateAddCustomer(List<Customer> customers, CustomerEditDto newCustomer, out String cardNumber, out String errorMessage) {
+            bool ret = ValidateNameAndSurname(newCustomer.Name, newCustomer.Surname, out errorMessage);
             cardNumber = String.Empty;
-            bool ret = true;
-            if (newCustomer.Name.Length < NameLimits.Min || newCustomer.Name.Length > NameLimits.Max) {
-                errorMessage = "Name must have lenght between 1 and 20 characters";
-                ret = false;
-                return ret;
-            } else if (newCustomer.Surname.Length < NameLimits.Min || newCustomer.Surname.Length > NameLimits.Max) {
-                errorMessage = "Name must have lenght between 1 and 20 characters";
-                ret = false;
+            if(!ret) {
                 return ret;
             }
+            int startPos = customers.Count - 1;
+            cardNumber = GenarateCardNumber(customers);
+            return ret;
+        }
+        public bool ValidateUpdateCustomer(CustomerEditDto newCustomer, out String errorMessage) {
+            return ValidateNameAndSurname(newCustomer.Name,newCustomer.Surname, out errorMessage);
+        }
+
+        public bool ValidateDeleteCustomer(Customer customer, out String errorMessage) {
+            return ValidateDeleteCustomerOrEmployee("Customer", customer, out errorMessage);
+        }
+
+        public bool ValidateAddItem(List<Item> items, ItemEditDto newItem, out String errorMessage) {
+            return ValidateAddOrUpdateItem(items, newItem, out errorMessage);
+        }
+
+        public bool ValidateUpdateItem(List<Item> items, Item oldItem, ItemEditDto newItem, out String errorMessage) {
+            return ValidateAddOrUpdateItem(items, newItem, out errorMessage);
+        }
+
+
+        public bool ValidateDeleteItem(Item item, out String errorMessage) {
+            errorMessage = "Succeed";
+            bool ret = true;
+            if (item.TransactionLines.Count > 0) {
+                errorMessage = $"Can not delete Item with transactions";
+                ret = false;
+            }
+            return ret;
+        }
+        public bool ValidateTransaction(Transaction transaction, out String errorMessage) {
+            errorMessage = "Succeed";
+            return true;
+        }
+
+
+
+        // shared functions
+
+        private string GenarateCardNumber(List<Customer> customers) {
             int startPos = customers.Count - 1;
             for (int i = customers.Count + 1; i > 0; i--) {
                 for (int j = startPos; j >= 0; j--) {
@@ -111,23 +116,46 @@ namespace CoffeShop.Web.Blazor.Shared {
                     startPos--;
                 }
                 if (startPos < 0) {
-                    cardNumber = $"A{i}";
-                    break;
+                    return $"A{i}";
                 }
+            }
+            return String.Empty;
+        }
+
+        private bool ValidateAddEmployeeByEmployeeType(EmployeeType type,List<Employee> employees, out String errorMessage) {
+            bool ret = true;
+            errorMessage = "Succeed";
+            var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
+            var staff = employees.Where(e => e.EmployeeType == EmployeeType.Staff);
+            var managers = employees.Where(e => e.EmployeeType == EmployeeType.Manager);
+            if (type == EmployeeType.Manager && managers.Count() == ManagersLimits.Max) {
+                ret = false;
+                errorMessage = $"You have already {ManagersLimits.Max} Managers. Max number of managers is {ManagersLimits.Max}";
+            }
+            if (type == EmployeeType.Cashier && cashiers.Count() >= CashiersLimits.Max) {
+                ret = false;
+                errorMessage = $"You have already {CashiersLimits.Max} Cashiers. Max number of Cashiers is {CashiersLimits.Max}";
+            }
+            if (type == EmployeeType.Staff && staff.Count() >= StaffLimits.Max) {
+                ret = false;
+                errorMessage = $"You have already {StaffLimits.Max} Staff. Max number of Staff is {StaffLimits.Max}";
             }
             return ret;
         }
-        public bool ValidateUpdateCustomer(List<Customer> customers, Customer oldCustomer, CustomerEditDto newCustomer, out string errorMessage) {
-            errorMessage = "Succeed";
-            return true;
-        }
 
-        public bool ValidateDeleteCustomer(List<Customer> customers, out string errorMessage) {
+        private bool ValidateNameAndSurname(String name, String surname, out String errorMessage) {
             errorMessage = "Succeed";
-            return true;
+            bool ret = true;
+            if (name.Length < NameLimits.Min || name.Length > NameLimits.Max) {
+                errorMessage = "Name must have lenght between 1 and 20 characters";
+                ret = false;
+            } else if (surname.Length < NameLimits.Min || surname.Length > NameLimits.Max) {
+                errorMessage = "Surname must have lenght between 1 and 20 characters";
+                ret = false;
+            }
+            return ret;
         }
-
-        public bool ValidateAddItem(List<Item> items, ItemEditDto newItem, out string errorMessage) {
+        private bool ValidateAddOrUpdateItem(List<Item> items, ItemEditDto newItem, out String errorMessage) {
             errorMessage = "Succeed";
             bool ret = true;
             foreach (Item item in items) {
@@ -141,7 +169,7 @@ namespace CoffeShop.Web.Blazor.Shared {
                                    $"      and the add a new with this code";
                     ret = false;
                 }
-                if(item.Id != newItem.Id && item.ItemType == newItem.ItemType && item.Description == newItem.Description) {
+                if (item.Id != newItem.Id && item.ItemType == newItem.ItemType && item.Description == newItem.Description) {
                     errorMessage = $"The same object exists in the database with\n" +
                                    $"Item Type:     {item.ItemType}\n" +
                                    $"Description:   {item.Description}\n" +
@@ -153,19 +181,14 @@ namespace CoffeShop.Web.Blazor.Shared {
             }
             return ret;
         }
-
-        public bool ValidateUpdateItem(List<Item> items, Item oldItem, ItemEditDto newItem, out string errorMessage) {
+        private bool ValidateDeleteCustomerOrEmployee(String type, Person person, out String errorMessage) {
             errorMessage = "Succeed";
-            return true;
-        }
-
-        public bool ValidateDeleteItem(List<Item> items, out string errorMessage) {
-            errorMessage = "Succeed";
-            return true;
-        }
-        public bool ValidateTransaction(Transaction transaction, out string errorMessage) {
-            errorMessage = "Succeed";
-            return true;
+            bool ret = true;
+            if (person.Transactions.Count > 0) {
+                errorMessage = $"Can not delete {type} with transactions";
+                ret = false;
+            }
+            return ret;
         }
     }
 

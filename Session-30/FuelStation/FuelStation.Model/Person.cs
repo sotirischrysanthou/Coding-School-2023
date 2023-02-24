@@ -16,6 +16,9 @@ namespace FuelStation.Model {
         [MaxLength(20, ErrorMessage = "The surname must be less than 20 characters")]
         public String Surname { get; set; }
 
+        // Relations
+        public List<Transaction> Transactions { get; set; } = null!;
+
         // Constructors
         public Person(String name, String surname) {
             Id = Guid.NewGuid();

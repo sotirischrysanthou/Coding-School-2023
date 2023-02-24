@@ -1,11 +1,14 @@
 ﻿@page "/customerlist/details/{Id:guid?}"
-@using FuelStation.Web.Blazor.Shared;
+@using System.Net.Http.Headers;
+@using uelStation.Web.Blazor.Client.Extensions;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
-<PageTitle>Fuel Station</PageTitle>
+@inject AuthenticationStateProvider authStateProvider
+@inject IJSRuntime jsRuntime
+@attribute [Authorize(Roles = "Manager")]
 <h3>Customer Details</h3>
 
-@if (Customer == null) {
+@if (isLoading) {
     <div class="spinner-border text-secondary" role="status">
     </div>
 } else {
@@ -64,17 +67,31 @@
 
 
 @code {
+    private bool isLoading = true;
     [Parameter] public Guid? Id { get; set; }
     CustomerDetailsDto? Customer { get; set; }
 
     protected override async Task OnInitializedAsync() {
-        if (Id == null) {
-            Customer = new();
-        } else {
-            Customer = await httpClient.GetFromJsonAsync<CustomerDetailsDto>($"api/customer/details/{Id}");
-            if (Customer is null) {
-                //TODO: Handle if customer is null
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        var token = await customAuthStateProvider.GetToken();
+        if (!String.IsNullOrWhiteSpace(token)) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            if (Id == null) {
+                Customer = new();
+                Customer.CardNumber = "A0";
             }
+            else {
+                Customer = await httpClient.GetFromJsonAsync<CustomerDetailsDto>($"api/customer/edit/{Id}");
+                if (Customer is null) {
+                    await jsRuntime.InvokeVoidAsync("alert", "Can not find Customer");
+                    navigationManager.NavigateTo("/");
+                    //TODO: Handle if customer is null
+                }
+            }
+            isLoading = false;
+        }
+        else {
+            navigationManager.NavigateTo("/login", true);
         }
     }
 

@@ -29,7 +29,6 @@ namespace FuelStation.Model {
         public EmployeeType EmployeeType { get; set; }
 
         // Relations
-        public List<Transaction> Transactions { get; set; } = null!;
         public Guid AccountId { get; set; }
         public Account Account { get; set; } = null!;
 
