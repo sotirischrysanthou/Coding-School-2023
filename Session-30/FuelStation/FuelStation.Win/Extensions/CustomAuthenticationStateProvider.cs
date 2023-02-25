@@ -1,33 +1,33 @@
-﻿using Blazored.SessionStorage;
-using FuelStation.Web.Blazor.Client.Extensions;
+﻿using System.Security.Claims;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using FuelStation.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Security.Claims;
 
-namespace FuelStation.Web.Blazor.Client.Extensions {
+namespace FuelStation.Win.Extensions {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider {
         // Properties
-        private readonly ISessionStorageService _sessionStorage;
         private ClaimsPrincipal _anonymous = new ClaimsPrincipal(new ClaimsIdentity());
 
         // Constructors
-        public CustomAuthenticationStateProvider(ISessionStorageService sessionStorage) {
-            _sessionStorage = sessionStorage;
+        public CustomAuthenticationStateProvider() {
         }
 
         // Methods
         public override async Task<AuthenticationState> GetAuthenticationStateAsync() {
             try {
-                var userSession = await _sessionStorage.ReadEncriptedItemAsync<UserSession>("UserSession");
+                var userSession = await SessionStorageServiceExtension.ReadEncriptedItemAsync<UserSession>("UserSession");
                 if (userSession == null) {
                     return await Task.FromResult(new AuthenticationState(_anonymous));
                 }
                 var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim> {
                     new Claim(ClaimTypes.Name, $"{userSession.Employee.Name} {userSession.Employee.Surname}"),
                     new Claim(ClaimTypes.Role, userSession.Role)
-                },"JwtAuth"));
+                }, "JwtAuth"));
                 return await Task.FromResult(new AuthenticationState(claimsPrincipal));
-            } catch {
+            }
+            catch {
                 return await Task.FromResult(new AuthenticationState(_anonymous));
             }
         }
@@ -40,10 +40,11 @@ namespace FuelStation.Web.Blazor.Client.Extensions {
                     new Claim(ClaimTypes.Role, userSession.Role)
                 }));
                 userSession.ExpiryTimeStamp = DateTime.Now.AddSeconds(userSession.ExpiresIn);
-                await _sessionStorage.SaveItemEncryptedAsync("UserSession", userSession);
-            } else {  
-                    claimsPrincipal = _anonymous;
-                    await _sessionStorage.RemoveItemAsync("UserSession");
+                await SessionStorageServiceExtension.SaveItemEncryptedAsync("UserSession", userSession);
+            }
+            else {
+                claimsPrincipal = _anonymous;
+                await SessionStorageServiceExtension.RemoveItemAsync("UserSession");
             }
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
@@ -51,11 +52,12 @@ namespace FuelStation.Web.Blazor.Client.Extensions {
         public async Task<string> GetToken() {
             var result = string.Empty;
             try {
-                var userSession = await _sessionStorage.ReadEncriptedItemAsync<UserSession>("UserSession");
+                var userSession = await SessionStorageServiceExtension.ReadEncriptedItemAsync<UserSession>("UserSession");
                 if (userSession != null && DateTime.Now < userSession.ExpiryTimeStamp) {
                     result = userSession.Token;
                 }
-            } catch {
+            }
+            catch {
 
                 throw;
             }

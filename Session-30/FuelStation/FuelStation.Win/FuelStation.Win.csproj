@@ -8,4 +8,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
+    <PackageReference Include="DevExpress.Win.Design" Version="22.2.4" />
+    <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FuelStation.Web.Blazor\Client\FuelStation.Web.Blazor.Client.csproj" />
+    <ProjectReference Include="..\FuelStation.Web.Blazor\Shared\FuelStation.Web.Blazor.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

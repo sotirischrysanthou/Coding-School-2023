@@ -3,7 +3,7 @@ using FuelStation.Web.Blazor.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using uelStation.Web.Blazor.Client.Extensions;
+using FuelStation.Web.Blazor.Client.Extensions;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

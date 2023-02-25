@@ -11,7 +11,7 @@ namespace FuelStation.Web.Blazor.Client.Extensions {
             await sessionStorageService.SetItemAsync(key, base64Json);
         }
 
-        public static async Task<T> ReadEncriptedItemAsync<T>(this ISessionStorageService sessionStorageService, String key) {
+        public static async Task<T?> ReadEncriptedItemAsync<T>(this ISessionStorageService sessionStorageService, String key) {
             var base64Json = await sessionStorageService.GetItemAsync<String>(key);
             var itemJsonBytes = Convert.FromBase64String(base64Json);
             var itemJson = Encoding.UTF8.GetString(itemJsonBytes);
