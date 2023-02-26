@@ -23,7 +23,7 @@ namespace FuelStation.Web.Blazor.Shared {
         }
         public bool ValidateAddEmployee(EmployeeEditDto employee, List<Employee> employees, out String errorMessage) {
             if (!ValidateNameAndSurname(employee.Name, employee.Surname, out errorMessage)) return false;
-            if (!ValidateAddEmployeeByEmployeeType(employee.EmployeeType,employees, out errorMessage)) return false;
+            if (!ValidateAddEmployeeByEmployeeType(employee.EmployeeType, employees, out errorMessage)) return false;
             return true;
         }
 
@@ -31,7 +31,7 @@ namespace FuelStation.Web.Blazor.Shared {
             if (!ValidateNameAndSurname(employee.Name, employee.Surname, out errorMessage)) return false;
             EmployeeType newType = employee.EmployeeType;
             if (newType != dbEmployee.EmployeeType) {
-                if(!ValidateAddEmployeeByEmployeeType(newType, employees, out errorMessage)) return false;
+                if (!ValidateAddEmployeeByEmployeeType(newType, employees, out errorMessage)) return false;
             }
             return true;
         }
@@ -64,8 +64,8 @@ namespace FuelStation.Web.Blazor.Shared {
             bool ret = true;
             errorMessage = "Succeed ";
             foreach (Account account in accounts) {
-                if(account.Id != newAccount.Id && account.Username == newAccount.Username) { 
-                    ret =false;
+                if (account.Id != newAccount.Id && account.Username == newAccount.Username) {
+                    ret = false;
                     errorMessage = $"Username {account.Username} is already exist";
                 }
             }
@@ -81,7 +81,7 @@ namespace FuelStation.Web.Blazor.Shared {
         public bool ValidateAddCustomer(List<Customer> customers, CustomerEditDto newCustomer, out String cardNumber, out String errorMessage) {
             bool ret = ValidateNameAndSurname(newCustomer.Name, newCustomer.Surname, out errorMessage);
             cardNumber = String.Empty;
-            if(!ret) {
+            if (!ret) {
                 return ret;
             }
             int startPos = customers.Count - 1;
@@ -89,7 +89,7 @@ namespace FuelStation.Web.Blazor.Shared {
             return ret;
         }
         public bool ValidateUpdateCustomer(CustomerEditDto newCustomer, out String errorMessage) {
-            return ValidateNameAndSurname(newCustomer.Name,newCustomer.Surname, out errorMessage);
+            return ValidateNameAndSurname(newCustomer.Name, newCustomer.Surname, out errorMessage);
         }
 
         public bool ValidateDeleteCustomer(Customer customer, out String errorMessage) {
@@ -124,23 +124,32 @@ namespace FuelStation.Web.Blazor.Shared {
         // shared functions
 
         private string GenarateCardNumber(List<Customer> customers) {
-            int startPos = customers.Count - 1;
-            for (int i = customers.Count + 1; i > 0; i--) {
-                for (int j = startPos; j >= 0; j--) {
-                    int number = Int32.Parse(customers[j].CardNumber.Substring(1));
-                    if (number == i) {
-                        break;
-                    }
-                    startPos--;
-                }
-                if (startPos < 0) {
-                    return $"A{i}";
+            int max = 0;
+            foreach (Customer customer in customers) {
+                int number = Int32.Parse(customer.CardNumber.Substring(1));
+                if (number > max) {
+                    max = number;
                 }
             }
-            return String.Empty;
+            return $"A{max + 1}";
+
+            //int startPos = customers.Count - 1;
+            //for (int i = customers.Count + 1; i > 0; i--) {
+            //    for (int j = startPos; j >= 0; j--) {
+            //        int number = Int32.Parse(customers[j].CardNumber.Substring(1));
+            //        if (number == i) {
+            //            break;
+            //        }
+            //        startPos--;
+            //    }
+            //    if (startPos < 0) {
+            //        return $"A{i}";
+            //    }
+            //}
+            //return String.Empty;
         }
 
-        private bool ValidateAddEmployeeByEmployeeType(EmployeeType type,List<Employee> employees, out String errorMessage) {
+        private bool ValidateAddEmployeeByEmployeeType(EmployeeType type, List<Employee> employees, out String errorMessage) {
             bool ret = true;
             errorMessage = "Succeed";
             var cashiers = employees.Where(e => e.EmployeeType == EmployeeType.Cashier);
@@ -167,7 +176,8 @@ namespace FuelStation.Web.Blazor.Shared {
             if (name.Length < NameLimits.Min || name.Length > NameLimits.Max) {
                 errorMessage = "Name must have lenght between 1 and 20 characters";
                 ret = false;
-            } else if (surname.Length < NameLimits.Min || surname.Length > NameLimits.Max) {
+            }
+            else if (surname.Length < NameLimits.Min || surname.Length > NameLimits.Max) {
                 errorMessage = "Surname must have lenght between 1 and 20 characters";
                 ret = false;
             }

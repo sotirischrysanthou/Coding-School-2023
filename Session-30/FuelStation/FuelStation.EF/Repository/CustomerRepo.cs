@@ -32,7 +32,6 @@ namespace FuelStation.EF.Repository {
             return await context.Customers
                 .Include(c => c.Transactions).ThenInclude(t => t.Employee)
                 .Include(c => c.Transactions).ThenInclude(t => t.TransactionLines)
-                .OrderBy(c => c.CardNumber)
                 .ToListAsync();
         }
 

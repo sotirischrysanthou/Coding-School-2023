@@ -15,55 +15,57 @@
     </div>
 }
 else {
-    <EditForm Model="Employee" OnValidSubmit="OnSave">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div class="row">
-            <div class="col-md-3">
-                <label class="form-label">Name</label>
-                @*<input class="form-control" @bind="@Employee.Name" />*@
-                <InputText class="form-control" @bind-Value="@Employee.Name" />
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Surname</label>
-                <InputText class="form-control" @bind-Value="@Employee.Surname" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Hire date start</label>
-                <InputDate class="form-control" @bind-Value="@Employee.HireDateStart" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Hire date end</label>
-                <InputDate class="form-control" @bind-Value="@Employee.HireDateEnd" />
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Salary Per Month</label>
-                <InputNumber class="form-control" @bind-Value="@Employee.SalaryPerMonth" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Employee Type</label>
-                <InputSelect class="form-control" @bind-Value="Employee.EmployeeType">
-                    @foreach (var employeetype in Enum.GetValues<EmployeeType>()) {
-                        <option value="@employeetype">@employeetype</option>
-                    }
-                </InputSelect>
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Username</label>
-                <InputText class="form-control" @bind-Value="@Employee.Account.Username" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Password</label>
-                <InputText class="form-control" @bind-Value="@Employee.Account.Password" />
-            </div>
-            <div class="row mt-2">
-                <div class="col">
-                    <BootstrapButton ButtonType="BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
-                    <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="OnCancel">Back</BootstrapButton>
+    if (Employee is not null) {
+        <EditForm Model="Employee" OnValidSubmit="OnSave">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Name</label>
+                    @*<input class="form-control" @bind="@Employee.Name" />*@
+                    <InputText class="form-control" @bind-Value="@Employee.Name" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Surname</label>
+                    <InputText class="form-control" @bind-Value="@Employee.Surname" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Hire date start</label>
+                    <InputDate class="form-control" @bind-Value="@Employee.HireDateStart" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Hire date end</label>
+                    <InputDate class="form-control" @bind-Value="@Employee.HireDateEnd" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Salary Per Month</label>
+                    <InputNumber class="form-control" @bind-Value="@Employee.SalaryPerMonth" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Employee Type</label>
+                    <InputSelect class="form-control" @bind-Value="Employee.EmployeeType">
+                        @foreach (var employeetype in Enum.GetValues<EmployeeType>()) {
+                            <option value="@employeetype">@employeetype</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Username</label>
+                    <InputText class="form-control" @bind-Value="@Employee.Account.Username" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Password</label>
+                    <InputText class="form-control" @bind-Value="@Employee.Account.Password" />
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <BootstrapButton ButtonType="BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="OnCancel">Back</BootstrapButton>
+                    </div>
                 </div>
             </div>
-        </div>
-    </EditForm>
+        </EditForm>
+    }
 }
 
 

@@ -1,5 +1,5 @@
-﻿using FuelStation.Model;
-using FuelStation.Model.Enums;
+﻿using FuelStation.Model.Enums;
+using FuelStation.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FuelStation.Web.Blazor.Shared {
-    public class TransactionDetailsDto {
+    public class TransactionWinDto {
         // Properties
         [Required] public Guid Id { get; set; }
 
@@ -27,23 +27,22 @@ namespace FuelStation.Web.Blazor.Shared {
         public decimal TotalValue { get; set; }
 
         // Relations
-        public EmployeeListDto Employee { get; set; } = null!;
-
-        public CustomerListDto Customer { get; set; } = null!;
-
-        // Relations
-        public List<TransactionLineListDto> TransactionLines { get; set; } = null!;
+        public List<TransactionLineWinDto> TransactionLines { get; set; } = new();
+        public Guid EmployeeId { get; set; }
+        public Guid CustomerId { get; set; }
 
         // Constructors
-        public TransactionDetailsDto() {
+        public TransactionWinDto() {
 
         }
-        public TransactionDetailsDto(Transaction transaction) {
+        public TransactionWinDto(Transaction transaction) {
             Id = transaction.Id;
             Date = transaction.Date;
             PaymentMethod = transaction.PaymentMethod;
             TotalValue = transaction.TotalValue;
-            TransactionLines = transaction.TransactionLines.Select(t => new TransactionLineListDto(t)).ToList();
+            EmployeeId = transaction.EmployeeId;
+            CustomerId = transaction.CustomerId;
+            TransactionLines = transaction.TransactionLines.Select(t => new TransactionLineWinDto(t)).ToList();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace FuelStation.Web.Blazor.Shared {
         public decimal TotalValue { get; set; }
 
         // Relations
+        public List<TransactionLineListDto> TransactionLines { get; set; } = new();
         public EmployeeListDto Employee { get; set; } = null!;
         public CustomerListDto Customer { get; set; } = null!;
 
