@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 
 namespace FuelStation.Web.Blazor.Server.Controllers {
     [Route("api/[controller]")]
@@ -28,7 +29,8 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
                                                          transactionLine.DiscountValue,
                                                          transactionLine.TotalValue,
                                                          transactionLine.TransactionId,
-                                                         transactionLine.ItemId
+                                                         transactionLine.ItemId,
+                                                         transactionLine.ItemPrice
                                                          );
             await _transactionLineRepo.Add(newTransactionLine);
             return Ok();
@@ -46,11 +48,16 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
             dbTransactionLine.Quantity = transactionLine.Quantity;
             dbTransactionLine.NetValue = transactionLine.NetValue;
             dbTransactionLine.DiscountPercent = transactionLine.DiscountPercent;
+            dbTransactionLine.DiscountValue = transactionLine.DiscountValue;
             dbTransactionLine.TotalValue = transactionLine.TotalValue;
+            dbTransactionLine.ItemPrice = transactionLine.ItemPrice;
             dbTransactionLine.ItemId = transactionLine.ItemId;
-
-            await _transactionLineRepo.Update(transactionLine.Id, dbTransactionLine);
-            return Ok();
+            try {
+                await _transactionLineRepo.Update(transactionLine.Id, dbTransactionLine);
+                return Ok();
+            } catch (DbException) {
+                return BadRequest("Update failed");
+            }
         }
 
         // DELETE api/<TransactionLineController>/5
@@ -61,7 +68,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
                 await _transactionLineRepo.Delete(id);
                 return Ok();
             } catch (KeyNotFoundException) {
-                return BadRequest($"Transaction not found");
+                return BadRequest($"TransactionLine not found");
             }
         }
     }

@@ -15,8 +15,10 @@ using System.Security.Policy;
 using System.Net.Http.Headers;
 using FuelStation.Win.Extensions;
 using System.ComponentModel;
+using FuelStation.Win.Transactions;
+using DevExpress.Utils.Extensions;
 
-namespace FuelStation.Win {
+namespace FuelStation.Win.Transactions {
     public partial class TransactionsForm : Form {
         // Properties
         private readonly HttpClient _httpClient;
@@ -174,7 +176,7 @@ namespace FuelStation.Win {
                 if (item != null) {
                     transactionLine.ItemPrice = item.Price;
                     transactionLine.NetValue = transactionLine.Quantity * transactionLine.ItemPrice;
-                    if (transactionLine.NetValue > 20) {
+                    if (item.ItemType == ItemType.Fuel && transactionLine.NetValue > 20) {
                         transactionLine.DiscountPercent = 10;
                     } else {
                         transactionLine.DiscountPercent = 0;
@@ -188,10 +190,14 @@ namespace FuelStation.Win {
 
         private void CalculateTransactionTotalValue() {
             var transaction = (TransactionWinDto)bsTransactions.Current;
-            transaction.TotalValue = 0;
+            decimal TotalValue = 0;
             foreach (TransactionLineWinDto transactionLine in transaction.TransactionLines) {
-                transaction.TotalValue += transactionLine.TotalValue;
+                TotalValue += transactionLine.TotalValue;
             }
+            if (TotalValue > 50) {
+                ((TransactionWinDto)bsTransactions.Current).PaymentMethod = PaymentMethod.Cash;
+            }
+            ((TransactionWinDto)bsTransactions.Current).TotalValue = TotalValue;
         }
 
         private async void grvTransactionLines_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
@@ -205,7 +211,7 @@ namespace FuelStation.Win {
             }
             if (items.Where(i => i.Id == transactionLine.ItemId && i.ItemType == ItemType.Fuel).Any()) {
                 foreach (TransactionLineWinDto transactionL in transaction.TransactionLines) {
-                    if (items.Where(i => i.Id == transactionL.ItemId && i.ItemType == ItemType.Fuel).Any()) {
+                    if (items.Where(i => i.Id == transactionL.ItemId && i.Id != transactionLine.ItemId && i.ItemType == ItemType.Fuel).Any()) {
                         e.Valid = false;
                         view.SetColumnError(colItem, "The transaction can only have one fuel transaction line");
                     }
@@ -257,7 +263,7 @@ namespace FuelStation.Win {
             transactionLine.TransactionId = ((TransactionWinDto)bsTransactions.Current).Id;
         }
         private async void grvTransactionLines_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            TransactionLine transactionLine = (TransactionLine)bsTransactionLines.Current;
+            TransactionLineWinDto transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
             var confirm = XtraMessageBox.Show("Delete Item. Are you sure?", "Confirmation", MessageBoxButtons.YesNo);
             if (confirm == DialogResult.Yes) {
                 var response = await _httpClient.DeleteAsync($"api/transactionLine/{transactionLine.Id}");
@@ -294,5 +300,171 @@ namespace FuelStation.Win {
             btn_Close.FlatAppearance.BorderColor = Color.Black;
             btn_Close.FlatAppearance.BorderSize = 2;
         }
+
+        private async void btnAddTransactionLine_Click(object sender, EventArgs e) {
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            if (transaction != null) {
+                var transactionLineEditForm = new TransactionLineEditForm(items, null, canBeFuel());
+                transactionLineEditForm.ShowDialog();
+                if (transactionLineEditForm.DialogResult == DialogResult.OK) {
+                    var transactionLine = new TransactionLineWinDto {
+                        Id = Guid.Empty,
+                        ItemId = transactionLineEditForm.Item.Id,
+                        ItemPrice = transactionLineEditForm.Price,
+                        NetValue = transactionLineEditForm.NetValue,
+                        DiscountPercent = transactionLineEditForm.DiscountPercent,
+                        DiscountValue = transactionLineEditForm.DiscountValue,
+                        TotalValue = transactionLineEditForm.TotalValue,
+                        TransactionId = transaction.Id,
+                        Quantity = transactionLineEditForm.Quantity,
+
+                    };
+                    await AddOrUpdateTransactionLine(transactionLine);
+                }
+            }
+        }
+        private async void btnEditTransactionLine_Click(object sender, EventArgs e) {
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
+            var itemId = transactionLine.ItemId;
+            if (transaction != null) {
+                var transactionLineEditForm = new TransactionLineEditForm(items, items.Find(i => i.Id == itemId), canBeFuel(), transactionLine.Quantity);
+                transactionLineEditForm.ShowDialog();
+                if (transactionLineEditForm.DialogResult == DialogResult.OK) {
+                    transactionLine.ItemId = transactionLineEditForm.Item.Id;
+                    transactionLine.ItemPrice = transactionLineEditForm.Price;
+                    transactionLine.NetValue = transactionLineEditForm.NetValue;
+                    transactionLine.DiscountPercent = transactionLineEditForm.DiscountPercent;
+                    transactionLine.DiscountValue = transactionLineEditForm.DiscountValue;
+                    transactionLine.TotalValue = transactionLineEditForm.TotalValue;
+                    transactionLine.TransactionId = transaction.Id;
+                    transactionLine.Quantity = transactionLineEditForm.Quantity;
+                    await AddOrUpdateTransactionLine(transactionLine);
+                }
+            }
+        }
+
+        private async Task AddOrUpdateTransactionLine(TransactionLineWinDto transactionLine) {
+            HttpResponseMessage? response = null;
+            if (transactionLine.Id == Guid.Empty) {
+                response = await _httpClient.PostAsJsonAsync("api/transactionLine", transactionLine);
+            } else {
+                response = await _httpClient.PutAsJsonAsync("api/transactionLine", transactionLine);
+            }
+            if (response.IsSuccessStatusCode) {
+                await SetControlProperties();
+                XtraMessageBox.Show("Succsess");
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                XtraMessageBox.Show(error);
+            }
+            CalculateTransactionTotalValue();
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            grvTransactions.RefreshData();
+            response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
+            if (response.IsSuccessStatusCode) {
+                await SetControlProperties();
+                XtraMessageBox.Show("Succsess");
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                XtraMessageBox.Show(error);
+            }
+        }
+
+        private async void btnDeleteTransactionLine_Click(object sender, EventArgs e) {
+            TransactionLineWinDto transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
+            var confirm = XtraMessageBox.Show("Delete Item. Are you sure?", "Confirmation", MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.Yes) {
+                var response = await _httpClient.DeleteAsync($"api/transactionLine/{transactionLine.Id}");
+                if (!response.IsSuccessStatusCode) {
+                    var error = await response.Content.ReadAsStringAsync();
+                    XtraMessageBox.Show(error);
+                }
+                await SetControlProperties();
+                CalculateTransactionTotalValue();
+                var transaction = (TransactionWinDto)bsTransactions.Current;
+                grvTransactions.RefreshData();
+                response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
+                if (response.IsSuccessStatusCode) {
+                    await SetControlProperties();
+                    XtraMessageBox.Show("Succsess");
+                } else {
+                    var error = await response.Content.ReadAsStringAsync();
+                    XtraMessageBox.Show(error);
+                }
+            }
+        }
+
+        private void btnAddTransaction_Click(object sender, EventArgs e) {
+            var transactionEditForm = new TransactionEditForm(customers, employees, DateTime.Today, CanBeCreditCard(), null, null, PaymentMethod.Cash);
+            transactionEditForm.ShowDialog();
+            if (transactionEditForm.DialogResult == DialogResult.OK) {
+                var transaction = new TransactionWinDto {
+                    Id = Guid.Empty,
+                    Date = DateTime.Now,
+                    PaymentMethod = transactionEditForm.PaymentMethod,
+                    TotalValue = 0,
+                    CustomerId = transactionEditForm.Customer.Id,
+                    EmployeeId = transactionEditForm.Employee.Id,
+                };
+                AddOrUpdateTransaction(transaction);
+            }
+        }
+
+        private async Task AddOrUpdateTransaction(TransactionWinDto transaction) {
+            HttpResponseMessage? response = null;
+            if (transaction.Id == Guid.Empty) {
+                response = await _httpClient.PostAsJsonAsync("api/transaction", transaction);
+            } else {
+                response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
+            }
+            if (response.IsSuccessStatusCode) {
+                await SetControlProperties();
+                XtraMessageBox.Show("Succsess");
+            } else {
+                var error = await response.Content.ReadAsStringAsync();
+                XtraMessageBox.Show("alert", error);
+            }
+        }
+
+        private void btnEditTransaction_Click(object sender, EventArgs e) {
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            var customer = customers.Find(c => c.Id == transaction.CustomerId);
+            var employee = employees.Find(e => e.Id == transaction.EmployeeId);
+            var transactionEditForm = new TransactionEditForm(customers, employees, transaction.Date, CanBeCreditCard(), customer, employee, PaymentMethod.Cash);
+            transactionEditForm.ShowDialog();
+            if (transactionEditForm.DialogResult == DialogResult.OK) {
+                var newTransaction = new TransactionWinDto {
+                    Id = Guid.Empty,
+                    Date = DateTime.Now,
+                    PaymentMethod = transactionEditForm.PaymentMethod,
+                    TotalValue = 0,
+                    CustomerId = transactionEditForm.Customer.Id,
+                    EmployeeId = transactionEditForm.Employee.Id,
+                };
+                AddOrUpdateTransaction(newTransaction);
+            }
+        }
+
+        private bool canBeFuel() {
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            foreach (TransactionLineWinDto transactionLine in transaction.TransactionLines) {
+                if (items.Find(i => i.Id == transactionLine.ItemId).ItemType == ItemType.Fuel) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool CanBeCreditCard() {
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            return transaction.TotalValue < 50;
+        }
     }
 }
+
+//var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
+//if (transactionLine != null) {
+//    var item = items.Find(i => i.Id == transactionLine.ItemId);
+//    var tasactionLineEditForm = new TransactionLineEditForm(items, item)
+//            }

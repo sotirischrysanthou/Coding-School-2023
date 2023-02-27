@@ -9,6 +9,7 @@ using System.Net.Http;
 using FuelStation.EF.Repository;
 using FuelStation.Model;
 using Session_16.Win;
+using FuelStation.Win.Transactions;
 
 namespace FuelStation.Win {
     public static class Program {
@@ -37,7 +38,7 @@ namespace FuelStation.Win {
             //services.AddScoped<IEntityRepo<Employee>, EmployeeRepo>();
             //services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
             //services.AddScoped<IEntityRepo<Item>, ItemRepo>();
-            //services.AddScoped<CustomAuthenticationStateProvider>();
+            services.AddScoped<CustomAuthenticationStateProvider>();
             var serviceProvider = services.BuildServiceProvider();
 
             // Resolve LoginForm with HttpClient and AuthenticationStateProvider parameters

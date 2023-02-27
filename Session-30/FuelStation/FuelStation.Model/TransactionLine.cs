@@ -52,8 +52,9 @@ namespace FuelStation.Model {
         public Item Item { get; set; } = null!;
 
         // Constructor
-        public TransactionLine(int quantity, decimal netValue, decimal discountPercent, decimal discountValue, decimal totalValue, Guid transactionId, Guid itemId) {
+        public TransactionLine(int quantity, decimal netValue, decimal discountPercent, decimal discountValue, decimal totalValue, Guid transactionId, Guid itemId, decimal itemPrice) {
             Id = Guid.NewGuid();
+            ItemPrice = itemPrice;
             Quantity= quantity;
             NetValue= netValue;
             DiscountPercent= discountPercent;

@@ -64,10 +64,10 @@
             this.btnLogout.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.Black;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 354);
+            this.btnLogout.Location = new System.Drawing.Point(0, 367);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
-            this.btnLogout.Size = new System.Drawing.Size(220, 96);
+            this.btnLogout.Size = new System.Drawing.Size(220, 83);
             this.btnLogout.TabIndex = 6;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -83,10 +83,10 @@
             this.btnItems.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnItems.ForeColor = System.Drawing.Color.Black;
             this.btnItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnItems.Location = new System.Drawing.Point(0, 168);
+            this.btnItems.Location = new System.Drawing.Point(0, 175);
             this.btnItems.Name = "btnItems";
             this.btnItems.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
-            this.btnItems.Size = new System.Drawing.Size(220, 101);
+            this.btnItems.Size = new System.Drawing.Size(220, 90);
             this.btnItems.TabIndex = 3;
             this.btnItems.Text = "Items";
             this.btnItems.UseVisualStyleBackColor = true;
@@ -102,10 +102,10 @@
             this.btnCustomers.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCustomers.ForeColor = System.Drawing.Color.Black;
             this.btnCustomers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCustomers.Location = new System.Drawing.Point(0, 269);
+            this.btnCustomers.Location = new System.Drawing.Point(0, 271);
             this.btnCustomers.Name = "btnCustomers";
             this.btnCustomers.Padding = new System.Windows.Forms.Padding(10, 10, 30, 0);
-            this.btnCustomers.Size = new System.Drawing.Size(220, 92);
+            this.btnCustomers.Size = new System.Drawing.Size(220, 90);
             this.btnCustomers.TabIndex = 2;
             this.btnCustomers.Text = "        Customers";
             this.btnCustomers.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@
             this.btnTransactions.Location = new System.Drawing.Point(0, 79);
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Padding = new System.Windows.Forms.Padding(12, 10, 0, 0);
-            this.btnTransactions.Size = new System.Drawing.Size(220, 94);
+            this.btnTransactions.Size = new System.Drawing.Size(220, 90);
             this.btnTransactions.TabIndex = 1;
             this.btnTransactions.Text = " Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;

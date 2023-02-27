@@ -14,12 +14,13 @@ namespace FuelStation.Win {
         private readonly AuthenticationStateProvider _authStateProvider;
 
         // Public property to store the returned object
-        public object ReturnedObject { get; private set; } = null!;
+        public object? ReturnedObject { get; private set; } = null!;
         public String Role { get; set; }
 
         // Constructors
         public LoginForm(HttpClient httpClient, AuthenticationStateProvider authStateProvider) {
             InitializeComponent();
+            txtPassword.Properties.PasswordChar = '*';
             _httpClient = httpClient;
             _authStateProvider = authStateProvider;
             this.DialogResult = DialogResult.Cancel;
@@ -43,11 +44,14 @@ namespace FuelStation.Win {
                 MessageBox.Show("You are Logged in");
                 // Set the returned object to the UserSession object
                 ReturnedObject = userSession;
-                Role = userSession.Role;
+                if (userSession is not null) {
+                    Role = userSession.Role;
+                } else {
+                    Role = "annonymous";
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-            else if (loginResponse.StatusCode == HttpStatusCode.Unauthorized) {
+            } else if (loginResponse.StatusCode == HttpStatusCode.Unauthorized) {
                 MessageBox.Show("Invalid User Name or Password");
             }
         }

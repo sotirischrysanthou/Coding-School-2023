@@ -17,7 +17,7 @@ namespace FuelStation.EF.Repository {
 
         public async Task Delete(Guid id) {
             using var context = new FuelStationDbContext();
-            var dbTransactionLine = context.TransactionLines.Where(t => t.Id == id).SingleOrDefaultAsync();
+            var dbTransactionLine = await context.TransactionLines.Where(t => t.Id == id).SingleOrDefaultAsync();
             if (dbTransactionLine == null) {
                 throw new Exception($"Transaction Line with id: {id} not found ");
             }
@@ -48,6 +48,12 @@ namespace FuelStation.EF.Repository {
             if (dbTransactionLine == null) {
                 throw new Exception($"TransactionLine with id: {id} not found");
             }
+            dbTransactionLine.NetValue = entity.NetValue;
+            dbTransactionLine.DiscountValue = entity.DiscountValue;
+            dbTransactionLine.TotalValue = entity.TotalValue;
+            dbTransactionLine.DiscountPercent = entity.DiscountPercent;
+            dbTransactionLine.ItemId = entity.ItemId;
+            dbTransactionLine.Quantity = entity.Quantity;
             await context.SaveChangesAsync();
         }
     }
