@@ -6,7 +6,9 @@
 
 <AuthorizeView>
     <Authorized>
-        <h1>Hello, @context.User.Identity.Name</h1>
+        @if (context.User.Identity is not null) {
+            <h1>Hello, @context.User.Identity.Name</h1>
+        }
     </Authorized>
     <NotAuthorized>
         <h1>Please Login</h1>

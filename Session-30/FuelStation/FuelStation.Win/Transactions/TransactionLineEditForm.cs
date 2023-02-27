@@ -2,6 +2,7 @@
 using DevExpress.XtraScheduler.Outlook.Interop;
 using FuelStation.Model.Enums;
 using FuelStation.Web.Blazor.Shared;
+using FuelStation.Win.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace FuelStation.Win.Transactions {
     public partial class TransactionLineEditForm : Form {
         private readonly List<ItemListDto> _items;
         private readonly bool _canBefuel;
+        private bool _isClosingFromXButton = true;
+
         public ItemListDto? Item { get; set; }
         public int Quantity { get; set; }
         public decimal NetValue { get; set; }
@@ -30,10 +33,11 @@ namespace FuelStation.Win.Transactions {
             Quantity = quantity;
             _canBefuel = canBeFuel;
         }
-        private void AddOrUpdateTransactionLine_Load(object sender, EventArgs e) {
+        private void TransactionLineEditForm_Load(object sender, EventArgs e) {
             SetControlProperties();
             UpdateValues();
             numQuantity.Value = Quantity;
+            cbItemType.Properties.Items.AddRange(typeof(ItemType).GetEnumValues());
         }
 
         private void SetControlProperties() {
@@ -63,6 +67,9 @@ namespace FuelStation.Win.Transactions {
                                                                 &&
                                               item.Description.StartsWith(searchDescriptionTerm))
                                               .ToList();
+            if (cbItemType.SelectedItem != null) {
+                bsItems.DataSource = ((List<ItemListDto>)bsItems.DataSource).Where(item => item.ItemType == (ItemType)cbItemType.SelectedItem);
+            }
             gridView1.RefreshData();
         }
 
@@ -108,10 +115,11 @@ namespace FuelStation.Win.Transactions {
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
+            _isClosingFromXButton = false;
             bool flag = true;
             if (Item is null) {
                 XtraMessageBox.Show("Please select valid Item");
-                flag = false;
+                return;
             }
             if (Quantity < 1) {
                 XtraMessageBox.Show("Quantity must be [1 - 99]");
@@ -129,7 +137,19 @@ namespace FuelStation.Win.Transactions {
 
         private void btnCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
+            _isClosingFromXButton = false;
             this.Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            base.OnFormClosing(e);
+            if (_isClosingFromXButton && e.CloseReason == CloseReason.UserClosing) {
+                this.DialogResult = DialogResult.Continue;
+            }
+        }
+
+        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e) {
+            Search();
         }
     }
 }

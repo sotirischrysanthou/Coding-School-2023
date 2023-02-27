@@ -114,7 +114,10 @@ namespace FuelStation.Web.Blazor.Shared {
             }
             return ret;
         }
-        public bool ValidateTransaction(Transaction transaction, out String errorMessage) {
+        public bool ValidateDeleteTransaction(Transaction? transaction, out String errorMessage) {
+            if(transaction!=null&&transaction.TransactionLines.Count>0) {
+                errorMessage = "Can not delete Transactions with transaction lines";
+            }
             errorMessage = "Succeed";
             return true;
         }

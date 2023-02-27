@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionLineEditForm));
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -34,6 +35,7 @@
             this.colCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colItemType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsItems = new System.Windows.Forms.BindingSource(this.components);
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.lblPrice = new DevExpress.XtraEditors.LabelControl();
@@ -48,12 +50,15 @@
             this.numQuantity = new System.Windows.Forms.NumericUpDown();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.cbItemType = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbItemType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -70,7 +75,7 @@
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(341, 28);
+            this.labelControl2.Location = new System.Drawing.Point(233, 28);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(123, 33);
             this.labelControl2.TabIndex = 1;
@@ -98,7 +103,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(341, 67);
+            this.txtDescription.Location = new System.Drawing.Point(233, 67);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtDescription.Properties.Appearance.Options.UseFont = true;
@@ -121,7 +126,8 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCode,
             this.colDescription,
-            this.colPrice});
+            this.colPrice,
+            this.colItemType});
             this.gridView1.GridControl = this.grdItems;
             this.gridView1.Name = "gridView1";
             // 
@@ -151,6 +157,14 @@
             this.colPrice.OptionsColumn.AllowEdit = false;
             this.colPrice.Visible = true;
             this.colPrice.VisibleIndex = 2;
+            // 
+            // colItemType
+            // 
+            this.colItemType.Caption = "Type";
+            this.colItemType.FieldName = "ItemType";
+            this.colItemType.Name = "colItemType";
+            this.colItemType.Visible = true;
+            this.colItemType.VisibleIndex = 3;
             // 
             // bsItems
             // 
@@ -258,10 +272,26 @@
             // 
             // numQuantity
             // 
+            this.numQuantity.DecimalPlaces = 2;
             this.numQuantity.Location = new System.Drawing.Point(627, 169);
+            this.numQuantity.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            131072});
+            this.numQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numQuantity.Name = "numQuantity";
             this.numQuantity.Size = new System.Drawing.Size(161, 23);
             this.numQuantity.TabIndex = 17;
+            this.numQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
             // 
             // btnSave
@@ -298,11 +328,36 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // cbItemType
+            // 
+            this.cbItemType.Location = new System.Drawing.Point(446, 67);
+            this.cbItemType.Name = "cbItemType";
+            this.cbItemType.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbItemType.Properties.Appearance.Options.UseFont = true;
+            this.cbItemType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbItemType.Size = new System.Drawing.Size(152, 30);
+            this.cbItemType.TabIndex = 27;
+            this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(446, 28);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(122, 33);
+            this.labelControl5.TabIndex = 26;
+            this.labelControl5.Text = "Item Type";
+            // 
             // TransactionLineEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(234)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(880, 518);
+            this.Controls.Add(this.cbItemType);
+            this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.numQuantity);
@@ -322,15 +377,17 @@
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TransactionLineEditForm";
             this.Text = "AddOrUpdateTransactionLine";
-            this.Load += new System.EventHandler(this.AddOrUpdateTransactionLine_Load);
+            this.Load += new System.EventHandler(this.TransactionLineEditForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbItemType.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,5 +419,8 @@
         private NumericUpDown numQuantity;
         private Button btnSave;
         private Button btnCancel;
+        private DevExpress.XtraGrid.Columns.GridColumn colItemType;
+        private DevExpress.XtraEditors.ComboBoxEdit cbItemType;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
     }
 }

@@ -17,7 +17,7 @@ namespace FuelStation.EF.Repository {
 
         public async Task Delete(Guid id) {
             using var context = new FuelStationDbContext();
-            var dbTransaction = context.Transactions.Where(t => t.Id == id).SingleOrDefaultAsync();
+            var dbTransaction = await context.Transactions.Where(t => t.Id == id).SingleOrDefaultAsync();
             if (dbTransaction == null) {
                 throw new Exception($"Transaction with id: {id} not found");
             }

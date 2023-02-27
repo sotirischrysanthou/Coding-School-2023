@@ -17,6 +17,7 @@ namespace FuelStation.Win {
 
         private readonly String _role;
         public FormType FormType { get; set; }
+        private bool _isClosingFromXButton = true;
 
         public MainMenuForm(String role) {
             InitializeComponent();
@@ -41,18 +42,21 @@ namespace FuelStation.Win {
         private void btnTransactions_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.OK;
             FormType = FormType.Transactions;
+            _isClosingFromXButton = false;
             this.Close();
         }
 
         private void btnCustomers_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.OK;
             FormType = FormType.Customers;
+            _isClosingFromXButton = false;
             this.Close();
         }
 
         private void btnItems_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.OK;
             FormType = FormType.Items;
+            _isClosingFromXButton = false;
             this.Close();
         }
 
@@ -60,8 +64,9 @@ namespace FuelStation.Win {
 
         }
         private void btnLogout_Click(object sender, EventArgs e) {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Continue;
             FormType = FormType.Login;
+            _isClosingFromXButton = false;
             this.Close();
         }
 
@@ -98,11 +103,9 @@ namespace FuelStation.Win {
             btnItems.FlatAppearance.BorderSize = 1;
         }
         private void btnItems_MouseLeave(object sender, EventArgs e) {
-            btnLogout.BackColor = Color.FromArgb(145, 31, 31);
-            btnLogout.FlatAppearance.MouseOverBackColor = btnLogout.BackColor;
-            btnLogout.ForeColor = Color.White;
-            btnLogout.FlatAppearance.BorderColor = Color.Black;
-            btnLogout.FlatAppearance.BorderSize = 1;
+            btnItems.BackColor = Color.FromArgb(237, 234, 218);
+            btnItems.ForeColor = Color.Black;
+            btnItems.FlatAppearance.BorderSize = 0;
         }
         private void btnLogout_MouseEnter(object sender, EventArgs e) {
             btnLogout.BackColor = Color.FromArgb(145, 31, 31);
@@ -116,6 +119,14 @@ namespace FuelStation.Win {
             btnLogout.BackColor = Color.FromArgb(237, 234, 218);
             btnLogout.ForeColor = Color.Black;
             btnLogout.FlatAppearance.BorderSize = 0;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            base.OnFormClosing(e);
+            if ( _isClosingFromXButton && e.CloseReason == CloseReason.UserClosing) {
+                this.DialogResult = DialogResult.Continue;
+                FormType = FormType.Login;
+            }
         }
     }
 }

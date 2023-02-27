@@ -24,7 +24,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // GET: api/<ItemController>
         [HttpGet]
-        [Authorize(Roles = "Manager,Staff")]
+        [Authorize(Roles = "Manager,Cashier,Staff")]
         public async Task<IEnumerable<ItemListDto>?> Get() {
             try {
                 var result = await _itemRepo.GetAll();

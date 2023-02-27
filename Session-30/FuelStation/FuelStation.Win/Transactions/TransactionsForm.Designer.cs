@@ -81,7 +81,6 @@
             this.repItems});
             this.grdTransactionLines.Size = new System.Drawing.Size(1007, 272);
             this.grdTransactionLines.TabIndex = 3;
-            this.grdTransactionLines.UseEmbeddedNavigator = true;
             this.grdTransactionLines.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvTransactionLines});
             // 
@@ -99,12 +98,6 @@
             this.grvTransactionLines.GridControl = this.grdTransactionLines;
             this.grvTransactionLines.Name = "grvTransactionLines";
             this.grvTransactionLines.OptionsView.ShowGroupPanel = false;
-            this.grvTransactionLines.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvTransactionLines_InitNewRow);
-            this.grvTransactionLines.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvTransactionLines_CellValueChanged);
-            this.grvTransactionLines.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.grvTransactionLines_RowDeleting);
-            this.grvTransactionLines.RowDeleted += new DevExpress.Data.RowDeletedEventHandler(this.grvTransactionLines_RowDeleted);
-            this.grvTransactionLines.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvTransactionLines_ValidateRow);
-            this.grvTransactionLines.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvTransactionLines_ValidatingEditor);
             // 
             // colTransactionLineID
             // 
@@ -199,7 +192,6 @@
             this.repEmployees});
             this.grdTransactions.Size = new System.Drawing.Size(1007, 247);
             this.grdTransactions.TabIndex = 5;
-            this.grdTransactions.UseEmbeddedNavigator = true;
             this.grdTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvTransactions});
             // 
@@ -215,10 +207,6 @@
             this.grvTransactions.GridControl = this.grdTransactions;
             this.grvTransactions.Name = "grvTransactions";
             this.grvTransactions.OptionsView.ShowGroupPanel = false;
-            this.grvTransactions.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvTransactions_InitNewRow);
-            this.grvTransactions.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.grvTransactions_RowDeleting);
-            this.grvTransactions.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvTransactions_ValidateRow);
-            this.grvTransactions.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvTransactions_ValidatingEditor);
             // 
             // colID
             // 
@@ -231,6 +219,7 @@
             this.colDate.Caption = "Date";
             this.colDate.FieldName = "Date";
             this.colDate.Name = "colDate";
+            this.colDate.OptionsColumn.AllowEdit = false;
             this.colDate.Visible = true;
             this.colDate.VisibleIndex = 0;
             // 
@@ -434,6 +423,7 @@
             this.btnDeleteTransaction.TabIndex = 16;
             this.btnDeleteTransaction.Text = "Delete Transaction";
             this.btnDeleteTransaction.UseVisualStyleBackColor = false;
+            this.btnDeleteTransaction.Click += new System.EventHandler(this.btnDeleteTransaction_Click);
             // 
             // TransactionsForm
             // 

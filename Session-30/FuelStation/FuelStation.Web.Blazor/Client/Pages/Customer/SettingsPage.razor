@@ -1,0 +1,70 @@
+﻿@using System.Net.Http.Headers;
+@using FuelStation.Model;
+@using FuelStation.Web.Blazor.Client.Extensions;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
+@inject IJSRuntime jsRuntime
+@page "/settings"
+
+<h3>Settings Page</h3>
+@if (isLoading) {
+    <div class="spinner-border text-secondary" role="status"></div>
+}else{
+    <EditForm Model="settings" OnValidSubmit="OnSave">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Minimum numbers of Managers</label>
+                <InputNumber class="form-control" @bind-Value="@settings.MinManagers" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Maximum numbers of Manager</label>
+                <InputNumber class="form-control" @bind-Value="@settings.MaxManagers" />
+            </div>
+        </div>
+           
+        <div class="row mt-2">
+            <div class="col">
+                <BootstrapButton ButtonType="BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                <BootstrapButton ButtonType="BootstrapButtonType.Secondary" OnClick="OnCancel">Back</BootstrapButton>
+            </div>
+        </div>
+    </EditForm>
+}
+
+
+
+@code {
+    private bool isLoading = true;
+    private Settings? settings;
+
+    protected override async Task OnInitializedAsync() {
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        var token = await customAuthStateProvider.GetToken();
+        if (!String.IsNullOrWhiteSpace(token)) {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            await LoadItemsFromServer();
+            isLoading = false;
+        } else {
+            navigationManager.NavigateTo("/login", true);
+        }
+    }
+
+    private async Task LoadItemsFromServer() {
+        settings = await httpClient.GetFromJsonAsync<Settings>("api/settings");
+        if (settings is null) {
+            await jsRuntime.InvokeVoidAsync("alert", "could not find the item list");
+            navigationManager.NavigateTo("");
+        }
+    }
+
+    private void OnSave() {
+
+    }
+
+    private void OnCancel() {
+        
+    }
+}

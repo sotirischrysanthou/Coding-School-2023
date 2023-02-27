@@ -16,13 +16,15 @@ namespace Session_16.Win {
         // Properties
         private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authStateProvider;
+        private readonly UserSession _userSession;
         private List<CustomerListDto> customers = new();
         private bool isLoading = true;
 
-        public CustomersForm(HttpClient httpClient, AuthenticationStateProvider authStateProvider) {
+        public CustomersForm(HttpClient httpClient, AuthenticationStateProvider authStateProvider, UserSession userSesion) {
             InitializeComponent();
             _httpClient = httpClient;
             _authStateProvider = authStateProvider;
+            _userSession = userSesion;
         }
         private async void CustomersAndCarsForm_Load(object sender, EventArgs e) {
             var customAuthStateProvider = (CustomAuthenticationStateProvider)_authStateProvider;
@@ -103,7 +105,7 @@ namespace Session_16.Win {
                 }
                 if (response.IsSuccessStatusCode) {
                     await SetControlProperties();
-                    XtraMessageBox.Show("Succsess");
+                    //XtraMessageBox.Show("Succsess");
                 } else {
                     var error = await response.Content.ReadAsStringAsync();
                     XtraMessageBox.Show("alert", error);
@@ -147,6 +149,13 @@ namespace Session_16.Win {
                 }
             } else {
                 e.Cancel = true;
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.UserClosing) {
+                this.DialogResult = DialogResult.OK;
             }
         }
     }

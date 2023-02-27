@@ -16,6 +16,7 @@ namespace FuelStation.EF.Context {
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionLine> TransactionLines { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         // Methods
         protected override void OnModelCreating(ModelBuilder modelBuilder) {

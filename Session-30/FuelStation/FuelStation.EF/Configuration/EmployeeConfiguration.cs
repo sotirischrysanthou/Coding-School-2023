@@ -12,7 +12,7 @@ namespace FuelStation.EF.Configuration {
             builder.HasKey(e => e.Id);
 
             // Set properties
-            builder.Property(e => e.Id).HasColumnName("ID").IsRequired();
+            builder.Property(e => e.Id).HasColumnName("Id").IsRequired();
             builder.Property(e => e.Name).HasColumnName("Name").IsRequired().HasMaxLength(20);
             builder.Property(e => e.Surname).HasColumnName("Surname").IsRequired().HasMaxLength(20);
             builder.Property(e => e.HireDateStart).HasColumnName("HireDateStart").IsRequired();

@@ -12,10 +12,13 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
     public class TransactionController : ControllerBase {
         // Properties
         private readonly IEntityRepo<Transaction> _transactionRepo;
+        private readonly IValidator _validator;
+        private String _errorMessage = null!;
 
         // Constructors
-        public TransactionController(IEntityRepo<Transaction> transactionRepo) {
+        public TransactionController(IEntityRepo<Transaction> transactionRepo, IValidator validator) {
             _transactionRepo = transactionRepo;
+            _validator = validator;
         }
 
         // GET: api/<TransactionController>
@@ -30,20 +33,20 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
         // POST api/<TransactionController>
         [HttpPost]
         [Authorize(Roles = "Manager,Cashier")]
-        public async Task<ActionResult> Post(TransactionWinDto transaction) {
+        public async Task<ActionResult<String>> Post(TransactionWinDto transaction) {
             var newTransaction = new Transaction(transaction.Date,
                                                  transaction.PaymentMethod,
                                                  transaction.TotalValue,
                                                  transaction.EmployeeId,
                                                  transaction.CustomerId);
             await _transactionRepo.Add(newTransaction);
-            return Ok();
+            return Ok(newTransaction.Id.ToString());
         }
 
         // PUT api/<TransactionController>/5
         [HttpPut]
         [Authorize(Roles = "Manager,Cashier")]
-        public async Task<ActionResult> Put(TransactionWinDto transaction) {
+        public async Task<ActionResult<String>> Put(TransactionWinDto transaction) {
             var dbTransaction = await _transactionRepo.GetById(transaction.Id);
             if (dbTransaction is null) {
                 //Todo: handle if dbTransaction is null
@@ -56,21 +59,30 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
             dbTransaction.EmployeeId = transaction.EmployeeId;
 
             await _transactionRepo.Update(transaction.Id, dbTransaction);
-            return Ok();
+            return Ok(transaction.Id.ToString());
         }
 
         // DELETE api/<TransactionController>/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult> Delete(Guid id) {
-            try {
-                await _transactionRepo.Delete(id);
-                return Ok();
-            } catch (DbUpdateException) {
-                return BadRequest($"Could not delete this transaction because it has transactionLines");
-            } catch (KeyNotFoundException) {
-                return BadRequest($"Transaction not found");
+            var transaction = await _transactionRepo.GetById(id);
+            if (transaction is not null) {
+                if (_validator.ValidateDeleteTransaction(transaction, out _errorMessage)) {
+                    try {
+                        await _transactionRepo.Delete(id);
+                        return Ok();
+                    } catch (DbUpdateException) {
+                        return BadRequest($"Could not delete this transaction because it has transactionLines");
+                    } catch (KeyNotFoundException) {
+                        return NotFound($"Transaction not found");
+                    }
+                } else {
+                    return BadRequest($"Could not delete this transaction because it has transactionLines");
+                }
+            } else {
+                return NotFound($"Transaction not found");
             }
-        }   
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
 
         // GET: api/<EmployeeController>
         [HttpGet]
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager,Cashier")]
         public async Task<ActionResult<IEnumerable<EmployeeListDto>>> Get() {
             var result = await _employeeRepo.GetAll();
             var selectEmployeeList = result.Select(employee => new EmployeeListDto(employee)).ToList();
@@ -39,8 +39,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
             var result = await _employeeRepo.GetById(id);
             if (result == null) {
                 return NotFound("Employee not Found");
-            }
-            else {
+            } else {
                 return new EmployeeEditDto(result);
             }
         }
@@ -53,8 +52,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
             var result = await _employeeRepo.GetById(id);
             if (result is null) {
                 return null;
-            }
-            else {
+            } else {
                 return new EmployeeDetailsDto(result);
             }
         }
@@ -75,8 +73,7 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
                 try {
                     await _employeeRepo.Add(dbEmployee);
                     return Ok(dbEmployee.Id.ToString());
-                }
-                catch (DbException ex) {
+                } catch (DbException ex) {
                     return BadRequest(ex.Message);
                 }
             }
@@ -102,13 +99,11 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
                 dbEmployee.EmployeeType = employee.EmployeeType;
                 try {
                     await _employeeRepo.Update(employee.Id, dbEmployee);
-                }
-                catch (DbUpdateException ex) {
+                } catch (DbUpdateException ex) {
                     return BadRequest(ex.Message);
                 }
                 return Ok();
-            }
-            else {
+            } else {
                 return BadRequest(_errorMessage);
             }
         }
@@ -122,11 +117,9 @@ namespace FuelStation.Web.Blazor.Server.Controllers {
             if (_validator.ValidateDeleteEmployee(employee.EmployeeType, employees.ToList(), out _errorMessage)) {
                 try {
                     await _employeeRepo.Delete(id);
-                }
-                catch (DbUpdateException) {
+                } catch (DbUpdateException) {
                     return BadRequest($"Can not delete this employee because it has transactions");
-                }
-                catch (KeyNotFoundException) {
+                } catch (KeyNotFoundException) {
                     return BadRequest($"Employee not found");
                 }
                 return Ok();

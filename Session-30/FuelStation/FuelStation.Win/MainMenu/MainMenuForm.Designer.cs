@@ -63,6 +63,7 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.Black;
+            this.btnLogout.Image = global::FuelStation.Win.Properties.Resources.exit;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLogout.Location = new System.Drawing.Point(0, 367);
             this.btnLogout.Name = "btnLogout";
@@ -82,6 +83,7 @@
             this.btnItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnItems.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnItems.ForeColor = System.Drawing.Color.Black;
+            this.btnItems.Image = global::FuelStation.Win.Properties.Resources.Items1;
             this.btnItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnItems.Location = new System.Drawing.Point(0, 175);
             this.btnItems.Name = "btnItems";
@@ -101,6 +103,7 @@
             this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomers.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCustomers.ForeColor = System.Drawing.Color.Black;
+            this.btnCustomers.Image = global::FuelStation.Win.Properties.Resources.customerandcar;
             this.btnCustomers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCustomers.Location = new System.Drawing.Point(0, 271);
             this.btnCustomers.Name = "btnCustomers";
@@ -120,6 +123,7 @@
             this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransactions.Font = new System.Drawing.Font("Yu Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnTransactions.ForeColor = System.Drawing.Color.Black;
+            this.btnTransactions.Image = global::FuelStation.Win.Properties.Resources.transaction;
             this.btnTransactions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTransactions.Location = new System.Drawing.Point(0, 79);
             this.btnTransactions.Name = "btnTransactions";
@@ -148,7 +152,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(80, 18);
+            this.label3.Location = new System.Drawing.Point(74, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 26);
             this.label3.TabIndex = 1;
@@ -159,7 +163,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(34, 18);
+            this.label2.Location = new System.Drawing.Point(28, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 26);
             this.label2.TabIndex = 0;
@@ -189,10 +193,12 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Location = new System.Drawing.Point(350, 120);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(220, 79);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(300, 200);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(327, 215);
+            this.pictureBox1.Size = new System.Drawing.Size(580, 371);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 

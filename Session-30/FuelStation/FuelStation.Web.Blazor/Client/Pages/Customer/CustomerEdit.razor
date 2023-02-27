@@ -21,7 +21,7 @@ else {
     <div class="spinner-border text-secondary" role="status">
     </div>
 }
-else {
+else if(Customer is not null) {
     <EditForm Model="Customer" OnValidSubmit="OnSave">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -90,8 +90,11 @@ else {
             response = await httpClient.PostAsJsonAsync("api/customer", Customer);
             if (response.IsSuccessStatusCode)
             {
-                var cardNumber = await response.Content.ReadAsStringAsync();
-                await jsRuntime.InvokeVoidAsync("alert", $"Customer {Customer.Name} {Customer.Surname} has registered with card number {cardNumber}");
+                if (Customer is not null)
+                {
+                    var cardNumber = await response.Content.ReadAsStringAsync();
+                    await jsRuntime.InvokeVoidAsync("alert", $"Customer {Customer.Name} {Customer.Surname} has registered with card number {cardNumber}");
+                }
             }
         }
         else {

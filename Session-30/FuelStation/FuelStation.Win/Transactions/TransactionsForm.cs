@@ -17,22 +17,25 @@ using FuelStation.Win.Extensions;
 using System.ComponentModel;
 using FuelStation.Win.Transactions;
 using DevExpress.Utils.Extensions;
+using FuelStation.Win.Enums;
 
 namespace FuelStation.Win.Transactions {
     public partial class TransactionsForm : Form {
         // Properties
         private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authStateProvider;
-        private List<TransactionWinDto>? transactions;
-        private List<CustomerListDto> customers;
-        private List<EmployeeListDto> employees;
-        private List<ItemListDto> items;
-        private bool isLoading = true;
+        private readonly UserSession _userSession;
+        private List<TransactionWinDto>? _transactions;
+        private List<CustomerListDto> _customers = null!;
+        private List<EmployeeListDto> _employees = null!;
+        private List<ItemListDto> _items = null!;
+        private bool _isLoading = true;
 
-        public TransactionsForm(HttpClient httpClient, AuthenticationStateProvider authStateProvider) {
+        public TransactionsForm(HttpClient httpClient, AuthenticationStateProvider authStateProvider, UserSession userSesion) {
             InitializeComponent();
             _httpClient = httpClient;
             _authStateProvider = authStateProvider;
+            _userSession = userSesion;
         }
 
         // Methods
@@ -52,23 +55,23 @@ namespace FuelStation.Win.Transactions {
 
         private async Task SetControlProperties() {
             await LoadItemsFromServer();
-            bsTransactions.DataSource = transactions;
+            bsTransactions.DataSource = _transactions;
             grdTransactions.DataSource = bsTransactions;
             bsTransactionLines.DataSource = bsTransactions;
             bsTransactionLines.DataMember = "TransactionLines";
             grdTransactionLines.DataSource = bsTransactionLines;
 
-            SetLookUpEdit(repCustomers, customers, "Name", "Id");
-            SetLookUpEdit(repEmployees, employees, "Name", "Id");
-            SetLookUpEdit(repItems, items, "Description", "Id");
+            SetLookUpEdit(repCustomers, _customers, "Name", "Id");
+            SetLookUpEdit(repEmployees, _employees, "Name", "Id");
+            SetLookUpEdit(repItems, _items, "Description", "Id");
         }
 
         private async Task LoadItemsFromServer() {
-            customers = await GetListFromApi<CustomerListDto>("api/customer");
-            employees = await GetListFromApi<EmployeeListDto>("api/employee");
-            items = await GetListFromApi<ItemListDto>("api/item");
-            transactions = await _httpClient.GetFromJsonAsync<List<TransactionWinDto>>("api/transaction");
-            if (transactions is null) {
+            _customers = await GetListFromApi<CustomerListDto>("api/customer");
+            _employees = await GetListFromApi<EmployeeListDto>("api/employee");
+            _items = await GetListFromApi<ItemListDto>("api/item");
+            _transactions = await _httpClient.GetFromJsonAsync<List<TransactionWinDto>>("api/transaction");
+            if (_transactions is null) {
                 XtraMessageBox.Show("Not Authorized");
                 this.Close();
             }
@@ -93,99 +96,7 @@ namespace FuelStation.Win.Transactions {
 
         private void repoItems_QueryPopUp(object sender, CancelEventArgs e) {
             LookUpEdit edit = (LookUpEdit)sender;
-            edit.Properties.DataSource = items.Where(x => x.Code.ToLower().Contains(edit.Text.ToLower())).ToList();
-        }
-
-
-        //--------------------------------------------------------------------------------------
-        // -----------------------------grvTransaction Events-----------------------------------
-        //--------------------------------------------------------------------------------------
-        private async void grvTransactions_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
-            var transaction = (TransactionWinDto)bsTransactions.Current;
-            GridView view = (GridView)sender;
-            if (transaction.CustomerId == Guid.Empty) {
-                e.Valid = false;
-                view.SetColumnError(colCustomer, "Insert Valid Custmer Name");
-            }
-            if (transaction.EmployeeId == Guid.Empty) {
-                e.Valid = false;
-                view.SetColumnError(colEmployee, "Insert Valid Employee Name");
-            }
-            if (e.Valid) {
-                view.ClearColumnErrors();
-                HttpResponseMessage? response = null;
-                if (transaction.Id == Guid.Empty) {
-                    response = await _httpClient.PostAsJsonAsync("api/transaction", transaction);
-                } else {
-                    response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
-                }
-                if (response.IsSuccessStatusCode) {
-                    await SetControlProperties();
-                    XtraMessageBox.Show("Succsess");
-                } else {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show("alert", error);
-                }
-            }
-        }
-
-        private void grvTransactions_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
-            GridView view = (GridView)sender;
-            GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
-            if (column.FieldName == "CustomerId") {
-                Guid id = (Guid)e.Value;
-                if (id == Guid.Empty) {
-                    e.Valid = false;
-                    view.SetColumnError(colCustomer, "Insert Valid Customer");
-                }
-            }
-            if (column.FieldName == "EmployeeId") {
-                Guid id = (Guid)e.Value;
-                if (id == Guid.Empty) {
-                    e.Valid = false;
-                    view.SetColumnError(colEmployee, "Insert Valid Employee Name");
-                }
-            }
-        }
-        private void grvTransactions_InitNewRow(object sender, InitNewRowEventArgs e) {
-            ((TransactionWinDto)bsTransactions.Current).Date = DateTime.Today;
-        }
-
-        private async void grvTransactions_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            var transaction = (TransactionWinDto)bsTransactions.Current;
-            var confirm = XtraMessageBox.Show("Delete Item. Are you sure?", "Confirmation", MessageBoxButtons.YesNo);
-            if (confirm == DialogResult.Yes) {
-                var response = await _httpClient.DeleteAsync($"api/transaction/{transaction.Id}");
-                if (!response.IsSuccessStatusCode) {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show(error);
-                }
-            } else {
-                e.Cancel = true;
-            }
-
-        }
-        //--------------------------------------------------------------------------------------
-        // ------------------------grvTransactionLines Events-----------------------------------
-        //--------------------------------------------------------------------------------------
-        private async void grvTransactionLines_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e) {
-            GridView view = (GridView)sender;
-            var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
-            if (e.Column.Caption == "Item" || e.Column.Caption == "Quantity") {
-                var item = items.Where(i => i.Id == transactionLine.ItemId).Single();
-                if (item != null) {
-                    transactionLine.ItemPrice = item.Price;
-                    transactionLine.NetValue = transactionLine.Quantity * transactionLine.ItemPrice;
-                    if (item.ItemType == ItemType.Fuel && transactionLine.NetValue > 20) {
-                        transactionLine.DiscountPercent = 10;
-                    } else {
-                        transactionLine.DiscountPercent = 0;
-                    }
-                    transactionLine.DiscountValue = transactionLine.NetValue * transactionLine.DiscountPercent / 100;
-                    transactionLine.TotalValue = transactionLine.NetValue - transactionLine.DiscountValue;
-                    CalculateTransactionTotalValue();
-                }
-            }
+            edit.Properties.DataSource = _items.Where(x => x.Code.ToLower().Contains(edit.Text.ToLower())).ToList();
         }
 
         private void CalculateTransactionTotalValue() {
@@ -200,84 +111,11 @@ namespace FuelStation.Win.Transactions {
             ((TransactionWinDto)bsTransactions.Current).TotalValue = TotalValue;
         }
 
-        private async void grvTransactionLines_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e) {
-            var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
-            var transaction = (TransactionWinDto)bsTransactions.Current;
-
-            GridView view = (GridView)sender;
-            if (transactionLine.ItemId == Guid.Empty) {
-                e.Valid = false;
-                view.SetColumnError(colItem, "Insert Valid Item");
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.UserClosing) {
+                this.DialogResult = DialogResult.OK;
             }
-            if (items.Where(i => i.Id == transactionLine.ItemId && i.ItemType == ItemType.Fuel).Any()) {
-                foreach (TransactionLineWinDto transactionL in transaction.TransactionLines) {
-                    if (items.Where(i => i.Id == transactionL.ItemId && i.Id != transactionLine.ItemId && i.ItemType == ItemType.Fuel).Any()) {
-                        e.Valid = false;
-                        view.SetColumnError(colItem, "The transaction can only have one fuel transaction line");
-                    }
-                }
-            }
-
-            if (e.Valid) {
-                view.ClearColumnErrors();
-                HttpResponseMessage? response = null;
-                if (transactionLine.Id == Guid.Empty) {
-                    response = await _httpClient.PostAsJsonAsync("api/transactionLine", transactionLine);
-                } else {
-                    response = await _httpClient.PutAsJsonAsync("api/transactionLine", transactionLine);
-                }
-                if (response.IsSuccessStatusCode) {
-                    await SetControlProperties();
-                    XtraMessageBox.Show("Succsess");
-                } else {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show(error);
-                }
-                grvTransactions.RefreshData();
-                response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
-                if (response.IsSuccessStatusCode) {
-                    await SetControlProperties();
-                    XtraMessageBox.Show("Succsess");
-                } else {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show(error);
-                }
-            }
-        }
-
-        private void grvTransactionLines_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e) {
-            GridView view = (GridView)sender;
-            var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
-            GridColumn column = (e as EditFormValidateEditorEventArgs)?.Column ?? view.FocusedColumn;
-            if (column.FieldName == "Item") {
-                var item = items.Where(i => i.Id == (Guid)e.Value).SingleOrDefault();
-                if (item == null) {
-                    e.Valid = false;
-                    view.SetColumnError(colItem, "Insert Valid Item");
-                }
-            }
-        }
-
-        private void grvTransactionLines_InitNewRow(object sender, InitNewRowEventArgs e) {
-            var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
-            transactionLine.TransactionId = ((TransactionWinDto)bsTransactions.Current).Id;
-        }
-        private async void grvTransactionLines_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e) {
-            TransactionLineWinDto transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
-            var confirm = XtraMessageBox.Show("Delete Item. Are you sure?", "Confirmation", MessageBoxButtons.YesNo);
-            if (confirm == DialogResult.Yes) {
-                var response = await _httpClient.DeleteAsync($"api/transactionLine/{transactionLine.Id}");
-                if (!response.IsSuccessStatusCode) {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show(error);
-                }
-            } else {
-                e.Cancel = true;
-            }
-        }
-
-        private void grvTransactionLines_RowDeleted(object sender, DevExpress.Data.RowDeletedEventArgs e) {
-            CalculateTransactionTotalValue();
         }
 
         //--------------------------------------------------------------------------------------
@@ -303,10 +141,14 @@ namespace FuelStation.Win.Transactions {
 
         private async void btnAddTransactionLine_Click(object sender, EventArgs e) {
             var transaction = (TransactionWinDto)bsTransactions.Current;
+            if (_userSession.Role != "Manager" && transaction.EmployeeId != _userSession.EmployeeId) {
+                XtraMessageBox.Show("Not Authorized to Edit this transaction. If you think something went wrong, please contact your manager");
+                return;
+            }
             if (transaction != null) {
-                var transactionLineEditForm = new TransactionLineEditForm(items, null, canBeFuel());
+                var transactionLineEditForm = new TransactionLineEditForm(_items, null, canBeFuel());
                 transactionLineEditForm.ShowDialog();
-                if (transactionLineEditForm.DialogResult == DialogResult.OK) {
+                if (transactionLineEditForm.DialogResult == DialogResult.OK && transactionLineEditForm.Item is not null) {
                     var transactionLine = new TransactionLineWinDto {
                         Id = Guid.Empty,
                         ItemId = transactionLineEditForm.Item.Id,
@@ -325,12 +167,16 @@ namespace FuelStation.Win.Transactions {
         }
         private async void btnEditTransactionLine_Click(object sender, EventArgs e) {
             var transaction = (TransactionWinDto)bsTransactions.Current;
+            if (_userSession.Role != "Manager" && transaction.EmployeeId != _userSession.EmployeeId) {
+                XtraMessageBox.Show("Not Authorized to Edit this transaction. If you think something went wrong, please contact your manager");
+                return;
+            }
             var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
             var itemId = transactionLine.ItemId;
             if (transaction != null) {
-                var transactionLineEditForm = new TransactionLineEditForm(items, items.Find(i => i.Id == itemId), canBeFuel(), transactionLine.Quantity);
+                var transactionLineEditForm = new TransactionLineEditForm(_items, _items.Find(i => i.Id == itemId), canBeFuel(), transactionLine.Quantity);
                 transactionLineEditForm.ShowDialog();
-                if (transactionLineEditForm.DialogResult == DialogResult.OK) {
+                if (transactionLineEditForm.DialogResult == DialogResult.OK && transactionLineEditForm.Item is not null) {
                     transactionLine.ItemId = transactionLineEditForm.Item.Id;
                     transactionLine.ItemPrice = transactionLineEditForm.Price;
                     transactionLine.NetValue = transactionLineEditForm.NetValue;
@@ -345,6 +191,11 @@ namespace FuelStation.Win.Transactions {
         }
 
         private async Task AddOrUpdateTransactionLine(TransactionLineWinDto transactionLine) {
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            if (_userSession.Role != "Manager" && transaction.EmployeeId != _userSession.EmployeeId) {
+                XtraMessageBox.Show("Not Authorized to Edit this transaction. If you think something went wrong, please contact your manager");
+                return;
+            }
             HttpResponseMessage? response = null;
             if (transactionLine.Id == Guid.Empty) {
                 response = await _httpClient.PostAsJsonAsync("api/transactionLine", transactionLine);
@@ -353,65 +204,91 @@ namespace FuelStation.Win.Transactions {
             }
             if (response.IsSuccessStatusCode) {
                 await SetControlProperties();
-                XtraMessageBox.Show("Succsess");
+                //XtraMessageBox.Show("Succsess");
             } else {
                 var error = await response.Content.ReadAsStringAsync();
                 XtraMessageBox.Show(error);
             }
             CalculateTransactionTotalValue();
-            var transaction = (TransactionWinDto)bsTransactions.Current;
-            grvTransactions.RefreshData();
-            response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
-            if (response.IsSuccessStatusCode) {
-                await SetControlProperties();
-                XtraMessageBox.Show("Succsess");
-            } else {
-                var error = await response.Content.ReadAsStringAsync();
-                XtraMessageBox.Show(error);
-            }
+            transaction = (TransactionWinDto)bsTransactions.Current;
+            await AddOrUpdateTransaction(transaction, new(), new());
+            //grvTransactions.RefreshData();
+            //response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
+            //if (response.IsSuccessStatusCode) {
+            //    await SetControlProperties();
+            //    //XtraMessageBox.Show("Succsess");
+            //} else {
+            //    var error = await response.Content.ReadAsStringAsync();
+            //    XtraMessageBox.Show(error);
+            //}
         }
 
         private async void btnDeleteTransactionLine_Click(object sender, EventArgs e) {
             TransactionLineWinDto transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
             var confirm = XtraMessageBox.Show("Delete Item. Are you sure?", "Confirmation", MessageBoxButtons.YesNo);
             if (confirm == DialogResult.Yes) {
-                var response = await _httpClient.DeleteAsync($"api/transactionLine/{transactionLine.Id}");
-                if (!response.IsSuccessStatusCode) {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show(error);
-                }
-                await SetControlProperties();
-                CalculateTransactionTotalValue();
-                var transaction = (TransactionWinDto)bsTransactions.Current;
-                grvTransactions.RefreshData();
-                response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
-                if (response.IsSuccessStatusCode) {
-                    await SetControlProperties();
-                    XtraMessageBox.Show("Succsess");
-                } else {
-                    var error = await response.Content.ReadAsStringAsync();
-                    XtraMessageBox.Show(error);
-                }
+                await DeleteTransactionLine(transactionLine);
+                //var response = await _httpClient.DeleteAsync($"api/transactionLine/{transactionLine.Id}");
+                //if (!response.IsSuccessStatusCode) {
+                //    var error = await response.Content.ReadAsStringAsync();
+                //    XtraMessageBox.Show(error);
+                //}
+                //await SetControlProperties();
+                //CalculateTransactionTotalValue();
+                //var transaction = (TransactionWinDto)bsTransactions.Current;
+                //await AddOrUpdateTransaction(transaction, new(), new());
+                //grvTransactions.RefreshData();
+                //response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
+                //if (response.IsSuccessStatusCode) {
+                //    await SetControlProperties();
+                //    //XtraMessageBox.Show("Succsess");
+                //} else {
+                //    var error = await response.Content.ReadAsStringAsync();
+                //    XtraMessageBox.Show(error);
+                //}
             }
         }
 
-        private void btnAddTransaction_Click(object sender, EventArgs e) {
-            var transactionEditForm = new TransactionEditForm(customers, employees, DateTime.Today, CanBeCreditCard(), null, null, PaymentMethod.Cash);
+        public async Task DeleteTransactionLine(TransactionLineWinDto transactionLine) {
+            var response = await _httpClient.DeleteAsync($"api/transactionLine/{transactionLine.Id}");
+            if (!response.IsSuccessStatusCode) {
+                var error = await response.Content.ReadAsStringAsync();
+                XtraMessageBox.Show(error);
+            }
+            await SetControlProperties();
+            CalculateTransactionTotalValue();
+            var transaction = (TransactionWinDto)bsTransactions.Current;
+            await AddOrUpdateTransaction(transaction, new(), new());
+        }
+
+        private async void btnAddTransaction_Click(object sender, EventArgs e) {
+            var transactionEditForm = new TransactionEditForm(_customers,
+                                                              _employees,
+                                                              _items,
+                                                              new(),
+                                                              0,
+                                                              DateTime.Today,
+                                                              CanBeCreditCard(),
+                                                              _userSession
+                                                              );
             transactionEditForm.ShowDialog();
-            if (transactionEditForm.DialogResult == DialogResult.OK) {
+            if (transactionEditForm.DialogResult == DialogResult.OK && transactionEditForm.Customer is not null && transactionEditForm.Employee is not null) {
                 var transaction = new TransactionWinDto {
                     Id = Guid.Empty,
-                    Date = DateTime.Now,
+                    Date = transactionEditForm.Date,
                     PaymentMethod = transactionEditForm.PaymentMethod,
-                    TotalValue = 0,
+                    TotalValue = transactionEditForm.TotalValue,
                     CustomerId = transactionEditForm.Customer.Id,
                     EmployeeId = transactionEditForm.Employee.Id,
                 };
-                AddOrUpdateTransaction(transaction);
+                await AddOrUpdateTransaction(transaction, transactionEditForm.TransactionLines, transactionEditForm.DeletedTransactionLines);
+
             }
         }
 
-        private async Task AddOrUpdateTransaction(TransactionWinDto transaction) {
+        private async Task AddOrUpdateTransaction(TransactionWinDto transaction,
+                                                  List<TransactionLineWinDto> transactionLines,
+                                                  List<TransactionLineWinDto> deletedTransactionLines) {
             HttpResponseMessage? response = null;
             if (transaction.Id == Guid.Empty) {
                 response = await _httpClient.PostAsJsonAsync("api/transaction", transaction);
@@ -419,52 +296,90 @@ namespace FuelStation.Win.Transactions {
                 response = await _httpClient.PutAsJsonAsync("api/transaction", transaction);
             }
             if (response.IsSuccessStatusCode) {
+
+                var transactionIdStr = await response.Content.ReadAsStringAsync();
+                Guid transactionId = Guid.Parse(transactionIdStr);
+
+                foreach (var transactionLine in transactionLines) {
+                    transactionLine.TransactionId = transactionId;
+                    await AddOrUpdateTransactionLine(transactionLine);
+                }
+                foreach (var toDeleteTransactionLine in deletedTransactionLines) {
+                    await DeleteTransactionLine(toDeleteTransactionLine);
+                }
+
                 await SetControlProperties();
-                XtraMessageBox.Show("Succsess");
+                //XtraMessageBox.Show("Succsess");
             } else {
                 var error = await response.Content.ReadAsStringAsync();
                 XtraMessageBox.Show("alert", error);
             }
         }
 
-        private void btnEditTransaction_Click(object sender, EventArgs e) {
+        private async void btnEditTransaction_Click(object sender, EventArgs e) {
             var transaction = (TransactionWinDto)bsTransactions.Current;
-            var customer = customers.Find(c => c.Id == transaction.CustomerId);
-            var employee = employees.Find(e => e.Id == transaction.EmployeeId);
-            var transactionEditForm = new TransactionEditForm(customers, employees, transaction.Date, CanBeCreditCard(), customer, employee, PaymentMethod.Cash);
+            if (_userSession.Role != "Manager" && transaction.EmployeeId != _userSession.EmployeeId) {
+                XtraMessageBox.Show("Not Authorized to Edit this transaction. If you think something went wrong, please contact your manager");
+                return;
+            }
+            var customer = _customers.Find(c => c.Id == transaction.CustomerId);
+            var employee = _employees.Find(e => e.Id == transaction.EmployeeId);
+            var transactionEditForm = new TransactionEditForm(_customers,
+                                                              _employees,
+                                                              _items,
+                                                              transaction.TransactionLines,
+                                                              transaction.TotalValue,
+                                                              transaction.Date,
+                                                              CanBeCreditCard(),
+                                                              _userSession,
+                                                              customer,
+                                                              employee,
+                                                              PaymentMethod.Cash);
             transactionEditForm.ShowDialog();
-            if (transactionEditForm.DialogResult == DialogResult.OK) {
+            if (transactionEditForm.DialogResult == DialogResult.OK && transactionEditForm.Customer is not null && transactionEditForm.Employee is not null) {
                 var newTransaction = new TransactionWinDto {
-                    Id = Guid.Empty,
-                    Date = DateTime.Now,
+                    Id = transaction.Id,
+                    Date = transactionEditForm.Date,
                     PaymentMethod = transactionEditForm.PaymentMethod,
-                    TotalValue = 0,
+                    TotalValue = transactionEditForm.TotalValue,
                     CustomerId = transactionEditForm.Customer.Id,
                     EmployeeId = transactionEditForm.Employee.Id,
                 };
-                AddOrUpdateTransaction(newTransaction);
+                await AddOrUpdateTransaction(newTransaction, transactionEditForm.TransactionLines, transactionEditForm.DeletedTransactionLines);
             }
         }
 
         private bool canBeFuel() {
             var transaction = (TransactionWinDto)bsTransactions.Current;
             foreach (TransactionLineWinDto transactionLine in transaction.TransactionLines) {
-                if (items.Find(i => i.Id == transactionLine.ItemId).ItemType == ItemType.Fuel) {
-                    return false;
+                var item = _items.Find(i => i.Id == transactionLine.ItemId);
+                if (item != null) {
+                    if (item.ItemType == ItemType.Fuel) {
+                        return false;
+                    }
                 }
             }
             return true;
         }
 
         private bool CanBeCreditCard() {
-            var transaction = (TransactionWinDto)bsTransactions.Current;
-            return transaction.TotalValue < 50;
+            var transaction = (TransactionWinDto?)bsTransactions.Current;
+            if (transaction != null)
+                return transaction.TotalValue < 50;
+            else return true;
+        }
+
+        private async void btnDeleteTransaction_Click(object sender, EventArgs e) {
+            TransactionWinDto transaction = (TransactionWinDto)bsTransactions.Current;
+            var confirm = XtraMessageBox.Show("Delete Item. Are you sure?", "Confirmation", MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.Yes) {
+                var response = await _httpClient.DeleteAsync($"api/transaction/{transaction.Id}");
+                if (!response.IsSuccessStatusCode) {
+                    var error = await response.Content.ReadAsStringAsync();
+                    XtraMessageBox.Show(error);
+                }
+                await SetControlProperties();
+            }
         }
     }
 }
-
-//var transactionLine = (TransactionLineWinDto)bsTransactionLines.Current;
-//if (transactionLine != null) {
-//    var item = items.Find(i => i.Id == transactionLine.ItemId);
-//    var tasactionLineEditForm = new TransactionLineEditForm(items, item)
-//            }

@@ -30,7 +30,8 @@ namespace FuelStation.EF.Repository {
         public async Task<IList<Item>> GetAll() {
             using var context = new FuelStationDbContext();
             return await context.Items
-                .Include(i => i.TransactionLines)
+                .Include(i => i.TransactionLines).ThenInclude(t => t.Transaction).ThenInclude(t => t.Employee)
+                .Include(i => i.TransactionLines).ThenInclude(t => t.Transaction).ThenInclude(t => t.Customer)
                 .ToListAsync();
         }
 
@@ -38,7 +39,8 @@ namespace FuelStation.EF.Repository {
             using var context = new FuelStationDbContext();
             return await context.Items
                 .Where(i => i.Id == id)
-                .Include(i => i.TransactionLines)
+                .Include(i => i.TransactionLines).ThenInclude(t => t.Transaction).ThenInclude(t => t.Employee)
+                .Include(i => i.TransactionLines).ThenInclude(t => t.Transaction).ThenInclude(t => t.Customer)
                 .SingleAsync();
         }
 

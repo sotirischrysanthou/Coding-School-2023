@@ -17,10 +17,10 @@ namespace FuelStation.EF.Configuration {
             builder.HasKey(a => a.Id);
 
             // Set properties
-            builder.Property(a => a.Id).HasColumnName("ID").IsRequired();
+            builder.Property(a => a.Id).HasColumnName("Id").IsRequired();
             builder.Property(a => a.Username).HasColumnName("Userame").IsRequired().HasMaxLength(20);
-            builder.Property(c => c.Password).HasColumnName("Password").IsRequired().HasMaxLength(20);
-            builder.Property(c => c.Role).HasColumnName("Role").IsRequired().HasConversion<string>();
+            builder.Property(a => a.Password).HasColumnName("Password").IsRequired().HasMaxLength(20);
+            builder.Property(a => a.Role).HasColumnName("Role").IsRequired().HasConversion<string>();
 
             // Set navigation properties
             builder.HasOne(a => a.Employee)

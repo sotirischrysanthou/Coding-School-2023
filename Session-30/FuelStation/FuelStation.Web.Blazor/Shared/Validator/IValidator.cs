@@ -20,6 +20,6 @@ namespace FuelStation.Web.Blazor.Shared {
         bool ValidateAddItem(List<Item> items, ItemEditDto newItem, out String errorMessage);
         bool ValidateUpdateItem(List<Item> items, Item oldItem, ItemEditDto newItem, out String errorMessage);
         bool ValidateDeleteItem(Item item, out String errorMessage);
-        bool ValidateTransaction(Transaction transaction, out String errorMessage);
+        bool ValidateDeleteTransaction(Transaction transaction, out String errorMessage);
     }
 }

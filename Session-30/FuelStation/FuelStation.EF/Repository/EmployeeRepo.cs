@@ -31,7 +31,7 @@ namespace FuelStation.EF.Repository {
             using var context = new FuelStationDbContext();
             return await context.Employees
                                 .Include(e => e.Transactions)
-                                .Include(e => e.Account)
+                                //.Include(e => e.Account)
                                 .ToListAsync();
         }
 

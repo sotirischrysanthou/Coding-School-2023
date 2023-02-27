@@ -84,7 +84,7 @@ else {
                 Customer.CardNumber = "A0";
             }
             else {
-                Customer = await httpClient.GetFromJsonAsync<CustomerDetailsDto>($"api/customer/edit/{Id}");
+                Customer = await httpClient.GetFromJsonAsync<CustomerDetailsDto>($"api/customer/details/{Id}");
                 if (Customer is null) {
                     await jsRuntime.InvokeVoidAsync("alert", "Can not find Customer");
                     navigationManager.NavigateTo("/");
