@@ -67,6 +67,7 @@
             this.colItemType.Caption = "Item Type";
             this.colItemType.FieldName = "ItemType";
             this.colItemType.Name = "colItemType";
+            this.colItemType.OptionsColumn.AllowEdit = false;
             this.colItemType.Visible = true;
             this.colItemType.VisibleIndex = 2;
             // 
@@ -75,6 +76,7 @@
             this.colCode.Caption = "Code";
             this.colCode.FieldName = "Code";
             this.colCode.Name = "colCode";
+            this.colCode.OptionsColumn.AllowEdit = false;
             this.colCode.Visible = true;
             this.colCode.VisibleIndex = 0;
             // 
@@ -83,6 +85,7 @@
             this.colDescription.Caption = "Description";
             this.colDescription.FieldName = "Description";
             this.colDescription.Name = "colDescription";
+            this.colDescription.OptionsColumn.AllowEdit = false;
             this.colDescription.Visible = true;
             this.colDescription.VisibleIndex = 1;
             // 
@@ -91,6 +94,7 @@
             this.colPrice.Caption = "Price";
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
+            this.colPrice.OptionsColumn.AllowEdit = false;
             this.colPrice.Visible = true;
             this.colPrice.VisibleIndex = 3;
             // 

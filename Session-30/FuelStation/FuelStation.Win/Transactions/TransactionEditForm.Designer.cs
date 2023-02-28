@@ -282,6 +282,7 @@
             this.colEmployeeName.Caption = "Name";
             this.colEmployeeName.FieldName = "Name";
             this.colEmployeeName.Name = "colEmployeeName";
+            this.colEmployeeName.OptionsColumn.AllowEdit = false;
             this.colEmployeeName.Visible = true;
             this.colEmployeeName.VisibleIndex = 0;
             // 
@@ -290,6 +291,7 @@
             this.colSurname.Caption = "Surname";
             this.colSurname.FieldName = "Surname";
             this.colSurname.Name = "colSurname";
+            this.colSurname.OptionsColumn.AllowEdit = false;
             this.colSurname.Visible = true;
             this.colSurname.VisibleIndex = 1;
             // 
@@ -298,6 +300,7 @@
             this.colRole.Caption = "Role";
             this.colRole.FieldName = "EmployeeType";
             this.colRole.Name = "colRole";
+            this.colRole.OptionsColumn.AllowEdit = false;
             this.colRole.Visible = true;
             this.colRole.VisibleIndex = 2;
             // 

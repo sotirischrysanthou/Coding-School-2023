@@ -111,6 +111,7 @@
             this.colTransactionID.Caption = "TransactionID";
             this.colTransactionID.FieldName = "TransactionID";
             this.colTransactionID.Name = "colTransactionID";
+            this.colTransactionID.OptionsColumn.AllowEdit = false;
             // 
             // colItem
             // 

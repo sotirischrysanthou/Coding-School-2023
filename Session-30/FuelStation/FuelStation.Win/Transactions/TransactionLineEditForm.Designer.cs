@@ -163,6 +163,7 @@
             this.colItemType.Caption = "Type";
             this.colItemType.FieldName = "ItemType";
             this.colItemType.Name = "colItemType";
+            this.colItemType.OptionsColumn.AllowEdit = false;
             this.colItemType.Visible = true;
             this.colItemType.VisibleIndex = 3;
             // 
